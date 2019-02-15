@@ -24,10 +24,7 @@ public class Area extends DomainEntity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> juanma
 	@URL
 	public String getPicture() {
 		return this.picture;
