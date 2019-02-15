@@ -10,7 +10,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -52,7 +51,7 @@ public class Message extends DomainEntity {
 		this.body = body;
 	}
 
-	@Range(min = -1, max = 1)
+	@NotBlank
 	public int getPriority() {
 		return this.priority;
 	}
@@ -64,4 +63,9 @@ public class Message extends DomainEntity {
 	public String getTags() {
 		return this.tags;
 	}
+
+	public void setTags(final String tags) {
+		this.tags = tags;
+	}
+
 }

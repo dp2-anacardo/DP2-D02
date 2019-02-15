@@ -54,4 +54,33 @@ public abstract class Actor extends DomainEntity {
 	public String getAddress() {
 		return this.address;
 	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public void setMiddleName(final String middleName) {
+		this.middleName = middleName;
+	}
+
+	public void setSurname(final String surname) {
+		this.surname = surname;
+	}
+
+	public void setPhoto(final String photo) {
+		this.photo = photo;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public void setPhoneNumber(final String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setAddress(final String address) {
+		this.address = address;
+	}
+
 }
