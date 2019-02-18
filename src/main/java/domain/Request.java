@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -11,10 +12,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Request extends DomainEntity {
 
-	private int		positionRow;
-	private int		positionColumn;
-	private String	status;
-	private String	comments;
+	private int			positionRow;
+	private int			positionColumn;
+	private String		status;
+	private String		comments;
+	private Procession	procession;
+	private Member		member;
 
 
 	@NotBlank
@@ -25,7 +28,7 @@ public class Request extends DomainEntity {
 	public void setStatus(final String status) {
 		this.status = status;
 	}
-	@NotBlank
+
 	public String getComments() {
 		return this.comments;
 	}
@@ -48,6 +51,26 @@ public class Request extends DomainEntity {
 
 	public void setPositionColumn(final int positionColumn) {
 		this.positionColumn = positionColumn;
+	}
+
+	//Relationships
+
+	@ManyToOne(optional = false)
+	public Procession getProcession() {
+		return this.procession;
+	}
+
+	public void setProcession(final Procession procession) {
+		this.procession = procession;
+	}
+
+	public Member getMember() {
+		return this.member;
+	}
+
+	@ManyToOne(optional = false)
+	public void setMember(final Member member) {
+		this.member = member;
 	}
 
 }
