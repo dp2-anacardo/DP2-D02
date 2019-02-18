@@ -1,20 +1,21 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class FloatEntity extends DomainEntity {
 
-	private String	tittle;
-	private String	description;
-	private String	url;
+	private String				tittle;
+	private String				description;
+	private Collection<String>	pictures;
 
 
 	@NotBlank
@@ -35,13 +36,12 @@ public class FloatEntity extends DomainEntity {
 		this.description = description;
 	}
 
-	@URL
-	public String getUrl() {
-		return this.url;
+	public Collection<String> getPictures() {
+		return this.pictures;
 	}
 
-	public void setUrl(final String url) {
-		this.url = url;
+	public void setPictures(final Collection<String> pictures) {
+		this.pictures = pictures;
 	}
 
 }

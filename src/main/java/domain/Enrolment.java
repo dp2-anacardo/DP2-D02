@@ -19,7 +19,6 @@ public class Enrolment extends DomainEntity {
 	private Date	moment;
 
 
-	//TODO: Añadir restricción formato fecha
 	@NotBlank
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
