@@ -8,12 +8,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -23,6 +25,10 @@ public class Brotherhood extends DomainEntity {
 	private String				title;
 	private Date				establishmentDate;
 	private Collection<String>	pictures;
+
+	//Relationships
+
+	private Area				area;
 
 
 	@NotBlank
@@ -46,12 +52,24 @@ public class Brotherhood extends DomainEntity {
 
 	@NotEmpty
 	@ElementCollection
+	@URL
 	public Collection<String> getPictures() {
 		return this.pictures;
 	}
 
 	public void setPictures(final Collection<String> pictures) {
 		this.pictures = pictures;
+	}
+
+	//Relationships
+
+	@OneToOne(optional = false)
+	public Area getArea() {
+		return this.area;
+	}
+
+	public void setArea(final Area area) {
+		this.area = area;
 	}
 
 }

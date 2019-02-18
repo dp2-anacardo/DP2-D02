@@ -1,11 +1,13 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,10 +17,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Finder extends DomainEntity {
 
-	private String	keyWord;
-	private Date	minimumDate;
-	private Date	maximumDate;
-	private String	areaName;
+	private String					keyWord;
+	private Date					minimumDate;
+	private Date					maximumDate;
+	private String					areaName;
+
+	//Relationships
+
+	private Collection<Procession>	processions;
 
 
 	public String getKeyWord() {
@@ -55,6 +61,17 @@ public class Finder extends DomainEntity {
 
 	public void setAreaName(final String areaName) {
 		this.areaName = areaName;
+	}
+
+	//Relationships
+
+	@OneToMany
+	public Collection<Procession> getProcessions() {
+		return this.processions;
+	}
+
+	public void setProcessions(final Collection<Procession> processions) {
+		this.processions = processions;
 	}
 
 }
