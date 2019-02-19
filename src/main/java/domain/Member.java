@@ -19,7 +19,7 @@ public class Member extends Actor {
 	//Relationships
 
 	@Valid
-	@OneToOne
+	@OneToOne(optional = false)
 	public Finder getFinder() {
 		return this.finder;
 	}
