@@ -1,19 +1,11 @@
 
 package domain;
 
-<<<<<<< HEAD
-=======
 import java.util.Collection;
->>>>>>> origin/adrian
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-<<<<<<< HEAD
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-=======
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -23,7 +15,6 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
->>>>>>> origin/adrian
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,18 +23,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Message extends DomainEntity {
 
-<<<<<<< HEAD
-	//Attributes
-	private Date	sendingMoment;
-	private String	subject;
-	private String	body;
-	private int		priority;
-	private String	tags;
-
-
-	//Getters and Setters
-	@Temporal(TemporalType.TIMESTAMP)
-=======
 	// Attributes -------------------------------------------------------------
 	private Date				sendingMoment;
 	private String				subject;
@@ -55,7 +34,6 @@ public class Message extends DomainEntity {
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@Past
->>>>>>> origin/adrian
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getSendingMoment() {
 		return this.sendingMoment;
@@ -64,10 +42,7 @@ public class Message extends DomainEntity {
 	public void setSendingMoment(final Date sendingMoment) {
 		this.sendingMoment = sendingMoment;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/adrian
 	@NotBlank
 	public String getSubject() {
 		return this.subject;
@@ -76,10 +51,7 @@ public class Message extends DomainEntity {
 	public void setSubject(final String subject) {
 		this.subject = subject;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/adrian
 	@NotBlank
 	public String getBody() {
 		return this.body;
@@ -89,25 +61,6 @@ public class Message extends DomainEntity {
 		this.body = body;
 	}
 
-<<<<<<< HEAD
-	@NotBlank
-	public int getPriority() {
-		return this.priority;
-	}
-
-	public void setPriority(final int priority) {
-		this.priority = priority;
-	}
-
-	public String getTags() {
-		return this.tags;
-	}
-
-	public void setTags(final String tags) {
-		this.tags = tags;
-	}
-
-=======
 	@NotNull
 	@Valid
 	public Priority getPriority() {
@@ -164,5 +117,4 @@ public class Message extends DomainEntity {
 		this.messageBoxes = messageBoxes;
 	}
 
->>>>>>> origin/adrian
 }
