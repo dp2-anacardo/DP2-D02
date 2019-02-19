@@ -11,16 +11,26 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Position extends DomainEntity {
 
-	private String	position;
+	private String	roleEs;
+	private String	roleEn;
 
 
 	@NotBlank
-	public String getPosition() {
-		return this.position;
+	public String getRoleEs() {
+		return this.roleEs;
 	}
 
-	public void setPosition(final String position) {
-		this.position = position;
+	public void setRoleEs(final String roleEs) {
+		this.roleEs = roleEs;
+	}
+
+	@NotBlank
+	public String getRoleEn() {
+		return this.roleEn;
+	}
+
+	public void setRoleEn(final String roleEn) {
+		this.roleEn = roleEn;
 	}
 
 }
