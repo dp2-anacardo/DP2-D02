@@ -100,6 +100,7 @@ hs_err_pid*
 ### Maven ###
 target/
 pom.xml.tag
+pom.properties
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
@@ -108,5 +109,6 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+Entities.map
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
