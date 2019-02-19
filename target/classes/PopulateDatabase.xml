@@ -171,8 +171,6 @@
 		<bean id="brotherhood1" class="domain.Brotherhood">
 		<property name="userAccount" ref="userAccount2"/>
 		<property name="name" value="brotherhood1" />
-		<property name="middleName" value="" />
-		<property name="surname" value="brotherhood1"/>
 		<property name="photo" value="https://www.youtube.com"/>
 		<property name="email" value="brotherhood1@gmail.com"/>
 		<property name="phoneNumber" value="+34 675234132"/>
@@ -366,7 +364,7 @@
 		<property name="areaName" value="Triana"/>
 		<property name="processions">
 			<list>
-			<ref bean="procession1"/>
+			
 			</list>
 		</property>
 	</bean>
@@ -632,6 +630,25 @@
 				<value>bonitos</value>
 				<value>bonita</value>
 				<value>bonitas</value>
+			</list>
+		</property>
+		<property name="negativeWords">
+			<list>
+				<value>not</value>
+				<value>bad</value>
+				<value>horrible</value>
+				<value>average</value>
+				<value>disaster</value>
+				<value>no</value>
+				<value>malo</value>
+				<value>malos</value>
+				<value>mala</value>
+				<value>malas</value>
+				<value>mediocre</value>
+				<value>desastroso</value>
+				<value>desastrosos</value>
+				<value>desastrosa</value>
+				<value>desastrosas</value>
 			</list>
 		</property>
 	</bean>
