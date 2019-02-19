@@ -81,7 +81,7 @@
 	
 	<!-- Other domain beans come here -->	
 	
-	<!-- ADMINISTRATOR -->	
+	<!-- Administrator -->	
 	
 	<bean id="admin1" class="domain.Administrator">
 		<property name="userAccount" ref="userAccount1"/>
@@ -111,7 +111,7 @@
 		</property>
 	</bean>
 	
-	<!-- ADMINISTRATOR'S SocialProfiles -->	
+	<!-- Administrator's SocialProfiles -->	
 	
 	<bean id="socialProfileAdmin1" class="domain.SocialProfile">
 		<property name="nick" value="admin1Nick" />
@@ -119,7 +119,7 @@
 		<property name="profileLink" value="http://www.twitter.com" />
 	</bean>
 	
-	<!-- ADMINISTRATOR'S Boxes -->
+	<!-- Administrator's Boxes -->
 	
 	<bean id="inBoxAdmin1" class="domain.MessageBox">
 		<property name="name" value="INBOX"/>
@@ -166,7 +166,7 @@
 		</property>
 	</bean>
 	
-	<!-- BROTHERHOOD -->	
+	<!-- Brotherhood -->	
 		
 		<bean id="brotherhood1" class="domain.Brotherhood">
 		<property name="userAccount" ref="userAccount2"/>
@@ -204,7 +204,7 @@
 		</property>
 	</bean>
 	
-	<!-- BROTHERHOOD'S Area -->
+	<!-- Brotherhood's Area -->
 		
 	<bean id="areaBrotherhood1" class="domain.Area">
 		<property name="name" value="Triana" />
@@ -215,15 +215,15 @@
 		</property>
 	</bean>
 	
-	<!-- BROTHERHOOD'S SocialProfile -->
+	<!-- Brotherhood's SocialProfile -->
 		
-		<bean id="socialProfileBrotherhood1" class="domain.SocialProfile">
+	<bean id="socialProfileBrotherhood1" class="domain.SocialProfile">
 		<property name="nick" value="Brotherhood1Nick" />
 		<property name="socialNetworkName" value="instagram" />
 		<property name="profileLink" value="http://www.instagram.com" />
 	</bean>
 	
-	<!-- BROTHERHOOD'S Boxes -->
+	<!-- Brotherhood's Boxes -->
 	
 	<bean id="inBoxBrotherhood1" class="domain.MessageBox">
 		<property name="name" value="INBOX"/>
@@ -270,6 +270,300 @@
 		</property>
 	</bean>
 	
+	<!-- Members -->
+	
+	<bean id="member1" class="domain.Member">
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="name" value="member1" />
+		<property name="middleName" value="" />
+		<property name="surname" value="member1"/>
+		<property name="photo" value="https://www.pinterest.com"/>
+		<property name="email" value="emailMember1@gmail.com"/>
+		<property name="phoneNumber" value="+34 692312501"/>
+		<property name="address" value="Carretera Carmona"/>
+		<property name="isSuspicious" value="1"/>
+		<property name="isBanned" value=""/>
+		<property name="score" value="-0.8"/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxMember1"/>
+				<ref bean="outBoxMember1"/>
+				<ref bean="spamBoxMember1"/>
+				<ref bean="trashBoxMember1"/>
+				<ref bean="notificationBoxMember1" />
+			</list>
+		</property>
+		<property name="finder" ref="finderMember1" />
+	</bean>
+	
+	<bean id="member2" class="domain.Member">
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="name" value="member2" />
+		<property name="middleName" value="probando" />
+		<property name="surname" value="member2"/>
+		<property name="photo" value="https://www.urlQueMeInvento.com"/>
+		<property name="email" value="emailMember2@gmail.com"/>
+		<property name="phoneNumber" value="+34 691212501"/>
+		<property name="address" value="Calle Tetuán"/>
+		<property name="isSuspicious" value="0"/>
+		<property name="isBanned" value="0"/>
+		<property name="score" value="0.5"/>
+		<property name="socialProfiles">
+			<list>
+				<ref bean="socialProfileMember2"/>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxMember2"/>
+				<ref bean="outBoxMember2"/>
+				<ref bean="spamBoxMember2"/>
+				<ref bean="trashBoxMember2"/>
+				<ref bean="notificationBoxMember2" />
+			</list>
+		</property>
+		<property name="finder" ref="finderMember2" />
+	</bean>
+	
+		<bean id="member3" class="domain.Member">
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="name" value="member3" />
+		<property name="middleName" value="" />
+		<property name="surname" value="member3"/>
+		<property name="photo" value="https://www.vasAEstarBaneado.com"/>
+		<property name="email" value="emailMember3@gmail.com"/>
+		<property name="phoneNumber" value="+34 662217501"/>
+		<property name="address" value="Calle 8 de Septiembre"/>
+		<property name="isSuspicious" value="1"/>
+		<property name="isBanned" value="1"/>
+		<property name="score" value="-0.9"/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxMember3"/>
+				<ref bean="outBoxMember3"/>
+				<ref bean="spamBoxMember3"/>
+				<ref bean="trashBoxMember3"/>
+				<ref bean="notificationBoxMember3" />
+			</list>
+		</property>
+		<property name="finder" ref="finderMember3" />
+	</bean>
+	
+	<!-- Member's Finder -->
+	
+	<bean id="finderMember1" class="domain.Finder">
+		<property name="keyWord" value="Triana" />
+		<property name="minimumDate" value="19/02/2019 18:11"/>
+		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="areaName" value="Triana"/>
+		<property name="processions">
+			<list>
+			<ref bean="procession1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="finderMember2" class="domain.Finder">
+		<property name="keyWord" value="Cristo Gran Poder" />
+		<property name="minimumDate" value="19/02/2019 18:11"/>
+		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="areaName" value="Centro"/>
+		<property name="processions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="finderMember3" class="domain.Finder">
+		<property name="keyWord" value="Tres caidas" />
+		<property name="minimumDate" value="19/02/2019 18:11"/>
+		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="areaName" value="Poligono Norte"/>
+		<property name="processions">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Member's SocialProfile -->
+	
+	<bean id="socialProfileMember2" class="domain.SocialProfile">
+		<property name="nick" value="Member2Nick" />
+		<property name="socialNetworkName" value="redSocialInventada" />
+		<property name="profileLink" value="http://www.redSocialInventada.com" />
+	</bean>
+	
+	<!-- Member's boxes -->
+	
+	<bean id="inBoxMember1" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+				<ref bean="messageMember1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxMember1" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxMember1" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxMember1" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxMember1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inBoxMember2" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxMember2" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxMember2" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxMember2" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxMember2" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inBoxMember3" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxMember3" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxMember3" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxMember3" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxMember3" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Member's Messages -->
+	
+	<bean id="messageMember1" class="domain.Message">
+		<property name="sendingMoment" value="19/02/2017 18:20"/>
+		<property name="subject" value="subjectPrueba"/>
+		<property name="body" value="bodyMessageMember1"/>
+		<property name="priority" ref="HIGH"/>
+		<property name="tags">
+		<list>
+			<value>"tagDePrueba"</value>
+		</list>
+		</property>
+		<property name="sender" ref="member2"/>
+		<property name="recipients">
+		<list>
+			<ref bean="member1"/>
+		</list>
+		</property>
+		<property name="messageBoxes">
+		<list>
+			<ref bean="inBoxMember1"/>
+		</list>
+		</property>
+	</bean>
+	
 	<!-- Priorities -->
 	
 	<bean id="HIGH" class="domain.Priority">
@@ -282,6 +576,64 @@
 	
 	<bean id="LOW" class="domain.Priority">
 		<property name="title" value="LOW"/>
+	</bean>
+	
+	<!-- Configuration -->
+	
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="maxResults" value="10"/>
+		<property name="maxTime" value="1"/>
+		<property name="systemName" value="Acme Madrugá"/>
+		<property name="banner" value="https://tinyurl.com/acme-madruga"/>
+		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones."/>
+		<property name="welcomeMessageEn" value="Welcome to Acme Madrugá, the site to organise your processions."/>
+		<property name="defaultCC" value="34"/>
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>Nigeria</value>
+				<value>sexo</value>
+				<value>un millon</value>
+				<value>has sido seleccionado</value>
+			</list>
+		</property>
+		<property name="positiveWords">
+			<list>
+				<value>good</value>
+				<value>fantastic</value>
+				<value>excellent</value>
+				<value>great</value>
+				<value>amazing</value>
+				<value>terrific</value>
+				<value>beautiful</value>
+				<value>bueno</value>
+				<value>buenos</value>
+				<value>buena</value>
+				<value>buenas</value>
+				<value>fantastico</value>
+				<value>fantasticos</value>
+				<value>fantastica</value>
+				<value>fantasticas</value>
+				<value>excelente</value>
+				<value>excelentes</value>
+				<value>genial</value>
+				<value>geniales</value>
+				<value>increible</value>
+				<value>increibles</value>
+				<value>estupendo</value>
+				<value>estupendos</value>
+				<value>estupenda</value>
+				<value>estupendas</value>
+				<value>bonito</value>
+				<value>bonitos</value>
+				<value>bonita</value>
+				<value>bonitas</value>
+			</list>
+		</property>
 	</bean>
 	
 </beans>

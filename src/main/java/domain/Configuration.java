@@ -20,7 +20,8 @@ public class Configuration extends DomainEntity {
 	private int					maxTime;
 	private String				systemName;
 	private String				banner;
-	private String				welcomeMessage;
+	private String				welcomeMessageEn;
+	private String				welcomeMessageEs;
 	private Collection<String>	spamWords;
 	private Collection<String>	positiveWords;
 	private Collection<String>	negativeWords;
@@ -65,12 +66,21 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
-	public String getWelcomeMessage() {
-		return this.welcomeMessage;
+	public String getWelcomeMessageEn() {
+		return this.welcomeMessageEn;
 	}
 
-	public void setWelcomeMessage(final String welcomeMessage) {
-		this.welcomeMessage = welcomeMessage;
+	public void setWelcomeMessageEn(final String welcomeMessageEn) {
+		this.welcomeMessageEn = welcomeMessageEn;
+	}
+
+	@NotBlank
+	public String getWelcomeMessageEs() {
+		return this.welcomeMessageEs;
+	}
+
+	public void setWelcomeMessageEs(final String welcomeMessageEs) {
+		this.welcomeMessageEs = welcomeMessageEs;
 	}
 
 	@ElementCollection
