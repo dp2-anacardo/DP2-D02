@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -15,19 +16,19 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class FloatEntity extends DomainEntity {
 
-	private String				tittle;
+	private String				title;
 	private String				description;
 	private Collection<String>	pictures;
 	private Brotherhood			brotherhood;
 
 
 	@NotBlank
-	public String getTittle() {
-		return this.tittle;
+	public String getTitle() {
+		return this.title;
 	}
 
-	public void setTittle(final String tittle) {
-		this.tittle = tittle;
+	public void setTitle(final String title) {
+		this.title = title;
 	}
 
 	@NotBlank
@@ -39,6 +40,7 @@ public class FloatEntity extends DomainEntity {
 		this.description = description;
 	}
 
+	@ElementCollection
 	public Collection<String> getPictures() {
 		return this.pictures;
 	}

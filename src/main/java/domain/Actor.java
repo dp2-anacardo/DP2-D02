@@ -36,7 +36,7 @@ public abstract class Actor extends DomainEntity {
 
 	//Relationships
 
-	private Collection<Box>				boxes;
+	private Collection<MessageBox>		boxes;
 	private UserAccount					userAccount;
 	private Collection<SocialProfile>	socialProfiles;
 
@@ -129,7 +129,7 @@ public abstract class Actor extends DomainEntity {
 	//Relationships
 
 	@OneToMany
-	public Collection<Box> getBoxes() {
+	public Collection<MessageBox> getBoxes() {
 		return this.boxes;
 	}
 
@@ -140,12 +140,13 @@ public abstract class Actor extends DomainEntity {
 		return this.userAccount;
 	}
 
+	@Valid
 	@OneToMany
 	public Collection<SocialProfile> getSocialProfiles() {
 		return this.socialProfiles;
 	}
 
-	public void setBoxes(final Collection<Box> boxes) {
+	public void setBoxes(final Collection<MessageBox> boxes) {
 		this.boxes = boxes;
 	}
 

@@ -4,9 +4,9 @@ package repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import domain.Box;
+import domain.MessageBox;
 
 @Repository
-public interface BoxRepository extends JpaRepository<Box, Integer> {
+public interface MessageBoxRepository extends JpaRepository<MessageBox, Integer> {
 
 }

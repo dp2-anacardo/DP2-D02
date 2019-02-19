@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,6 +29,7 @@ public class Area extends DomainEntity {
 		this.name = name;
 	}
 
+	@URL
 	@NotEmpty
 	@ElementCollection
 	public Collection<String> getPictures() {

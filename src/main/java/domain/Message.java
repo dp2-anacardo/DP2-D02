@@ -9,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,6 +64,7 @@ public class Message extends DomainEntity {
 
 	@NotNull
 	@Valid
+	@ManyToOne
 	public Priority getPriority() {
 		return this.priority;
 	}
@@ -71,7 +73,7 @@ public class Message extends DomainEntity {
 		this.priority = priority;
 	}
 
-	@ElementCollection(targetClass = String.class)
+	@ElementCollection
 	public Collection<String> getTags() {
 		return this.tags;
 	}
@@ -87,6 +89,7 @@ public class Message extends DomainEntity {
 	private Collection<MessageBox>	messageBoxes;
 
 
+	@Valid
 	@OneToOne(optional = true)
 	public Actor getSender() {
 		return this.sender;
@@ -96,6 +99,7 @@ public class Message extends DomainEntity {
 		this.sender = sender;
 	}
 
+	@Valid
 	@NotNull
 	@ManyToMany
 	public Collection<Actor> getRecipients() {

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Brotherhood extends DomainEntity {
+public class Brotherhood extends Actor {
 
 	private String				title;
 	private Date				establishmentDate;
@@ -63,6 +64,7 @@ public class Brotherhood extends DomainEntity {
 
 	//Relationships
 
+	@Valid
 	@OneToOne(optional = false)
 	public Area getArea() {
 		return this.area;

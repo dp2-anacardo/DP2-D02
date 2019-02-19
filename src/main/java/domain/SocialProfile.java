@@ -13,8 +13,8 @@ import org.hibernate.validator.constraints.URL;
 public class SocialProfile extends DomainEntity {
 
 	private String	nick;
-	private String	socialNetName;
-	private String	socialNetProfLink;
+	private String	socialNetworkName;
+	private String	profileLink;
 
 
 	@NotBlank
@@ -27,20 +27,20 @@ public class SocialProfile extends DomainEntity {
 	}
 
 	@NotBlank
-	public String getSocialNetName() {
-		return this.socialNetName;
+	public String getSocialNetworkName() {
+		return this.socialNetworkName;
 	}
 
-	public void setSocialNetName(final String socialNetName) {
-		this.socialNetName = socialNetName;
+	public void setSocialNetworkName(final String socialNetworkName) {
+		this.socialNetworkName = socialNetworkName;
 	}
 
 	@URL
-	public String getSocialNetProfLink() {
-		return this.socialNetProfLink;
+	public String getProfileLink() {
+		return this.profileLink;
 	}
 
-	public void setSocialNetProfLink(final String socialNetProfLink) {
-		this.socialNetProfLink = socialNetProfLink;
+	public void setProfileLink(final String profileLink) {
+		this.profileLink = profileLink;
 	}
 }

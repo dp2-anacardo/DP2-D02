@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -16,12 +17,13 @@ public class Request extends DomainEntity {
 	private int			positionRow;
 	private int			positionColumn;
 	private String		status;
-	private String		comments;
+	private String		comment;
 	private Procession	procession;
 	private Member		member;
 
 
 	@NotBlank
+	@Pattern(regexp = "^APPROVED|PENDING|REJECTED$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -30,12 +32,12 @@ public class Request extends DomainEntity {
 		this.status = status;
 	}
 
-	public String getComments() {
-		return this.comments;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void setComments(final String comments) {
-		this.comments = comments;
+	public void setComment(final String comment) {
+		this.comment = comment;
 	}
 
 	public int getPositionRow() {

@@ -19,10 +19,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Procession extends DomainEntity {
 
-	private String	title;
-	private String	description;
-	private Date	moment;
-	private String	ticker;
+	private String		title;
+	private String		description;
+	private Date		moment;
+	private String		ticker;
+	private Member[][]	formation;
+	private Boolean		isFinal;
+	private int			maxRow;
+	private int			maxColumn;
 
 
 	@NotBlank
@@ -63,6 +67,38 @@ public class Procession extends DomainEntity {
 
 	public void setTicker(final String ticker) {
 		this.ticker = ticker;
+	}
+
+	public Member[][] getFormation() {
+		return this.formation;
+	}
+
+	public void setFormation(final Member[][] formation) {
+		this.formation = formation;
+	}
+
+	public Boolean getIsFinal() {
+		return this.isFinal;
+	}
+
+	public void setIsFinal(final Boolean isFinal) {
+		this.isFinal = isFinal;
+	}
+
+	public int getMaxRow() {
+		return this.maxRow;
+	}
+
+	public void setMaxRow(final int maxRow) {
+		this.maxRow = maxRow;
+	}
+
+	public int getMaxColumn() {
+		return this.maxColumn;
+	}
+
+	public void setMaxColumn(final int maxColumn) {
+		this.maxColumn = maxColumn;
 	}
 
 }

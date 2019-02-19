@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,6 +66,7 @@ public class Finder extends DomainEntity {
 
 	//Relationships
 
+	@Valid
 	@OneToMany
 	public Collection<Procession> getProcessions() {
 		return this.processions;

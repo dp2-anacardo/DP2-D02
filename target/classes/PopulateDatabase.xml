@@ -19,8 +19,8 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -31,32 +31,257 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="BROTHERHOOD" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="member1" />
+		<property name="password" value="c7764cfed23c5ca3bb393308a0da2306" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="MEMBER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="member2" />
+		<property name="password" value="88ed421f060aadcacbd63f28d889797f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="member3" />
+		<property name="password" value="3ef4802d8a37022fd187fbd829d1c4d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
 	<!-- Other domain beans come here -->	
+	
+	<!-- ADMINISTRATOR -->	
+	
+	<bean id="admin1" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount1"/>
+		<property name="name" value="admin1" />
+		<property name="middleName" value="middleName" />
+		<property name="surname" value="admin1"/>
+		<property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+		<property name="email" value="emailDePrueba@gmail.com"/>
+		<property name="phoneNumber" value="+34 678123674"/>
+		<property name="address" value="Avenida Reina Mercedes"/>
+		<property name="isSuspicious" value=""/>
+		<property name="isBanned" value=""/>
+		<property name="score" value=""/>
+		<property name="socialProfiles">
+			<list>
+				<ref bean="socialProfileAdmin1"/>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxAdmin1"/>
+				<ref bean="outBoxAdmin1"/>
+				<ref bean="spamBoxAdmin1"/>
+				<ref bean="trashBoxAdmin1"/>
+				<ref bean="notificationBoxAdmin1" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ADMINISTRATOR'S SocialProfiles -->	
+	
+	<bean id="socialProfileAdmin1" class="domain.SocialProfile">
+		<property name="nick" value="admin1Nick" />
+		<property name="socialNetworkName" value="twitter" />
+		<property name="profileLink" value="http://www.twitter.com" />
+	</bean>
+	
+	<!-- ADMINISTRATOR'S Boxes -->
+	
+	<bean id="inBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxAdmin1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- BROTHERHOOD -->	
+		
+		<bean id="brotherhood1" class="domain.Brotherhood">
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="name" value="brotherhood1" />
+		<property name="middleName" value="" />
+		<property name="surname" value="brotherhood1"/>
+		<property name="photo" value="https://www.youtube.com"/>
+		<property name="email" value="brotherhood1@gmail.com"/>
+		<property name="phoneNumber" value="+34 675234132"/>
+		<property name="address" value="C/ Recaredo"/>
+		<property name="isSuspicious" value=""/>
+		<property name="isBanned" value=""/>
+		<property name="score" value=""/>
+		<property name="title" value="Triana's Brotherhood"/>
+		<property name="establishmentDate" value="19/02/2019 15:51"/>
+		<property name="area" ref="areaBrotherhood1"/>
+		<property name="pictures">
+			<list>
+				<value>"http://www.imagenPrueba.com"</value>
+			</list>
+		</property>
+		<property name="socialProfiles">
+			<list>
+				<ref bean="socialProfileBrotherhood1"/>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxBrotherhood1"/>
+				<ref bean="outBoxBrotherhood1"/>
+				<ref bean="spamBoxBrotherhood1"/>
+				<ref bean="trashBoxBrotherhood1"/>
+				<ref bean="notificationBoxBrotherhood1" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- BROTHERHOOD'S Area -->
+		
+	<bean id="areaBrotherhood1" class="domain.Area">
+		<property name="name" value="Triana" />
+		<property name="pictures">
+			<list>
+				<value>"http://www.fotoDeTriana.com"</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- BROTHERHOOD'S SocialProfile -->
+		
+		<bean id="socialProfileBrotherhood1" class="domain.SocialProfile">
+		<property name="nick" value="Brotherhood1Nick" />
+		<property name="socialNetworkName" value="instagram" />
+		<property name="profileLink" value="http://www.instagram.com" />
+	</bean>
+	
+	<!-- BROTHERHOOD'S Boxes -->
+	
+	<bean id="inBoxBrotherhood1" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxBrotherhood1" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxBrotherhood1" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxBrotherhood1" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxBrotherhood1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Priorities -->
+	
+	<bean id="HIGH" class="domain.Priority">
+		<property name="title" value="HIGH"/>
+	</bean>
+	
+	<bean id="NEUTRAL" class="domain.Priority">
+		<property name="title" value="NEUTRAL"/>
+	</bean>
+	
+	<bean id="LOW" class="domain.Priority">
+		<property name="title" value="LOW"/>
+	</bean>
 	
 </beans>
