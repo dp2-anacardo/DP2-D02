@@ -20,8 +20,8 @@
 	<!-- Artifact identification and properties -->
 
 	<groupId>Design-and-Testing</groupId>
-	<artifactId>Sample-Project</artifactId>
-	<version>1.18</version>
+	<artifactId>Acme-Madruga</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	
 	<properties>
@@ -30,9 +30,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<name>Acme-Madruga</name>
+	<url>http://www.acme-madruga.com</url>
+	<description>This is D&amp;T's  project.</description>
 	
 	<!-- Build commands -->
 

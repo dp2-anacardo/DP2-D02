@@ -1,5 +1,25 @@
 #./src/main/resources/Entities.map
-#Thu Sep 20 13:19:36 CEST 2018
-userAccount3=6
-userAccount2=5
-userAccount1=4
+#Tue Feb 19 17:38:57 CET 2019
+NEUTRAL=57
+LOW=58
+notificationBoxBrotherhood1=55
+admin1=42
+trashBoxAdmin1=47
+brotherhood1=59
+socialProfileBrotherhood1=50
+socialProfileAdmin1=43
+outBoxBrotherhood1=52
+trashBoxBrotherhood1=54
+userAccount5=41
+userAccount4=40
+spamBoxBrotherhood1=53
+userAccount3=39
+userAccount2=38
+userAccount1=37
+spamBoxAdmin1=46
+HIGH=56
+areaBrotherhood1=49
+inBoxAdmin1=44
+inBoxBrotherhood1=51
+notificationBoxAdmin1=48
+outBoxAdmin1=45
