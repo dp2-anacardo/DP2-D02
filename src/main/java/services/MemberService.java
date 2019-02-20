@@ -32,7 +32,7 @@ public class MemberService {
 	//	private FinderService		finderService;
 
 	//	@Autowired 
-	//	private MessageBoxService		messageBoxService;
+	//	private MessageBoxService	messageBoxService;
 
 	public Member create() {
 
@@ -40,9 +40,12 @@ public class MemberService {
 		Authority auth;
 		//		Finder finder;
 		UserAccount userAccount;
+		UserAccount userAccount1;
 		Collection<Authority> authorities;
 		Collection<SocialProfile> profiles;
 		Collection<MessageBox> boxes;
+		userAccount1 = LoginService.getPrincipal();
+		Assert.isTrue(userAccount1.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 
 		result = new Member();
 		userAccount = new UserAccount();
@@ -70,7 +73,7 @@ public class MemberService {
 
 		Assert.isTrue(memberId != 0);
 		Member result;
-		result = this.findOne(memberId);
+		result = this.memberRepository.findOne(memberId);
 		return result;
 
 	}
@@ -89,11 +92,14 @@ public class MemberService {
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 		Assert.notNull(member);
-		final Member result;
+
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
+		member.getUserAccount().setPassword(res);
+
+		Member result;
 		if (member.getId() == 0) {
-			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-			final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
-			member.getUserAccount().setPassword(res);
+
 			//	member.setBoxes(this.messageBoxService.createSystemMessageBox);
 		}
 		result = this.memberRepository.save(member);
@@ -103,10 +109,8 @@ public class MemberService {
 	public void delete(final Member member) {
 
 		UserAccount userAccount;
-
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-
 		Assert.notNull(member);
 		Assert.isTrue(member.getId() != 0);
 		this.memberRepository.delete(member.getId());
