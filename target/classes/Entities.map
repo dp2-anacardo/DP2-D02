@@ -1,4 +1,30 @@
 #./src/main/resources/Entities.map
+<<<<<<< HEAD
+#Tue Feb 19 17:56:11 CET 2019
+NEUTRAL=57
+LOW=58
+notificationBoxBrotherhood1=55
+admin1=42
+trashBoxAdmin1=47
+brotherhood1=59
+socialProfileBrotherhood1=50
+socialProfileAdmin1=43
+outBoxBrotherhood1=52
+trashBoxBrotherhood1=54
+userAccount5=41
+userAccount4=40
+spamBoxBrotherhood1=53
+userAccount3=39
+userAccount2=38
+userAccount1=37
+spamBoxAdmin1=46
+HIGH=56
+areaBrotherhood1=49
+inBoxAdmin1=44
+inBoxBrotherhood1=51
+notificationBoxAdmin1=48
+outBoxAdmin1=45
+=======
 #Tue Feb 19 18:29:33 CET 2019
 trashBoxAdmin1=169
 inBoxBrotherhood1=173
@@ -46,3 +72,4 @@ spamBoxMember3=194
 spamBoxMember2=189
 spamBoxMember1=184
 socialProfileAdmin1=165
+>>>>>>> origin/miguel
