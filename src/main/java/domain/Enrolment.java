@@ -25,6 +25,7 @@ public class Enrolment extends DomainEntity {
 	private String		status;
 	private Member		member;
 	private Position	position;
+	private Brotherhood	brotherhood;
 
 
 	@NotNull
@@ -77,4 +78,15 @@ public class Enrolment extends DomainEntity {
 	public void setPosition(final Position position) {
 		this.position = position;
 	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
+	}
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
+	}
+
 }

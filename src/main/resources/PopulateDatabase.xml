@@ -662,6 +662,7 @@
 		<property name="status" value="REJECTED"/>
 		<property name="position" ref="president"/>
 		<property name="member" ref="member1"/>
+		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
 	<bean id="enrolment2" class="domain.Enrolment">
@@ -669,6 +670,7 @@
 		<property name="status" value="ACCEPTED"/>
 		<property name="position" ref="historian"/>
 		<property name="member" ref="member1"/>
+		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
 	<bean id="enrolment3" class="domain.Enrolment">
@@ -676,6 +678,7 @@
 		<property name="status" value="PENDING"/>
 		<property name="position" ref="officer"/>
 		<property name="member" ref="member3"/>
+		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
 	<!-- Position -->
