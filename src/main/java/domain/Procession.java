@@ -7,8 +7,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -27,6 +29,7 @@ public class Procession extends DomainEntity {
 	private Boolean		isFinal;
 	private int			maxRow;
 	private int			maxColumn;
+	private Brotherhood	brotherhood;
 
 
 	@NotBlank
@@ -60,7 +63,7 @@ public class Procession extends DomainEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^(\\d{6}(-)\\w{6})$")
+	@Pattern(regexp = "^(\\d{6}(-)\\w{5})$")
 	public String getTicker() {
 		return this.ticker;
 	}
@@ -99,6 +102,16 @@ public class Procession extends DomainEntity {
 
 	public void setMaxColumn(final int maxColumn) {
 		this.maxColumn = maxColumn;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
+	}
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
 	}
 
 }

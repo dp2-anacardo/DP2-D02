@@ -7,9 +7,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -28,7 +28,7 @@ public class Configuration extends DomainEntity {
 	private String				defaultCC;
 
 
-	@Size(min = 10, max = 100)
+	@Range(min = 10, max = 100)
 	public int getMaxResults() {
 		return this.maxResults;
 	}
@@ -37,7 +37,7 @@ public class Configuration extends DomainEntity {
 		this.maxResults = maxResults;
 	}
 
-	@Size(min = 1, max = 24)
+	@Range(min = 1, max = 24)
 	public int getMaxTime() {
 		return this.maxTime;
 	}
@@ -55,8 +55,8 @@ public class Configuration extends DomainEntity {
 		this.systemName = systemName;
 	}
 
-	@URL
 	@NotBlank
+	@URL
 	public String getBanner() {
 		return this.banner;
 	}

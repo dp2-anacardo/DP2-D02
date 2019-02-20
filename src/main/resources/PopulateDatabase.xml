@@ -364,7 +364,7 @@
 		<property name="areaName" value="Triana"/>
 		<property name="processions">
 			<list>
-			
+				<ref bean="procession1"/>
 			</list>
 		</property>
 	</bean>
@@ -574,6 +574,145 @@
 	
 	<bean id="LOW" class="domain.Priority">
 		<property name="title" value="LOW"/>
+	</bean>
+	
+	<!-- FloatEntity -->
+	
+	<bean id="floatEntity1" class="domain.FloatEntity">
+		<property name="title" value="Cristo del Gran Poder"/>
+		<property name="description" value="Creo que va con una cruz"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="floatEntity2" class="domain.FloatEntity">
+		<property name="title" value="Virgen de la Macarena"/>
+		<property name="description" value="No se sabe si sonrie o llora"/>
+		<property name="pictures">
+			<list>
+				<value>http://www.imagenVirgen.com</value>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<!-- Procession -->
+	
+	<bean id="procession1" class="domain.Procession">
+		<property name="title" value="Procession's title"/>
+		<property name="description" value="Procession's description"/>
+		<property name="moment" value="08/05/2019"/>
+		<property name="ticker" value="190508-DAVID"/>
+		<property name="formation">
+			<array>
+				<array>
+				</array>
+			</array>
+		</property>
+		<property name="isFinal" value="false"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession2" class="domain.Procession">
+		<property name="title" value="Procession2's title"/>
+		<property name="description" value="Procession2's description"/>
+		<property name="moment" value="20/04/2019"/>
+		<property name="ticker" value="190420-JESUS"/>
+		<property name="formation">
+			<array>
+				<array>
+				</array>
+			</array>
+		</property>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<!-- Request -->
+	
+	<bean id="request1" class="domain.Request">
+		<property name="positionRow" value="2"/>
+		<property name="positionColumn" value="1"/>
+		<property name="status" value="PENDING"/>
+		<property name="comment" value=""/>
+		<property name="procession" ref="procession1"/>
+		<property name="member" ref="member1"/>
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+		<property name="positionRow" value="2"/>
+		<property name="positionColumn" value="1"/>
+		<property name="status" value="REJECTED"/>
+		<property name="comment" value="No te queremos member2"/>
+		<property name="procession" ref="procession1"/>
+		<property name="member" ref="member2"/>
+	</bean>
+	
+	<!-- Enrolment -->
+	
+	<bean id="enrolment1" class="domain.Enrolment">
+		<property name="registerMoment" value="16/02/2019 12:00"/>
+		<property name="status" value="REJECTED"/>
+		<property name="position" ref="president"/>
+		<property name="member" ref="member1"/>
+	</bean>
+	
+	<bean id="enrolment2" class="domain.Enrolment">
+		<property name="registerMoment" value="17/02/2019 12:00"/>
+		<property name="status" value="ACCEPTED"/>
+		<property name="position" ref="historian"/>
+		<property name="member" ref="member1"/>
+	</bean>
+	
+	<bean id="enrolment3" class="domain.Enrolment">
+		<property name="registerMoment" value="20/02/2019 17:30"/>
+		<property name="status" value="PENDING"/>
+		<property name="position" ref="officer"/>
+		<property name="member" ref="member3"/>
+	</bean>
+	
+	<!-- Position -->
+	
+	<bean id="president" class="domain.Position">
+		<property name="roleEs" value="Presidente"/>
+		<property name="roleEn" value="President"/>
+	</bean>
+	
+	<bean id="vicepresident" class="domain.Position">
+		<property name="roleEs" value="Vicepresidente"/>
+		<property name="roleEn" value="Vice President"/>
+	</bean>
+	
+	<bean id="secretary" class="domain.Position">
+		<property name="roleEs" value="Secretary"/>
+		<property name="roleEn" value="Secretario"/>
+	</bean>
+	
+	<bean id="treasurer" class="domain.Position">
+		<property name="roleEs" value="Tesorero"/>
+		<property name="roleEn" value="Treasurer"/>
+	</bean>
+	
+	<bean id="fundraiser" class="domain.Position">
+		<property name="roleEs" value="Promotor"/>
+		<property name="roleEn" value="Fundraiser"/>
+	</bean>
+	
+	<bean id="historian" class="domain.Position">
+		<property name="roleEs" value="Historiador"/>
+		<property name="roleEn" value="Historian"/>
+	</bean>
+	
+	<bean id="officer" class="domain.Position">
+		<property name="roleEs" value="Vocal"/>
+		<property name="roleEn" value="Officer"/>
 	</bean>
 	
 	<!-- Configuration -->
