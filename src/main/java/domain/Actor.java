@@ -24,8 +24,6 @@ import security.UserAccount;
 public abstract class Actor extends DomainEntity {
 
 	private String						name;
-	private String						middleName;
-	private String						surname;
 	private String						photo;
 	private String						email;
 	private String						phoneNumber;
@@ -44,15 +42,6 @@ public abstract class Actor extends DomainEntity {
 	@NotBlank
 	public String getName() {
 		return this.name;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	@NotBlank
-	public String getSurname() {
-		return this.surname;
 	}
 
 	@URL
@@ -88,14 +77,6 @@ public abstract class Actor extends DomainEntity {
 
 	public void setName(final String name) {
 		this.name = name;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
 	}
 
 	public void setPhoto(final String photo) {

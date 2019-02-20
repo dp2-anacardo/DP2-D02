@@ -6,8 +6,11 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -17,20 +20,22 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Enrolment extends DomainEntity {
 
-	private Date	registerMoment;
-	private Date	dropOutMoment;
-	private String	status;
+	private Date		registerMoment;
+	private Date		dropOutMoment;
+	private String		status;
+	private Member		member;
+	private Position	position;
 
 
-	@NotBlank
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getRegisterMoment() {
 		return this.registerMoment;
 	}
 
-	public void setRegisterMoment(final Date RegisterMoment) {
-		this.registerMoment = RegisterMoment;
+	public void setRegisterMoment(final Date registerMoment) {
+		this.registerMoment = registerMoment;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -53,4 +58,23 @@ public class Enrolment extends DomainEntity {
 		this.status = status;
 	}
 
+	@Valid
+	@ManyToOne(optional = false)
+	public Member getMember() {
+		return this.member;
+	}
+
+	public void setMember(final Member member) {
+		this.member = member;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Position getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(final Position position) {
+		this.position = position;
+	}
 }
