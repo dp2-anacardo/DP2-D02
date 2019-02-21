@@ -1,85 +1,5 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-#Wed Feb 20 19:17:01 CET 2019
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Tue Feb 19 17:56:11 CET 2019
-NEUTRAL=57
-LOW=58
-notificationBoxBrotherhood1=55
-admin1=42
-trashBoxAdmin1=47
-brotherhood1=59
-socialProfileBrotherhood1=50
-socialProfileAdmin1=43
-outBoxBrotherhood1=52
-trashBoxBrotherhood1=54
-userAccount5=41
-userAccount4=40
-spamBoxBrotherhood1=53
-userAccount3=39
-userAccount2=38
-userAccount1=37
-spamBoxAdmin1=46
-HIGH=56
-areaBrotherhood1=49
-inBoxAdmin1=44
-inBoxBrotherhood1=51
-notificationBoxAdmin1=48
-outBoxAdmin1=45
-=======
-#Tue Feb 19 18:29:33 CET 2019
-trashBoxAdmin1=169
-inBoxBrotherhood1=173
-finderMember3=180
-finderMember2=179
-finderMember1=178
-trashBoxMember3=195
-trashBoxMember2=190
-outBoxMember3=193
-inBoxAdmin1=166
-trashBoxMember1=185
-outBoxMember2=188
-HIGH=197
-outBoxMember1=183
-spamBoxBrotherhood1=175
-inBoxMember3=192
-socialProfileMember2=181
-inBoxMember2=187
-notificationBoxBrotherhood1=177
-inBoxMember1=182
-member3=203
-member2=202
-notificationBoxAdmin1=170
-member1=201
-brotherhood1=200
-spamBoxAdmin1=168
-outBoxAdmin1=167
-LOW=199
-NEUTRAL=198
-notificationBoxMember3=196
-notificationBoxMember2=191
-trashBoxBrotherhood1=176
-notificationBoxMember1=186
-messageMember1=204
-userAccount5=163
-userAccount4=162
-areaBrotherhood1=171
-userAccount3=161
-userAccount2=160
-userAccount1=159
-socialProfileBrotherhood1=172
-admin1=164
-outBoxBrotherhood1=174
-spamBoxMember3=194
-spamBoxMember2=189
-spamBoxMember1=184
-socialProfileAdmin1=165
->>>>>>> origin/miguel
-=======
-#Wed Feb 20 12:02:36 CET 2019
->>>>>>> origin/sergio
+#Thu Feb 21 16:25:11 CET 2019
 trashBoxAdmin1=564
 inBoxBrotherhood1=568
 configuration1=602
@@ -143,7 +63,3 @@ spamBoxMember3=589
 spamBoxMember2=584
 spamBoxMember1=579
 socialProfileAdmin1=560
-<<<<<<< HEAD
-=======
->>>>>>> origin/miguel
->>>>>>> origin/sergio

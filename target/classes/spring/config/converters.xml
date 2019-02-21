@@ -25,6 +25,8 @@
 		
 		<bean class="converters.ConfigurationToString"/>
 		<bean class="converters.StringToConfiguration"/>
+		<bean class="converters.AreaToStringConverter"/>
+		<bean class="converters.StringToAreaConverter"/>
 	</util:list>
 	
 </beans>
