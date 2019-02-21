@@ -90,6 +90,8 @@ public class ProcessionService {
 		return result;
 	}
 
+	//TODO delete de procession, se deben borrar todas las request asociadas, ¿agregacion?
+
 	private String tickerGenerator() {
 		String dateRes = "";
 		String numericRes = "";
