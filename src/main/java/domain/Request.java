@@ -14,8 +14,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Request extends DomainEntity {
 
-	private int			positionRow;
-	private int			positionColumn;
+	private Integer		positionRow;
+	private Integer		positionColumn;
 	private String		status;
 	private String		comment;
 	private Procession	procession;
