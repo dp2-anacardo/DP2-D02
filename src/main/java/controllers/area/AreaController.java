@@ -1,6 +1,8 @@
 
 package controllers.area;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AreaService;
 import controllers.AbstractController;
 import domain.Area;
-import forms.AreaForm;
 
 @Controller
 @RequestMapping("area/administrator")
@@ -21,12 +22,31 @@ public class AreaController extends AbstractController {
 	private AreaService	areaService;
 
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final AreaForm areaForm, final BindingResult binding) {
-		final ModelAndView result;
-		Area area;
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Area> areas;
+		areas = this.areaService.findAll();
 
-		area = this.areaService.reconstruct(areaForm, binding);
+		result = new ModelAndView("area/administrator/list");
+		result.addObject("area", areas);
+		result.addObject("requestURI", "area/administrator/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(final int areaId) {
+		ModelAndView result;
+		Area area;
+		area = this.areaService.findOne(areaId);
+		result = this.createEditModelAndView(area);
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(final Area area, final BindingResult binding) {
+		ModelAndView result;
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(area);
 		else
@@ -34,7 +54,7 @@ public class AreaController extends AbstractController {
 				this.areaService.save(area);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(areaForm, "area.commit.error");
+				result = this.createEditModelAndView(area, "area.commit.error");
 
 			}
 		return result;
@@ -43,7 +63,16 @@ public class AreaController extends AbstractController {
 
 	private ModelAndView createEditModelAndView(final Area area) {
 		ModelAndView result;
-		result = 
-		return null;
+		result = this.createEditModelAndView(area, null);
+		return result;
 	}
+
+	private ModelAndView createEditModelAndView(final Area area, final String messageCode) {
+		ModelAndView result;
+
+		result = new ModelAndView("area/administrator/edit");
+		result.addObject("area", area);
+		return result;
+	}
+
 }

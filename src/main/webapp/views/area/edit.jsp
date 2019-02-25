@@ -11,7 +11,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('ADMIN')">
-<form:form action="area/administrator/edit.do" modelAttribute="areaForm">
+<form:form action="area/administrator/edit.do" modelAttribute="area">
 	<form:hidden path="id" />
 	
 	<form:label path="name">
