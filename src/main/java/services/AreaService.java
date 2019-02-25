@@ -9,9 +9,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AreaRepository;
 import domain.Area;
+import forms.AreaForm;
 
 @Service
 @Transactional
@@ -23,6 +26,23 @@ public class AreaService {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private Validator		validator;
+
+
+	public Area reconstruct(final AreaForm area, final BindingResult binding) {
+		Area result;
+		result = this.create();
+		if (area.getId() != 0)
+			result = this.areaRepository.findOne(area.getId());
+		result.setName(area.getName());
+		result.setPictures(area.getPictures());
+
+		this.validator.validate(result, binding);
+
+		return result;
+
+	}
 
 	public Area create() {
 		Area result;
