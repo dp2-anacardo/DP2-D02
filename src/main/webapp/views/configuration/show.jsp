@@ -9,6 +9,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<!-- Single Attributes -->
+
 <p>
 	<acme:showtext code="configuration.edit.maxResults" 
 	value="${config.maxResults}"
@@ -45,10 +47,16 @@
 	fieldset="true"/>
 </p>
 
-<!-- HACER SPAM WORD POS WORD Y NEG WORDS -->
+<!-- Table Attributes -->
 
+<display:table pagesize="5" class="fixUpTask" name="fixUpTasks" requestURI="finder/handyWorker/list.do" id="row">
+	
+	<spring:message code="fixUpTask.ticker" var="ticker" />
+	<display:column property="ticker" title="${ticker}"/>
+	
+</display:table>
 
 <input type="button" name="edit PD"
-		value="<spring:message code="configuration.edit" />"
-		onclick="javascript: relativeRedir('/configuration/administrator/edit.do');" />
-	<br />
+	value="<spring:message code="configuration.edit" />"
+	onclick="javascript: relativeRedir('/configuration/administrator/edit.do');" />
+<br />

@@ -22,6 +22,7 @@ public class Finder extends DomainEntity {
 	private Date					minimumDate;
 	private Date					maximumDate;
 	private String					areaName;
+	private Date					lastUpdate;
 
 	//Relationships
 
@@ -65,6 +66,14 @@ public class Finder extends DomainEntity {
 	}
 
 	//Relationships
+
+	public Date getLastUpdate() {
+		return this.lastUpdate;
+	}
+
+	public void setLastUpdate(final Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
 	@Valid
 	@OneToMany
