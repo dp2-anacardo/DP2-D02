@@ -70,15 +70,14 @@ public class PositionService {
 		Assert.notNull(position);
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		if (this.getTotalPositionsByName(position.getRoleEn()) == 0 && this.getTotalPositionsByName(position.getRoleEs()) == 0)
+		if (this.getPositionsNotUsed().contains(position))
 			this.positionRepository.delete(position.getId());
 	}
 
-	private Integer getTotalPositionsByName(final String name) {
-		Integer result;
-		Assert.notNull(name);
+	private Collection<Position> getPositionsNotUsed() {
+		Collection<Position> result;
 
-		result = this.positionRepository.getTotalPositionsByName(name);
+		result = this.positionRepository.getPositionsNotUsed();
 
 		return result;
 	}

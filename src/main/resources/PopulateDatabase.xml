@@ -694,8 +694,8 @@
 	</bean>
 	
 	<bean id="secretary" class="domain.Position">
-		<property name="roleEs" value="Secretary"/>
-		<property name="roleEn" value="Secretario"/>
+		<property name="roleEs" value="Secretario"/>
+		<property name="roleEn" value="Secretary"/>
 	</bean>
 	
 	<bean id="treasurer" class="domain.Position">
