@@ -38,7 +38,6 @@ public class MemberService {
 
 		Member result;
 		Authority auth;
-		//		Finder finder;
 		UserAccount userAccount;
 		UserAccount userAccount1;
 		Collection<Authority> authorities;
@@ -53,7 +52,6 @@ public class MemberService {
 		authorities = new ArrayList<Authority>();
 		profiles = new ArrayList<SocialProfile>();
 		boxes = new ArrayList<MessageBox>();
-		//		finder = this.finderService.create();
 
 		auth.setAuthority(Authority.MEMBER);
 		authorities.add(auth);
@@ -63,7 +61,6 @@ public class MemberService {
 		result.setIsSuspicious(false);
 		result.setBoxes(boxes);
 		result.setSocialProfiles(profiles);
-		//		result.setFinder(finder);
 
 		return result;
 
@@ -99,7 +96,11 @@ public class MemberService {
 
 		Member result;
 		if (member.getId() == 0) {
-
+			// Finder finderCreate;
+			// Finder finder;
+			// finderCreate=this.finderService.create();
+			// finder=this.finderService.save(finderCreate);
+			// member.setFinder(finder);
 			//	member.setBoxes(this.messageBoxService.createSystemMessageBox);
 		}
 		result = this.memberRepository.save(member);
