@@ -9,8 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AreaRepository;
+import datatype.Url;
 import domain.Area;
 
 @Service
@@ -23,11 +26,31 @@ public class AreaService {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private Validator		validator;
+
+
+	public Area reconstruct(final Area a, final BindingResult binding) {
+		Area result;
+
+		if (a.getId() == 0)
+			result = a;
+		else {
+			result = this.areaRepository.findOne(a.getId());
+			result.setName(a.getName());
+			result.setPictures(a.getPictures());
+
+			this.validator.validate(result, binding);
+		}
+
+		return result;
+
+	}
 
 	public Area create() {
 		Area result;
 		result = new Area();
-		result.setPictures(new ArrayList<String>());
+		result.setPictures(new ArrayList<Url>());
 		return result;
 	}
 
@@ -53,6 +76,7 @@ public class AreaService {
 	public void delete(final Area a) {
 		Assert.notNull(a);
 		Assert.isTrue(this.canBeDeleted(a));
+		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		this.areaRepository.delete(a);
 	}
 

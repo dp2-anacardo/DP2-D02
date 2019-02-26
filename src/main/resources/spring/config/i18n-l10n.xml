@@ -27,7 +27,11 @@
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/configuration/messages</value>
+<<<<<<< HEAD
 		<value>/views/socialProfile/messages</value>
+=======
+		<value>/views/area/messages</value>
+>>>>>>> jesus
 	</util:list>
 
 </beans>

@@ -31,6 +31,7 @@
 		<bean class="converters.StringToRequestConverter"/>
 		<bean class="converters.ProcessionToStringConverter"/>
 		<bean class="converters.StringToProcessionConverter"/>
+<<<<<<< HEAD
 		<bean class="converters.MemberToStringConverter"/>
 		<bean class="converters.StringToMemberConverter"/>
 		<bean class="converters.AdministratorToStringConverter"/>
@@ -42,6 +43,10 @@
 		<bean class="converters.ActorToStringConverter"/>
 		<bean class="converters.StringToActorConverter"/>
 		
+=======
+		<bean class="converters.UrlToStringConverter"/>
+		<bean class="converters.StringToUrlConverter"/>
+>>>>>>> jesus
 	</util:list>
 	
 </beans>

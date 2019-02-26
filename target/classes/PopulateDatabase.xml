@@ -208,9 +208,16 @@
 		<property name="name" value="Triana" />
 		<property name="pictures">
 			<list>
-				<value>"http://www.fotoDeTriana.com"</value>
+				<ref bean="picture2"/>
 			</list>
 		</property>
+	</bean>
+	
+	<!-- Picture -->
+	
+	<bean id="picture2" class="datatype.Url">
+		<property name="link"
+			value="https://i.blogs.es/556f4e/madrid-central-restricciones-trafico/1366_2000.jpg" />
 	</bean>
 	
 	<!-- Brotherhood's SocialProfile -->
