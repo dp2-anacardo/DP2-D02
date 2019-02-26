@@ -18,12 +18,12 @@
 
 	<definition name="area/administrator/edit" extends="master.page">	
 		<put-attribute name="title" value="Area" />
-		<put-attribute name="body" value="/views/area/edit" />
+		<put-attribute name="body" value="/views/area/edit.jsp" />
 	</definition>
 	
 	<definition name="area/administrator/list" extends="master.page">	
 		<put-attribute name="title" value="Areas" />
-		<put-attribute name="body" value="/views/area/list" />
+		<put-attribute name="body" value="/views/area/list.jsp" />
 	</definition>
 	
 	

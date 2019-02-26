@@ -35,6 +35,16 @@ public class AreaController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Area area;
+
+		area = this.areaService.create();
+		result = this.createEditModelAndView(area);
+		return result;
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(final int areaId) {
 		ModelAndView result;
@@ -45,12 +55,14 @@ public class AreaController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final Area area, final BindingResult binding) {
+	public ModelAndView save(Area area, final BindingResult binding) {
 		ModelAndView result;
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(area);
 		else
 			try {
+				area = this.areaService.reconstruct(area, binding);
 				this.areaService.save(area);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -59,6 +71,21 @@ public class AreaController extends AbstractController {
 			}
 		return result;
 
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Area area, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(area);
+		else
+			try {
+				this.areaService.delete(area);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(area, "area.commit.error");
+			}
+		return result;
 	}
 
 	private ModelAndView createEditModelAndView(final Area area) {

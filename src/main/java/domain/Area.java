@@ -7,16 +7,19 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import datatype.Url;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Area extends DomainEntity {
 
-	private String				name;
-	private Collection<String>	pictures;
+	private String			name;
+	private Collection<Url>	pictures;
 
 
 	@NotBlank
@@ -28,13 +31,13 @@ public class Area extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotEmpty
-	@ElementCollection
-	public Collection<String> getPictures() {
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Valid
+	public Collection<Url> getPictures() {
 		return this.pictures;
 	}
 
-	public void setPictures(final Collection<String> pictures) {
+	public void setPictures(final Collection<Url> pictures) {
 		this.pictures = pictures;
 	}
 

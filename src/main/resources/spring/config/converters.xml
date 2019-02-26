@@ -31,6 +31,8 @@
 		<bean class="converters.StringToRequestConverter"/>
 		<bean class="converters.ProcessionToStringConverter"/>
 		<bean class="converters.StringToProcessionConverter"/>
+		<bean class="converters.UrlToStringConverter"/>
+		<bean class="converters.StringToUrlConverter"/>
 	</util:list>
 	
 </beans>

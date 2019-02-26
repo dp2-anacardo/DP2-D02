@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
     
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,7 +23,7 @@
 	<form:label path="pictures">
 		<spring:message code="area.pictures"/>
 	</form:label>
-	<form:input path="pictures"/>
+	<form:textarea path="pictures" cols="50" rows="5"/>
 	<form:errors cssClass="error" path="pictures"/>
 	<br />
 	
@@ -35,7 +34,7 @@
 			value="<spring:message code="area.delete" />" />
 	</jstl:if>
 	<input type="button" name="cancel"
-		value="<spring:message code="category.cancel" />"
+		value="<spring:message code="area.cancel" />"
 		onclick="javascript: relativeRedir('area/administrator/list.do');" />
 	<br />
 	

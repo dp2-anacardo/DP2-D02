@@ -24,7 +24,7 @@
 </display:table>
 <div>
 	<a href="area/administrator/create.do"> <spring:message
-				code="category.create" />
+				code="area.create" />
 	</a>
 </div>
 </security:authorize>
