@@ -3,6 +3,8 @@ package controllers.area;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -55,7 +57,7 @@ public class AreaController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Area area, final BindingResult binding) {
+	public ModelAndView save(@Valid Area area, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())

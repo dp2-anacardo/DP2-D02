@@ -2,6 +2,7 @@
 package converters;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class UrlToStringConverter implements Converter<Url, String> {
 		else
 			try {
 				builder = new StringBuilder();
-				builder.append(URLEncoder.encode(url.getLink(), "UTF-8"));
+				builder.append(URLEncoder.encode(url.getLink(), StandardCharsets.UTF_8.name()));
 				result = builder.toString();
 			} catch (final Throwable oops) {
 				throw new RuntimeException(oops);

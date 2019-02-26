@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import datatype.Url;
 
@@ -30,7 +31,7 @@ public class Area extends DomainEntity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	@NotEmpty
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Valid
 	public Collection<Url> getPictures() {
