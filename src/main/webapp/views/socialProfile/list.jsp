@@ -12,7 +12,7 @@
 <display:table pagesize="5" class="socialProfiles" name="socialProfiles" requestURI="${requestURI}" id="row">
 
 
-	<display:column> <a href="socialProfile/handyWorker,customer,admin,referee/edit.do?socialProfileId=${row.id}">
+	<display:column> <a href="socialProfile/brotherhood,member,admin/edit.do?socialProfileId=${row.id}">
 	<spring:message code="socialProfile.edit" /></a> </display:column>
 
 	<spring:message code="socialProfile.nick" var="nick" />
@@ -28,4 +28,5 @@
 
 <input type="button" value="<spring:message code="socialProfile.create" />"
 		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin/create.do');" />
+		
 </security:authorize>

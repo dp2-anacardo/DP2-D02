@@ -3,10 +3,16 @@ package controllers.socialProfile;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -49,6 +55,56 @@ public class SocialProfileController extends AbstractController {
 		profile = this.socialProfileService.create();
 		result = this.createEditModelAndView(profile);
 
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int socialProfileId) {
+
+		ModelAndView result;
+		SocialProfile profile;
+		Actor user;
+
+		user = this.actorService.getActorLogged();
+		profile = this.socialProfileService.findOne(socialProfileId);
+		Assert.notNull(profile);
+		if (user.getSocialProfiles().contains(profile))
+			result = this.createEditModelAndView(profile);
+		else
+			result = new ModelAndView("redirect:/misc/403");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@ModelAttribute("socialProfile") @Valid final SocialProfile profile, final BindingResult binding) {
+
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(profile);
+		else
+			try {
+				this.socialProfileService.save(profile);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(profile, "profile.commit.error");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final SocialProfile profile, final BindingResult binding) {
+
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(profile);
+		else
+			try {
+				this.socialProfileService.delete(profile);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(profile, "profile.commit.error");
+			}
 		return result;
 	}
 

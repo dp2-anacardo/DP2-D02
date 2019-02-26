@@ -29,7 +29,7 @@
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('administrator/administrator/edit.do');" />
+			onclick="javascript: relativeRedir('');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			
@@ -41,10 +41,10 @@
 <spring:message code="administrator.email" />: ${brotherhood.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${brotherhood.phoneNumber} <br/>
 
-<input type="button" name="socialProfiles" value="<spring:message code="edit.PD" />"
+<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
-<input type="button" name="Edit PD" value="<spring:message code="socialProfile" />"
-			onclick="javascript: relativeRedir('/referee/referee/edit.do');" />
+<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
+			onclick="javascript: relativeRedir('');" />
 </security:authorize>
 
 <security:authorize access="hasRole('MEMBER')">
@@ -59,7 +59,7 @@
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('administrator/administrator/edit.do');" />
+			onclick="javascript: relativeRedir('');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			
