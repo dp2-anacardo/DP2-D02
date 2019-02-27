@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.SocialProfileRepository;
 import domain.Actor;
@@ -23,6 +25,9 @@ public class SocialProfileService {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public SocialProfile create() {
@@ -71,5 +76,23 @@ public class SocialProfileService {
 		Assert.notEmpty(result);
 		result.remove(socialProfile);
 		this.socialProfileRepository.delete(socialProfile.getId());
+	}
+
+	//Metodo reconstruct para el objeto poda
+	public SocialProfile reconstruct(final SocialProfile profile, final BindingResult binding) {
+
+		SocialProfile result;
+
+		if (profile.getId() == 0)
+			result = profile;
+		else {
+			result = this.socialProfileRepository.findOne(profile.getId());
+
+			result.setNick(profile.getNick());
+			result.setProfileLink(profile.getProfileLink());
+			result.setSocialNetworkName(profile.getSocialNetworkName());
+			this.validator.validate(result, binding);
+		}
+		return result;
 	}
 }

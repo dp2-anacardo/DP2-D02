@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.MemberRepository;
 import security.Authority;
@@ -26,6 +28,9 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository	memberRepository;
+
+	@Autowired
+	private Validator			validator;
 
 
 	//	@Autowired 
@@ -116,6 +121,27 @@ public class MemberService {
 		Assert.isTrue(member.getId() != 0);
 		this.memberRepository.delete(member.getId());
 
+	}
+
+	public Member reconstruct(final Member member, final BindingResult binding) {
+
+		Member result;
+		if (member.getId() == 0)
+			result = member;
+		else {
+			result = this.memberRepository.findOne(member.getId());
+
+			result.setName(member.getName());
+			result.setMiddleName(member.getMiddleName());
+			result.setSurname(member.getSurname());
+			result.setPhoto(member.getPhoto());
+			result.setPhoneNumber(member.getPhoneNumber());
+			result.setEmail(member.getEmail());
+			result.setAddress(member.getAddress());
+
+			this.validator.validate(result, binding);
+		}
+		return result;
 	}
 
 }

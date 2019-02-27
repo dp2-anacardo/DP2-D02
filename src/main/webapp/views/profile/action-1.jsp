@@ -26,6 +26,10 @@
 <spring:message code="administrator.surname" />: ${administrator.surname} <br/>
 <spring:message code="administrator.email" />: ${administrator.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${administrator.phoneNumber} <br/>
+<spring:message code="administrator.address" />: ${administrator.address} <br/>
+<jstl:if test="${administrator.score != 0.0}">
+		<spring:message code="administrator.score" />: ${administrator.score} <br/>
+	</jstl:if>
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
@@ -40,6 +44,10 @@
 <spring:message code="administrator.name" />: ${brotherhood.name} <br/>
 <spring:message code="administrator.email" />: ${brotherhood.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${brotherhood.phoneNumber} <br/>
+<spring:message code="administrator.address" />: ${brotherhood.address} <br/>
+<jstl:if test="${brotherhood.score != 0.0}">
+		<spring:message code="administrator.score" />: ${brotherhood.score} <br/>
+	</jstl:if>
 
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
@@ -56,6 +64,10 @@
 <spring:message code="administrator.surname" />: ${member.surname} <br/>
 <spring:message code="administrator.email" />: ${member.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${member.phoneNumber} <br/>
+<spring:message code="administrator.address" />: ${member.address} <br/>
+<jstl:if test="${member.score != 0.0}">
+		<spring:message code="administrator.score" />: ${member.score} <br/>
+	</jstl:if>
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"

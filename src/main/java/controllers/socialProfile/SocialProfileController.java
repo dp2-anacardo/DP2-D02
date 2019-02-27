@@ -77,9 +77,11 @@ public class SocialProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("socialProfile") @Valid final SocialProfile profile, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("socialProfile") @Valid SocialProfile profile, final BindingResult binding) {
 
 		ModelAndView result;
+		profile = this.socialProfileService.reconstruct(profile, binding);
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(profile);
 		else
@@ -93,9 +95,11 @@ public class SocialProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final SocialProfile profile, final BindingResult binding) {
+	public ModelAndView delete(SocialProfile profile, final BindingResult binding) {
 
 		ModelAndView result;
+		profile = this.socialProfileService.reconstruct(profile, binding);
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(profile);
 		else

@@ -13,7 +13,6 @@
 <form:form action="socialProfile/brotherhood,member,admin/edit.do" modelAttribute="socialProfile">
 
 	<form:hidden path="id" />
-	<form:hidden path="version" />
 	
 	<form:label path="nick">
 		<spring:message code="socialProfile.nick"/>
