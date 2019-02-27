@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.AdministratorRepository;
 import repositories.PositionRepository;
 import security.LoginService;
 import security.UserAccount;
@@ -19,7 +20,10 @@ import domain.Position;
 public class PositionService {
 
 	@Autowired
-	private PositionRepository	positionRepository;
+	private PositionRepository		positionRepository;
+
+	@Autowired
+	private AdministratorRepository	administratorRepository;
 
 
 	public Position create() {
@@ -77,7 +81,7 @@ public class PositionService {
 	private Collection<Position> getPositionsNotUsed() {
 		Collection<Position> result;
 
-		result = this.positionRepository.getPositionsNotUsed();
+		result = this.administratorRepository.getPositionsNotUsed();
 
 		return result;
 	}
