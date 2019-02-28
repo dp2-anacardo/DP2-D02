@@ -8,35 +8,33 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
 <form:form action="procession/brotherhood/edit.do" modelAttribute="procession">
 	<form:hidden path="id" />
 	
-	<form:label path="name">
-		<spring:message code="area.name"/>
-	</form:label>
-	<form:input path="name"/>
-	<form:errors cssClass="error" path="name"/>
-	<br />
+	<acme:textbox code="procession.title" path="title"/>
+	<acme:textarea code="procession.description" path="description"/>
+	<acme:textbox code="procession.maxRow" path="maxRow"/>
+	<acme:textbox code="procession.maxColumn" path="maxColumn"/>
+	<acme:select items="${floats}" itemLabel="title" code="procession.float" path="floats"/>
 	
-	<form:label path="pictures">
-		<spring:message code="area.pictures"/>
-	</form:label>
-	<form:textarea path="pictures" cols="50" rows="5"/>
-	<form:errors cssClass="error" path="pictures"/>
-	<br />
 	
-	<input type="submit" name="save"
-		value="<spring:message code="area.save" />" />&nbsp; 
-	<jstl:if test="${area.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="area.delete" />" />
+	<jstl:if test="${procession.isFinal == false }">
+		<acme:submit name="saveFinal" code="procession.saveFinal"/>
+		<acme:submit name="saveDraft" code="procession.saveDraft"/>
 	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="area.cancel" />"
-		onclick="javascript: relativeRedir('area/administrator/list.do');" />
+	<jstl:if test="${procession.isFinal == true }">
+		<acme:submit name="save" code="procession.save"/>
+	</jstl:if>
+	<jstl:if test="${procession.id != 0}">
+		<input type="submit" name="delete"
+			value="<spring:message code="procession.delete" />" />
+	</jstl:if>
+	<acme:cancel url="procession/brotherhood/list.do" code="procession.cancel"/>
 	<br />
+	
 	
 	
 </form:form>

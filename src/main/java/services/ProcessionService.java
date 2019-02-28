@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ProcessionRepository;
+import domain.Brotherhood;
 import domain.Member;
 import domain.Procession;
 
@@ -91,6 +92,12 @@ public class ProcessionService {
 	}
 
 	//TODO delete de procession, se deben borrar todas las request asociadas, ¿agregacion?
+
+	public Collection<Procession> getProcessionsByBrotherhood(final Brotherhood b) {
+		Collection<Procession> result;
+		result = this.processionRepository.getProcessionsByBrotherhood(b);
+		return result;
+	}
 
 	private String tickerGenerator() {
 		String dateRes = "";
