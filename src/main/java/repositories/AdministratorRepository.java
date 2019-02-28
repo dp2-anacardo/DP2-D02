@@ -48,7 +48,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	/* Q5: The ratio of request to march in a procession, group by their status */
 
 	@Query("select 100*(select count(f) from Request f where f.procession = ?1 and f.status like ?2)/count(f) from Request f where f.procession = ?1")
-	Double getRatioOfRequestToProcessionPerStatus(Procession procession);
+	Double getRatioOfRequestToProcessionPerStatus(Procession procession, String status);
 
 	/* Q6: The ratio of requests to march, grouped by their status. */
 
