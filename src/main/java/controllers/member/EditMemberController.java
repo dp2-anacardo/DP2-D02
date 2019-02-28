@@ -43,16 +43,16 @@ public class EditMemberController extends AbstractController {
 	public ModelAndView update(@Valid Member member, final BindingResult binding) {
 
 		ModelAndView result;
-		member = this.memberService.reconstruct(member, binding);
 
 		if (binding.hasErrors())
 			result = this.editModelAndView(member);
 		else
 			try {
+				member = this.memberService.reconstruct(member, binding);
 				this.memberService.save(member);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(member, "member.commit.error"); //"Administrator.commit.error"
+				result = this.editModelAndView(member, "member.commit.error");
 			}
 		return result;
 	}

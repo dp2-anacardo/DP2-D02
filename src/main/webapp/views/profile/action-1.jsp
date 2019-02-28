@@ -33,7 +33,7 @@
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('/administrator/administrator/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			
@@ -52,7 +52,7 @@
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('brotherhood/brotherhood/edit.do');" />
 </security:authorize>
 
 <security:authorize access="hasRole('MEMBER')">
@@ -71,7 +71,7 @@
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('/member/member/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			

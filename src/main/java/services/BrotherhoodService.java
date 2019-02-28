@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BrotherhoodRepository;
 import security.Authority;
@@ -27,6 +29,9 @@ public class BrotherhoodService {
 
 	@Autowired
 	private BrotherhoodRepository	brotherhoodRepository;
+
+	@Autowired
+	private Validator				validator;
 
 
 	public Brotherhood create() {
@@ -116,6 +121,26 @@ public class BrotherhoodService {
 		Assert.isTrue(brotherhood.getId() != 0);
 		this.brotherhoodRepository.delete(brotherhood);
 
+	}
+
+	public Brotherhood reconstruct(final Brotherhood bro, final BindingResult binding) {
+
+		Brotherhood result;
+		if (bro.getId() == 0)
+			result = bro;
+		else {
+			result = this.brotherhoodRepository.findOne(bro.getId());
+
+			result.setName(bro.getName());
+			result.setPhoto(bro.getPhoto());
+			result.setPhoneNumber(bro.getPhoneNumber());
+			result.setEmail(bro.getEmail());
+			result.setAddress(bro.getAddress());
+			result.setTitle(bro.getTitle());
+
+			this.validator.validate(result, binding);
+		}
+		return result;
 	}
 
 }

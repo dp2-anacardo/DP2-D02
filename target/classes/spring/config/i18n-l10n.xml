@@ -30,7 +30,11 @@
 		<value>/views/socialProfile/messages</value>
 		<value>/views/area/messages</value>
 		<value>/views/member/messages</value>
+<<<<<<< HEAD
 		<value>/views/position/messages</value>
+=======
+		<value>/views/broherhood/messages</value>
+>>>>>>> origin/sergio
 	</util:list>
 
 </beans>
