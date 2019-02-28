@@ -18,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Area;
 import domain.Brotherhood;
+import domain.Enrolment;
 import domain.MessageBox;
 import domain.SocialProfile;
 
@@ -116,6 +117,18 @@ public class BrotherhoodService {
 		Assert.isTrue(brotherhood.getId() != 0);
 		this.brotherhoodRepository.delete(brotherhood);
 
+	}
+
+	public Collection<Enrolment> getEnrolments(final int brotherhoodId) {
+		Collection<Enrolment> enrolments;
+		Assert.notNull(brotherhoodId);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+
+		enrolments = this.brotherhoodRepository.getEnrolments(brotherhoodId);
+
+		return enrolments;
 	}
 
 }

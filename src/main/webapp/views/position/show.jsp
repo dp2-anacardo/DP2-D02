@@ -11,15 +11,19 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
+	<jstl:if test="${lang=='en' }">
 	<p>
 	<spring:message code="position.roleEn"/>:
 	<jstl:out value="${position.roleEn}"></jstl:out> 
 	</p>
+	</jstl:if>
 	
+	<jstl:if test="${lang=='es' }">
 	<p>
 	<spring:message code="position.roleEs"/>:
 	<jstl:out value="${position.roleEs}"></jstl:out>
 	</p>
+	</jstl:if>
 
 	<input type="button" name="back"
 		value="<spring:message code="position.back" />"
