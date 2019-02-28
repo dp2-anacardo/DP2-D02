@@ -93,7 +93,7 @@ public class PositionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/administrator/delete", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/administrator/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid Position position, final BindingResult binding) {
 		ModelAndView result;
 

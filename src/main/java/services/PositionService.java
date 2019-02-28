@@ -93,9 +93,8 @@ public class PositionService {
 
 		Assert.notNull(position);
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-
-		if (this.getPositionsNotUsed().contains(position))
-			this.positionRepository.delete(position.getId());
+		Assert.isTrue(this.getPositionsNotUsed().contains(position));
+		this.positionRepository.delete(position.getId());
 	}
 
 	private Collection<Position> getPositionsNotUsed() {

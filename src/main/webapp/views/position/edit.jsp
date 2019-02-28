@@ -23,12 +23,12 @@
 	<form:label path="roleEs">
 		<spring:message code="position.roleEs"/>
 	</form:label>
-	<form:label path="roleEs"/>
+	<form:input path="roleEs"/>
 	<form:errors cssClass="error" path="roleEs"/>
 	<br />
 	
 	<input type="submit" name="save"
-		value="<spring:message code="picture.save" />" />&nbsp; 
+		value="<spring:message code="position.save" />" />&nbsp; 
 	<jstl:if test="${position.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="position.delete" />" />
