@@ -8,34 +8,24 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
 <form:form action="area/administrator/edit.do" modelAttribute="area">
 	<form:hidden path="id" />
 	
-	<form:label path="name">
-		<spring:message code="area.name"/>
-	</form:label>
-	<form:input path="name"/>
-	<form:errors cssClass="error" path="name"/>
+	<acme:textbox code="area.name" path="name"/>
 	<br />
 	
-	<form:label path="pictures">
-		<spring:message code="area.pictures"/>
-	</form:label>
-	<form:textarea path="pictures" cols="50" rows="5"/>
-	<form:errors cssClass="error" path="pictures"/>
+	<acme:textarea code="area.pictures" path="pictures"/>
 	<br />
 	
-	<input type="submit" name="save"
-		value="<spring:message code="area.save" />" />&nbsp; 
+	<acme:submit name="save" code="area.save"/>
 	<jstl:if test="${area.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="area.delete" />" />
 	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="area.cancel" />"
-		onclick="javascript: relativeRedir('area/administrator/list.do');" />
+	<acme:cancel url="area/administrator/list.do" code="area.cancel"/>
 	<br />
 	
 	
