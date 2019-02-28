@@ -80,12 +80,12 @@ public class SocialProfileController extends AbstractController {
 	public ModelAndView save(@ModelAttribute("socialProfile") @Valid SocialProfile profile, final BindingResult binding) {
 
 		ModelAndView result;
-		profile = this.socialProfileService.reconstruct(profile, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(profile);
 		else
 			try {
+				profile = this.socialProfileService.reconstruct(profile, binding);
 				this.socialProfileService.save(profile);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -98,12 +98,12 @@ public class SocialProfileController extends AbstractController {
 	public ModelAndView delete(SocialProfile profile, final BindingResult binding) {
 
 		ModelAndView result;
-		profile = this.socialProfileService.reconstruct(profile, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(profile);
 		else
 			try {
+				profile = this.socialProfileService.reconstruct(profile, binding);
 				this.socialProfileService.delete(profile);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

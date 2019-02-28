@@ -30,6 +30,7 @@
 		<value>/views/socialProfile/tiles.xml</value>
 		<value>/views/area/tiles.xml</value>
 		<value>/views/member/tiles.xml</value>
+		<value>/views/brotherhood/tiles.xml</value>
 	</util:list>
 
 </beans>
