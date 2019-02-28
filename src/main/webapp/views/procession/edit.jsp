@@ -8,24 +8,34 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
-<form:form action="area/administrator/edit.do" modelAttribute="area">
+<form:form action="procession/brotherhood/edit.do" modelAttribute="procession">
 	<form:hidden path="id" />
 	
-	<acme:textbox code="area.name" path="name"/>
+	<form:label path="name">
+		<spring:message code="area.name"/>
+	</form:label>
+	<form:input path="name"/>
+	<form:errors cssClass="error" path="name"/>
 	<br />
 	
-	<acme:textarea code="area.pictures" path="pictures"/>
+	<form:label path="pictures">
+		<spring:message code="area.pictures"/>
+	</form:label>
+	<form:textarea path="pictures" cols="50" rows="5"/>
+	<form:errors cssClass="error" path="pictures"/>
 	<br />
 	
-	<acme:submit name="save" code="area.save"/>
+	<input type="submit" name="save"
+		value="<spring:message code="area.save" />" />&nbsp; 
 	<jstl:if test="${area.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="area.delete" />" />
 	</jstl:if>
-	<acme:cancel url="area/administrator/list.do" code="area.cancel"/>
+	<input type="button" name="cancel"
+		value="<spring:message code="area.cancel" />"
+		onclick="javascript: relativeRedir('area/administrator/list.do');" />
 	<br />
 	
 	

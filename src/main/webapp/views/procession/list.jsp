@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
@@ -8,26 +8,23 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
-<form:form action="area/administrator/edit.do" modelAttribute="area">
-	<form:hidden path="id" />
+<display:table name="area" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<spring:message code="area.name" var="columnTitle"/>
+	<display:column title="columnTitle">
+		<jstl:out value="${row.name }"></jstl:out>
+	</display:column>
 	
-	<acme:textbox code="area.name" path="name"/>
-	<br />
-	
-	<acme:textarea code="area.pictures" path="pictures"/>
-	<br />
-	
-	<acme:submit name="save" code="area.save"/>
-	<jstl:if test="${area.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="area.delete" />" />
-	</jstl:if>
-	<acme:cancel url="area/administrator/list.do" code="area.cancel"/>
-	<br />
-	
-	
-</form:form>
+	<display:column>
+		<a href="area/administrator/edit.do?areaId=${row.id}">
+			<spring:message code="area.edit"/>
+		</a>
+	</display:column>
+</display:table>
+<div>
+	<a href="area/administrator/create.do"> <spring:message
+				code="area.create" />
+	</a>
+</div>
 </security:authorize>
