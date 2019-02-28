@@ -24,7 +24,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select min(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
 	Double getMinOfMembersPerBrotherhood();
 
-	@Query("select max(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c;")
+	@Query("select max(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
 	Double getMaxOfMembersPerBrotherhood();
 
 	@Query("select stddev(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
