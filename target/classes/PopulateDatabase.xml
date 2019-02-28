@@ -600,7 +600,6 @@
 		<property name="description" value="No se sabe si sonrie o llora"/>
 		<property name="pictures">
 			<list>
-				<value>http://www.imagenVirgen.com</value>
 			</list>
 		</property>
 		<property name="brotherhood" ref="brotherhood1"/>

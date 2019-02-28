@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.position;
 
 import java.util.Collection;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Position;
 
 @Controller
@@ -33,7 +34,7 @@ public class PositionController extends AbstractController {
 
 		result = new ModelAndView("position/administrator/list");
 		result.addObject("positions", positions);
-		result.addObject("requestURI", "postion/administrator/list.do");
+		result.addObject("requestURI", "position/administrator/list.do");
 
 		return result;
 	}
@@ -75,13 +76,14 @@ public class PositionController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/administrator/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Position position, final BindingResult binding) {
+	public ModelAndView save(@Valid Position position, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(position);
 		else
 			try {
+				position = this.positionService.reconstruct(position, binding);
 				this.positionService.save(position);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -92,13 +94,14 @@ public class PositionController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/administrator/delete", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final Position position, final BindingResult binding) {
+	public ModelAndView delete(@Valid Position position, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(position);
 		else
 			try {
+				position = this.positionService.reconstruct(position, binding);
 				this.positionService.delete(position);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

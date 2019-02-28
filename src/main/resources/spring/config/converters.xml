@@ -43,6 +43,10 @@
 		<bean class="converters.StringToActorConverter"/>
 		<bean class="converters.UrlToStringConverter"/>
 		<bean class="converters.StringToUrlConverter"/>
+		<bean class="converters.PositionToStringConverter"/>
+		<bean class="converters.StringToPositionConverter"/>
+		<bean class="converters.EnrolmentToStringConverter"/>
+		<bean class="converters.StringToEnrolmentConverter"/>
 
 	</util:list>
 	

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.enrolment;
 
 
 public class EnrolmentController {
