@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,9 +54,12 @@ public class EnrolmentController extends AbstractController {
 
 		brotherhoodId = this.actorService.getActorLogged().getId();
 		enrolments = this.brotherhoodService.getEnrolments(brotherhoodId);
+		final String language = LocaleContextHolder.getLocale().getLanguage();
+
 		result = new ModelAndView("enrolment/brotherhood/list");
 		result.addObject("enrolments", enrolments);
 		result.addObject("requestURI", "enrolment/brotherhood/list.do");
+		result.addObject("lang", language);
 
 		return result;
 	}
@@ -143,7 +147,8 @@ public class EnrolmentController extends AbstractController {
 		Enrolment enrolment;
 
 		enrolment = this.enrolmentService.create(brotherhoodId);
-		result = this.createEditModelAndViewMember(enrolment);
+		this.enrolmentService.save(enrolment);
+		result = new ModelAndView("redirect:list.do");
 
 		return result;
 	}
@@ -156,10 +161,12 @@ public class EnrolmentController extends AbstractController {
 
 		memberId = this.actorService.getActorLogged().getId();
 		enrolments = this.memberService.getEnrolments(memberId);
+		final String language = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("enrolment/member/list");
 		result.addObject("enrolments", enrolments);
 		result.addObject("requestURI", "enrolment/member/list.do");
+		result.addObject("lang", language);
 
 		return result;
 	}
