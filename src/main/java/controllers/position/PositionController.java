@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,12 @@ public class PositionController extends AbstractController {
 		final Collection<Position> positions;
 
 		positions = this.positionService.findAll();
+		final String language = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("position/administrator/list");
 		result.addObject("positions", positions);
 		result.addObject("requestURI", "position/administrator/list.do");
+		result.addObject("lang", language);
 
 		return result;
 	}
@@ -45,10 +48,12 @@ public class PositionController extends AbstractController {
 		Position position;
 
 		position = this.positionService.findOne(positionId);
+		final String language = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("position/administrator/show");
 		result.addObject("position", position);
 		result.addObject("requestURI", "position/administrator/show.do");
+		result.addObject("lang", language);
 
 		return result;
 	}
