@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,16 +41,16 @@ public class EditBrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
-	public ModelAndView update(@Valid Brotherhood bro, final BindingResult binding) {
+	public ModelAndView update(@ModelAttribute("bro") @Valid Brotherhood bro, final BindingResult binding) {
 		ModelAndView result;
+		bro = this.brotherhoodService.reconstruct(bro, binding);
 
 		if (binding.hasErrors())
 			result = this.editModelAndView(bro);
 		else
 			try {
-				bro = this.brotherhoodService.reconstruct(bro, binding);
 				this.brotherhoodService.save(bro);
-				result = new ModelAndView("redirect:http://localhost:8080/Acme-Madruga/profile/action-1.do");
+				result = new ModelAndView("redirect:/profile/action-1.do");
 			} catch (final Throwable oops) {
 				result = this.editModelAndView(bro, "Administrator.commit.error");
 			}

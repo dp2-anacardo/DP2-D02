@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,7 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import datatype.Url;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Enrolment;
@@ -42,7 +44,8 @@ public class BrotherhoodService {
 		final UserAccount userAccount;
 		UserAccount userAccount1;
 		Area area;
-		final Collection<String> pictures;
+		Date d;
+		final Collection<Url> pictures;
 		final Collection<Authority> authorities;
 		final Collection<SocialProfile> profiles;
 		final Collection<MessageBox> boxes;
@@ -51,7 +54,8 @@ public class BrotherhoodService {
 
 		result = new Brotherhood();
 		area = new Area();
-		pictures = new ArrayList<String>();
+		d = new Date();
+		pictures = new ArrayList<Url>();
 		userAccount = new UserAccount();
 		auth = new Authority();
 		authorities = new ArrayList<Authority>();
@@ -65,6 +69,7 @@ public class BrotherhoodService {
 		result.setIsBanned(false);
 		result.setIsSuspicious(false);
 		result.setBoxes(boxes);
+		result.setEstablishmentDate(d);
 		result.setSocialProfiles(profiles);
 		result.setPictures(pictures);
 		result.setArea(area);
@@ -150,6 +155,7 @@ public class BrotherhoodService {
 			result.setEmail(bro.getEmail());
 			result.setAddress(bro.getAddress());
 			result.setTitle(bro.getTitle());
+			result.setPictures(bro.getPictures());
 
 			this.validator.validate(result, binding);
 		}

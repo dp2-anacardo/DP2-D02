@@ -183,7 +183,7 @@
 		<property name="area" ref="areaBrotherhood1"/>
 		<property name="pictures">
 			<list>
-				<value>"http://www.imagenPrueba.com"</value>
+				<ref bean="picture2"/>
 			</list>
 		</property>
 		<property name="socialProfiles">
