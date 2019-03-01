@@ -13,12 +13,12 @@
 <display:table name="enrolments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	
 	<spring:message code="enrolment.registerMoment" var="registerMoment"/>
-	<display:column title="registerMoment" format="{0,date,dd/MM/yyyy HH:mm">
+	<display:column title="registerMoment">
 		<jstl:out value="${row.registerMoment}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.dropOutMoment" var="dropOutMoment"/>
-	<display:column title="dropOutMoment" format="{0,date,dd/MM/yyyy HH:mm">
+	<display:column title="dropOutMoment">
 		<jstl:out value="${row.dropOutMoment}" ></jstl:out>
 	</display:column>
 	
@@ -66,12 +66,12 @@
 <display:table name="enrolments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	
 	<spring:message code="enrolment.registerMoment" var="registerMoment"/>
-	<display:column title="registerMoment" format="{0,date,dd/MM/yyyy HH:mm">
+	<display:column title="registerMoment">
 		<jstl:out value="${row.registerMoment}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.dropOutMoment" var="dropOutMoment"/>
-	<display:column title="dropOutMoment" format="{0,date,dd/MM/yyyy HH:mm">
+	<display:column title="dropOutMoment">
 		<jstl:out value="${row.dropOutMoment}"></jstl:out>
 	</display:column>
 	
