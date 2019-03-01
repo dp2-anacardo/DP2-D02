@@ -89,9 +89,9 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select count(e) from Enrolment e where (e.position.roleEn='Officer' or e.position.roleEs='Vocal') and e.status='ACCEPTED' and e.dropOutMoment is null")
 	Integer getNumberOfOfficers();
 
-	@Query("select count(b) from Brotherhood b where b.area.id=?1")
+	@Query("select 1.0 * count(b) from Brotherhood b where b.area.id=?1")
 	//@Query("select count(b), b.area.name from Brotherhood b group by b.area")
-	Integer getCountOfBrotherhoodPerArea(Integer AreaId);
+	Double getCountOfBrotherhoodPerArea(Integer AreaId);
 
 	@Query("select min(1.0*(select count(b) from Brotherhood b where b.area.id=a.id)) from Area a")
 	Double getMinBrotherhoodPerArea();
