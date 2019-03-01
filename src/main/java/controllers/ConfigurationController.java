@@ -78,7 +78,7 @@ public class ConfigurationController extends AbstractController {
 		final Configuration config = this.configurationService.findAll().get(0);
 
 		result = new ModelAndView("configuration/administrator/show");
-		result.addObject("configuration", config);
+		result.addObject("config", config);
 
 		return result;
 	}

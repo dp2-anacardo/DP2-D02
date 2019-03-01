@@ -9,6 +9,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<security:authorize access="hasRole('ADMIN')">
+<!DOCTYPE>
+<html>
+<head>
+<link rel="stylesheet" href="styles/table.css" type="text/css">
+</head>
+<body>
+
 <!-- Single Attributes -->
 
 <p>
@@ -48,15 +56,47 @@
 </p>
 
 <!-- Table Attributes -->
-
-<display:table pagesize="5" class="fixUpTask" name="fixUpTasks" requestURI="finder/handyWorker/list.do" id="row">
 	
-	<spring:message code="fixUpTask.ticker" var="ticker" />
-	<display:column property="ticker" title="${ticker}"/>
-	
-</display:table>
+<table>
+	<tr>
+    	<th><spring:message code="configuration.edit.spamWords" /></th>
+  	</tr>
+	<jstl:forEach items="${config.spamWords}" 
+					var="spamWords">
+		<tr>
+    		<td><jstl:out value="${spamWords}"/></td>
+  		</tr>
+	</jstl:forEach>
+</table>
 
-<input type="button" name="edit PD"
-	value="<spring:message code="configuration.edit" />"
-	onclick="javascript: relativeRedir('/configuration/administrator/edit.do');" />
-<br />
+<table>
+	<tr>
+    	<th><spring:message code="configuration.edit.posWords" /></th>
+  	</tr>
+	<jstl:forEach items="${config.positiveWords}" 
+					var="positiveWords">
+		<tr>
+    		<td><jstl:out value="${positiveWords}"/></td>
+  		</tr>
+	</jstl:forEach>
+</table>
+
+<table>
+	<tr>
+    	<th><spring:message code="configuration.edit.negWords" /></th>
+  	</tr>
+	<jstl:forEach items="${config.negativeWords}" 
+					var="negWords">
+		<tr>
+    		<td><jstl:out value="${negWords}"/></td>
+  		</tr>
+	</jstl:forEach>
+</table>
+
+<!-- Buttons -->
+
+<acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit"/>
+
+</body>
+</html>
+</security:authorize>
