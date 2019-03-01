@@ -31,21 +31,26 @@ public class EnrolmentService {
 	@Autowired
 	private MemberService		memberService;
 
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
 
-	public Enrolment create() {
+
+	public Enrolment create(final int brotherhoodId) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-
 		Enrolment enrolment;
+
+		Assert.notNull(brotherhoodId);
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 
 		enrolment = new Enrolment();
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 		enrolment.setPosition(new Position());
 		final Member member = this.memberService.findOne(this.actorService.getActorLogged().getId());
 		enrolment.setMember(member);
 		enrolment.setStatus("PENDING");
 		enrolment.setRegisterMoment(new Date());
-		enrolment.setBrotherhood(new Brotherhood());
+		enrolment.setBrotherhood(brotherhood);
 		enrolment.setDropOutMoment(null);
 
 		return enrolment;
@@ -68,6 +73,7 @@ public class EnrolmentService {
 
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(enrolment.getStatus().equals("PENDING"));
+		Assert.notNull(enrolment.getBrotherhood().getArea());
 		enrolment.setStatus("ACCEPTED");
 	}
 
@@ -78,6 +84,7 @@ public class EnrolmentService {
 
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(enrolment.getStatus().equals("PENDING"));
+		Assert.notNull(enrolment.getBrotherhood().getArea());
 		enrolment.setStatus("REJECTED");
 	}
 

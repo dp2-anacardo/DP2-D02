@@ -1,12 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,16 +23,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Procession extends DomainEntity {
 
-	private String		title;
-	private String		description;
-	private Date		moment;
-	private String		ticker;
-	private Member[][]	formation;
-	private Boolean		isFinal;
-	private int			maxRow;
-	private int			maxColumn;
-	private Brotherhood	brotherhood;
+	private String					title;
+	private String					description;
+	private Date					moment;
+	private String					ticker;
+	private Member[][]				formation;
+	private Boolean					isFinal;
+	private int						maxRow;
+	private int						maxColumn;
+	private Brotherhood				brotherhood;
+	private Collection<FloatEntity>	floats;
 
+
+	@Valid
+	@ManyToMany
+	public Collection<FloatEntity> getFloats() {
+		return this.floats;
+	}
+
+	public void setFloats(final Collection<FloatEntity> floats) {
+		this.floats = floats;
+	}
 
 	@NotBlank
 	public String getTitle() {

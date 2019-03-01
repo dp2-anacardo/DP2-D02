@@ -8,7 +8,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
+import repositories.AdministratorRepository;
 import repositories.PositionRepository;
 import security.LoginService;
 import security.UserAccount;
@@ -19,8 +22,29 @@ import domain.Position;
 public class PositionService {
 
 	@Autowired
-	private PositionRepository	positionRepository;
+	private PositionRepository		positionRepository;
 
+	@Autowired
+	private AdministratorRepository	administratorRepository;
+
+	@Autowired
+	private Validator				validator;
+
+
+	public Position reconstruct(final Position position, final BindingResult binding) {
+		Position result;
+
+		if (position.getId() == 0)
+			result = position;
+		else {
+			result = this.positionRepository.findOne(position.getId());
+			result.setRoleEn(position.getRoleEn());
+			result.setRoleEs(position.getRoleEs());
+			this.validator.validate(result, binding);
+		}
+
+		return result;
+	}
 
 	public Position create() {
 		UserAccount userAccount;
@@ -69,16 +93,14 @@ public class PositionService {
 
 		Assert.notNull(position);
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-
-		if (this.getTotalPositionsByName(position.getRoleEn()) == 0 && this.getTotalPositionsByName(position.getRoleEs()) == 0)
-			this.positionRepository.delete(position.getId());
+		Assert.isTrue(this.getPositionsNotUsed().contains(position));
+		this.positionRepository.delete(position.getId());
 	}
 
-	private Integer getTotalPositionsByName(final String name) {
-		Integer result;
-		Assert.notNull(name);
+	private Collection<Position> getPositionsNotUsed() {
+		Collection<Position> result;
 
-		result = this.positionRepository.getTotalPositionsByName(name);
+		result = this.administratorRepository.getPositionsNotUsed();
 
 		return result;
 	}

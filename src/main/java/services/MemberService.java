@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Enrolment;
 import domain.Member;
 import domain.MessageBox;
 import domain.SocialProfile;
@@ -26,6 +29,9 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository	memberRepository;
+
+	@Autowired
+	private Validator			validator;
 
 
 	//	@Autowired 
@@ -38,7 +44,6 @@ public class MemberService {
 
 		Member result;
 		Authority auth;
-		//		Finder finder;
 		UserAccount userAccount;
 		UserAccount userAccount1;
 		Collection<Authority> authorities;
@@ -53,7 +58,6 @@ public class MemberService {
 		authorities = new ArrayList<Authority>();
 		profiles = new ArrayList<SocialProfile>();
 		boxes = new ArrayList<MessageBox>();
-		//		finder = this.finderService.create();
 
 		auth.setAuthority(Authority.MEMBER);
 		authorities.add(auth);
@@ -63,7 +67,6 @@ public class MemberService {
 		result.setIsSuspicious(false);
 		result.setBoxes(boxes);
 		result.setSocialProfiles(profiles);
-		//		result.setFinder(finder);
 
 		return result;
 
@@ -99,7 +102,11 @@ public class MemberService {
 
 		Member result;
 		if (member.getId() == 0) {
-
+			// Finder finderCreate;
+			// Finder finder;
+			// finderCreate=this.finderService.create();
+			// finder=this.finderService.save(finderCreate);
+			// member.setFinder(finder);
 			//	member.setBoxes(this.messageBoxService.createSystemMessageBox);
 		}
 		result = this.memberRepository.save(member);
@@ -115,6 +122,39 @@ public class MemberService {
 		Assert.isTrue(member.getId() != 0);
 		this.memberRepository.delete(member.getId());
 
+	}
+
+	public Member reconstruct(final Member member, final BindingResult binding) {
+
+		Member result;
+		if (member.getId() == 0)
+			result = member;
+		else {
+			result = this.memberRepository.findOne(member.getId());
+
+			result.setName(member.getName());
+			result.setMiddleName(member.getMiddleName());
+			result.setSurname(member.getSurname());
+			result.setPhoto(member.getPhoto());
+			result.setPhoneNumber(member.getPhoneNumber());
+			result.setEmail(member.getEmail());
+			result.setAddress(member.getAddress());
+
+			this.validator.validate(result, binding);
+		}
+		return result;
+	}
+
+	public Collection<Enrolment> getEnrolments(final int memberId) {
+		Collection<Enrolment> enrolments;
+		Assert.notNull(memberId);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
+
+		enrolments = this.memberRepository.getEnrolments(memberId);
+
+		return enrolments;
 	}
 
 }
