@@ -34,6 +34,11 @@
 		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
 		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/brotherhood/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/member/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/procession/listNotRegister.do" access="permitAll" /> 
+		<security:intercept-url pattern="/floatEntity/listNotRegister.do" access="permitAll" /> 
+		
 		<security:intercept-url pattern="/socialProfile/brotherhood,member,admin/**" access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
