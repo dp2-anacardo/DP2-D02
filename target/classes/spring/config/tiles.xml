@@ -31,12 +31,9 @@
 		<value>/views/area/tiles.xml</value>
 		<value>/views/member/tiles.xml</value>
 		<value>/views/position/tiles.xml</value>
-<<<<<<< HEAD
 		<value>/views/brotherhood/tiles.xml</value>
 		<value>/views/enrolment/tiles.xml</value>
-=======
 		<value>/views/procession/tiles.xml</value>
->>>>>>> 8c9fed1dfe6a7e4f7727960a1074e76f2ce53a03
 	</util:list>
 
 </beans>
