@@ -16,14 +16,14 @@
        
 <tiles-definitions>
 
-	<definition name="area/administrator/edit" extends="master.page">	
-		<put-attribute name="title" value="Area" />
-		<put-attribute name="body" value="/views/area/edit.jsp" />
+	<definition name="procession/brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Procession" />
+		<put-attribute name="body" value="/views/procession/edit.jsp" />
 	</definition>
 	
-	<definition name="area/administrator/list" extends="master.page">	
-		<put-attribute name="title" value="Areas" />
-		<put-attribute name="body" value="/views/area/list.jsp" />
+	<definition name="procession/brotherhood/list" extends="master.page">	
+		<put-attribute name="title" value="Processions" />
+		<put-attribute name="body" value="/views/procession/list.jsp" />
 	</definition>
 	
 	
