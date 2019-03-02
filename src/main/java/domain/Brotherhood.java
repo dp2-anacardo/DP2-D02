@@ -66,7 +66,7 @@ public class Brotherhood extends Actor {
 	//Relationships
 
 	@Valid
-	@OneToOne(optional = false)
+	@OneToOne(optional = true)
 	public Area getArea() {
 		return this.area;
 	}
