@@ -92,9 +92,8 @@ public class ConfigurationController extends AbstractController {
 	}
 	// WORD ADDS
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addSW")
-	public ModelAndView addSWord(@Valid final ConfigurationForm configF, final BindingResult binding) {
+	public ModelAndView addSWord(final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
-		final Configuration config = this.configurationService.findAll().get(0);
 
 		final Actor user = this.actorService.getActorLogged();
 		final Administrator admin = this.administratorService.findOne(user.getId());

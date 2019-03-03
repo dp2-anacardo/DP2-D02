@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="styles/table.css" type="text/css">
 </head>
 <body>
-<form:form action ="configuration/administrator/edit.do" modelAttribute="config">
+<form:form action ="configuration/administrator/edit.do" modelAttribute="configF">
 
 	<form:hidden path="id"/>
 
@@ -39,7 +39,7 @@
     		<th><spring:message code="configuration.edit.spamWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${config.spamWords}" 
+		<jstl:forEach items="${configF.spamWords}" 
 						var="spamWords">
 		<tr>
     		<td><jstl:out value="${spamWords}"/></td>
@@ -49,12 +49,16 @@
 		</jstl:forEach>
 	</table>
 	
+	<form:input path="addSW"/>	
+	<form:errors path="addSW" cssClass="error" />
+	<acme:submit name="addSW" code="configuration.edit.addSW"/>&nbsp;
+	
 	<table>
 		<tr>
     		<th><spring:message code="configuration.edit.posWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${config.positiveWords}" 
+		<jstl:forEach items="${configF.positiveWords}" 
 						var="posWords">
 		<tr>
     		<td><jstl:out value="${posWords}"/></td>
@@ -69,7 +73,7 @@
     		<th><spring:message code="configuration.edit.negWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${config.negativeWords}" 
+		<jstl:forEach items="${configF.negativeWords}" 
 						var="negWords">
 		<tr>
     		<td><jstl:out value="${negWords}"/></td>
@@ -85,12 +89,6 @@
 	
 	<acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit.cancel"/>
 	
-</form:form>
-
-<form:form action ="configuration/administrator/edit.do" modelAttribute="${configF}">
-		<form:input path="addSW"/>	
-		<form:errors path="addSW" cssClass="error" />
-		<acme:submit name="addSW" code="configuration.edit.addSW"/>&nbsp;
 </form:form>
 </body>
 </html>
