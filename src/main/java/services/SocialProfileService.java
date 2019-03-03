@@ -83,15 +83,18 @@ public class SocialProfileService {
 
 		SocialProfile result;
 
-		if (profile.getId() == 0)
+		if (profile.getId() == 0) {
+			this.validator.validate(profile, binding);
 			result = profile;
-		else {
+		} else {
 			result = this.socialProfileRepository.findOne(profile.getId());
 
-			result.setNick(profile.getNick());
-			result.setProfileLink(profile.getProfileLink());
-			result.setSocialNetworkName(profile.getSocialNetworkName());
-			this.validator.validate(result, binding);
+			//			result.setNick(profile.getNick());
+			//			result.setProfileLink(profile.getProfileLink());
+			//			result.setSocialNetworkName(profile.getSocialNetworkName());
+			profile.setVersion(result.getVersion());
+			result = profile;
+			this.validator.validate(profile, binding);
 		}
 		return result;
 	}

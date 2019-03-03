@@ -1,6 +1,7 @@
 
 package controllers.procession;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -24,7 +25,7 @@ import domain.FloatEntity;
 import domain.Procession;
 
 @Controller
-@RequestMapping("procession/brotherhood")
+@RequestMapping("procession")
 public class ProcessionController extends AbstractController {
 
 	@Autowired
@@ -37,7 +38,7 @@ public class ProcessionController extends AbstractController {
 	private BrotherhoodService	brotherhoodService;
 
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Procession> processions;
@@ -52,7 +53,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/brotherhood/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
 		Procession procession;
@@ -63,7 +64,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int processionId) {
 		ModelAndView result;
 		Procession procession;
@@ -77,7 +78,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveDraft")
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveDraft")
 	public ModelAndView saveDraft(@Valid final Procession procession, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
@@ -93,7 +94,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveFinal")
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveFinal")
 	public ModelAndView saveFinal(@Valid final Procession procession, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
@@ -106,6 +107,22 @@ public class ProcessionController extends AbstractController {
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(procession, "procession.commit.error");
 			}
+		return result;
+	}
+
+	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int brotherhoodId) {
+
+		ModelAndView result;
+		Collection<Procession> pro = new ArrayList<Procession>();
+		pro = this.processionService.findAll();
+		for (final Procession p : pro)
+			if (p.getBrotherhood().getId() == brotherhoodId)
+				pro.remove(p);
+		result = new ModelAndView("procession/listNotRegister");
+		result.addObject("procession", pro);
+		result.addObject("requestURI", "procession/listNotRegister.do");
+
 		return result;
 	}
 
