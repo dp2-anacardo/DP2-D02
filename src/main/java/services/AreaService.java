@@ -33,14 +33,18 @@ public class AreaService {
 	public Area reconstruct(final Area a, final BindingResult binding) {
 		Area result;
 
-		if (a.getId() == 0)
+		if (a.getId() == 0) {
+			this.validator.validate(a, binding);
 			result = a;
-		else {
+		} else {
 			result = this.areaRepository.findOne(a.getId());
-			result.setName(a.getName());
-			result.setPictures(a.getPictures());
 
-			this.validator.validate(result, binding);
+			//result.setName(a.getName());
+			//result.setPictures(a.getPictures());
+
+			a.setVersion(result.getVersion());
+			result = a;
+			this.validator.validate(a, binding);
 		}
 
 		return result;

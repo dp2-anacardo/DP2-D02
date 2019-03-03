@@ -3,8 +3,6 @@ package controllers.area;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -58,14 +56,13 @@ public class AreaController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Area area, final BindingResult binding) {
+	public ModelAndView save(Area area, final BindingResult binding) {
 		ModelAndView result;
-
+		area = this.areaService.reconstruct(area, binding);
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(area);
 		else
 			try {
-				area = this.areaService.reconstruct(area, binding);
 				this.areaService.save(area);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
