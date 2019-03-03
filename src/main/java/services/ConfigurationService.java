@@ -68,11 +68,9 @@ public class ConfigurationService {
 			result.setWelcomeMessageEn(config.getWelcomeMessageEn());
 			result.setWelcomeMessageEs(config.getWelcomeMessageEs());
 			result.setDefaultCC(config.getDefaultCC());
-			//result.setSpamWords(config.getSpamWords());
 
 			this.validator.validate(result, binding);
 		}
 		return result;
 	}
-
 }

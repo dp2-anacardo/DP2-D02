@@ -42,9 +42,12 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 
 <spring:message code="administrator.name" />: ${brotherhood.name} <br/>
+<spring:message code="administrator.title" />: ${brotherhood.title} <br/>
 <spring:message code="administrator.email" />: ${brotherhood.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${brotherhood.phoneNumber} <br/>
 <spring:message code="administrator.address" />: ${brotherhood.address} <br/>
+<spring:message code="administrator.pictures" />: ${brotherhood.pictures} <br/>
+
 <jstl:if test="${brotherhood.score != 0.0}">
 		<spring:message code="administrator.score" />: ${brotherhood.score} <br/>
 	</jstl:if>
@@ -65,6 +68,7 @@
 <spring:message code="administrator.email" />: ${member.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${member.phoneNumber} <br/>
 <spring:message code="administrator.address" />: ${member.address} <br/>
+
 <jstl:if test="${member.score != 0.0}">
 		<spring:message code="administrator.score" />: ${member.score} <br/>
 	</jstl:if>

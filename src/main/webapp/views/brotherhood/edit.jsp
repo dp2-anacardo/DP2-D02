@@ -12,6 +12,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 </head>
 <body>
@@ -61,6 +62,9 @@
 	</form:label>
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />
+	<br />
+	
+	<acme:textarea code="brotherhood.pictures" path="pictures"/>
 	<br />
 	
 	<input type="submit" name="update"

@@ -49,7 +49,7 @@ public class EditAdministratorController extends AbstractController {
 			try {
 				admin = this.administratorService.reconstruct(admin, binding);
 				this.administratorService.save(admin);
-				result = new ModelAndView("redirect:http://localhost:8080/Acme-Madruga/profile/action-1.do");
+				result = new ModelAndView("redirect:/profile/action-1.do");
 			} catch (final Throwable oops) {
 				result = this.editModelAndView(admin, "Administrator.commit.error");
 			}

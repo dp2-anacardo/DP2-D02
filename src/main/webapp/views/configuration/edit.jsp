@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="styles/table.css" type="text/css">
 </head>
 <body>
-<form:form action ="configuration/administrator/edit.do" modelAttribute="configuration">
+<form:form action ="configuration/administrator/edit.do" modelAttribute="config">
 
 	<form:hidden path="id"/>
 
@@ -33,13 +33,13 @@
 	<acme:textboxbs code="configuration.edit.defaultCC" path="defaultCC"/>
 	
 	<!-- Edit words -->
-	
+
 	<table>
 		<tr>
     		<th><spring:message code="configuration.edit.spamWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${configuration.spamWords}" 
+		<jstl:forEach items="${config.spamWords}" 
 						var="spamWords">
 		<tr>
     		<td><jstl:out value="${spamWords}"/></td>
@@ -54,7 +54,7 @@
     		<th><spring:message code="configuration.edit.posWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${configuration.positiveWords}" 
+		<jstl:forEach items="${config.positiveWords}" 
 						var="posWords">
 		<tr>
     		<td><jstl:out value="${posWords}"/></td>
@@ -69,7 +69,7 @@
     		<th><spring:message code="configuration.edit.negWords" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${configuration.negativeWords}" 
+		<jstl:forEach items="${config.negativeWords}" 
 						var="negWords">
 		<tr>
     		<td><jstl:out value="${negWords}"/></td>
@@ -85,6 +85,12 @@
 	
 	<acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit.cancel"/>
 	
+</form:form>
+
+<form:form action ="configuration/administrator/edit.do" modelAttribute="${configF}">
+		<form:input path="addSW"/>	
+		<form:errors path="addSW" cssClass="error" />
+		<acme:submit name="addSW" code="configuration.edit.addSW"/>&nbsp;
 </form:form>
 </body>
 </html>
