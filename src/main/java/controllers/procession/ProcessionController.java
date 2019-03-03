@@ -3,8 +3,6 @@ package controllers.procession;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.FloatEntityService;
 import services.ProcessionService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -35,6 +34,9 @@ public class ProcessionController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private FloatEntityService	floatService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -78,13 +80,15 @@ public class ProcessionController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveDraft")
-	public ModelAndView saveDraft(@Valid final Procession procession, final BindingResult binding) {
+	public ModelAndView saveDraft(Procession procession, final BindingResult binding) {
 		ModelAndView result;
+		procession.setIsFinal(false);
+		procession = this.processionService.reconstruct(procession, binding);
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(procession);
 		else
 			try {
-				procession.setIsFinal(false);
 				this.processionService.saveDraft(procession);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -94,13 +98,14 @@ public class ProcessionController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveFinal")
-	public ModelAndView saveFinal(@Valid final Procession procession, final BindingResult binding) {
+	public ModelAndView saveFinal(Procession procession, final BindingResult binding) {
 		ModelAndView result;
+		procession.setIsFinal(false);
+		procession = this.processionService.reconstruct(procession, binding);
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(procession);
 		else
 			try {
-				procession.setIsFinal(true);
 				this.processionService.saveFinal(procession);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -118,7 +123,9 @@ public class ProcessionController extends AbstractController {
 	private ModelAndView createEditModelAndView(final Procession procession, final String messageCode) {
 		ModelAndView result;
 		Collection<FloatEntity> floats;
-		floats = procession.getFloats();
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		floats = this.floatService.getFloatsByBrotherhood(b);
 
 		result = new ModelAndView("procession/brotherhood/edit");
 		result.addObject("procession", procession);

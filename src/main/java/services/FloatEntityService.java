@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.FloatEntityRepository;
 import datatype.Url;
+import domain.Brotherhood;
 import domain.FloatEntity;
 
 @Service
@@ -61,5 +62,11 @@ public class FloatEntityService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		this.floatRepository.delete(floatEntity);
 
+	}
+
+	public Collection<FloatEntity> getFloatsByBrotherhood(final Brotherhood b) {
+		Collection<FloatEntity> result;
+		result = this.floatRepository.getFloatsByBrotherhood(b);
+		return result;
 	}
 }

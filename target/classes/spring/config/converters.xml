@@ -47,6 +47,10 @@
 		<bean class="converters.StringToPositionConverter"/>
 		<bean class="converters.EnrolmentToStringConverter"/>
 		<bean class="converters.StringToEnrolmentConverter"/>
+		<bean class="converters.FloatEntityToStringConverter"/>
+		<bean class="converters.StringToFloatEntityConverter"/>
+		<bean class="converters.StringToIntConverter"/>
+		
 
 	</util:list>
 	

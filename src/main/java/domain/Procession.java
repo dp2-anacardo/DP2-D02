@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -29,8 +30,8 @@ public class Procession extends DomainEntity {
 	private String					ticker;
 	private Member[][]				formation;
 	private Boolean					isFinal;
-	private int						maxRow;
-	private int						maxColumn;
+	private Integer					maxRow;
+	private Integer					maxColumn;
 	private Brotherhood				brotherhood;
 	private Collection<FloatEntity>	floats;
 
@@ -101,15 +102,16 @@ public class Procession extends DomainEntity {
 		this.isFinal = isFinal;
 	}
 
-	public int getMaxRow() {
+	@Range(min = 1, max = 10000)
+	public Integer getMaxRow() {
 		return this.maxRow;
 	}
 
 	public void setMaxRow(final int maxRow) {
 		this.maxRow = maxRow;
 	}
-
-	public int getMaxColumn() {
+	@Range(min = 1, max = 10000)
+	public Integer getMaxColumn() {
 		return this.maxColumn;
 	}
 
