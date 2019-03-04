@@ -11,7 +11,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<form:form action="position/administrator/accept.do" modelAttribute="enrolment">
+<form:form action="enrolment/brotherhood/accept.do" modelAttribute="enrolment">
 	<form:hidden path="id" />
 	
 	<jstl:if test="${lang=='en'}">

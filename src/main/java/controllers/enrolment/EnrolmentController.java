@@ -3,8 +3,6 @@ package controllers.enrolment;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -100,8 +98,10 @@ public class EnrolmentController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "accept")
-	public ModelAndView accept(@Valid final Enrolment enrolment, final BindingResult binding) {
+	public ModelAndView accept(Enrolment enrolment, final BindingResult binding) {
 		ModelAndView result;
+
+		enrolment = this.enrolmentService.reconstruct(enrolment, binding);
 
 		if (binding.hasErrors())
 			result = this.acceptModelAndView(enrolment);
@@ -109,7 +109,7 @@ public class EnrolmentController extends AbstractController {
 			try {
 				this.enrolmentService.acceptEnrolment(enrolment);
 				this.enrolmentService.save(enrolment);
-				result = new ModelAndView("redirect:brotherhood/list");
+				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.acceptModelAndView(enrolment);
 			}
