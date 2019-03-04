@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -91,7 +92,7 @@ public class ConfigurationController extends AbstractController {
 	}
 	// WORD ADDS
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addWord")
-	public ModelAndView addSW(final ConfigurationForm configF, final BindingResult binding) {
+	public ModelAndView addSW(@ModelAttribute final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
 		Configuration config;
 
@@ -128,7 +129,7 @@ public class ConfigurationController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final ConfigurationForm configF, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
 		Configuration config;
 

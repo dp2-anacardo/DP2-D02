@@ -65,18 +65,20 @@ public class ConfigurationService {
 		final Collection<String> pW = result.getPositiveWords();
 		final Collection<String> nW = result.getNegativeWords();
 
-		if (!configF.getAddSW().equals(""))
+		if (!configF.getAddSW().equals("")) {
 			sW.add(configF.getAddSW());
+			result.setSpamWords(sW);
+		}
 
-		if (!configF.getAddPW().equals(""))
+		if (!configF.getAddPW().equals("")) {
 			pW.add(configF.getAddNW());
+			result.setPositiveWords(pW);
+		}
 
-		if (!configF.getAddNW().equals(""))
+		if (!configF.getAddNW().equals("")) {
 			nW.add(configF.getAddNW());
-
-		result.setSpamWords(sW);
-		result.setPositiveWords(pW);
-		result.setSpamWords(nW);
+			result.setSpamWords(nW);
+		}
 
 		this.validator.validate(result, binding);
 
