@@ -1,13 +1,5 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Mon Feb 25 15:53:44 CET 2019
-=======
-#Tue Feb 26 21:22:31 CET 2019
->>>>>>> jesus
-=======
-#Thu Feb 21 16:45:54 CET 2019
->>>>>>> juanma
+#Mon Mar 04 15:21:11 CET 2019
 trashBoxAdmin1=564
 inBoxBrotherhood1=568
 configuration1=602
@@ -47,7 +39,6 @@ floatEntity1=608
 outBoxAdmin1=562
 officer=601
 LOW=594
-NEUTRAL=593
 notificationBoxMember3=591
 notificationBoxMember2=586
 trashBoxBrotherhood1=571
@@ -62,6 +53,7 @@ areaBrotherhood1=566
 userAccount3=556
 userAccount2=555
 userAccount1=554
+MEDIUM=593
 fundraiser=599
 treasurer=598
 socialProfileBrotherhood1=567
