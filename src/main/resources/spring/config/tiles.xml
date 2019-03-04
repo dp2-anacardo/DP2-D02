@@ -30,19 +30,14 @@
 		<value>/views/socialProfile/tiles.xml</value>
 		<value>/views/area/tiles.xml</value>
 		<value>/views/member/tiles.xml</value>
-<<<<<<< HEAD
 		<value>/views/message/tiles.xml</value>
 		<value>/views/messageBox/tiles.xml</value>
 		<value>/views/priority/tiles.xml</value>
-=======
 		<value>/views/position/tiles.xml</value>
 		<value>/views/brotherhood/tiles.xml</value>
 		<value>/views/enrolment/tiles.xml</value>
-<<<<<<< HEAD
 		<value>/views/floatEntity/tiles.xml</value>
-=======
->>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
->>>>>>> origin/adrian
+
 	</util:list>
 
 </beans>

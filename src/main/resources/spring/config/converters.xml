@@ -43,26 +43,20 @@
 		<bean class="converters.StringToActorConverter"/>
 		<bean class="converters.UrlToStringConverter"/>
 		<bean class="converters.StringToUrlConverter"/>
-<<<<<<< HEAD
 		<bean class="converters.MessageToStringConverter"/>
 		<bean class="converters.StringToMessageConverter"/>
 		<bean class="converters.MessageBoxToStringConverter"/>
 		<bean class="converters.StringToMessageBoxConverter"/>
 		<bean class="converters.PriorityToStringConverter"/>
 		<bean class="converters.StringToPriorityConverter"/>
-=======
 		<bean class="converters.PositionToStringConverter"/>
 		<bean class="converters.StringToPositionConverter"/>
 		<bean class="converters.EnrolmentToStringConverter"/>
 		<bean class="converters.StringToEnrolmentConverter"/>
-<<<<<<< HEAD
 		<bean class="converters.FloatEntityToStringConverter"/>
 		<bean class="converters.StringToFloatEntityConverter"/>
 		<bean class="converters.StringToIntConverter"/>
 		
-=======
->>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
->>>>>>> origin/adrian
 
 	</util:list>
 	

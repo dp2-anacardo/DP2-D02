@@ -715,10 +715,7 @@
 		<property name="description" value="No se sabe si sonrie o llora"/>
 		<property name="pictures">
 			<list>
-<<<<<<< HEAD
 				<ref bean="picture2"/>
-=======
->>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
 			</list>
 		</property>
 		<property name="brotherhood" ref="brotherhood1"/>
