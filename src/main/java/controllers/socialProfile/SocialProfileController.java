@@ -3,8 +3,6 @@ package controllers.socialProfile;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -77,15 +75,15 @@ public class SocialProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("socialProfile") @Valid SocialProfile profile, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("socialProfile") SocialProfile profile, final BindingResult binding) {
 
 		ModelAndView result;
+		profile = this.socialProfileService.reconstruct(profile, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(profile);
 		else
 			try {
-				profile = this.socialProfileService.reconstruct(profile, binding);
 				this.socialProfileService.save(profile);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

@@ -9,30 +9,16 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
 <display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-	<spring:message code="procession.title" var="columnTitle"/>
-	<display:column title="columnTitle">
-		<jstl:out value="${row.title }"></jstl:out>
-	</display:column>
+
+	<spring:message code="procession.title" var="title" />
+	<display:column property="title" title="${title}"/>
 	
-	<display:column>
-		<a href="procession/brotherhood/edit.do?processiontId=${row.id}">
-			<spring:message code="procession.edit"/>
-		</a>
-	</display:column>
+	<spring:message code="procession.description" var="description" />
+	<display:column property="description" title="${description}"/>
 	
-	<display:column>
-		<a href="procession/brotherhood/show.do?processiontId=${row.id}">
-			<spring:message code="procession.show"/>
-		</a>
-	</display:column>
+	<spring:message code="procession.moment" var="moment" />
+	<display:column property="moment" title="${moment}"/>
 	
-	
+
 </display:table>
-<div>
-	<a href="procession/brotherhood/create.do"> <spring:message
-				code="procession.create" />
-	</a>
-</div>
-</security:authorize>

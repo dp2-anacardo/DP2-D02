@@ -43,12 +43,12 @@ public class EditBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@ModelAttribute("bro") @Valid Brotherhood bro, final BindingResult binding) {
 		ModelAndView result;
-		bro = this.brotherhoodService.reconstruct(bro, binding);
 
 		if (binding.hasErrors())
 			result = this.editModelAndView(bro);
 		else
 			try {
+				bro = this.brotherhoodService.reconstruct(bro, binding);
 				this.brotherhoodService.save(bro);
 				result = new ModelAndView("redirect:/profile/action-1.do");
 			} catch (final Throwable oops) {

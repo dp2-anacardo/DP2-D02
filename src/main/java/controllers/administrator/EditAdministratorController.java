@@ -41,6 +41,7 @@ public class EditAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@Valid Administrator admin, final BindingResult binding) {
+
 		ModelAndView result;
 
 		if (binding.hasErrors())

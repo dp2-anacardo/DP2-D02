@@ -16,13 +16,18 @@
       
 <tiles-definitions>
 
-	<definition name="area/administrator/edit" extends="master.page">	
-		<put-attribute name="title" value="Área" />
-		<put-attribute name="body" value="/views/area/edit.jsp" />
+	<definition name="procession/brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Procesión" />
+		<put-attribute name="body" value="/views/procession/edit.jsp" />
 	</definition>
 	
-	<definition name="area/administrator/list" extends="master.page">	
-		<put-attribute name="title" value="Áreas" />
-		<put-attribute name="body" value="/views/area/list.jsp" />
+	<definition name="procession/brotherhood/list" extends="master.page">	
+		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="body" value="/views/procession/list.jsp" />
+	</definition>
+	
+	<definition name="procession/listNotRegister" extends="master.page">	
+		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="body" value="/views/procession/listNotRegister.jsp" />
 	</definition>
 </tiles-definitions>

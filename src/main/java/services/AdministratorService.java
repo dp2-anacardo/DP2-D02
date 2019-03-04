@@ -120,9 +120,10 @@ public class AdministratorService {
 	public Administrator reconstruct(final Administrator admin, final BindingResult binding) {
 
 		Administrator result;
-		if (admin.getId() == 0)
+		if (admin.getId() == 0) {
+			this.validator.validate(admin, binding);
 			result = admin;
-		else {
+		} else {
 			result = this.administratorRepository.findOne(admin.getId());
 
 			result.setName(admin.getName());
@@ -133,11 +134,18 @@ public class AdministratorService {
 			result.setEmail(admin.getEmail());
 			result.setAddress(admin.getAddress());
 
-			this.validator.validate(result, binding);
+			//			result.setIsBanned(admin.getIsBanned());
+			//			result.setIsSuspicious(admin.getIsSuspicious());
+			//			result.setScore(admin.getScore());
+			//			result.setBoxes(admin.getBoxes());
+			//			result.setUserAccount(admin.getUserAccount());
+			//			result.setSocialProfiles(admin.getSocialProfiles());
+			//			result = admin;
+
+			this.validator.validate(admin, binding);
 		}
 		return result;
 	}
-
 	/* Q1 */
 	public Collection<Double> getStatsMemberPerBrotherhood() {
 		UserAccount userAccount;
