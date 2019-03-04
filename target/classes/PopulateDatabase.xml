@@ -612,12 +612,6 @@
 		<property name="description" value="Procession's description"/>
 		<property name="moment" value="08/05/2019"/>
 		<property name="ticker" value="190508-DAVID"/>
-		<property name="formation">
-			<array>
-				<array>
-				</array>
-			</array>
-		</property>
 		<property name="isFinal" value="false"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
@@ -629,12 +623,6 @@
 		<property name="description" value="Procession2's description"/>
 		<property name="moment" value="20/04/2019"/>
 		<property name="ticker" value="190420-JESUS"/>
-		<property name="formation">
-			<array>
-				<array>
-				</array>
-			</array>
-		</property>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>

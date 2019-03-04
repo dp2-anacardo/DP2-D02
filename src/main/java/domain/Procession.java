@@ -13,10 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -27,10 +29,9 @@ public class Procession extends DomainEntity {
 	private String					description;
 	private Date					moment;
 	private String					ticker;
-	private Member[][]				formation;
 	private Boolean					isFinal;
-	private int						maxRow;
-	private int						maxColumn;
+	private Integer					maxRow;
+	private Integer					maxColumn;
 	private Brotherhood				brotherhood;
 	private Collection<FloatEntity>	floats;
 
@@ -64,6 +65,7 @@ public class Procession extends DomainEntity {
 	}
 
 	@NotNull
+	@Future
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -85,14 +87,6 @@ public class Procession extends DomainEntity {
 		this.ticker = ticker;
 	}
 
-	public Member[][] getFormation() {
-		return this.formation;
-	}
-
-	public void setFormation(final Member[][] formation) {
-		this.formation = formation;
-	}
-
 	public Boolean getIsFinal() {
 		return this.isFinal;
 	}
@@ -101,15 +95,16 @@ public class Procession extends DomainEntity {
 		this.isFinal = isFinal;
 	}
 
-	public int getMaxRow() {
+	@Range(min = 1, max = 10000)
+	public Integer getMaxRow() {
 		return this.maxRow;
 	}
 
 	public void setMaxRow(final int maxRow) {
 		this.maxRow = maxRow;
 	}
-
-	public int getMaxColumn() {
+	@Range(min = 1, max = 10000)
+	public Integer getMaxColumn() {
 		return this.maxColumn;
 	}
 

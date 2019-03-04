@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasRole('BROTHERHOOD')">
 <form:form action="procession/brotherhood/edit.do" modelAttribute="procession">
 	<form:hidden path="id" />
 	
@@ -18,7 +18,8 @@
 	<acme:textarea code="procession.description" path="description"/>
 	<acme:textbox code="procession.maxRow" path="maxRow"/>
 	<acme:textbox code="procession.maxColumn" path="maxColumn"/>
-	<acme:select items="${floats}" itemLabel="title" code="procession.float" path="floats"/>
+	<acme:textbox code="procession.date" path="moment"/>
+	
 	
 	
 	<jstl:if test="${procession.isFinal == false }">
@@ -26,7 +27,7 @@
 		<acme:submit name="saveDraft" code="procession.saveDraft"/>
 	</jstl:if>
 	<jstl:if test="${procession.isFinal == true }">
-		<acme:submit name="save" code="procession.save"/>
+		<acme:submit name="saveFinal" code="procession.save"/>
 	</jstl:if>
 	<jstl:if test="${procession.id != 0}">
 		<input type="submit" name="delete"

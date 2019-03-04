@@ -4,8 +4,6 @@ package controllers.procession;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.FloatEntityService;
 import services.ProcessionService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -36,6 +35,9 @@ public class ProcessionController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private FloatEntityService	floatService;
 
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -78,14 +80,21 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveDraft")
 	public ModelAndView saveDraft(@Valid final Procession procession, final BindingResult binding) {
+=======
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveDraft")
+	public ModelAndView saveDraft(Procession procession, final BindingResult binding) {
+>>>>>>> jesus
 		ModelAndView result;
+		procession.setIsFinal(false);
+		procession = this.processionService.reconstruct(procession, binding);
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(procession);
 		else
 			try {
-				procession.setIsFinal(false);
 				this.processionService.saveDraft(procession);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -94,14 +103,20 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveFinal")
 	public ModelAndView saveFinal(@Valid final Procession procession, final BindingResult binding) {
+=======
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveFinal")
+	public ModelAndView saveFinal(Procession procession, final BindingResult binding) {
+>>>>>>> jesus
 		ModelAndView result;
+		procession.setIsFinal(false);
+		procession = this.processionService.reconstruct(procession, binding);
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(procession);
 		else
 			try {
-				procession.setIsFinal(true);
 				this.processionService.saveFinal(procession);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
@@ -110,6 +125,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 
@@ -124,6 +140,20 @@ public class ProcessionController extends AbstractController {
 		result.addObject("requestURI", "procession/listNotRegister.do");
 
 		return result;
+=======
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int processionId) {
+		ModelAndView result;
+		Procession p;
+
+		p = this.processionService.findOne(processionId);
+
+		result = new ModelAndView("procession/brotherhood/show");
+		result.addObject("p", p);
+
+		return result;
+
+>>>>>>> jesus
 	}
 
 	private ModelAndView createEditModelAndView(final Procession procession) {
@@ -135,7 +165,9 @@ public class ProcessionController extends AbstractController {
 	private ModelAndView createEditModelAndView(final Procession procession, final String messageCode) {
 		ModelAndView result;
 		Collection<FloatEntity> floats;
-		floats = procession.getFloats();
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		floats = this.floatService.getFloatsByBrotherhood(b);
 
 		result = new ModelAndView("procession/brotherhood/edit");
 		result.addObject("procession", procession);

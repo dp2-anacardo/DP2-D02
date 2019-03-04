@@ -4,7 +4,6 @@ package services;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -12,10 +11,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ProcessionRepository;
+import security.LoginService;
+import domain.Actor;
 import domain.Brotherhood;
-import domain.Member;
 import domain.Procession;
 
 @Service
@@ -24,11 +26,39 @@ public class ProcessionService {
 
 	@Autowired
 	ProcessionRepository	processionRepository;
+	@Autowired
+	Validator				validator;
+	@Autowired
+	ActorService			actorService;
+	@Autowired
+	BrotherhoodService		brotherhoodService;
 
+
+	public Procession reconstruct(final Procession p, final BindingResult binding) {
+		Procession result;
+		if (p.getId() == 0) {
+			p.setTicker(this.tickerGenerator());
+			result = p;
+			this.validator.validate(p, binding);
+		} else {
+			result = this.processionRepository.findOne(p.getId());
+			p.setBrotherhood(result.getBrotherhood());
+			p.setFloats(result.getFloats());
+			p.setTicker(result.getTicker());
+			p.setVersion(result.getVersion());
+			p.setMoment(result.getMoment());
+			p.setIsFinal(result.getIsFinal());
+			this.validator.validate(p, binding);
+			result = p;
+		}
+		return result;
+
+	}
 
 	public Procession create() {
 		Procession result;
 		result = new Procession();
+		result.setIsFinal(false);
 		return result;
 	}
 
@@ -46,35 +76,19 @@ public class ProcessionService {
 
 	public Procession save(final Procession p) {
 		Assert.notNull(p);
+		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
 		Procession result;
 		if (p.getId() == 0) {
-			final Member[][] formation = new Member[p.getMaxRow()][p.getMaxColumn()];
-			p.setFormation(formation);
-			p.setMoment(new Date());
 			p.setTicker(this.tickerGenerator());
+			p.setBrotherhood(b);
 			result = this.processionRepository.save(p);
 		} else {
-			final Procession old = this.findOne(p.getId());
-			if (old.getMaxRow() != p.getMaxRow() || old.getMaxColumn() != p.getMaxColumn()) {
-				final Member[][] newFormation = this.formationEdit(p, old);
-				p.setFormation(newFormation);
-			}
+			Assert.isTrue(p.getBrotherhood().equals(b));
 			result = this.processionRepository.save(p);
 		}
 		return result;
-	}
-
-	private Member[][] formationEdit(final Procession p, final Procession old) {
-		final Member[][] result = new Member[p.getMaxRow()][p.getMaxColumn()];
-		final Member[][] oldFormation = old.getFormation();
-
-		for (int i = 0; i < old.getMaxRow(); i++)
-			for (int j = 0; j < old.getMaxColumn(); j++) {
-				final Member m = oldFormation[i][j];
-				result[i][j] = m;
-			}
-		return result;
-
 	}
 
 	public Procession saveDraft(final Procession p) {
