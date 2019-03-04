@@ -49,9 +49,9 @@
 		</jstl:forEach>
 	</table>
 	
-	<form:input path="addSW"/>	
+	<form:input path="addSW"/>
 	<form:errors path="addSW" cssClass="error" />
-	<acme:submit name="addSW" code="configuration.edit.addSW"/>&nbsp;
+	<acme:submit name="addWord" code="configuration.edit.addSW"/>&nbsp;
 	
 	<table>
 		<tr>
@@ -68,6 +68,10 @@
 		</jstl:forEach>
 	</table>
 	
+	<form:input path="addPW"/>
+	<form:errors path="addPW" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addPW"/>&nbsp;
+	
 	<table>
 		<tr>
     		<th><spring:message code="configuration.edit.negWords" /></th>
@@ -82,6 +86,11 @@
   		</tr>
 		</jstl:forEach>
 	</table>
+	
+	<form:input path="addNW"/>
+	<form:errors path="addNW" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addNW"/>&nbsp;
+	<br/>
 	
 	<!-- Submit and cancel -->
 	

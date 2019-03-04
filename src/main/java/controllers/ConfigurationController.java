@@ -3,14 +3,13 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -35,7 +34,7 @@ public class ConfigurationController extends AbstractController {
 
 	// WORD DELETES
 	@RequestMapping(value = "/deleteSWord", method = RequestMethod.GET)
-	public ModelAndView deleteSWord(final String spamWord) {
+	public ModelAndView deleteSWord(@RequestParam(value = "spamWord") final String spamWord) {
 		final ModelAndView result;
 		final Configuration config = this.configurationService.findAll().get(0);
 
@@ -54,7 +53,7 @@ public class ConfigurationController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/deletePWord", method = RequestMethod.GET)
-	public ModelAndView deletePWord(final String posWord) {
+	public ModelAndView deletePWord(@RequestParam(value = "posWord") final String posWord) {
 		final ModelAndView result;
 		final Configuration config = this.configurationService.findAll().get(0);
 
@@ -73,7 +72,7 @@ public class ConfigurationController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/deleteNWord", method = RequestMethod.GET)
-	public ModelAndView deleteNWord(final String negWord) {
+	public ModelAndView deleteNWord(@RequestParam(value = "negWord") final String negWord) {
 		final ModelAndView result;
 		final Configuration config = this.configurationService.findAll().get(0);
 
@@ -91,27 +90,25 @@ public class ConfigurationController extends AbstractController {
 		return result;
 	}
 	// WORD ADDS
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addSW")
-	public ModelAndView addSWord(final ConfigurationForm configF, final BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addWord")
+	public ModelAndView addSW(final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
+		Configuration config;
 
 		final Actor user = this.actorService.getActorLogged();
 		final Administrator admin = this.administratorService.findOne(user.getId());
 		Assert.notNull(admin);
 
+		config = this.configurationService.reconstruct(configF, binding);
 		if (binding.hasErrors())
 			result = this.editModelAndView(config);
 		else
 			try {
-				final Collection<String> sW = config.getSpamWords();
-				sW.add(configF.getAddSW());
-				config.setNegativeWords(sW);
-
 				this.configurationService.save(config);
 				result = new ModelAndView("redirect:/configuration/administrator/edit.do");
 
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(config, "configuration.edit.error"); //"Administrator.commit.error"
+				result = this.editModelAndView(configF, "configuration.edit.error"); //"Administrator.commit.error"
 			}
 		return result;
 	}
@@ -131,9 +128,11 @@ public class ConfigurationController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView update(@Valid final Configuration config, final BindingResult binding) {
+	public ModelAndView save(final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
+		Configuration config;
 
+		config = this.configurationService.reconstruct(configF, binding);
 		if (binding.hasErrors())
 			result = this.editModelAndView(config);
 		else
@@ -141,7 +140,7 @@ public class ConfigurationController extends AbstractController {
 				this.configurationService.save(config);
 				result = new ModelAndView("redirect:/configuration/administrator/show.do");
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(config, "configuration.edit.error"); //"Administrator.commit.error"
+				result = this.editModelAndView(configF, "configuration.edit.error"); //"Administrator.commit.error"
 			}
 		return result;
 	}
@@ -162,17 +161,15 @@ public class ConfigurationController extends AbstractController {
 	// MODEL&VIEW
 	protected ModelAndView editModelAndView(final Configuration config) {
 		ModelAndView result;
-		result = this.editModelAndView(config, null);
+		final ConfigurationForm configF = new ConfigurationForm(config);
+		result = this.editModelAndView(configF, null);
 		return result;
 	}
 
-	protected ModelAndView editModelAndView(final Configuration config, final String messageCode) {
+	protected ModelAndView editModelAndView(final ConfigurationForm configF, final String messageCode) {
 		ModelAndView result;
 
-		final ConfigurationForm configF = new ConfigurationForm();
-
 		result = new ModelAndView("configuration/administrator/edit");
-		result.addObject("config", config);
 		result.addObject("configF", configF);
 		result.addObject("messageCode", messageCode);
 

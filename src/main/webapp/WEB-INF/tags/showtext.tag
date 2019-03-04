@@ -13,8 +13,8 @@
 <%-- Attributes --%> 
  
 <%@ attribute name="code" required="true" %>
-<%@ attribute name="value" required="false" %>
-<%@ attribute name="fieldset" required="true" %>
+<%@ attribute name="value" required="true" %>
+<%@ attribute name="fieldset" required="false" %>
 
 <%-- Definition --%>
 

@@ -9,22 +9,30 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('ADMIN')">
-<display:table name="area" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-	<spring:message code="area.name" var="columnTitle"/>
+<security:authorize access="hasRole('BROTHERHOOD')">
+<display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<spring:message code="procession.title" var="columnTitle"/>
 	<display:column title="columnTitle">
-		<jstl:out value="${row.name }"></jstl:out>
+		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
 	<display:column>
-		<a href="area/administrator/edit.do?areaId=${row.id}">
-			<spring:message code="area.edit"/>
+		<a href="procession/brotherhood/edit.do?processiontId=${row.id}">
+			<spring:message code="procession.edit"/>
 		</a>
 	</display:column>
+	
+	<display:column>
+		<a href="procession/brotherhood/show.do?processiontId=${row.id}">
+			<spring:message code="procession.show"/>
+		</a>
+	</display:column>
+	
+	
 </display:table>
 <div>
-	<a href="area/administrator/create.do"> <spring:message
-				code="area.create" />
+	<a href="procession/brotherhood/create.do"> <spring:message
+				code="procession.create" />
 	</a>
 </div>
 </security:authorize>

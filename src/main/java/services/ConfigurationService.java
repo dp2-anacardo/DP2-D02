@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.validation.Validator;
 import repositories.ConfigurationRepository;
 import security.UserAccount;
 import domain.Configuration;
+import forms.ConfigurationForm;
 
 @Service
 @Transactional
@@ -53,24 +55,31 @@ public class ConfigurationService {
 	}
 
 	//Reconstruct
-	public Configuration reconstruct(final Configuration config, final BindingResult binding) {
+	public Configuration reconstruct(final ConfigurationForm configF, final BindingResult binding) {
 		Configuration result;
 
-		if (config.getId() == 0)
-			result = config;
-		else {
-			result = this.configurationRepository.findOne(config.getId());
+		result = this.configurationRepository.findOne(configF.getId());
 
-			result.setMaxResults(config.getMaxResults());
-			result.setMaxTime(config.getMaxTime());
-			result.setBanner(config.getBanner());
-			result.setSystemName(config.getSystemName());
-			result.setWelcomeMessageEn(config.getWelcomeMessageEn());
-			result.setWelcomeMessageEs(config.getWelcomeMessageEs());
-			result.setDefaultCC(config.getDefaultCC());
+		result.setVersion(configF.getVersion());
+		final Collection<String> sW = result.getSpamWords();
+		final Collection<String> pW = result.getPositiveWords();
+		final Collection<String> nW = result.getNegativeWords();
 
-			this.validator.validate(result, binding);
-		}
+		if (!configF.getAddSW().equals(""))
+			sW.add(configF.getAddSW());
+
+		if (!configF.getAddPW().equals(""))
+			pW.add(configF.getAddNW());
+
+		if (!configF.getAddNW().equals(""))
+			nW.add(configF.getAddNW());
+
+		result.setSpamWords(sW);
+		result.setPositiveWords(pW);
+		result.setSpamWords(nW);
+
+		this.validator.validate(result, binding);
+
 		return result;
 	}
 }
