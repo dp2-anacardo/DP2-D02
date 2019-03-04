@@ -7,98 +7,98 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
-<form:form action ="configuration/administrator/edit.do" modelAttribute="configuration">
-	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="spamWords" />
-	<form:hidden path="cCardsMakes" />
+<!DOCTYPE>
+<html>
+<head>
+<link rel="stylesheet" href="styles/table.css" type="text/css">
+</head>
+<body>
+<form:form action ="configuration/administrator/edit.do" modelAttribute="configF">
 
-	<form:label path="maxResults">
-		<spring:message code="configuration.edit.maxResults" />:
-	</form:label>
-	<br />
-	<form:input path="maxResults" />
-	<form:errors cssClass="error" path="maxResults" />
-	<br />
+	<form:hidden path="id"/>
+
+	<!-- Single areas -->
 	
-	<form:label path="maxTime">
-		<spring:message code="configuration.edit.maxTime" />:
-	</form:label>
-	<br />
-	<form:input path="maxTime"/>
-	<form:errors cssClass="error" path="maxTime" />
+	<acme:textboxbs code="configuration.edit.maxResults" path="maxResults"/>
+	<acme:textboxbs code="configuration.edit.maxTime" path="maxTime"/>
+	<acme:textboxbs code="configuration.edit.systemName" path="systemName"/>
+	<acme:textboxbs code="configuration.edit.banner" path="banner"/>
+	<acme:textboxbs code="configuration.edit.welcomeEn" 
+		path="welcomeMessageEn"/>
+	<acme:textboxbs code="configuration.edit.welcomeEs" 
+		path="welcomeMessageEs"/>
+	<acme:textboxbs code="configuration.edit.defaultCC" path="defaultCC"/>
+	
+	<!-- Edit words -->
+
+	<table>
+		<tr>
+    		<th><spring:message code="configuration.edit.spamWords" /></th>
+    		<th></th>
+  		</tr>
+		<jstl:forEach items="${configF.spamWords}" 
+						var="spamWords">
+		<tr>
+    		<td><jstl:out value="${spamWords}"/></td>
+    		<td><acme:cancel url="/configuration/administrator/deleteSWord.do?spamWord=${spamWords}" 
+    			code="configuration.edit.delete"/></td>
+  		</tr>
+		</jstl:forEach>
+	</table>
+	
+	<form:input path="addSW"/>
+	<form:errors path="addSW" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addSW"/>&nbsp;
+	
+	<table>
+		<tr>
+    		<th><spring:message code="configuration.edit.posWords" /></th>
+    		<th></th>
+  		</tr>
+		<jstl:forEach items="${configF.positiveWords}" 
+						var="posWords">
+		<tr>
+    		<td><jstl:out value="${posWords}"/></td>
+    		<td><acme:cancel url="/configuration/administrator/deletePWord.do?posWord=${posWords}" 
+    			code="configuration.edit.delete"/></td>
+  		</tr>
+		</jstl:forEach>
+	</table>
+	
+	<form:input path="addPW"/>
+	<form:errors path="addPW" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addPW"/>&nbsp;
+	
+	<table>
+		<tr>
+    		<th><spring:message code="configuration.edit.negWords" /></th>
+    		<th></th>
+  		</tr>
+		<jstl:forEach items="${configF.negativeWords}" 
+						var="negWords">
+		<tr>
+    		<td><jstl:out value="${negWords}"/></td>
+    		<td><acme:cancel url="/configuration/administrator/deleteNWord.do?negWord=${negWords}" 
+    			code="configuration.edit.delete"/></td>
+  		</tr>
+		</jstl:forEach>
+	</table>
+	
+	<form:input path="addNW"/>
+	<form:errors path="addNW" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addNW"/>&nbsp;
 	<br/>
 	
-	<form:label path="pageName">
-		<spring:message code="configuration.edit.pageName" />
-	</form:label>
-	<br />
-	<form:input path="pageName"/>
-	<form:errors cssClass="error" path="pageName" />
-	<br />
+	<!-- Submit and cancel -->
 	
-	<form:label path="bannerURL">
-		<spring:message code="configuration.edit.bannerURL" />
-	</form:label>
-	<br />
-	<form:input path="bannerURL"/>
-	<form:errors cssClass="error" path="bannerURL" />
-	<br />
+	<acme:submit name="save" code="configuration.edit.submit"/>&nbsp;
 	
-	<form:label path="welcomeES">
-		<spring:message code="configuration.edit.welcomeES" />
-	</form:label>
-	<br />
-	<form:input path="welcomeES"/>
-	<form:errors cssClass="error" path="welcomeES" />
-	<br />
-	
-	<form:label path="welcomeEN">
-		<spring:message code="configuration.edit.welcomeEN" />
-	</form:label>
-	<br />
-	<form:input path="welcomeEN"/>
-	<form:errors cssClass="error" path="welcomeEN" />
-	<br />
-	
-	<form:label path="VATPercent">
-		<spring:message code="configuration.edit.VATPercent" />
-	</form:label>
-	<br />
-	<form:input path="VATPercent"/>
-	<form:errors cssClass="error" path="VATPercent" />
-	<br />
-	
-	<form:label path="phoneCCode">
-		<spring:message code="configuration.edit.phoneCCode" />
-	</form:label>
-	<br />
-	<form:input path="phoneCCode"/>
-	<form:errors cssClass="error" path="phoneCCode" />
-	<br />
-	
-	<spring:message code="configuration.edit.spamWords" />:
-	<br/>
-	<input id="sW" name="sW" value="${spam}"/> 
-	<jstl:set var="sW" value="sW"/>
-	<br />
-	
-	<spring:message code="configuration.edit.cCardsMakes" />:
-	<br/>
-	<input id="cCM" name="cCM" value="${cards}"/> 
-	<jstl:set var="cCM" value="cCM"/>
-	<br />
-	
-	<input type="submit" name="save"
-		value="<spring:message code="configuration.edit.submit" />" />&nbsp; 
-	
-	<input type="button" name="cancel"
-		value="<spring:message code="configuration.edit.cancel" />"
-		onclick="javascript: relativeRedir('/');" />
-	<br />
+	<acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit.cancel"/>
 	
 </form:form>
+</body>
+</html>
 </security:authorize>
