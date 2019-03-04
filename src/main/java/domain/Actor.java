@@ -108,7 +108,8 @@ public abstract class Actor extends DomainEntity {
 
 	//Relationships
 
-	@OneToMany
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<MessageBox> getBoxes() {
 		return this.boxes;
 	}

@@ -18,25 +18,25 @@
 <body>
 <security:authorize access="hasRole('ADMIN')">
 <spring:message code="administrator.firstMessage" />
-<form:form action="administrator/administrator/create.do" modelAttribute="administrator">
+<form:form action="administrator/administrator/create.do" modelAttribute="administratorForm">
 
 	<form:hidden path="id" />
  
-	<acme:textbox code="administrator.username" path="userAccount.username"/>
+	<acme:textbox code="administrator.username" path="username"/>
 	<br />
 	
-	<form:label path="userAccount.password" >
+	<form:label path="password" >
 		<spring:message code="administrator.password" />*:
 	</form:label>
-	<form:password path="userAccount.password" onchange='check_pass();'/>
-	<form:errors cssClass="error" path="userAccount.password" />
+	<form:password path="password" onchange='check_pass();'/>
+	<form:errors cssClass="error" path="password" />
 	<br />
 	
 	<form:label path="confirmPass">
 		<spring:message code="administrator.confirmPass" />*:
 	</form:label>
 	<form:password path="confirmPass" onchange='check_pass();'/>
-	<form:errors cssClass="error" path="userAccount.password" />
+	<form:errors cssClass="error" path="password" />
 	<br />
 	
 	
@@ -46,7 +46,7 @@
 	<acme:textbox code="administrator.middleName" path="middleName"/>
 	<br />
 	
-	<acme:textbox code="administrator.surname" path="surName"/>
+	<acme:textbox code="administrator.surname" path="surname"/>
 	<br />
 	
 	<acme:textbox code="administrator.photo" path="photo"/>
@@ -55,7 +55,7 @@
 	<acme:textbox code="administrator.email" path="email"/>
 	<br />
 	
-	<acme:textbox code="administrator.phoneNumer" path="phoneNumber"/>
+	<acme:textbox code="administrator.phoneNumber" path="phoneNumber"/>
 	<br />
 	
 	<acme:textbox code="administrator.address" path="address"/>
@@ -105,7 +105,7 @@
 	 </div>
 	
 	<input type="submit" name="save"
-		value="<spring:message code="administrator.save" disabled/>"
+		value="<spring:message code="administrator.save"/>"
 		onclick="phoneValidation();check_pass();"
 		 />&nbsp; 
 	

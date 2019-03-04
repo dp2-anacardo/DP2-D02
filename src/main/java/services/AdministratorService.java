@@ -56,9 +56,9 @@ public class AdministratorService {
 		result = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		boxes = new ArrayList<MessageBox>();
 		authorities = new ArrayList<Authority>();
 		profiles = new ArrayList<SocialProfile>();
-		boxes = new ArrayList<MessageBox>();
 
 		auth.setAuthority(Authority.ADMIN);
 		authorities.add(auth);
@@ -342,21 +342,23 @@ public class AdministratorService {
 
 	public Administrator reconstruct(final AdministratorForm admin, final BindingResult binding) {
 
-		final Administrator result = new Administrator();
+		final Administrator result = this.create();
 		result.setAddress(admin.getAddress());
-		result.setBoxes(admin.getBoxes());
+		//		result.setBoxes(admin.getBoxes());
 		result.setEmail(admin.getEmail());
 		result.setId(admin.getId());
-		result.setIsBanned(admin.getIsBanned());
-		result.setIsSuspicious(admin.getIsSuspicious());
+		//		result.setIsBanned(admin.getIsBanned());
+		//		result.setIsSuspicious(admin.getIsSuspicious());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
-		result.setScore(admin.getScore());
-		result.setSocialProfiles(admin.getSocialProfiles());
+		//		result.setScore(admin.getScore());
+		//		result.setSocialProfiles(admin.getSocialProfiles());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
-		result.setUserAccount(admin.getUserAccount());
+		//		result.setUserAccount(admin.getUserAccount());
+		result.getUserAccount().setPassword(admin.getPassword());
+		result.getUserAccount().setUsername(admin.getUsername());
 		result.setVersion(admin.getVersion());
 		this.validator.validate(result, binding);
 		return result;

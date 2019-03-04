@@ -28,29 +28,30 @@ public class RegisterAdministratorController extends AbstractController {
 	public ModelAndView create() {
 
 		ModelAndView result;
-		Administrator administrator;
-
-		administrator = this.administratorService.create();
-		final AdministratorForm admin = new AdministratorForm(administrator);
-		result = this.createEditModelAndView(admin);
+		AdministratorForm administratorForm;
+		//**************
+		administratorForm = new AdministratorForm();
+		result = this.createEditModelAndView(administratorForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final AdministratorForm administrator, final BindingResult binding) {
+	public ModelAndView save(@Valid final AdministratorForm administratorForm, final BindingResult binding) {
 		ModelAndView result;
 		Administrator admin;
 
-		admin = this.administratorService.reconstruct(administrator, binding);
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(admin);
+			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
+				admin = this.administratorService.reconstruct(administratorForm, binding);
 				this.administratorService.save(admin);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(administrator, "administrator.commit.error");
+				if (binding.hasErrors())
+					result = this.createEditModelAndView(administratorForm, "administrator.duplicated");
+				result = this.createEditModelAndView(administratorForm, "administrator.commit.error");
 			}
 		return result;
 	}
@@ -62,12 +63,18 @@ public class RegisterAdministratorController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final AdministratorForm administrator, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final AdministratorForm adminForm) {
+		ModelAndView result;
+		result = this.createEditModelAndView(adminForm, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final AdministratorForm adminForm, final String messageCode) {
 
 		ModelAndView result;
 
 		result = new ModelAndView("administrator/administrator/create");
-		result.addObject("administrator", administrator);
+		result.addObject("administratorForm", adminForm);
 		result.addObject("message", messageCode);
 
 		return result;
