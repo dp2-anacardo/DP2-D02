@@ -13,15 +13,6 @@ import domain.FloatEntity;
 public class FloatEntityToStringConverter implements Converter<FloatEntity, String> {
 
 	@Override
-<<<<<<< HEAD
-	public String convert(final FloatEntity f) {
-		String result;
-
-		if (f == null)
-			result = null;
-		else
-			result = String.valueOf(f.getId());
-=======
 	public String convert(final FloatEntity configuration) {
 		String result;
 
@@ -29,7 +20,6 @@ public class FloatEntityToStringConverter implements Converter<FloatEntity, Stri
 			result = null;
 		else
 			result = String.valueOf(configuration.getId());
->>>>>>> jesus
 
 		return result;
 	}

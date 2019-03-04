@@ -16,11 +16,7 @@ import domain.FloatEntity;
 public class StringToFloatEntityConverter implements Converter<String, FloatEntity> {
 
 	@Autowired
-<<<<<<< HEAD
-	FloatEntityRepository	floatEntityRepository;
-=======
 	FloatEntityRepository	floatRepository;
->>>>>>> jesus
 
 
 	@Override
@@ -33,11 +29,9 @@ public class StringToFloatEntityConverter implements Converter<String, FloatEnti
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-<<<<<<< HEAD
-				result = this.floatEntityRepository.findOne(id);
-=======
+
 				result = this.floatRepository.findOne(id);
->>>>>>> jesus
+
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);

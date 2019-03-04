@@ -80,13 +80,8 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-<<<<<<< HEAD
-	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveDraft")
-	public ModelAndView saveDraft(@Valid final Procession procession, final BindingResult binding) {
-=======
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveDraft")
 	public ModelAndView saveDraft(Procession procession, final BindingResult binding) {
->>>>>>> jesus
 		ModelAndView result;
 		procession.setIsFinal(false);
 		procession = this.processionService.reconstruct(procession, binding);
@@ -103,13 +98,8 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-<<<<<<< HEAD
-	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveFinal")
-	public ModelAndView saveFinal(@Valid final Procession procession, final BindingResult binding) {
-=======
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveFinal")
 	public ModelAndView saveFinal(Procession procession, final BindingResult binding) {
->>>>>>> jesus
 		ModelAndView result;
 		procession.setIsFinal(false);
 		procession = this.processionService.reconstruct(procession, binding);
@@ -125,7 +115,6 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-<<<<<<< HEAD
 	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 
@@ -140,7 +129,7 @@ public class ProcessionController extends AbstractController {
 		result.addObject("requestURI", "procession/listNotRegister.do");
 
 		return result;
-=======
+	}
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int processionId) {
 		ModelAndView result;
@@ -153,7 +142,6 @@ public class ProcessionController extends AbstractController {
 
 		return result;
 
->>>>>>> jesus
 	}
 
 	private ModelAndView createEditModelAndView(final Procession procession) {
