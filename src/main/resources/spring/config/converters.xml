@@ -43,6 +43,12 @@
 		<bean class="converters.StringToActorConverter"/>
 		<bean class="converters.UrlToStringConverter"/>
 		<bean class="converters.StringToUrlConverter"/>
+		<bean class="converters.MessageToStringConverter"/>
+		<bean class="converters.StringToMessageConverter"/>
+		<bean class="converters.MessageBoxToStringConverter"/>
+		<bean class="converters.StringToMessageBoxConverter"/>
+		<bean class="converters.PriorityToStringConverter"/>
+		<bean class="converters.StringToPriorityConverter"/>
 
 	</util:list>
 	

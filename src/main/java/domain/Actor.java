@@ -139,4 +139,12 @@ public abstract class Actor extends DomainEntity {
 		this.socialProfiles = socialProfiles;
 	}
 
+	public MessageBox getMessageBox(final String name) {
+		final MessageBox result = null;
+		for (final MessageBox box : this.getBoxes())
+			if (box.getName().equals(name))
+				return box;
+		return result;
+	}
+
 }

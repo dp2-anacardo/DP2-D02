@@ -128,12 +128,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="outBoxAdmin1" class="domain.MessageBox">
 		<property name="name" value="OUTBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -146,6 +154,10 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="trashBoxAdmin1" class="domain.MessageBox">
@@ -155,12 +167,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="notificationBoxAdmin1" class="domain.MessageBox">
 		<property name="name" value="NOTIFICATIONBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -237,12 +257,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="outBoxBrotherhood1" class="domain.MessageBox">
 		<property name="name" value="OUTBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -255,6 +283,10 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="trashBoxBrotherhood1" class="domain.MessageBox">
@@ -264,12 +296,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="notificationBoxBrotherhood1" class="domain.MessageBox">
 		<property name="name" value="NOTIFICATIONBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -416,12 +456,20 @@
 				<ref bean="messageMember1"/>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="outBoxMember1" class="domain.MessageBox">
 		<property name="name" value="OUTBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -434,12 +482,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="trashBoxMember1" class="domain.MessageBox">
 		<property name="name" value="TRASHBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -452,12 +508,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="inBoxMember2" class="domain.MessageBox">
 		<property name="name" value="INBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -470,12 +534,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="spamBoxMember2" class="domain.MessageBox">
 		<property name="name" value="SPAMBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -488,12 +560,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="notificationBoxMember2" class="domain.MessageBox">
 		<property name="name" value="NOTIFICATIONBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -506,12 +586,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="outBoxMember3" class="domain.MessageBox">
 		<property name="name" value="OUTBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -524,6 +612,10 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="trashBoxMember3" class="domain.MessageBox">
@@ -533,12 +625,20 @@
 			<list>
 			</list>
 		</property>
+		<property name="nestedBoxes">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="notificationBoxMember3" class="domain.MessageBox">
 		<property name="name" value="NOTIFICATIONBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="nestedBoxes">
 			<list>
 			</list>
 		</property>
@@ -572,15 +672,30 @@
 	<!-- Priorities -->
 	
 	<bean id="HIGH" class="domain.Priority">
-		<property name="title" value="HIGH"/>
+		<property name="name">
+		<map>
+		<entry key="ES" value="ALTA"/>
+		<entry key="EN" value="HIGH"/>
+		</map>
+		</property>
 	</bean>
 	
-	<bean id="NEUTRAL" class="domain.Priority">
-		<property name="title" value="NEUTRAL"/>
+	<bean id="MEDIUM" class="domain.Priority">
+		<property name="name">
+		<map>
+		<entry key="ES" value="MEDIA"/>
+		<entry key="EN" value="MEDIUM"/>
+		</map>
+		</property>
 	</bean>
 	
 	<bean id="LOW" class="domain.Priority">
-		<property name="title" value="LOW"/>
+		<property name="name">
+		<map>
+		<entry key="ES" value="BAJA"/>
+		<entry key="EN" value="LOW"/>
+		</map>
+		</property>
 	</bean>
 	
 	<!-- FloatEntity -->
@@ -600,7 +715,7 @@
 		<property name="description" value="No se sabe si sonrie o llora"/>
 		<property name="pictures">
 			<list>
-				<value>http://www.imagenVirgen.com</value>
+				<ref bean="picture2"/>
 			</list>
 		</property>
 		<property name="brotherhood" ref="brotherhood1"/>
