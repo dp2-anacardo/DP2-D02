@@ -1,7 +1,6 @@
 
 package controllers.procession;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +79,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveDraft")
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveDraft")
 	public ModelAndView saveDraft(Procession procession, final BindingResult binding) {
 		ModelAndView result;
 		procession.setIsFinal(false);
@@ -98,7 +97,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveFinal")
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "saveFinal")
 	public ModelAndView saveFinal(Procession procession, final BindingResult binding) {
 		ModelAndView result;
 		procession.setIsFinal(false);
@@ -119,15 +118,15 @@ public class ProcessionController extends AbstractController {
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 
 		ModelAndView result;
-		Collection<Procession> pro = new ArrayList<Procession>();
-		pro = this.processionService.findAll();
-		for (final Procession p : pro)
-			if (p.getBrotherhood().getId() == brotherhoodId)
-				pro.remove(p);
-		result = new ModelAndView("procession/listNotRegister");
-		result.addObject("procession", pro);
-		result.addObject("requestURI", "procession/listNotRegister.do");
-
+		Collection<Procession> pro;
+		pro = this.processionService.getProcessionsFinalByBrotherhood(brotherhoodId);
+		if (pro == null || pro.size() <= 0)
+			result = new ModelAndView("redirect:/misc/403");
+		else {
+			result = new ModelAndView("procession/listNotRegister");
+			result.addObject("procession", pro);
+			result.addObject("requestURI", "procession/listNotRegister.do");
+		}
 		return result;
 	}
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -136,14 +135,28 @@ public class ProcessionController extends AbstractController {
 		Procession p;
 
 		p = this.processionService.findOne(processionId);
-
-		result = new ModelAndView("procession/brotherhood/show");
-		result.addObject("p", p);
-
+		if (p == null)
+			result = new ModelAndView("redirect:/misc/403");
+		else {
+			result = new ModelAndView("procession/show");
+			result.addObject("p", p);
+		}
 		return result;
 
 	}
 
+	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Procession procession) {
+		ModelAndView result;
+		try {
+			this.processionService.delete(this.processionService.findOne(procession.getId()));
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(procession, "procession.commit.error");
+		}
+
+		return result;
+	}
 	private ModelAndView createEditModelAndView(final Procession procession) {
 		ModelAndView result;
 		result = this.createEditModelAndView(procession, null);

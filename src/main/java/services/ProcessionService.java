@@ -18,7 +18,9 @@ import repositories.ProcessionRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Finder;
 import domain.Procession;
+import domain.Request;
 
 @Service
 @Transactional
@@ -32,6 +34,10 @@ public class ProcessionService {
 	ActorService			actorService;
 	@Autowired
 	BrotherhoodService		brotherhoodService;
+	@Autowired
+	RequestService			requestService;
+	@Autowired
+	FinderService			finderService;
 
 
 	public Procession reconstruct(final Procession p, final BindingResult binding) {
@@ -43,10 +49,8 @@ public class ProcessionService {
 		} else {
 			result = this.processionRepository.findOne(p.getId());
 			p.setBrotherhood(result.getBrotherhood());
-			p.setFloats(result.getFloats());
 			p.setTicker(result.getTicker());
 			p.setVersion(result.getVersion());
-			p.setMoment(result.getMoment());
 			p.setIsFinal(result.getIsFinal());
 			this.validator.validate(p, binding);
 			result = p;
@@ -105,11 +109,36 @@ public class ProcessionService {
 		return result;
 	}
 
-	//TODO delete de procession, se deben borrar todas las request asociadas, ¿agregacion?
+	public void delete(final Procession p) {
+		Assert.notNull(p);
+		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		Assert.isTrue(p.getBrotherhood().equals(b));
+		final Collection<Request> requests = this.requestService.getRequestByProcession(p);
+		for (final Request r : requests)
+			this.requestService.delete(r);
+		final Collection<Finder> finders = this.getFinders();
+		for (final Finder f : finders)
+			if (f.getProcessions().contains(p))
+				f.getProcessions().remove(p);
+
+		this.processionRepository.delete(p);
+	}
 
 	public Collection<Procession> getProcessionsByBrotherhood(final Brotherhood b) {
 		Collection<Procession> result;
 		result = this.processionRepository.getProcessionsByBrotherhood(b);
+		return result;
+	}
+
+	public Collection<Finder> getFinders() {
+		return this.processionRepository.getFinders();
+	}
+
+	public Collection<Procession> getProcessionsFinalByBrotherhood(final int id) {
+		Collection<Procession> result;
+		result = this.processionRepository.getProcessionsFinalByBrotherhood(id);
 		return result;
 	}
 

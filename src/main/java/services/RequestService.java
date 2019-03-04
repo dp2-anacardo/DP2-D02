@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RequestRepository;
+import domain.Procession;
 import domain.Request;
 
 @Service
@@ -47,7 +48,7 @@ public class RequestService {
 
 	public void delete(final Request r) {
 		Assert.notNull(r);
-		Assert.isTrue(r.getStatus().equals("PENDING"));
+		// Meterlo en controlador cuando el usuario member la va a borrar Assert.isTrue(r.getStatus().equals("PENDING"));
 		this.requestRepository.delete(r);
 	}
 
@@ -65,5 +66,9 @@ public class RequestService {
 		r.setStatus("REJECTED");
 		final Request result = this.save(r);
 		return result;
+	}
+
+	public Collection<Request> getRequestByProcession(final Procession p) {
+		return this.requestRepository.getRequestByProcession(p);
 	}
 }

@@ -13,12 +13,20 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 <form:form action="procession/brotherhood/edit.do" modelAttribute="procession">
 	<form:hidden path="id" />
-	
 	<acme:textbox code="procession.title" path="title"/>
 	<acme:textarea code="procession.description" path="description"/>
 	<acme:textbox code="procession.maxRow" path="maxRow"/>
 	<acme:textbox code="procession.maxColumn" path="maxColumn"/>
 	<acme:textbox code="procession.date" path="moment"/>
+	<form:label path="floats">
+		<spring:message code="procession.floats"/>
+	</form:label>
+	<form:select path="floats">	
+		<form:options items="${floats}" itemValue="id" itemLabel="title"
+			/>
+	</form:select>
+	<form:errors cssClass="error" path="floats" />
+	<br />
 	
 	
 	

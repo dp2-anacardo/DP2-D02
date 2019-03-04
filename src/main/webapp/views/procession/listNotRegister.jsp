@@ -11,14 +11,21 @@
 
 <display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
-	<spring:message code="procession.title" var="title" />
-	<display:column property="title" title="${title}"/>
+	<spring:message code="procession.title" var="columnTitle"/>
+	<display:column title="columnTitle">
+		<jstl:out value="${row.title }"></jstl:out>
+	</display:column>
 	
-	<spring:message code="procession.description" var="description" />
-	<display:column property="description" title="${description}"/>
+	<spring:message code="procession.date" var="columnTitle"/>
+	<display:column title="columnTitle">
+		<jstl:out value="${row.moment }"></jstl:out>
+	</display:column>
 	
-	<spring:message code="procession.moment" var="moment" />
-	<display:column property="moment" title="${moment}"/>
+	<display:column>
+		<a href="procession/show.do?processionId=${row.id}">
+			<spring:message code="procession.show"/>
+		</a>
+	</display:column>
 	
 
 </display:table>
