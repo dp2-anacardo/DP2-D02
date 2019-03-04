@@ -30,14 +30,18 @@
 	<jstl:if test="${lang=='en' }">
 	<spring:message code="enrolment.positionEn" var="positionEn"/>
 	<display:column title="positionEn">
+		<jstl:if test="${row.position.roleEn != 'default' }">
 		<jstl:out value="${row.position.roleEn}"></jstl:out>
+		</jstl:if>
 	</display:column>
 	</jstl:if>
 	
 	<jstl:if test="${lang=='es' }">
 	<spring:message code="enrolment.positionEs" var="positionEs"/>
 	<display:column title="positionEs">
+		<jstl:if test="${row.position.roleEs != 'default' }">
 		<jstl:out value="${row.position.roleEs}"></jstl:out>
+		</jstl:if>
 	</display:column>
 	</jstl:if>
 	
@@ -46,10 +50,10 @@
 		<jstl:out value="${row.member.name}"></jstl:out>
 	</display:column>
 	
-	<jstl:if test="${row.status == 'PENDING' }">
+	<jstl:if test="${row.status == 'PENDING'}">
 	<spring:message code="enrolment.accept" var="accept"/>
 	<display:column title="accept">
-		<input type="submit" name="accept"
+		<input type="button" name="accept"
 		value="<spring:message code="enrolment.accept"/>"/>
 	</display:column>
 	
@@ -83,14 +87,18 @@
 	<jstl:if test="${lang=='en' }">
 	<spring:message code="enrolment.positionEn" var="positionEn"/>
 	<display:column title="positionEn">
+		<jstl:if test="${row.position.roleEn != 'default' }">
 		<jstl:out value="${row.position.roleEn}"></jstl:out>
+		</jstl:if>
 	</display:column>
 	</jstl:if>
 	
 	<jstl:if test="${lang=='es' }">
 	<spring:message code="enrolment.positionEs" var="positionEs"/>
 	<display:column title="positionEs">
+		<jstl:if test="${row.position.roleEs != 'default' }">
 		<jstl:out value="${row.position.roleEs}"></jstl:out>
+		</jstl:if>
 	</display:column>
 	</jstl:if>
 	

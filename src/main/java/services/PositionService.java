@@ -105,4 +105,12 @@ public class PositionService {
 		return result;
 	}
 
+	public Position getDefaultPosition() {
+		Position defaultPosition;
+
+		defaultPosition = this.positionRepository.getDefaultPosition();
+
+		return defaultPosition;
+	}
+
 }

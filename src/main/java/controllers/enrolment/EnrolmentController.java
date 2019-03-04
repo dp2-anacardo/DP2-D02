@@ -82,7 +82,7 @@ public class EnrolmentController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "accept")
+	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "save")
 	public ModelAndView accept(@Valid final Enrolment enrolment, final BindingResult binding) {
 		ModelAndView result;
 
