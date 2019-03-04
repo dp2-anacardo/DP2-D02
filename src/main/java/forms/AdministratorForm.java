@@ -1,89 +1,45 @@
 
 package forms;
 
-public class AdministratorForm {
+import javax.validation.constraints.NotNull;
 
-	private String	username;
-	private String	password;
-	private String	name;
-	private String	middleName;
-	private String	surname;
-	private String	photo;
-	private String	email;
-	private String	phoneNumber;
-	private String	address;
+import domain.Administrator;
+
+public class AdministratorForm extends Administrator {
+
+	private String	confirmPass;
 
 
-	public String getUsername() {
-		return this.username;
+	public AdministratorForm(final Administrator admin) {
+
+		final AdministratorForm result = new AdministratorForm();
+		result.setAddress(admin.getAddress());
+		result.setBoxes(admin.getBoxes());
+		result.setEmail(admin.getEmail());
+		result.setId(admin.getId());
+		result.setIsBanned(admin.getIsBanned());
+		result.setIsSuspicious(admin.getIsSuspicious());
+		result.setName(admin.getName());
+		result.setPhoneNumber(admin.getPhoneNumber());
+		result.setPhoto(admin.getPhoto());
+		result.setScore(admin.getScore());
+		result.setSocialProfiles(admin.getSocialProfiles());
+		result.setSurname(admin.getSurname());
+		result.setMiddleName(admin.getMiddleName());
+		result.setUserAccount(admin.getUserAccount());
+		result.setVersion(admin.getVersion());
+	}
+	public AdministratorForm() {
+
 	}
 
-	public void setUsername(final String username) {
-		this.username = username;
+	@NotNull
+	public String getConfirmPass() {
+		return this.confirmPass;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(final String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
-	}
-
-	public String getPhoto() {
-		return this.photo;
-	}
-
-	public void setPhoto(final String photo) {
-		this.photo = photo;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public String getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
-	public void setPhoneNumber(final String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(final String address) {
-		this.address = address;
+	public void setConfirmPass(final String confirmPass) {
+		this.confirmPass = confirmPass;
 	}
 
 }
