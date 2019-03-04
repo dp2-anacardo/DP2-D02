@@ -45,6 +45,8 @@
 
 		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" /> 
+		
+		
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
@@ -53,6 +55,7 @@
 		
 		<security:intercept-url pattern="/configuration/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/area/administrator/**" access="hasRole('ADMIN')" />
+<<<<<<< HEAD
 			<!-- MESSAGE -->
 		<security:intercept-url pattern="/message/create.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/message/list.do" access="isAuthenticated()" /> 
@@ -68,6 +71,16 @@
 		<security:intercept-url pattern="/messageBox/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/create.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/nest.do" access="isAuthenticated()" />  
+=======
+		<security:intercept-url pattern="/position/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/administrator/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/member/member/edit.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/brotherhood/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
+		
+		<security:intercept-url pattern="/enrolment/member/**" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enrolment/brotherhood/**" access="hasRole('BROTHERHOOD')" />
+
+>>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

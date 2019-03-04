@@ -33,7 +33,7 @@
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('/administrator/administrator/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			
@@ -42,9 +42,12 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 
 <spring:message code="administrator.name" />: ${brotherhood.name} <br/>
+<spring:message code="administrator.title" />: ${brotherhood.title} <br/>
 <spring:message code="administrator.email" />: ${brotherhood.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${brotherhood.phoneNumber} <br/>
 <spring:message code="administrator.address" />: ${brotherhood.address} <br/>
+<spring:message code="administrator.pictures" />: ${brotherhood.pictures} <br/>
+
 <jstl:if test="${brotherhood.score != 0.0}">
 		<spring:message code="administrator.score" />: ${brotherhood.score} <br/>
 	</jstl:if>
@@ -52,7 +55,7 @@
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('brotherhood/brotherhood/edit.do');" />
 </security:authorize>
 
 <security:authorize access="hasRole('MEMBER')">
@@ -65,13 +68,14 @@
 <spring:message code="administrator.email" />: ${member.email} <br/>
 <spring:message code="administrator.phoneNumber" />: ${member.phoneNumber} <br/>
 <spring:message code="administrator.address" />: ${member.address} <br/>
+
 <jstl:if test="${member.score != 0.0}">
 		<spring:message code="administrator.score" />: ${member.score} <br/>
 	</jstl:if>
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
-			onclick="javascript: relativeRedir('');" />
+			onclick="javascript: relativeRedir('/member/member/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
 			

@@ -8,12 +8,60 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Brotherhood;
 import domain.Member;
 import domain.Position;
+import domain.Procession;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
 
+	/* Q1: The average, the minimum, the maximum, and the standard deviation of the number of members per brotherhood. */
+
+	@Query("select avg(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
+	Double getAvgOfMembersPerBrotherhood();
+
+	@Query("select min(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
+	Double getMinOfMembersPerBrotherhood();
+
+	@Query("select max(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
+	Double getMaxOfMembersPerBrotherhood();
+
+	@Query("select stddev(1.0*(select count(f) from Enrolment f where f.brotherhood.id = c.id and f.status like 'ACCEPTED' and f.dropOutMoment is null)) from Brotherhood c")
+	Double getSteddevOfMembersPerBrotherhood();
+
+	/* Q2: The largest brotherhoods. */
+
+	@Query("select max(f.brotherhood) from Enrolment f where f.status like 'ACCEPTED' and f.dropOutMoment is null")
+	Brotherhood getLargestBrotherhood();
+
+	/* Q3: The smallest brotherhoods. */
+
+	@Query("select min(f.brotherhood) from Enrolment f where f.status like 'ACCEPTED' and f.dropOutMoment is null")
+	Brotherhood getSmallestBrotherhood();
+
+	/* Q4: The processions that are going to be organised in 30 days or less. */
+
+	@Query("select p from Procession p where datediff(p.moment, current_date()) <=30")
+	Collection<Procession> getProcessionsIn30Days();
+
+	/* Q5: The ratio of request to march in a procession, group by their status */
+
+	@Query("select 100*(select count(f) from Request f where f.procession = ?1 and f.status like ?2)/count(f) from Request f where f.procession = ?1")
+	Double getRatioOfRequestToProcessionPerStatus(Procession procession, String status);
+
+	/* Q6: The ratio of requests to march, grouped by their status. */
+
+	@Query("select 100*(select count(f) from Request f where f.status like 'APPROVED')/count(f) from Request f")
+	Double getRatioOfRequestsApproveds();
+
+	@Query("select 100*(select count(f) from Request f where f.status like 'APPROVED')/count(f) from Request f")
+	Double getRatioOfRequestsPendings();
+
+	@Query("select 100*(select count(f) from Request f where f.status like 'REJECTED')/count(f) from Request f")
+	Double getRatioOfRequestsRejecteds();
+
+	/* **************************************************************************************************************************************** */
 	@Query("select p from Position p where not exists (select p2 from Enrolment r join r.position p2 where p2 = p)")
 	Collection<Position> getPositionsNotUsed();
 
@@ -41,9 +89,9 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select count(e) from Enrolment e where (e.position.roleEn='Officer' or e.position.roleEs='Vocal') and e.status='ACCEPTED' and e.dropOutMoment is null")
 	Integer getNumberOfOfficers();
 
-	@Query("select count(b) from Brotherhood b where b.area.id=?1")
+	@Query("select 1.0 * count(b) from Brotherhood b where b.area.id=?1")
 	//@Query("select count(b), b.area.name from Brotherhood b group by b.area")
-	Integer getCountOfBrotherhoodPerArea(Integer AreaId);
+	Double getCountOfBrotherhoodPerArea(Integer AreaId);
 
 	@Query("select min(1.0*(select count(b) from Brotherhood b where b.area.id=a.id)) from Area a")
 	Double getMinBrotherhoodPerArea();

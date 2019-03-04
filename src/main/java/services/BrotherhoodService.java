@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,13 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import datatype.Url;
 import domain.Area;
 import domain.Brotherhood;
+import domain.Enrolment;
 import domain.MessageBox;
 import domain.SocialProfile;
 
@@ -28,6 +33,9 @@ public class BrotherhoodService {
 	@Autowired
 	private BrotherhoodRepository	brotherhoodRepository;
 
+	@Autowired
+	private Validator				validator;
+
 
 	public Brotherhood create() {
 
@@ -36,7 +44,8 @@ public class BrotherhoodService {
 		final UserAccount userAccount;
 		UserAccount userAccount1;
 		Area area;
-		final Collection<String> pictures;
+		Date d;
+		final Collection<Url> pictures;
 		final Collection<Authority> authorities;
 		final Collection<SocialProfile> profiles;
 		final Collection<MessageBox> boxes;
@@ -45,7 +54,8 @@ public class BrotherhoodService {
 
 		result = new Brotherhood();
 		area = new Area();
-		pictures = new ArrayList<String>();
+		d = new Date();
+		pictures = new ArrayList<Url>();
 		userAccount = new UserAccount();
 		auth = new Authority();
 		authorities = new ArrayList<Authority>();
@@ -59,6 +69,7 @@ public class BrotherhoodService {
 		result.setIsBanned(false);
 		result.setIsSuspicious(false);
 		result.setBoxes(boxes);
+		result.setEstablishmentDate(d);
 		result.setSocialProfiles(profiles);
 		result.setPictures(pictures);
 		result.setArea(area);
@@ -116,6 +127,39 @@ public class BrotherhoodService {
 		Assert.isTrue(brotherhood.getId() != 0);
 		this.brotherhoodRepository.delete(brotherhood);
 
+	}
+
+	public Collection<Enrolment> getEnrolments(final int brotherhoodId) {
+		Collection<Enrolment> enrolments;
+		Assert.notNull(brotherhoodId);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+
+		enrolments = this.brotherhoodRepository.getEnrolments(brotherhoodId);
+
+		return enrolments;
+	}
+
+	public Brotherhood reconstruct(final Brotherhood bro, final BindingResult binding) {
+
+		Brotherhood result;
+		if (bro.getId() == 0)
+			result = bro;
+		else {
+			result = this.brotherhoodRepository.findOne(bro.getId());
+
+			result.setName(bro.getName());
+			result.setPhoto(bro.getPhoto());
+			result.setPhoneNumber(bro.getPhoneNumber());
+			result.setEmail(bro.getEmail());
+			result.setAddress(bro.getAddress());
+			result.setTitle(bro.getTitle());
+			result.setPictures(bro.getPictures());
+
+			this.validator.validate(result, binding);
+		}
+		return result;
 	}
 
 }

@@ -42,16 +42,16 @@ public class EditAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@Valid Administrator admin, final BindingResult binding) {
 		ModelAndView result;
-		admin = this.administratorService.reconstruct(admin, binding);
 
 		if (binding.hasErrors())
 			result = this.editModelAndView(admin);
 		else
 			try {
+				admin = this.administratorService.reconstruct(admin, binding);
 				this.administratorService.save(admin);
-				result = new ModelAndView("redirect:/");
+				result = new ModelAndView("redirect:/profile/action-1.do");
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(admin, oops.getLocalizedMessage()); //"Administrator.commit.error"
+				result = this.editModelAndView(admin, "Administrator.commit.error");
 			}
 		return result;
 	}

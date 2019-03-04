@@ -103,6 +103,7 @@ public class AreaController extends AbstractController {
 
 		result = new ModelAndView("area/administrator/edit");
 		result.addObject("area", area);
+		result.addObject("message", messageCode);
 		return result;
 	}
 

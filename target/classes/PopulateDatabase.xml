@@ -203,7 +203,7 @@
 		<property name="area" ref="areaBrotherhood1"/>
 		<property name="pictures">
 			<list>
-				<value>"http://www.imagenPrueba.com"</value>
+				<ref bean="picture2"/>
 			</list>
 		</property>
 		<property name="socialProfiles">
@@ -715,7 +715,10 @@
 		<property name="description" value="No se sabe si sonrie o llora"/>
 		<property name="pictures">
 			<list>
+<<<<<<< HEAD
 				<ref bean="picture2"/>
+=======
+>>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
 			</list>
 		</property>
 		<property name="brotherhood" ref="brotherhood1"/>

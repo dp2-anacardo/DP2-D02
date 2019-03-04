@@ -18,6 +18,7 @@ import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Enrolment;
 import domain.Member;
 import domain.MessageBox;
 import domain.SocialProfile;
@@ -142,6 +143,18 @@ public class MemberService {
 			this.validator.validate(result, binding);
 		}
 		return result;
+	}
+
+	public Collection<Enrolment> getEnrolments(final int memberId) {
+		Collection<Enrolment> enrolments;
+		Assert.notNull(memberId);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
+
+		enrolments = this.memberRepository.getEnrolments(memberId);
+
+		return enrolments;
 	}
 
 }

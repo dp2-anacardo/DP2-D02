@@ -50,9 +50,9 @@ public class EditMemberController extends AbstractController {
 		else
 			try {
 				this.memberService.save(member);
-				result = new ModelAndView("redirect:/");
+				result = new ModelAndView("redirect:/profile/action-1.do");
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(member, "member.commit.error"); //"Administrator.commit.error"
+				result = this.editModelAndView(member, "member.commit.error");
 			}
 		return result;
 	}
