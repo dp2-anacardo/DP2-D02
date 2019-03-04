@@ -5,15 +5,18 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
@@ -44,6 +47,20 @@ public class EnrolmentController extends AbstractController {
 	@Autowired
 	private MemberService		memberService;
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		ModelAndView result;
+
+		if (LoginService.getPrincipal().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"))
+			result = new ModelAndView("redirect:/brotherhood/list.do");
+		else if (LoginService.getPrincipal().getAuthorities().iterator().next().getAuthority().equals("MEMBER"))
+			result = new ModelAndView("redirect:/member/list.do");
+		else
+			result = new ModelAndView("redirect:/");
+
+		return result;
+	}
 
 	//AQUÍ EMPIEZA LA PARTE DE BROTHERHOOD-----------------------------------
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -82,7 +99,7 @@ public class EnrolmentController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "accept")
 	public ModelAndView accept(@Valid final Enrolment enrolment, final BindingResult binding) {
 		ModelAndView result;
 
@@ -92,23 +109,23 @@ public class EnrolmentController extends AbstractController {
 			try {
 				this.enrolmentService.acceptEnrolment(enrolment);
 				this.enrolmentService.save(enrolment);
-				result = new ModelAndView("enrolment/brotherhood/list");
+				result = new ModelAndView("redirect:brotherhood/list");
 			} catch (final Throwable oops) {
 				result = this.acceptModelAndView(enrolment);
 			}
 		return result;
 	}
 
-	@RequestMapping(value = "/brotherhood/reject", method = RequestMethod.POST, params = "reject")
+	@RequestMapping(value = "/brotherhood/reject", method = RequestMethod.GET)
 	public ModelAndView reject(@RequestParam final int enrolmentId) {
 		ModelAndView result;
 		Enrolment enrolment;
 		int brotherhoodId;
 		Brotherhood brotherhood;
 
-		enrolment = this.enrolmentService.findOne(enrolmentId);
 		brotherhoodId = this.actorService.getActorLogged().getId();
 		brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		enrolment = this.enrolmentService.findOne(enrolmentId);
 
 		if (enrolment == null || !enrolment.getBrotherhood().equals(brotherhood))
 			result = new ModelAndView("redirect:/misc/403");
@@ -131,15 +148,18 @@ public class EnrolmentController extends AbstractController {
 	protected ModelAndView acceptModelAndView(final Enrolment enrolment, final String messageCode) {
 		ModelAndView result;
 		final Collection<Position> positions = this.positionService.findAll();
+		final Position defaultPosition = this.positionService.getDefaultPosition();
+		positions.remove(defaultPosition);
+		final String language = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("enrolment/brotherhood/accept");
 		result.addObject("enrolment", enrolment);
 		result.addObject("message", messageCode);
 		result.addObject("positions", positions);
+		result.addObject("lang", language);
 
 		return result;
 	}
-
 	//AQUí EMPIEZA LA PARTE DE MEMBER----------------------------------------
 	@RequestMapping(value = "/member/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
@@ -171,7 +191,7 @@ public class EnrolmentController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/member/dropOut", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/dropOut", method = RequestMethod.GET)
 	public ModelAndView dropOut(@RequestParam final int enrolmentId) {
 		ModelAndView result;
 		Enrolment enrolment;

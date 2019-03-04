@@ -13,23 +13,23 @@
 <display:table name="enrolments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	
 	<spring:message code="enrolment.registerMoment" var="registerMoment"/>
-	<display:column title="registerMoment">
+	<display:column title="${registerMoment}">
 		<jstl:out value="${row.registerMoment}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.dropOutMoment" var="dropOutMoment"/>
-	<display:column title="dropOutMoment">
+	<display:column title="${dropOutMoment}">
 		<jstl:out value="${row.dropOutMoment}" ></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.status" var="status"/>
-	<display:column title="status">
+	<display:column title="${status}">
 		<jstl:out value="${row.status}"></jstl:out>
 	</display:column>
 	
 	<jstl:if test="${lang=='en' }">
 	<spring:message code="enrolment.positionEn" var="positionEn"/>
-	<display:column title="positionEn">
+	<display:column title="${positionEn}">
 		<jstl:if test="${row.position.roleEn != 'default' }">
 		<jstl:out value="${row.position.roleEn}"></jstl:out>
 		</jstl:if>
@@ -38,7 +38,7 @@
 	
 	<jstl:if test="${lang=='es' }">
 	<spring:message code="enrolment.positionEs" var="positionEs"/>
-	<display:column title="positionEs">
+	<display:column title="${positionEs}">
 		<jstl:if test="${row.position.roleEs != 'default' }">
 		<jstl:out value="${row.position.roleEs}"></jstl:out>
 		</jstl:if>
@@ -46,23 +46,27 @@
 	</jstl:if>
 	
 	<spring:message code="enrolment.member" var="member"/>
-	<display:column title="member">
+	<display:column title="${member}">
 		<jstl:out value="${row.member.name}"></jstl:out>
 	</display:column>
 	
-	<jstl:if test="${row.status == 'PENDING'}">
 	<spring:message code="enrolment.accept" var="accept"/>
-	<display:column title="accept">
-		<input type="button" name="accept"
+	<display:column title="${accept}">
+	<jstl:if test="${row.status == 'PENDING'}">
+		<input type="button" 
+		onclick="javascript: relativeRedir('enrolment/brotherhood/accept.do?enrolmentId=${row.id}');"
 		value="<spring:message code="enrolment.accept"/>"/>
+	</jstl:if>
 	</display:column>
 	
 	<spring:message code="enrolment.reject" var="reject"/>
-	<display:column title="reject">
-		<input type="submit" name="reject"
+	<display:column title="${reject}">
+	<jstl:if test="${row.status == 'PENDING'}">
+		<input type="button" 
+		onclick="javascript: relativeRedir('enrolment/brotherhood/reject.do?enrolmentId=${row.id}');"
 		value="<spring:message code="enrolment.reject"/>"/>
-	</display:column>
 	</jstl:if>
+	</display:column>
 </display:table>
 </security:authorize>
 
@@ -70,23 +74,23 @@
 <display:table name="enrolments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	
 	<spring:message code="enrolment.registerMoment" var="registerMoment"/>
-	<display:column title="registerMoment">
+	<display:column title="${registerMoment}">
 		<jstl:out value="${row.registerMoment}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.dropOutMoment" var="dropOutMoment"/>
-	<display:column title="dropOutMoment">
+	<display:column title="${dropOutMoment}">
 		<jstl:out value="${row.dropOutMoment}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="enrolment.status" var="status"/>
-	<display:column title="status">
+	<display:column title="${status}">
 		<jstl:out value="${row.status}"></jstl:out>
 	</display:column>
 	
 	<jstl:if test="${lang=='en' }">
 	<spring:message code="enrolment.positionEn" var="positionEn"/>
-	<display:column title="positionEn">
+	<display:column title="${positionEn}">
 		<jstl:if test="${row.position.roleEn != 'default' }">
 		<jstl:out value="${row.position.roleEn}"></jstl:out>
 		</jstl:if>
@@ -95,7 +99,7 @@
 	
 	<jstl:if test="${lang=='es' }">
 	<spring:message code="enrolment.positionEs" var="positionEs"/>
-	<display:column title="positionEs">
+	<display:column title="${positionEs}">
 		<jstl:if test="${row.position.roleEs != 'default' }">
 		<jstl:out value="${row.position.roleEs}"></jstl:out>
 		</jstl:if>
@@ -103,16 +107,17 @@
 	</jstl:if>
 	
 	<spring:message code="enrolment.brotherhood" var="brotherhood"/>
-	<display:column title="brotherhood">
+	<display:column title="${brotherhood}">
 		<jstl:out value="${row.brotherhood.name}"></jstl:out>
 	</display:column>
 	
-	<jstl:if test="${dropOutMoment == null }">
 	<spring:message code="enrolment.dropOut" var="dropOut"/>
-	<display:column title="dropOut">
-		<input type="submit" name="dropOut"
+	<display:column title="${dropOut}">
+	<jstl:if test="${row.dropOutMoment == null && row.status == 'ACCEPTED' }">
+		<input type="button" 
+		onclick="javascript: relativeRedir('enrolment/member/dropOut.do?enrolmentId=${row.id}');"
 		value="<spring:message code="enrolment.dropOut"/>"/>
-	</display:column>
 	</jstl:if>
+	</display:column>
 </display:table>
 </security:authorize>

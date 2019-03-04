@@ -5,10 +5,12 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,11 @@ public class PositionController extends AbstractController {
 	@Autowired
 	private PositionService	positionService;
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/administrator/list.do");
+	}
 
 	@RequestMapping(value = "/administrator/list", method = RequestMethod.GET)
 	public ModelAndView list() {
