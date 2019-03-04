@@ -114,6 +114,20 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int processionId) {
+		ModelAndView result;
+		Procession p;
+
+		p = this.processionService.findOne(processionId);
+
+		result = new ModelAndView("procession/brotherhood/show");
+		result.addObject("p", p);
+
+		return result;
+
+	}
+
 	private ModelAndView createEditModelAndView(final Procession procession) {
 		ModelAndView result;
 		result = this.createEditModelAndView(procession, null);

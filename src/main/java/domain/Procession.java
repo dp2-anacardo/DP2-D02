@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -28,7 +29,6 @@ public class Procession extends DomainEntity {
 	private String					description;
 	private Date					moment;
 	private String					ticker;
-	private Member[][]				formation;
 	private Boolean					isFinal;
 	private Integer					maxRow;
 	private Integer					maxColumn;
@@ -65,6 +65,7 @@ public class Procession extends DomainEntity {
 	}
 
 	@NotNull
+	@Future
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -84,14 +85,6 @@ public class Procession extends DomainEntity {
 
 	public void setTicker(final String ticker) {
 		this.ticker = ticker;
-	}
-
-	public Member[][] getFormation() {
-		return this.formation;
-	}
-
-	public void setFormation(final Member[][] formation) {
-		this.formation = formation;
 	}
 
 	public Boolean getIsFinal() {

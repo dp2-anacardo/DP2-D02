@@ -4,7 +4,6 @@ package services;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -19,7 +18,6 @@ import repositories.ProcessionRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
-import domain.Member;
 import domain.Procession;
 
 @Service
@@ -40,12 +38,10 @@ public class ProcessionService {
 		Procession result;
 		if (p.getId() == 0) {
 			p.setTicker(this.tickerGenerator());
-			p.setMoment(new Date());
 			result = p;
 			this.validator.validate(p, binding);
 		} else {
 			result = this.processionRepository.findOne(p.getId());
-			p.setFormation(result.getFormation());
 			p.setBrotherhood(result.getBrotherhood());
 			p.setFloats(result.getFloats());
 			p.setTicker(result.getTicker());
@@ -85,35 +81,14 @@ public class ProcessionService {
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
 		Procession result;
 		if (p.getId() == 0) {
-			final Member[][] formation = new Member[p.getMaxRow()][p.getMaxColumn()];
-			p.setFormation(formation);
-			p.setMoment(new Date());
 			p.setTicker(this.tickerGenerator());
 			p.setBrotherhood(b);
 			result = this.processionRepository.save(p);
 		} else {
 			Assert.isTrue(p.getBrotherhood().equals(b));
-			final Procession old = this.findOne(p.getId());
-			if (old.getMaxRow() != p.getMaxRow() || old.getMaxColumn() != p.getMaxColumn()) {
-				final Member[][] newFormation = this.formationEdit(p, old);
-				p.setFormation(newFormation);
-			}
 			result = this.processionRepository.save(p);
 		}
 		return result;
-	}
-
-	private Member[][] formationEdit(final Procession p, final Procession old) {
-		final Member[][] result = new Member[p.getMaxRow()][p.getMaxColumn()];
-		final Member[][] oldFormation = old.getFormation();
-
-		for (int i = 0; i < old.getMaxRow(); i++)
-			for (int j = 0; j < old.getMaxColumn(); j++) {
-				final Member m = oldFormation[i][j];
-				result[i][j] = m;
-			}
-		return result;
-
 	}
 
 	public Procession saveDraft(final Procession p) {

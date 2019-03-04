@@ -23,7 +23,7 @@
 	</display:column>
 	
 	<display:column>
-		<a href="procession/brotherhood/show.do?processiontId=${row.id}">
+		<a href="procession/brotherhood/show.do?processionId=${row.id}">
 			<spring:message code="procession.show"/>
 		</a>
 	</display:column>

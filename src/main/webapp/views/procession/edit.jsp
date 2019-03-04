@@ -18,7 +18,8 @@
 	<acme:textarea code="procession.description" path="description"/>
 	<acme:textbox code="procession.maxRow" path="maxRow"/>
 	<acme:textbox code="procession.maxColumn" path="maxColumn"/>
-	<acme:select items="${floats}" itemLabel="title" code="procession.floats" path="floats"/>
+	<acme:textbox code="procession.date" path="moment"/>
+	
 	
 	
 	<jstl:if test="${procession.isFinal == false }">
