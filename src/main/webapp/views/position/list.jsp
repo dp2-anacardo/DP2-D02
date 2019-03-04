@@ -18,14 +18,14 @@
 	
 	<jstl:if test="${lang=='en' }">
 	<spring:message code="position.roleEn" var="roleEn"/>
-	<display:column title="roleEn">
+	<display:column title="${roleEn}">
 		<jstl:out value="${row.roleEn }"></jstl:out>
 	</display:column>
 	</jstl:if>
 	
 	<jstl:if test="${lang=='es' }">
 	<spring:message code="position.roleEs" var="roleEs"/>
-	<display:column title="roleEs">
+	<display:column title="${roleEs}">
 		<jstl:out value="${row.roleEs }"></jstl:out>
 	</display:column>
 	</jstl:if>

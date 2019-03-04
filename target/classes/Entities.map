@@ -1,5 +1,6 @@
 #./src/main/resources/Entities.map
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Sat Mar 02 10:46:54 CET 2019
 trashBoxAdmin1=412
 inBoxBrotherhood1=417
@@ -130,3 +131,70 @@ spamBoxMember2=584
 spamBoxMember1=579
 socialProfileAdmin1=560
 >>>>>>> jesus
+=======
+#Mon Mar 04 13:52:09 CET 2019
+trashBoxAdmin1=565
+inBoxBrotherhood1=569
+configuration1=604
+finderMember3=576
+finderMember2=575
+finderMember1=574
+historian=601
+trashBoxMember3=591
+trashBoxMember2=586
+outBoxMember3=589
+inBoxAdmin1=562
+trashBoxMember1=581
+outBoxMember2=584
+HIGH=593
+outBoxMember1=579
+spamBoxBrotherhood1=571
+request2=615
+vicepresident=597
+request1=614
+secretary=598
+default=603
+inBoxMember3=588
+enrolment3=618
+socialProfileMember2=577
+inBoxMember2=583
+notificationBoxBrotherhood1=573
+enrolment2=617
+inBoxMember1=578
+enrolment1=616
+member3=608
+member2=607
+notificationBoxAdmin1=566
+member1=606
+brotherhood1=605
+spamBoxAdmin1=564
+floatEntity2=611
+floatEntity1=610
+outBoxAdmin1=563
+officer=602
+LOW=595
+NEUTRAL=594
+notificationBoxMember3=592
+notificationBoxMember2=587
+trashBoxBrotherhood1=572
+notificationBoxMember1=582
+procession2=613
+procession1=612
+messageMember1=609
+userAccount5=559
+userAccount4=558
+president=596
+areaBrotherhood1=567
+userAccount3=557
+userAccount2=556
+userAccount1=555
+fundraiser=600
+treasurer=599
+socialProfileBrotherhood1=568
+admin1=560
+outBoxBrotherhood1=570
+spamBoxMember3=590
+spamBoxMember2=585
+spamBoxMember1=580
+socialProfileAdmin1=561
+>>>>>>> origin/miguel

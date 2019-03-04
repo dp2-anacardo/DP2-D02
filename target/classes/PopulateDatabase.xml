@@ -712,6 +712,11 @@
 		<property name="roleEn" value="Officer"/>
 	</bean>
 	
+	<bean id="default" class="domain.Position">
+		<property name="roleEs" value="default"/>
+		<property name="roleEn" value="default"/>
+	</bean>
+	
 	<!-- Configuration -->
 	
 	<bean id="configuration1" class="domain.Configuration">

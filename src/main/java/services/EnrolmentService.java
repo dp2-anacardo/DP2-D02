@@ -16,7 +16,6 @@ import security.UserAccount;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
-import domain.Position;
 
 @Service
 @Transactional
@@ -34,6 +33,9 @@ public class EnrolmentService {
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	public Enrolment create(final int brotherhoodId) {
 		UserAccount userAccount;
@@ -45,7 +47,7 @@ public class EnrolmentService {
 
 		enrolment = new Enrolment();
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
-		enrolment.setPosition(new Position());
+		enrolment.setPosition(this.positionService.getDefaultPosition());
 		final Member member = this.memberService.findOne(this.actorService.getActorLogged().getId());
 		enrolment.setMember(member);
 		enrolment.setStatus("PENDING");
