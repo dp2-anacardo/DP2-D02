@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Sat Mar 02 10:46:54 CET 2019
 trashBoxAdmin1=412
 inBoxBrotherhood1=417
@@ -71,6 +72,12 @@ socialProfileAdmin1=408
 =======
 #Sun Mar 03 14:50:26 CET 2019
 >>>>>>> origin/manuercaximba
+=======
+#Mon Mar 04 15:21:11 CET 2019
+=======
+#Fri Mar 01 17:34:55 CET 2019
+>>>>>>> 93fdd06a6a63c933790f912b7b9af8db613a5a23
+>>>>>>> origin/adrian
 trashBoxAdmin1=564
 inBoxBrotherhood1=568
 configuration1=602
@@ -110,7 +117,6 @@ floatEntity1=608
 outBoxAdmin1=562
 officer=601
 LOW=594
-NEUTRAL=593
 notificationBoxMember3=591
 notificationBoxMember2=586
 trashBoxBrotherhood1=571
@@ -125,6 +131,7 @@ areaBrotherhood1=566
 userAccount3=556
 userAccount2=555
 userAccount1=554
+MEDIUM=593
 fundraiser=599
 treasurer=598
 socialProfileBrotherhood1=567

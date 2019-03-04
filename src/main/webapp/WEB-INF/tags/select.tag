@@ -44,7 +44,11 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />
 	</form:label>	
+<<<<<<< HEAD
 	<form:select id="${id}" path="${path}" onchange="${onchange}">	
+=======
+	<form:select id="${id}" path="${path}" onchange="${onchange}">		
+>>>>>>> origin/adrian
 		<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />

@@ -1,26 +1,27 @@
 
 package domain;
 
+import java.util.Map;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Priority extends DomainEntity {
 
-	private String	title;
+	private Map<String, String>	name;
 
 
-	@NotBlank
-	public String getTitle() {
-		return this.title;
+	@ElementCollection(targetClass = String.class)
+	public Map<String, String> getName() {
+		return this.name;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setName(final Map<String, String> name) {
+		this.name = name;
 	}
 
 }

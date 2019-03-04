@@ -25,9 +25,11 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="url" required="true" %>
 
+<%@ attribute name="id" required="false" %>
+
 <%-- Definition --%>
 
-<button type="button" onclick="javascript: relativeRedir('${url}')" >
+<button id="${id}" type="button" onclick="javascript: relativeRedir('${url}')" >
 	<spring:message code="${code}" />
 </button>
 
