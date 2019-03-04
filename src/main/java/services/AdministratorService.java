@@ -37,6 +37,9 @@ public class AdministratorService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private MessageBoxService		messageBoxService;
+
 
 	public Administrator create() {
 
@@ -98,11 +101,8 @@ public class AdministratorService {
 		administrator.getUserAccount().setPassword(res);
 
 		Administrator result;
-		if (administrator.getId() == 0) {
-
-			//	administrator.setBoxes(this.messageBoxService.createSystemMessageBox);
-
-		}
+		if (administrator.getId() == 0)
+			administrator.setBoxes(this.messageBoxService.createSystemMessageBox());
 		result = this.administratorRepository.save(administrator);
 		return result;
 	}

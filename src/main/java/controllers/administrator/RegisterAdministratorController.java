@@ -16,7 +16,7 @@ import domain.Administrator;
 import forms.AdministratorForm;
 
 @Controller
-@RequestMapping("administrator")
+@RequestMapping("administrator/administrator")
 public class RegisterAdministratorController extends AbstractController {
 
 	@Autowired
@@ -66,7 +66,7 @@ public class RegisterAdministratorController extends AbstractController {
 
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/create");
+		result = new ModelAndView("administrator/administrator/create");
 		result.addObject("administrator", administrator);
 		result.addObject("message", messageCode);
 
