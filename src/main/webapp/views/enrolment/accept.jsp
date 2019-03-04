@@ -14,7 +14,15 @@
 <form:form action="position/administrator/accept.do" modelAttribute="enrolment">
 	<form:hidden path="id" />
 	
-	<acme:select items="${positions}" itemLabel="" code="" path=""/>
+	<jstl:if test="${lang=='en'}">
+	<acme:select items="${positions}" itemLabel="roleEn" code="enrolment.positions" 
+	path="position"/>
+	</jstl:if>
+	
+	<jstl:if test="${lang=='es'}">
+	<acme:select items="${positions}" itemLabel="roleEs" code="enrolment.positions" 
+	path="position"/>
+	</jstl:if>
 	
 	<input type="submit" name="accept"
 		value="<spring:message code="enrolment.save" />" />&nbsp; 
