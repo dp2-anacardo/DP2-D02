@@ -51,7 +51,10 @@ public class AreaController extends AbstractController {
 		ModelAndView result;
 		Area area;
 		area = this.areaService.findOne(areaId);
-		result = this.createEditModelAndView(area);
+		if (area == null)
+			result = new ModelAndView("redirect:/misc/403");
+		else
+			result = this.createEditModelAndView(area);
 		return result;
 	}
 

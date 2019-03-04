@@ -69,7 +69,6 @@ public class ProcessionService {
 	public Procession findOne(final int id) {
 		Procession result;
 		result = this.processionRepository.findOne(id);
-		Assert.notNull(result);
 		return result;
 	}
 

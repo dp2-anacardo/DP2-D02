@@ -60,7 +60,6 @@ public class AreaService {
 
 	public Area findOne(final int id) {
 		final Area result = this.areaRepository.findOne(id);
-		Assert.notNull(result);
 		return result;
 	}
 
