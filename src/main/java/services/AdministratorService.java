@@ -25,6 +25,7 @@ import domain.MessageBox;
 import domain.Position;
 import domain.Procession;
 import domain.SocialProfile;
+import forms.AdministratorForm;
 
 @Service
 @Transactional
@@ -146,6 +147,7 @@ public class AdministratorService {
 		}
 		return result;
 	}
+
 	/* Q1 */
 	public Collection<Double> getStatsMemberPerBrotherhood() {
 		UserAccount userAccount;
@@ -329,5 +331,34 @@ public class AdministratorService {
 		res = this.administratorRepository.getRatioOfEmptyFinders();
 
 		return res;
+	}
+
+	public Boolean checkPass(final String pass, final String confirmPass) {
+		Boolean res = false;
+		if (pass.compareTo(confirmPass) == 0)
+			res = true;
+		return res;
+	}
+
+	public Administrator reconstruct(final AdministratorForm admin, final BindingResult binding) {
+
+		final Administrator result = new Administrator();
+		result.setAddress(admin.getAddress());
+		result.setBoxes(admin.getBoxes());
+		result.setEmail(admin.getEmail());
+		result.setId(admin.getId());
+		result.setIsBanned(admin.getIsBanned());
+		result.setIsSuspicious(admin.getIsSuspicious());
+		result.setName(admin.getName());
+		result.setPhoneNumber(admin.getPhoneNumber());
+		result.setPhoto(admin.getPhoto());
+		result.setScore(admin.getScore());
+		result.setSocialProfiles(admin.getSocialProfiles());
+		result.setSurname(admin.getSurname());
+		result.setMiddleName(admin.getMiddleName());
+		result.setUserAccount(admin.getUserAccount());
+		result.setVersion(admin.getVersion());
+		this.validator.validate(result, binding);
+		return result;
 	}
 }
