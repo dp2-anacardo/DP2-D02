@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.FloatEntityRepository;
 import datatype.Url;
 import domain.FloatEntity;
+import domain.Procession;
 
 @Service
 @Transactional
@@ -23,6 +24,9 @@ public class FloatEntityService {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private ProcessionService		processionService;
 
 
 	public FloatEntity create() {
@@ -55,10 +59,22 @@ public class FloatEntityService {
 		return res;
 	}
 
-	//TODO: Queda borrar Float de las Procession---- > Falta Collection en Dominio Procession
 	public void delete(final FloatEntity floatEntity) {
 		Assert.notNull(floatEntity);
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+
+		Collection<Procession> processions;
+		processions = this.processionService.findAll();
+
+		for (final Procession p : processions) {
+			Collection<FloatEntity> floats;
+			floats = p.getFloats();
+			if (floats.contains(floatEntity)) {
+				floats.remove(floatEntity);
+				p.setFloats(floats);
+			}
+		}
+
 		this.floatRepository.delete(floatEntity);
 
 	}

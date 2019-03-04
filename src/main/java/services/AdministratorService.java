@@ -243,7 +243,7 @@ public class AdministratorService {
 		return result;
 	}
 
-	/* Q9 TODO: Pendiente de confirmación */
+	/* Q9 */
 	public Collection<Integer> getHistogramOfPositions() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
