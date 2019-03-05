@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.AdministratorService;
 import services.MemberService;
 import controllers.AbstractController;
 import domain.Member;
@@ -20,7 +22,11 @@ import forms.MemberForm;
 public class RegisterMemberController extends AbstractController {
 
 	@Autowired
-	private MemberService	memberService;
+	private MemberService			memberService;
+	@Autowired
+	private ActorService			actorService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//Para registrarse como administador, primero un admin llama al create del servicio
@@ -40,7 +46,13 @@ public class RegisterMemberController extends AbstractController {
 		ModelAndView result;
 		Member member;
 
-		if (binding.hasErrors())
+		if (this.actorService.existUsername(mForm.getUsername()) == false) {
+			binding.rejectValue("username", "error.username");
+			result = this.createEditModelAndView(mForm);
+		} else if (this.administratorService.checkPass(mForm.getPassword(), mForm.getConfirmPass()) == false) {
+			binding.rejectValue("password", "error.password");
+			result = this.createEditModelAndView(mForm);
+		} else if (binding.hasErrors())
 			result = this.createEditModelAndView(mForm);
 		else
 			try {

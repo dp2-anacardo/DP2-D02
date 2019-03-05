@@ -92,12 +92,11 @@ public class MemberService {
 
 		Assert.notNull(member);
 
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
-		member.getUserAccount().setPassword(res);
-
 		Member result;
 		if (member.getId() == 0) {
+			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
+			member.getUserAccount().setPassword(res);
 			Finder finderCreate;
 			Finder finder;
 			finderCreate = this.finderService.create();

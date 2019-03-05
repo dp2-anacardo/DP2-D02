@@ -96,13 +96,13 @@ public class AdministratorService {
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		Assert.notNull(administrator);
 
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final String res = encoder.encodePassword(administrator.getUserAccount().getPassword(), null);
-		administrator.getUserAccount().setPassword(res);
-
 		Administrator result;
-		if (administrator.getId() == 0)
+		if (administrator.getId() == 0) {
+			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			final String res = encoder.encodePassword(administrator.getUserAccount().getPassword(), null);
+			administrator.getUserAccount().setPassword(res);
 			administrator.setBoxes(this.messageBoxService.createSystemMessageBox());
+		}
 		result = this.administratorRepository.save(administrator);
 		return result;
 	}

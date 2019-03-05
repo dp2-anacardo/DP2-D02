@@ -26,14 +26,14 @@ onsubmit="return validarForm(this)">
 	<br />
 	
 	<form:label path="password" >
-		<spring:message code="administrator.password" />*:
+		<spring:message code="administrator.password" />
 	</form:label>
 	<form:password path="password" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />
 	<br />
 	
 	<form:label path="confirmPass">
-		<spring:message code="administrator.confirmPass" />*:
+		<spring:message code="administrator.confirmPass" />
 	</form:label>
 	<form:password path="confirmPass" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />

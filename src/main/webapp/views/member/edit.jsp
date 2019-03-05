@@ -22,49 +22,49 @@
 	<form:hidden path="id" />
  
 	<form:label path="name">
-		<spring:message code="member.name" />*:
+		<spring:message code="member.name" />
 	</form:label>
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
 	
 	<form:label path="middleName">
-		<spring:message code="member.middleName" />:
+		<spring:message code="member.middleName" />
 	</form:label>
 	<form:input path="middleName" />
 	<form:errors cssClass="error" path="middleName" />
 	<br />
 	
 	<form:label path="surname">
-		<spring:message code="member.surname" />*:
+		<spring:message code="member.surname" />
 	</form:label>
 	<form:input path="surname" />
 	<form:errors cssClass="error" path="surname" />
 	<br />
 	
 	<form:label path="photo">
-		<spring:message code="member.photo" />:
+		<spring:message code="member.photo" />
 	</form:label>
 	<form:input path="photo" />
 	<form:errors cssClass="error" path="photo" />
 	<br />
 	
 	<form:label path="email">
-		<spring:message code="member.email" />:
+		<spring:message code="member.email" />
 	</form:label>
 	<form:input path="email" />
 	<form:errors cssClass="error" path="email" />
 	<br />
 	
 	<form:label path="phoneNumber">
-		<spring:message code="member.phoneNumber" />:
+		<spring:message code="member.phoneNumber" />
 	</form:label>
 	<form:input path="phoneNumber" />
 	<form:errors cssClass="error" path="phoneNumber" />
 	<br />
 	
 	<form:label path="address">
-		<spring:message code="member.address" />:
+		<spring:message code="member.address" />
 	</form:label>
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />
