@@ -12,13 +12,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('ADMIN')">
-	<display:table name="priorities" id="row" requestURI="${requestURI}"
-		pagesize="5" class="displaytag">
-
-		<display:column>
-			<a href="priority/administrator/show.do?priorityId=${row.id}"> <spring:message
-					code="priority.show" /></a>
-		</display:column>
+	<display:table name="priority" id="row" class="displaytag">
 
 		<spring:message code="priority.nameES" var="titleES" />
 		<display:column title="${titleES}">
@@ -29,15 +23,11 @@
 		<display:column title="${titleEN}">
 			<jstl:out value="${row.name['EN']}" />
 		</display:column>
-
-		<display:column>
-			<a href="priority/administrator/edit.do?priorityId=${row.id}"> <spring:message
-					code="priority.edit" />
-			</a>
-		</display:column>
 	</display:table>
-	<div>
-		<acme:cancel url="priority/administrator/create.do" code="priority.create" />
-		<acme:cancel url="/" code="priority.back" />
-	</div>
+
+	<acme:cancel url="priority/administrator/edit.do?priorityId=${row.id}"
+		code="priority.edit" />
+	<acme:cancel url="priority/administrator/list.do" code="priority.back" />
+
+
 </security:authorize>

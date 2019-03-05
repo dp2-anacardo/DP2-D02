@@ -346,17 +346,24 @@ public class AdministratorService {
 		final Administrator result = this.create();
 		result.setAddress(admin.getAddress());
 		result.setEmail(admin.getEmail());
+<<<<<<< HEAD
 		result.setId(admin.getId());
+=======
+>>>>>>> origin/adrian
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
+<<<<<<< HEAD
 		result.getUserAccount().setPassword(admin.getPassword());
 		result.getUserAccount().setUsername(admin.getUsername());
 		result.setVersion(admin.getVersion());
 
+=======
+>>>>>>> origin/adrian
 		this.validator.validate(result, binding);
 		return result;
 	}
+
 }
