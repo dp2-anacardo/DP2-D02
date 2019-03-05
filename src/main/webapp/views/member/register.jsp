@@ -16,9 +16,8 @@
 
 </head>
 <body>
-<security:authorize access="hasRole('ADMIN')">
 <spring:message code="administrator.firstMessage" />
-<form:form id="myform" action="administrator/administrator/create.do" modelAttribute="administratorForm" 
+<form:form id="myform" action="member/create.do" modelAttribute="memberForm"
 onsubmit="return validarForm(this)">
 
 	<form:hidden path="id" />
@@ -29,14 +28,14 @@ onsubmit="return validarForm(this)">
 	<form:label path="password" >
 		<spring:message code="administrator.password" />*:
 	</form:label>
-	<form:password path="password" id="password"/>
+	<form:password path="password" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />
 	<br />
 	
 	<form:label path="confirmPass">
 		<spring:message code="administrator.confirmPass" />*:
 	</form:label>
-	<form:password path="confirmPass" id="confirmPassword"/>
+	<form:password path="confirmPass" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />
 	<br />
 	
@@ -119,6 +118,5 @@ onsubmit="return validarForm(this)">
 	<br />
  	
 </form:form>
-</security:authorize>
 </body>
 </html>

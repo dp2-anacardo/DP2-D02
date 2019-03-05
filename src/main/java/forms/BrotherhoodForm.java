@@ -1,44 +1,54 @@
 
 package forms;
 
+import java.util.Collection;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import domain.Administrator;
+import datatype.Url;
+import domain.Area;
+import domain.Brotherhood;
 
-public class AdministratorForm {
+public class BrotherhoodForm {
 
-	private String	confirmPass;
-	private String	password;
-	private String	username;
-	private String	middleName;
-	private String	surname;
-	private String	name;
-	private String	photo;
-	private String	email;
-	private String	phoneNumber;
-	private String	address;
-	private int		id;
-	private int		version;
+	private String			confirmPass;
+	private String			password;
+	private String			username;
+	private String			name;
+	private String			photo;
+	private String			email;
+	private String			phoneNumber;
+	private String			address;
+	private int				id;
+	private int				version;
+	private String			title;
+	private Collection<Url>	pictures;
+	private Area			area;
 
 
-	public AdministratorForm(final Administrator admin) {
+	public BrotherhoodForm(final Brotherhood bro) {
 
-		final AdministratorForm result = new AdministratorForm();
-		result.setAddress(admin.getAddress());
-		result.setEmail(admin.getEmail());
-		result.setId(admin.getId());
-		result.setName(admin.getName());
-		result.setPhoneNumber(admin.getPhoneNumber());
-		result.setPhoto(admin.getPhoto());
-		result.setSurname(admin.getSurname());
-		result.setMiddleName(admin.getMiddleName());
-		result.setVersion(admin.getVersion());
+		final BrotherhoodForm result = new BrotherhoodForm();
+		result.setAddress(bro.getAddress());
+		result.setEmail(bro.getEmail());
+		result.setId(bro.getId());
+		result.setName(bro.getName());
+		result.setPhoneNumber(bro.getPhoneNumber());
+		result.setPhoto(bro.getPhoto());
+		result.setTitle(bro.getTitle());
+		result.setPictures(bro.getPictures());
+		result.setArea(bro.getArea());
+		result.setVersion(bro.getVersion());
 	}
-	public AdministratorForm() {
+	public BrotherhoodForm() {
 
 	}
 
@@ -51,23 +61,6 @@ public class AdministratorForm {
 
 	public void setConfirmPass(final String confirmPass) {
 		this.confirmPass = confirmPass;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	@NotBlank
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
 	}
 
 	@NotBlank
@@ -145,6 +138,35 @@ public class AdministratorForm {
 	}
 	public void setUsername(final String username) {
 		this.username = username;
+	}
+
+	@NotBlank
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	@NotEmpty
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Valid
+	public Collection<Url> getPictures() {
+		return this.pictures;
+	}
+
+	public void setPictures(final Collection<Url> pictures) {
+		this.pictures = pictures;
+	}
+
+	@Valid
+	public Area getArea() {
+		return this.area;
+	}
+
+	public void setArea(final Area area) {
+		this.area = area;
 	}
 
 }

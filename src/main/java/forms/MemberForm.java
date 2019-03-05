@@ -7,15 +7,13 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import domain.Administrator;
+import domain.Member;
 
-public class AdministratorForm {
+public class MemberForm {
 
 	private String	confirmPass;
 	private String	password;
 	private String	username;
-	private String	middleName;
-	private String	surname;
 	private String	name;
 	private String	photo;
 	private String	email;
@@ -23,22 +21,24 @@ public class AdministratorForm {
 	private String	address;
 	private int		id;
 	private int		version;
+	private String	surname;
+	private String	middleName;
 
 
-	public AdministratorForm(final Administrator admin) {
+	public MemberForm(final Member m) {
 
-		final AdministratorForm result = new AdministratorForm();
-		result.setAddress(admin.getAddress());
-		result.setEmail(admin.getEmail());
-		result.setId(admin.getId());
-		result.setName(admin.getName());
-		result.setPhoneNumber(admin.getPhoneNumber());
-		result.setPhoto(admin.getPhoto());
-		result.setSurname(admin.getSurname());
-		result.setMiddleName(admin.getMiddleName());
-		result.setVersion(admin.getVersion());
+		final MemberForm result = new MemberForm();
+		result.setAddress(m.getAddress());
+		result.setEmail(m.getEmail());
+		result.setId(m.getId());
+		result.setName(m.getName());
+		result.setPhoneNumber(m.getPhoneNumber());
+		result.setPhoto(m.getPhoto());
+		result.setSurname(m.getSurname());
+		result.setMiddleName(m.getMiddleName());
+		result.setVersion(m.getVersion());
 	}
-	public AdministratorForm() {
+	public MemberForm() {
 
 	}
 
@@ -51,23 +51,6 @@ public class AdministratorForm {
 
 	public void setConfirmPass(final String confirmPass) {
 		this.confirmPass = confirmPass;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	@NotBlank
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
 	}
 
 	@NotBlank
@@ -145,6 +128,23 @@ public class AdministratorForm {
 	}
 	public void setUsername(final String username) {
 		this.username = username;
+	}
+
+	@NotBlank
+	public String getSurname() {
+		return this.surname;
+	}
+
+	public void setSurname(final String surname) {
+		this.surname = surname;
+	}
+
+	public String getMiddleName() {
+		return this.middleName;
+	}
+
+	public void setMiddleName(final String middleName) {
+		this.middleName = middleName;
 	}
 
 }

@@ -130,7 +130,6 @@ public class MessageBoxService {
 		final MessageBox trash = new MessageBox();
 		final MessageBox spam = new MessageBox();
 		final MessageBox notification = new MessageBox();
-
 		in.setName("in");
 		in.setMessages(messages);
 		in.setIsSystem(true);

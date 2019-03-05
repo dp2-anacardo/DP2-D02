@@ -37,6 +37,9 @@ public class AdministratorService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private MessageBoxService		messageBoxService;
+
 
 	public Administrator create() {
 
@@ -53,9 +56,9 @@ public class AdministratorService {
 		result = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		boxes = new ArrayList<MessageBox>();
 		authorities = new ArrayList<Authority>();
 		profiles = new ArrayList<SocialProfile>();
-		boxes = new ArrayList<MessageBox>();
 
 		auth.setAuthority(Authority.ADMIN);
 		authorities.add(auth);
@@ -98,11 +101,8 @@ public class AdministratorService {
 		administrator.getUserAccount().setPassword(res);
 
 		Administrator result;
-		if (administrator.getId() == 0) {
-
-			//	administrator.setBoxes(this.messageBoxService.createSystemMessageBox);
-
-		}
+		if (administrator.getId() == 0)
+			administrator.setBoxes(this.messageBoxService.createSystemMessageBox());
 		result = this.administratorRepository.save(administrator);
 		return result;
 	}
@@ -333,6 +333,7 @@ public class AdministratorService {
 		return res;
 	}
 
+	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
 		Boolean res = false;
 		if (pass.compareTo(confirmPass) == 0)
@@ -342,22 +343,19 @@ public class AdministratorService {
 
 	public Administrator reconstruct(final AdministratorForm admin, final BindingResult binding) {
 
-		final Administrator result = new Administrator();
+		final Administrator result = this.create();
 		result.setAddress(admin.getAddress());
-		result.setBoxes(admin.getBoxes());
 		result.setEmail(admin.getEmail());
 		result.setId(admin.getId());
-		result.setIsBanned(admin.getIsBanned());
-		result.setIsSuspicious(admin.getIsSuspicious());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
-		result.setScore(admin.getScore());
-		result.setSocialProfiles(admin.getSocialProfiles());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
-		result.setUserAccount(admin.getUserAccount());
+		result.getUserAccount().setPassword(admin.getPassword());
+		result.getUserAccount().setUsername(admin.getUsername());
 		result.setVersion(admin.getVersion());
+
 		this.validator.validate(result, binding);
 		return result;
 	}

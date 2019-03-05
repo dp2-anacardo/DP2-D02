@@ -16,9 +16,8 @@
 
 </head>
 <body>
-<security:authorize access="hasRole('ADMIN')">
 <spring:message code="administrator.firstMessage" />
-<form:form id="myform" action="administrator/administrator/create.do" modelAttribute="administratorForm" 
+<form:form id="myform" action="brotherhood/create.do" modelAttribute="brotherhoodForm"
 onsubmit="return validarForm(this)">
 
 	<form:hidden path="id" />
@@ -29,14 +28,14 @@ onsubmit="return validarForm(this)">
 	<form:label path="password" >
 		<spring:message code="administrator.password" />*:
 	</form:label>
-	<form:password path="password" id="password"/>
+	<form:password path="password" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />
 	<br />
 	
 	<form:label path="confirmPass">
 		<spring:message code="administrator.confirmPass" />*:
 	</form:label>
-	<form:password path="confirmPass" id="confirmPassword"/>
+	<form:password path="confirmPass" onchange='check_pass();'/>
 	<form:errors cssClass="error" path="password" />
 	<br />
 	
@@ -44,10 +43,10 @@ onsubmit="return validarForm(this)">
 	<acme:textbox code="administrator.name" path="name"/>
 	<br />
 	
-	<acme:textbox code="administrator.middleName" path="middleName"/>
+	<acme:textbox code="administrator.title" path="title"/>
 	<br />
 	
-	<acme:textbox code="administrator.surname" path="surname"/>
+	<acme:textarea code="brotherhood.pictures" path="pictures"/>
 	<br />
 	
 	<acme:textbox code="administrator.photo" path="photo"/>
@@ -60,6 +59,16 @@ onsubmit="return validarForm(this)">
 	<br />
 	
 	<acme:textbox code="administrator.address" path="address"/>
+	<br />
+	
+	<form:label path="area">
+		<spring:message code="administrator.area"/>
+	</form:label>
+	<form:select path="area">	
+		<form:options items="${areas}" itemValue="id" itemLabel="name"
+			/>
+	</form:select>
+	<form:errors cssClass="error" path="area" />
 	<br />
 	
 	<script type="text/javascript">
@@ -101,7 +110,6 @@ onsubmit="return validarForm(this)">
 	    return true;
 	  }
 
-
 	</script>
 	
 	 <div class=terms>
@@ -119,6 +127,5 @@ onsubmit="return validarForm(this)">
 	<br />
  	
 </form:form>
-</security:authorize>
 </body>
 </html>

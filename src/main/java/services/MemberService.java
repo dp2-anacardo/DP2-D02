@@ -19,9 +19,11 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Enrolment;
+import domain.Finder;
 import domain.Member;
 import domain.MessageBox;
 import domain.SocialProfile;
+import forms.MemberForm;
 
 @Service
 @Transactional
@@ -33,24 +35,21 @@ public class MemberService {
 	@Autowired
 	private Validator			validator;
 
+	@Autowired
+	private FinderService		finderService;
 
-	//	@Autowired 
-	//	private FinderService		finderService;
+	@Autowired
+	private MessageBoxService	messageBoxService;
 
-	//	@Autowired 
-	//	private MessageBoxService	messageBoxService;
 
 	public Member create() {
 
 		Member result;
 		Authority auth;
 		UserAccount userAccount;
-		UserAccount userAccount1;
 		Collection<Authority> authorities;
 		Collection<SocialProfile> profiles;
 		Collection<MessageBox> boxes;
-		userAccount1 = LoginService.getPrincipal();
-		Assert.isTrue(userAccount1.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 
 		result = new Member();
 		userAccount = new UserAccount();
@@ -91,9 +90,6 @@ public class MemberService {
 
 	public Member save(final Member member) {
 
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 		Assert.notNull(member);
 
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
@@ -102,12 +98,12 @@ public class MemberService {
 
 		Member result;
 		if (member.getId() == 0) {
-			// Finder finderCreate;
-			// Finder finder;
-			// finderCreate=this.finderService.create();
-			// finder=this.finderService.save(finderCreate);
-			// member.setFinder(finder);
-			//	member.setBoxes(this.messageBoxService.createSystemMessageBox);
+			Finder finderCreate;
+			Finder finder;
+			finderCreate = this.finderService.create();
+			finder = this.finderService.save(finderCreate);
+			member.setFinder(finder);
+			member.setBoxes(this.messageBoxService.createSystemMessageBox());
 		}
 		result = this.memberRepository.save(member);
 		return result;
@@ -155,6 +151,24 @@ public class MemberService {
 		enrolments = this.memberRepository.getEnrolments(memberId);
 
 		return enrolments;
+	}
+
+	public Member reconstruct(final MemberForm m, final BindingResult binding) {
+
+		final Member result = this.create();
+		result.setAddress(m.getAddress());
+		result.setEmail(m.getEmail());
+		result.setId(m.getId());
+		result.setName(m.getName());
+		result.setPhoneNumber(m.getPhoneNumber());
+		result.setPhoto(m.getPhoto());
+		result.setSurname(m.getSurname());
+		result.setMiddleName(m.getMiddleName());
+		result.getUserAccount().setPassword(m.getPassword());
+		result.getUserAccount().setUsername(m.getUsername());
+		result.setVersion(m.getVersion());
+		this.validator.validate(result, binding);
+		return result;
 	}
 
 }

@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AdministratorService;
 import controllers.AbstractController;
 import domain.Administrator;
 import forms.AdministratorForm;
 
 @Controller
-@RequestMapping("administrator")
+@RequestMapping("administrator/administrator")
 public class RegisterAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	//Para registrarse como administador, primero un admin llama al create del servicio
@@ -28,46 +32,50 @@ public class RegisterAdministratorController extends AbstractController {
 	public ModelAndView create() {
 
 		ModelAndView result;
-		Administrator administrator;
-
-		administrator = this.administratorService.create();
-		final AdministratorForm admin = new AdministratorForm(administrator);
-		result = this.createEditModelAndView(admin);
+		AdministratorForm administratorForm;
+		administratorForm = new AdministratorForm();
+		result = this.createEditModelAndView(administratorForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final AdministratorForm administrator, final BindingResult binding) {
+	public ModelAndView save(@Valid final AdministratorForm administratorForm, final BindingResult binding) {
 		ModelAndView result;
 		Administrator admin;
 
-		admin = this.administratorService.reconstruct(administrator, binding);
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(admin);
+		if (this.actorService.existUsername(administratorForm.getUsername()) == false) {
+			binding.rejectValue("username", "error.username");
+			result = this.createEditModelAndView(administratorForm);
+		} else if (this.administratorService.checkPass(administratorForm.getPassword(), administratorForm.getConfirmPass()) == false) {
+			binding.rejectValue("password", "error.password");
+			result = this.createEditModelAndView(administratorForm);
+		} else if (binding.hasErrors())
+			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
+				admin = this.administratorService.reconstruct(administratorForm, binding);
 				this.administratorService.save(admin);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(administrator, "administrator.commit.error");
+				if (binding.hasErrors())
+					result = this.createEditModelAndView(administratorForm, "administrator.duplicated");
+				result = this.createEditModelAndView(administratorForm, "administrator.commit.error");
 			}
 		return result;
 	}
-
-	protected ModelAndView createEditModelAndView(final Administrator administrator) {
+	protected ModelAndView createEditModelAndView(final AdministratorForm adminForm) {
 		ModelAndView result;
-		final AdministratorForm adminForm = new AdministratorForm(administrator);
 		result = this.createEditModelAndView(adminForm, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final AdministratorForm administrator, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final AdministratorForm adminForm, final String messageCode) {
 
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/create");
-		result.addObject("administrator", administrator);
+		result = new ModelAndView("administrator/administrator/create");
+		result.addObject("administratorForm", adminForm);
 		result.addObject("message", messageCode);
 
 		return result;

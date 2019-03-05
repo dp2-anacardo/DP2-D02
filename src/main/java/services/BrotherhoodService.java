@@ -25,6 +25,7 @@ import domain.Brotherhood;
 import domain.Enrolment;
 import domain.MessageBox;
 import domain.SocialProfile;
+import forms.BrotherhoodForm;
 
 @Service
 @Transactional
@@ -36,21 +37,21 @@ public class BrotherhoodService {
 	@Autowired
 	private Validator				validator;
 
+	@Autowired
+	private MessageBoxService		messageBoxService;
+
 
 	public Brotherhood create() {
 
 		Brotherhood result;
 		final Authority auth;
 		final UserAccount userAccount;
-		UserAccount userAccount1;
 		Area area;
 		Date d;
 		final Collection<Url> pictures;
 		final Collection<Authority> authorities;
 		final Collection<SocialProfile> profiles;
 		final Collection<MessageBox> boxes;
-		userAccount1 = LoginService.getPrincipal();
-		Assert.isTrue(userAccount1.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 
 		result = new Brotherhood();
 		area = new Area();
@@ -98,10 +99,8 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood brotherhood) {
 
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.notNull(brotherhood);
+		final Date nuevaFecha = new Date();
 
 		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 		final String res = encoder.encodePassword(brotherhood.getUserAccount().getPassword(), null);
@@ -109,9 +108,9 @@ public class BrotherhoodService {
 
 		Brotherhood result;
 		if (brotherhood.getId() == 0) {
-			//			brotherhood.setBoxes(this.messageBoxService.createSystemMessageBox);
+			brotherhood.setEstablishmentDate(nuevaFecha);
+			brotherhood.setBoxes(this.messageBoxService.createSystemMessageBox());
 		}
-
 		result = this.brotherhoodRepository.save(brotherhood);
 		return result;
 
@@ -159,6 +158,25 @@ public class BrotherhoodService {
 
 			this.validator.validate(result, binding);
 		}
+		return result;
+	}
+
+	public Brotherhood reconstruct(final BrotherhoodForm bro, final BindingResult binding) {
+
+		final Brotherhood result = this.create();
+		result.setAddress(bro.getAddress());
+		result.setEmail(bro.getEmail());
+		result.setId(bro.getId());
+		result.setName(bro.getName());
+		result.setPhoneNumber(bro.getPhoneNumber());
+		result.setPhoto(bro.getPhoto());
+		result.setTitle(bro.getTitle());
+		result.setPictures(bro.getPictures());
+		result.setArea(bro.getArea());
+		result.getUserAccount().setPassword(bro.getPassword());
+		result.getUserAccount().setUsername(bro.getUsername());
+		result.setVersion(bro.getVersion());
+		this.validator.validate(result, binding);
 		return result;
 	}
 
