@@ -737,7 +737,7 @@
 	<bean id="procession2" class="domain.Procession">
 		<property name="title" value="Procession2's title"/>
 		<property name="description" value="Procession2's description"/>
-		<property name="moment" value="20/04/2019"/>
+		<property name="moment" value="04/20/2019"/>
 		<property name="ticker" value="190420-JESUS"/>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>

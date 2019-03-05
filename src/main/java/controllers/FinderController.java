@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -21,7 +19,6 @@ import services.ActorService;
 import services.ConfigurationService;
 import services.FinderService;
 import services.MemberService;
-import services.ProcessionService;
 import domain.Actor;
 import domain.Finder;
 import domain.Member;
@@ -37,8 +34,6 @@ public class FinderController extends AbstractController {
 	private ActorService			actorService;
 	@Autowired
 	private MemberService			memberService;
-	@Autowired
-	private ProcessionService		processionService;
 	@Autowired
 	private ConfigurationService	configurationService;
 
@@ -71,20 +66,11 @@ public class FinderController extends AbstractController {
 			this.finderService.save(finder);
 		}
 
-		//Si los resultados estan vacios entonces redirigir a todas las processions
-		if (finder.getProcessions().isEmpty()) {
-			finder.setProcessions(this.processionService.findAll());
-			result = new ModelAndView("procession/brotherhood/list");
-		}
+		processions = finder.getProcessions();
 
-		//Sino lista de resultados
-		else {
-			processions = finder.getProcessions();
-
-			result.addObject("processions", processions);
-			result.addObject("finder", finder);
-			result.addObject("requestURI", "finder/member/list.do");
-		}
+		result.addObject("processions", processions);
+		result.addObject("finder", finder);
+		result.addObject("requestURI", "finder/member/list.do");
 
 		return result;
 	}
@@ -106,19 +92,14 @@ public class FinderController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("finder") @Valid final Finder finder, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("finder") Finder finder, final BindingResult binding) {
 		ModelAndView result;
 
+		finder = this.finderService.reconstruct(finder, binding);
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(finder);
 		else
 			try {
-
-				if (finder.getMinimumDate() == null)
-					finder.setMinimumDate(new Date()); //Fecha actual
-				if (finder.getMaximumDate() == null)
-					finder.setMaximumDate(new Date());
-
 				this.finderService.save(finder);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
