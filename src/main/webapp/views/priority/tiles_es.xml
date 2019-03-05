@@ -16,24 +16,24 @@
       
 <tiles-definitions>
 
-	<definition name="message/list" extends="master.page">	
-		<put-attribute name="title" value="Lista de Mensajes" />
-		<put-attribute name="body" value="/views/message/list.jsp" />
+	<definition name="priority/administrator/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de Prioridades" />
+		<put-attribute name="body" value="/views/priority/list.jsp" />
 	</definition>
 	
-	<definition name="message/create" extends="master.page">	
-		<put-attribute name="title" value="Crear Mensaje" />
-		<put-attribute name="body" value="/views/message/create.jsp" />
+	<definition name="priority/administrator/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar Prioridad" />
+		<put-attribute name="body" value="/views/priority/edit.jsp" />
 	</definition>
 	
-	<definition name="message/display" extends="master.page">	
-		<put-attribute name="title" value="Mostrar Mensaje" />
-		<put-attribute name="body" value="/views/message/display.jsp" />
+	<definition name="priority/administrator/create" extends="master.page">	
+		<put-attribute name="title" value="Crear Prioridad" />
+		<put-attribute name="body" value="/views/priority/edit.jsp" />
 	</definition>
 	
-	<definition name="message/broadcast" extends="master.page">	
-		<put-attribute name="title" value="Mensaje Broadcast" />
-		<put-attribute name="body" value="/views/message/broadcast.jsp" />
+	<definition name="priority/administrator/show" extends="master.page">	
+		<put-attribute name="title" value="Mostrar Prioridad" />
+		<put-attribute name="body" value="/views/priority/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

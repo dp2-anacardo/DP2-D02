@@ -24,4 +24,10 @@ public class Priority extends DomainEntity {
 		this.name = name;
 	}
 
+	public boolean equals(final Priority obj) {
+		boolean res = false;
+		if (this.getName().get("ES").equals(obj.getName().get("ES")) && this.getName().get("EN").equals(obj.getName().get("EN")))
+			res = true;
+		return res;
+	}
 }

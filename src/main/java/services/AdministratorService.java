@@ -342,23 +342,16 @@ public class AdministratorService {
 
 	public Administrator reconstruct(final AdministratorForm admin, final BindingResult binding) {
 
-		final Administrator result = new Administrator();
+		final Administrator result = this.create();
 		result.setAddress(admin.getAddress());
-		result.setBoxes(admin.getBoxes());
 		result.setEmail(admin.getEmail());
-		result.setId(admin.getId());
-		result.setIsBanned(admin.getIsBanned());
-		result.setIsSuspicious(admin.getIsSuspicious());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
-		result.setScore(admin.getScore());
-		result.setSocialProfiles(admin.getSocialProfiles());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
-		result.setUserAccount(admin.getUserAccount());
-		result.setVersion(admin.getVersion());
 		this.validator.validate(result, binding);
 		return result;
 	}
+
 }

@@ -28,6 +28,8 @@
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
 					<li><a href="area/administrator/list.do"><spring:message code="master.page.administrator.listArea" /></a></li>		
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.listPosition" /></a></li>
+					<li><a href="priority/administrator/list.do"><spring:message code="master.page.administrator.listPriority" /></a></li>
+					
 				</ul>
 			</li>
 		</security:authorize>
