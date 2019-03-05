@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RequestRepository;
+import domain.Member;
 import domain.Procession;
 import domain.Request;
 
@@ -42,6 +43,8 @@ public class RequestService {
 	public Request save(final Request r) {
 		Assert.notNull(r);
 		Request result;
+		if (r.getId() == 0)
+			r.setStatus("PENDING");
 		result = this.requestRepository.save(r);
 		return result;
 	}
@@ -70,5 +73,8 @@ public class RequestService {
 
 	public Collection<Request> getRequestByProcession(final Procession p) {
 		return this.requestRepository.getRequestByProcession(p);
+	}
+	public Collection<Request> getRequestsByMember(final Member m) {
+		return this.requestRepository.getRequestsByMember(m);
 	}
 }

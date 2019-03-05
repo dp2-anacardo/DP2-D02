@@ -21,3 +21,8 @@
 </fieldset>
 <acme:showtext fieldset="true" code="procession.maxRow" value="${p.maxRow}"/>
 <acme:showtext fieldset="true" code="procession.maxColumn" value="${p.maxColumn}"/>
+
+<security:authorize access="hasRole('MEMBER')">
+<acme:cancel url="request/member/create?processionId=${p.id}" code="procession.request"/>
+
+</security:authorize>
