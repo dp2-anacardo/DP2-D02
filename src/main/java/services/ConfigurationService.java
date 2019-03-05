@@ -60,7 +60,15 @@ public class ConfigurationService {
 
 		result = this.configurationRepository.findOne(configF.getId());
 
-		result.setVersion(configF.getVersion());
+		result.setId(result.getId());
+		result.setVersion(result.getVersion());
+		result.setMaxResults(configF.getMaxResults());
+		result.setMaxTime(configF.getMaxTime());
+		result.setSystemName(configF.getSystemName());
+		result.setBanner(configF.getBanner());
+		result.setWelcomeMessageEn(configF.getWelcomeMessageEn());
+		result.setWelcomeMessageEs(configF.getWelcomeMessageEs());
+		result.setDefaultCC(configF.getDefaultCC());
 		final Collection<String> sW = result.getSpamWords();
 		final Collection<String> pW = result.getPositiveWords();
 		final Collection<String> nW = result.getNegativeWords();
@@ -69,16 +77,53 @@ public class ConfigurationService {
 			sW.add(configF.getAddSW());
 
 		if (!configF.getAddPW().equals(""))
-			pW.add(configF.getAddNW());
+			pW.add(configF.getAddPW());
 
 		if (!configF.getAddNW().equals(""))
 			nW.add(configF.getAddNW());
 
 		result.setSpamWords(sW);
 		result.setPositiveWords(pW);
-		result.setSpamWords(nW);
+		result.setNegativeWords(nW);
+		this.validator.validate(configF, binding);
 
-		this.validator.validate(result, binding);
+		return result;
+	}
+
+	//Reconstruct
+	public Configuration reconstructAdd(final ConfigurationForm configF, final BindingResult binding) {
+		Configuration result;
+		final Configuration c = new Configuration();
+
+		result = this.configurationRepository.findOne(configF.getId());
+
+		c.setId(result.getId());
+		c.setVersion(result.getVersion());
+		c.setMaxResults(configF.getMaxResults());
+		c.setMaxTime(configF.getMaxTime());
+		c.setSystemName(configF.getSystemName());
+		c.setBanner(configF.getBanner());
+		c.setWelcomeMessageEn(configF.getWelcomeMessageEn());
+		c.setWelcomeMessageEs(configF.getWelcomeMessageEs());
+		c.setDefaultCC(configF.getDefaultCC());
+		final Collection<String> sW = result.getSpamWords();
+		final Collection<String> pW = result.getPositiveWords();
+		final Collection<String> nW = result.getNegativeWords();
+
+		if (!configF.getAddSW().equals(""))
+			sW.add(configF.getAddSW());
+
+		if (!configF.getAddPW().equals(""))
+			pW.add(configF.getAddPW());
+
+		if (!configF.getAddNW().equals(""))
+			nW.add(configF.getAddNW());
+
+		c.setSpamWords(sW);
+		c.setPositiveWords(pW);
+		c.setNegativeWords(nW);
+		//result = c;
+		this.validator.validate(c, binding);
 
 		return result;
 	}

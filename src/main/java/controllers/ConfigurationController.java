@@ -3,10 +3,13 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -91,7 +94,7 @@ public class ConfigurationController extends AbstractController {
 	}
 	// WORD ADDS
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addWord")
-	public ModelAndView addSW(final ConfigurationForm configF, final BindingResult binding) {
+	public ModelAndView addSW(@ModelAttribute("configF") @Valid final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
 		Configuration config;
 
@@ -99,7 +102,7 @@ public class ConfigurationController extends AbstractController {
 		final Administrator admin = this.administratorService.findOne(user.getId());
 		Assert.notNull(admin);
 
-		config = this.configurationService.reconstruct(configF, binding);
+		config = this.configurationService.reconstructAdd(configF, binding);
 		if (binding.hasErrors())
 			result = this.editModelAndView(config);
 		else
@@ -108,7 +111,7 @@ public class ConfigurationController extends AbstractController {
 				result = new ModelAndView("redirect:/configuration/administrator/edit.do");
 
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(configF, "configuration.edit.error"); //"Administrator.commit.error"
+				result = this.editModelAndView(configF, oops.getMessage()/* "configuration.edit.error" */); //"Administrator.commit.error"
 			}
 		return result;
 	}
@@ -128,13 +131,13 @@ public class ConfigurationController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final ConfigurationForm configF, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("configF") final ConfigurationForm configF, final BindingResult binding) {
 		ModelAndView result;
 		Configuration config;
 
 		config = this.configurationService.reconstruct(configF, binding);
 		if (binding.hasErrors())
-			result = this.editModelAndView(config);
+			result = this.editModelAndView(configF, null);
 		else
 			try {
 				this.configurationService.save(config);
@@ -144,7 +147,6 @@ public class ConfigurationController extends AbstractController {
 			}
 		return result;
 	}
-
 	// SHOW/DISPLAY
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show() {
