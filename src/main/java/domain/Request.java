@@ -40,19 +40,19 @@ public class Request extends DomainEntity {
 		this.comment = comment;
 	}
 
-	public int getPositionRow() {
+	public Integer getPositionRow() {
 		return this.positionRow;
 	}
 
-	public void setPositionRow(final int positionRow) {
+	public void setPositionRow(final Integer positionRow) {
 		this.positionRow = positionRow;
 	}
 
-	public int getPositionColumn() {
+	public Integer getPositionColumn() {
 		return this.positionColumn;
 	}
 
-	public void setPositionColumn(final int positionColumn) {
+	public void setPositionColumn(final Integer positionColumn) {
 		this.positionColumn = positionColumn;
 	}
 

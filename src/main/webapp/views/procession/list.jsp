@@ -27,6 +27,11 @@
 			<spring:message code="procession.show"/>
 		</a>
 	</display:column>
+	<display:column>
+		<a href="request/brotherhood/list.do?processionId=${row.id}">
+			<spring:message code="procession.request"/>
+		</a>
+	</display:column>
 	
 	
 </display:table>

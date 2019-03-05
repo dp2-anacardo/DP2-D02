@@ -21,5 +21,15 @@
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
 	
+	<definition name="request/member/edit" extends="master.page">	
+		<put-attribute name="title" value="Nueva petición" />
+		<put-attribute name="body" value="/views/request/edit.jsp" />
+	</definition>
+	
+	<definition name="request/member,brotherhood/show" extends="master.page">	
+		<put-attribute name="title" value="Petición" />
+		<put-attribute name="body" value="/views/request/show.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

@@ -21,7 +21,7 @@
 }
 </style>
 
-<security:authorize access="hasRole('MEMBER')">
+<security:authorize access="hasRole('BROTHERHOOD')">
 <display:table name="requests" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	<display:column class="${row.status }">
 		<a href="request/member,brotherhood/show.do?requestId=${row.id}">
@@ -29,7 +29,7 @@
 		</a>
 	</display:column>
 	
-	<spring:message code="request.procession" var="columnTitle"/>
+	<spring:message code="request.member" var="columnTitle"/>
 	<display:column title="columnTitle" class="${row.status }">
 		<jstl:out value="${row.procession.title}"></jstl:out>
 	</display:column>
@@ -39,18 +39,8 @@
 		<jstl:out value="${row.status}"></jstl:out>
 	</display:column>
 	
-	<display:column class="${row.status }">
-	<jstl:if test="${row.status=='PENDING' }">
-		<a href="request/member/delete.do?requestId=${row.id}">
-			<spring:message code="request.delete"/>
-		</a>
-	</jstl:if>
-	</display:column>
 	
 	
 </display:table>
-<div>
-<acme:cancel url="request/member/create.do" code="request.create"/>
-</div>
 
 </security:authorize>

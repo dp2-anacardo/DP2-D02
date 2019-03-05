@@ -1,15 +1,20 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.transaction.Transactional;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RequestRepository;
+import security.LoginService;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Enrolment;
 import domain.Member;
 import domain.Procession;
 import domain.Request;
@@ -20,6 +25,12 @@ public class RequestService {
 
 	@Autowired
 	private RequestRepository	requestRepository;
+	@Autowired
+	private MemberService		memberService;
+	@Autowired
+	private ProcessionService	processionService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	public Request create() {
@@ -30,7 +41,6 @@ public class RequestService {
 
 	public Request findOne(final int id) {
 		final Request result = this.requestRepository.findOne(id);
-		Assert.notNull(result);
 		return result;
 	}
 
@@ -42,9 +52,14 @@ public class RequestService {
 
 	public Request save(final Request r) {
 		Assert.notNull(r);
+		this.requestRepository.flush();
 		Request result;
-		if (r.getId() == 0)
+		if (r.getId() == 0) {
+			final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+			final Member m = this.memberService.findOne(user.getId());
+			r.setMember(m);
 			r.setStatus("PENDING");
+		}
 		result = this.requestRepository.save(r);
 		return result;
 	}
@@ -77,4 +92,17 @@ public class RequestService {
 	public Collection<Request> getRequestsByMember(final Member m) {
 		return this.requestRepository.getRequestsByMember(m);
 	}
+	public Collection<Procession> getProcessionsByMember(final Member m) {
+		final Collection<Procession> result = new ArrayList<Procession>();
+		final Collection<Enrolment> enrolments = this.memberService.getEnrolments(m.getId());
+		final Collection<Brotherhood> brotherhoods = new HashSet<Brotherhood>();
+		for (final Enrolment e : enrolments)
+			if (e.getDropOutMoment() == null && e.getStatus().equals("ACCEPTED"))
+				brotherhoods.add(e.getBrotherhood());
+		for (final Brotherhood b : brotherhoods)
+			result.addAll(this.processionService.getProcessionsFinalByBrotherhood(b.getId()));
+
+		return result;
+	}
+
 }

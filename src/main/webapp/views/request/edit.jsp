@@ -10,22 +10,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('ADMIN')">
-<form:form action="area/administrator/edit.do" modelAttribute="area">
+<security:authorize access="hasRole('MEMBER')">
+<form:form action="request/member/edit.do" modelAttribute="request">
 	<form:hidden path="id" />
 	
-	<acme:textbox code="area.name" path="name"/>
+	<form:label path="procession">
+		<spring:message code="request.procession"/>
+	</form:label>
+	<form:select path="procession">	
+		<form:options items="${processions}" itemValue="id" itemLabel="title" multiple="false"
+			/>
+	</form:select>
+	<form:errors cssClass="error" path="procession" />
 	<br />
-	
-	<acme:textarea code="area.pictures" path="pictures"/>
-	<br />
-	
-	<acme:submit name="save" code="area.save"/>
-	<jstl:if test="${area.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="area.delete" />" />
-	</jstl:if>
-	<acme:cancel url="area/administrator/list.do" code="area.cancel"/>
+	<acme:submit name="save" code="request.save"/>
+	<acme:cancel url="request/member/list.do" code="area.cancel"/>
 	<br />
 	
 	
