@@ -30,12 +30,12 @@
 	</display:column>
 	
 	<spring:message code="request.member" var="columnTitle"/>
-	<display:column title="columnTitle" class="${row.status }">
-		<jstl:out value="${row.procession.title}"></jstl:out>
+	<display:column title="${columnTitle}" class="${row.status }">
+		<jstl:out value="${row.member.name}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="request.status" var="columnTitle"/>
-	<display:column title="columnTitle" class="${row.status }">
+	<display:column title="${columnTitle}" class="${row.status }" sortable="true">
 		<jstl:out value="${row.status}"></jstl:out>
 	</display:column>
 	

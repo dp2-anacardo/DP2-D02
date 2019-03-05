@@ -19,5 +19,11 @@
 
 
 <security:authorize access="hasRole('BROTHERHOOD')">
+<acme:showtext fieldset="true" code="request.member" value="${r.member.name}"/>
+<jstl:if test="${r.status=='PENDING' }">
+<acme:cancel url="request/brotherhood/accept.do?requestId=${r.id}" code="request.accept"/>
+<acme:cancel url="request/brotherhood/reject.do?requestId=${r.id}" code="request.reject"/>
+</jstl:if>
+
 
 </security:authorize>

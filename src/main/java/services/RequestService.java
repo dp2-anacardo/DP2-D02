@@ -105,4 +105,8 @@ public class RequestService {
 		return result;
 	}
 
+	public Collection<Request> getRequestAcceptedByProcession(final Procession p) {
+		return this.requestRepository.getRequestAcceptedByProcession(p);
+	}
+
 }

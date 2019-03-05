@@ -12,7 +12,7 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 <display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	<spring:message code="procession.title" var="columnTitle"/>
-	<display:column title="columnTitle">
+	<display:column title="${columnTitle}">
 		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
