@@ -16,7 +16,7 @@
 <fieldset><legend><b><spring:message code="procession.floats"/></b></legend>
 <jstl:forEach items="${p.floats}" var="f">
 	<jstl:out value="${f.title}"/>
-	</br>
+	<br>
 </jstl:forEach>
 </fieldset>
 <acme:showtext fieldset="true" code="procession.maxRow" value="${p.maxRow}"/>
