@@ -30,7 +30,7 @@ public class PositionController extends AbstractController {
 
 	@ExceptionHandler(TypeMismatchException.class)
 	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
-		return new ModelAndView("redirect:/administrator/list.do");
+		return new ModelAndView("redirect:/position/administrator/list.do");
 	}
 
 	@RequestMapping(value = "/administrator/list", method = RequestMethod.GET)
@@ -54,8 +54,14 @@ public class PositionController extends AbstractController {
 		ModelAndView result;
 		Position position;
 
-		position = this.positionService.findOne(positionId);
 		final String language = LocaleContextHolder.getLocale().getLanguage();
+
+		try {
+			position = this.positionService.findOne(positionId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 
 		result = new ModelAndView("position/administrator/show");
 		result.addObject("position", position);
@@ -81,7 +87,12 @@ public class PositionController extends AbstractController {
 		final ModelAndView result;
 		Position position;
 
-		position = this.positionService.findOne(positionId);
+		try {
+			position = this.positionService.findOne(positionId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 		result = this.createEditModelAndView(position);
 
 		return result;

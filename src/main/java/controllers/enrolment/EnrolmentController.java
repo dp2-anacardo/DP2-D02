@@ -1,6 +1,7 @@
 
 package controllers.enrolment;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.TypeMismatchException;
@@ -19,11 +20,17 @@ import services.ActorService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.MemberService;
+import services.MessageBoxService;
+import services.MessageService;
 import services.PositionService;
+import services.PriorityService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
+import domain.Message;
+import domain.MessageBox;
 import domain.Position;
 
 @Controller
@@ -45,15 +52,24 @@ public class EnrolmentController extends AbstractController {
 	@Autowired
 	private MemberService		memberService;
 
+	@Autowired
+	private MessageService		messageService;
+
+	@Autowired
+	private MessageBoxService	messageBoxService;
+
+	@Autowired
+	private PriorityService		priorityService;
+
 
 	@ExceptionHandler(TypeMismatchException.class)
 	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
 		ModelAndView result;
 
 		if (LoginService.getPrincipal().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"))
-			result = new ModelAndView("redirect:/brotherhood/list.do");
+			result = new ModelAndView("redirect:/enrolment/brotherhood/list.do");
 		else if (LoginService.getPrincipal().getAuthorities().iterator().next().getAuthority().equals("MEMBER"))
-			result = new ModelAndView("redirect:/member/list.do");
+			result = new ModelAndView("redirect:/enrolment/member/list.do");
 		else
 			result = new ModelAndView("redirect:/");
 
@@ -86,9 +102,14 @@ public class EnrolmentController extends AbstractController {
 		int brotherhoodId;
 		Brotherhood brotherhood;
 
-		enrolment = this.enrolmentService.findOne(enrolmentId);
-		brotherhoodId = this.actorService.getActorLogged().getId();
-		brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		try {
+			enrolment = this.enrolmentService.findOne(enrolmentId);
+			brotherhoodId = this.actorService.getActorLogged().getId();
+			brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 
 		if (enrolment == null || !enrolment.getBrotherhood().equals(brotherhood))
 			result = new ModelAndView("redirect:/misc/403");
@@ -96,7 +117,6 @@ public class EnrolmentController extends AbstractController {
 			result = this.acceptModelAndView(enrolment);
 		return result;
 	}
-
 	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "accept")
 	public ModelAndView accept(Enrolment enrolment, final BindingResult binding) {
 		ModelAndView result;
@@ -109,13 +129,24 @@ public class EnrolmentController extends AbstractController {
 			try {
 				this.enrolmentService.acceptEnrolment(enrolment);
 				this.enrolmentService.save(enrolment);
+				final Message message = this.messageService.create();
+				final Collection<Actor> recipients = new ArrayList<>();
+				final Collection<MessageBox> messageBoxes = new ArrayList<>();
+				recipients.add(enrolment.getMember());
+				recipients.add(enrolment.getBrotherhood());
+				messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getMember().getId(), "NOTIFICATIONBOX"));
+				messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getBrotherhood().getId(), "NOTIFICATIONBOX"));
+				message.setRecipients(recipients);
+				message.setPriority(this.priorityService.getHighPriority());
+				message.setSubject("Enrolment accepted \n Inscripción aceptada");
+				message.setBody("An enrolment has been accepted \n Una inscripción ha sido aceptada");
+				this.messageService.save(message);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.acceptModelAndView(enrolment);
 			}
 		return result;
 	}
-
 	@RequestMapping(value = "/brotherhood/reject", method = RequestMethod.GET)
 	public ModelAndView reject(@RequestParam final int enrolmentId) {
 		ModelAndView result;
@@ -123,9 +154,14 @@ public class EnrolmentController extends AbstractController {
 		int brotherhoodId;
 		Brotherhood brotherhood;
 
-		brotherhoodId = this.actorService.getActorLogged().getId();
-		brotherhood = this.brotherhoodService.findOne(brotherhoodId);
-		enrolment = this.enrolmentService.findOne(enrolmentId);
+		try {
+			brotherhoodId = this.actorService.getActorLogged().getId();
+			brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+			enrolment = this.enrolmentService.findOne(enrolmentId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 
 		if (enrolment == null || !enrolment.getBrotherhood().equals(brotherhood))
 			result = new ModelAndView("redirect:/misc/403");
@@ -198,20 +234,37 @@ public class EnrolmentController extends AbstractController {
 		int memberId;
 		Member member;
 
-		memberId = this.actorService.getActorLogged().getId();
-		member = this.memberService.findOne(memberId);
-		enrolment = this.enrolmentService.findOne(enrolmentId);
+		try {
+			memberId = this.actorService.getActorLogged().getId();
+			member = this.memberService.findOne(memberId);
+			enrolment = this.enrolmentService.findOne(enrolmentId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 
 		if (enrolment == null || !enrolment.getMember().equals(member))
 			result = new ModelAndView("redirect:/misc/403");
 		else {
+			final Message message = this.messageService.create();
+			final Collection<Actor> recipients = new ArrayList<>();
+			final Collection<MessageBox> messageBoxes = new ArrayList<>();
+			recipients.add(enrolment.getMember());
+			recipients.add(enrolment.getBrotherhood());
+			messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getMember().getId(), "NOTIFICATIONBOX"));
+			messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getBrotherhood().getId(), "NOTIFICATIONBOX"));
+			message.setRecipients(recipients);
+			message.setSubject("Drop out brotherhood \n Salida de hermandad");
+			message.setBody("A drop out happened \n Se ha dejado la hermandad");
+			message.setPriority(this.priorityService.getHighPriority());
+			message.setMessageBoxes(messageBoxes);
+			this.messageService.save(message);
 			this.enrolmentService.dropOut(enrolment);
 			this.enrolmentService.save(enrolment);
 			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndViewMember(final Enrolment enrolment) {
 		ModelAndView result;
 
@@ -229,5 +282,4 @@ public class EnrolmentController extends AbstractController {
 
 		return result;
 	}
-
 }

@@ -88,4 +88,8 @@ public class PriorityService {
 		return result;
 
 	}
+
+	public Priority getHighPriority() {
+		return this.priorityRepository.getHighPriority();
+	}
 }

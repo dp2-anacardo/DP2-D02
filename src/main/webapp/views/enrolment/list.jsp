@@ -24,7 +24,17 @@
 	
 	<spring:message code="enrolment.status" var="status"/>
 	<display:column title="${status}">
-		<jstl:out value="${row.status}"></jstl:out>
+			<jstl:if test="${row.status == 'ACCEPTED' }">
+				<spring:message code="enrolment.accepted"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'PENDING' }">
+				<spring:message code="enrolment.pending"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'REJECTED' }">
+				<spring:message code="enrolment.rejected"/>
+			</jstl:if>
 	</display:column>
 	
 	<jstl:if test="${lang=='en' }">
@@ -85,7 +95,17 @@
 	
 	<spring:message code="enrolment.status" var="status"/>
 	<display:column title="${status}">
-		<jstl:out value="${row.status}"></jstl:out>
+		<jstl:if test="${row.status == 'ACCEPTED' }">
+				<spring:message code="enrolment.accepted"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'PENDING' }">
+				<spring:message code="enrolment.pending"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'REJECTED' }">
+				<spring:message code="enrolment.rejected"/>
+			</jstl:if>
 	</display:column>
 	
 	<jstl:if test="${lang=='en' }">
