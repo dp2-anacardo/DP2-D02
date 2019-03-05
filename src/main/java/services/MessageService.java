@@ -71,37 +71,55 @@ public class MessageService {
 		if (message.getId() == 0) {
 			Assert.notNull(message);
 
-			if (!message.getPriority().getName().get("ES").equals("NOTIFICACION")) {
+			final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
+			final String dropoutBrotherhood = "Drop out brotherhood \n Salida de hermandad";
+
+			if (message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)) {
+
+				final Collection<Actor> recipients = message.getRecipients();
+				Assert.notNull(recipients);
+				Assert.notEmpty(recipients);
+
+				for (final Actor recipient : recipients)
+					message.getMessageBoxes().add(recipient.getMessageBox("NOTIFICATIONBOX"));
+
+				result = this.messageRepository.save(message);
+
+				for (final Actor recipient : recipients)
+					recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
+
+			} else {
+
 				sender = this.actorService.findByUserAccount(userAccount);
 				message.setSender(sender);
+
+				final Collection<Actor> recipients = message.getRecipients();
+				Assert.notNull(recipients);
+				Assert.notEmpty(recipients);
+
+				final Boolean spam = this.checkSpam(message);
+				final String box;
+
+				if (spam) {
+					box = "SPAMBOX";
+					message.getSender().setIsSuspicious(true);
+				} else
+					box = "INBOX";
+
+				if (sender != null)
+					message.getMessageBoxes().add(sender.getMessageBox("OUTBOX"));
+
+				for (final Actor recipient : recipients)
+					message.getMessageBoxes().add(recipient.getMessageBox(box));
+
+				result = this.messageRepository.save(message);
+
+				if (sender != null)
+					sender.getMessageBox("OUTBOX").addMessage(result);
+
+				for (final Actor recipient : recipients)
+					recipient.getMessageBox(box).addMessage(result);
 			}
-
-			final Collection<Actor> recipients = message.getRecipients();
-			Assert.notNull(recipients);
-			Assert.notEmpty(recipients);
-
-			final Boolean spam = this.checkSpam(message);
-			final String box;
-
-			if (spam) {
-				box = "SPAMBOX";
-				message.getSender().setIsSuspicious(true);
-			} else
-				box = "INBOX";
-
-			if (sender != null)
-				message.getMessageBoxes().add(sender.getMessageBox("OUTBOX"));
-
-			for (final Actor recipient : recipients)
-				message.getMessageBoxes().add(recipient.getMessageBox(box));
-
-			result = this.messageRepository.save(message);
-
-			if (sender != null)
-				sender.getMessageBox("OUTBOX").addMessage(result);
-
-			for (final Actor recipient : recipients)
-				recipient.getMessageBox(box).addMessage(result);
 
 		} else
 			result = this.messageRepository.save(message);

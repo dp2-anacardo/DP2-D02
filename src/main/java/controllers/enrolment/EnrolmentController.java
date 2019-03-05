@@ -20,7 +20,6 @@ import services.ActorService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.MemberService;
-import services.MessageBoxService;
 import services.MessageService;
 import services.PositionService;
 import services.PriorityService;
@@ -30,7 +29,6 @@ import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
 import domain.Message;
-import domain.MessageBox;
 import domain.Position;
 
 @Controller
@@ -54,9 +52,6 @@ public class EnrolmentController extends AbstractController {
 
 	@Autowired
 	private MessageService		messageService;
-
-	@Autowired
-	private MessageBoxService	messageBoxService;
 
 	@Autowired
 	private PriorityService		priorityService;
@@ -131,11 +126,8 @@ public class EnrolmentController extends AbstractController {
 				this.enrolmentService.save(enrolment);
 				final Message message = this.messageService.create();
 				final Collection<Actor> recipients = new ArrayList<>();
-				final Collection<MessageBox> messageBoxes = new ArrayList<>();
 				recipients.add(enrolment.getMember());
 				recipients.add(enrolment.getBrotherhood());
-				messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getMember().getId(), "NOTIFICATIONBOX"));
-				messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getBrotherhood().getId(), "NOTIFICATIONBOX"));
 				message.setRecipients(recipients);
 				message.setPriority(this.priorityService.getHighPriority());
 				message.setSubject("Enrolment accepted \n Inscripción aceptada");
@@ -248,16 +240,12 @@ public class EnrolmentController extends AbstractController {
 		else {
 			final Message message = this.messageService.create();
 			final Collection<Actor> recipients = new ArrayList<>();
-			final Collection<MessageBox> messageBoxes = new ArrayList<>();
 			recipients.add(enrolment.getMember());
 			recipients.add(enrolment.getBrotherhood());
-			messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getMember().getId(), "NOTIFICATIONBOX"));
-			messageBoxes.add(this.messageBoxService.findOneByActorAndName(enrolment.getBrotherhood().getId(), "NOTIFICATIONBOX"));
 			message.setRecipients(recipients);
 			message.setSubject("Drop out brotherhood \n Salida de hermandad");
 			message.setBody("A drop out happened \n Se ha dejado la hermandad");
 			message.setPriority(this.priorityService.getHighPriority());
-			message.setMessageBoxes(messageBoxes);
 			this.messageService.save(message);
 			this.enrolmentService.dropOut(enrolment);
 			this.enrolmentService.save(enrolment);
