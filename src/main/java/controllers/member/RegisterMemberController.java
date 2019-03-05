@@ -48,6 +48,7 @@ public class RegisterMemberController extends AbstractController {
 				this.memberService.save(member);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
+				oops.printStackTrace();
 				if (binding.hasErrors())
 					result = this.createEditModelAndView(mForm, "administrator.duplicated");
 				result = this.createEditModelAndView(mForm, "administrator.commit.error");
