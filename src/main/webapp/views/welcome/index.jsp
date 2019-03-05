@@ -17,6 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
+<<<<<<< HEAD
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p>
  
@@ -29,3 +30,7 @@
 		value="<spring:message code="welcome.register.member" />"
 		onclick="javascript: relativeRedir('member/create.do');" />&nbsp;
 </security:authorize>
+=======
+<p>${welcome}</p>
+<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+>>>>>>> origin/manuercaximba

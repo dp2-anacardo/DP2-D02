@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -22,9 +23,11 @@ import domain.Procession;
 public class FinderService {
 
 	//Managed repository
+	@Autowired
 	private FinderRepository		finderRepository;
 
 	//Services
+	@Autowired
 	private ConfigurationService	configurationService;
 
 
@@ -36,7 +39,7 @@ public class FinderService {
 		result.setProcessions(processions);
 		return result;
 	}
-	public List<Finder> findAll() {
+	public Collection<Finder> findAll() {
 		return this.finderRepository.findAll();
 	}
 
@@ -49,16 +52,16 @@ public class FinderService {
 		Assert.notNull(finder);
 		final Set<Procession> allProcessions = new HashSet<Procession>();
 		if (finder.getKeyWord() != null && finder.getKeyWord() != "") {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
-			allProcessions.addAll(processions);
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
+			allProcessions.addAll(pro);
 		}
 		if (finder.getMinimumDate() != null && finder.getMaximumDate() != null) {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
-			allProcessions.addAll(processions);
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
+			allProcessions.addAll(pro);
 		}
-		if (finder.getAreaName() != null) {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByArea(finder.getAreaName());
-			allProcessions.addAll(processions);
+		if (finder.getAreaName() != null && finder.getAreaName() != "") {
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByArea(finder.getAreaName());
+			allProcessions.addAll(pro);
 		}
 
 		Configuration conf;
