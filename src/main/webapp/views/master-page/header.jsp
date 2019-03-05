@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Sample Co., Inc." /></a>
+	<a href="#"><img src="${configuration.banner}" alt="${configuration.systemName}" height="150" width="400"/></a>
 </div>
 
 <div>
@@ -30,6 +30,7 @@
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.listPosition" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MEMBER')">
@@ -37,6 +38,13 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="enrolment/member/list.do"><spring:message code="master.page.enrolment.list" /></a></li>					
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.finder" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="finder/member/edit.do"><spring:message code="master.page.finder.edit" /></a></li>
+					<li><a href="finder/member/list.do"><spring:message code="master.page.finder.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

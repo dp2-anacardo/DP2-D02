@@ -38,6 +38,7 @@
 		<value>/views/enrolment/tiles.xml</value>
 		<value>/views/floatEntity/tiles.xml</value>
 		<value>/views/procession/tiles.xml</value>
+		<value>/views/finder/tiles.xml</value>
 
 	</util:list>
 

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,14 +55,19 @@ public class ConfigurationService {
 		return result;
 	}
 
-	//Reconstruct
-	public Configuration reconstruct(final ConfigurationForm configF, final BindingResult binding) {
-		Configuration result;
+	//Reconstructs
+	public Configuration reconstructEdit(final ConfigurationForm configF, final BindingResult binding) {
+		Configuration config;
+		final Configuration result = new Configuration();
 
-		result = this.configurationRepository.findOne(configF.getId());
+		config = this.configurationRepository.findOne(configF.getId());
 
-		result.setId(result.getId());
-		result.setVersion(result.getVersion());
+		result.setId(config.getId());
+		result.setVersion(config.getVersion());
+		result.setSpamWords(config.getSpamWords());
+		result.setPositiveWords(config.getPositiveWords());
+		result.setNegativeWords(config.getNegativeWords());
+
 		result.setMaxResults(configF.getMaxResults());
 		result.setMaxTime(configF.getMaxTime());
 		result.setSystemName(configF.getSystemName());
@@ -69,61 +75,49 @@ public class ConfigurationService {
 		result.setWelcomeMessageEn(configF.getWelcomeMessageEn());
 		result.setWelcomeMessageEs(configF.getWelcomeMessageEs());
 		result.setDefaultCC(configF.getDefaultCC());
-		final Collection<String> sW = result.getSpamWords();
-		final Collection<String> pW = result.getPositiveWords();
-		final Collection<String> nW = result.getNegativeWords();
 
-		if (!configF.getAddSW().equals(""))
-			sW.add(configF.getAddSW());
-
-		if (!configF.getAddPW().equals(""))
-			pW.add(configF.getAddPW());
-
-		if (!configF.getAddNW().equals(""))
-			nW.add(configF.getAddNW());
-
-		result.setSpamWords(sW);
-		result.setPositiveWords(pW);
-		result.setNegativeWords(nW);
-		this.validator.validate(configF, binding);
+		this.validator.validate(result, binding);
 
 		return result;
 	}
 
-	//Reconstruct
-	public Configuration reconstructAdd(final ConfigurationForm configF, final BindingResult binding) {
-		Configuration result;
-		final Configuration c = new Configuration();
+	public Configuration reconstructAddWord(final ConfigurationForm configF, final BindingResult binding) {
+		Configuration config;
+		final Configuration result = new Configuration();
 
-		result = this.configurationRepository.findOne(configF.getId());
+		config = this.configurationRepository.findOne(configF.getId());
 
-		c.setId(result.getId());
-		c.setVersion(result.getVersion());
-		c.setMaxResults(configF.getMaxResults());
-		c.setMaxTime(configF.getMaxTime());
-		c.setSystemName(configF.getSystemName());
-		c.setBanner(configF.getBanner());
-		c.setWelcomeMessageEn(configF.getWelcomeMessageEn());
-		c.setWelcomeMessageEs(configF.getWelcomeMessageEs());
-		c.setDefaultCC(configF.getDefaultCC());
-		final Collection<String> sW = result.getSpamWords();
-		final Collection<String> pW = result.getPositiveWords();
-		final Collection<String> nW = result.getNegativeWords();
+		result.setMaxResults(config.getMaxResults());
+		result.setMaxTime(config.getMaxTime());
+		result.setSystemName(config.getSystemName());
+		result.setBanner(config.getBanner());
+		result.setWelcomeMessageEn(config.getWelcomeMessageEn());
+		result.setWelcomeMessageEs(config.getWelcomeMessageEs());
+		result.setDefaultCC(config.getDefaultCC());
+
+		final Collection<String> sW = new ArrayList<String>();
+		final Collection<String> pW = new ArrayList<String>();
+		final Collection<String> nW = new ArrayList<String>();
+
+		sW.addAll(config.getSpamWords());
+		pW.addAll(config.getPositiveWords());
+		nW.addAll(config.getNegativeWords());
+
+		result.setSpamWords(sW);
+		result.setPositiveWords(pW);
+		result.setNegativeWords(nW);
 
 		if (!configF.getAddSW().equals(""))
-			sW.add(configF.getAddSW());
+			result.getSpamWords().add(configF.getAddSW());
 
 		if (!configF.getAddPW().equals(""))
-			pW.add(configF.getAddPW());
+			result.getPositiveWords().add(configF.getAddPW());
 
 		if (!configF.getAddNW().equals(""))
-			nW.add(configF.getAddNW());
+			result.getNegativeWords().add(configF.getAddNW());
 
-		c.setSpamWords(sW);
-		c.setPositiveWords(pW);
-		c.setNegativeWords(nW);
-		//result = c;
-		this.validator.validate(c, binding);
+		result.setId(config.getId());
+		result.setVersion(config.getVersion());
 
 		return result;
 	}

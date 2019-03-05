@@ -102,16 +102,16 @@ public class ConfigurationController extends AbstractController {
 		final Administrator admin = this.administratorService.findOne(user.getId());
 		Assert.notNull(admin);
 
-		config = this.configurationService.reconstructAdd(configF, binding);
+		config = this.configurationService.reconstructAddWord(configF, binding);
+
 		if (binding.hasErrors())
-			result = this.editModelAndView(config);
+			result = this.editModelAndView(configF, null);
 		else
 			try {
 				this.configurationService.save(config);
 				result = new ModelAndView("redirect:/configuration/administrator/edit.do");
-
 			} catch (final Throwable oops) {
-				result = this.editModelAndView(configF, oops.getMessage()/* "configuration.edit.error" */); //"Administrator.commit.error"
+				result = this.editModelAndView(configF, "configuration.edit.error"); //"Administrator.commit.error"
 			}
 		return result;
 	}
@@ -135,7 +135,12 @@ public class ConfigurationController extends AbstractController {
 		ModelAndView result;
 		Configuration config;
 
-		config = this.configurationService.reconstruct(configF, binding);
+		config = this.configurationService.reconstructEdit(configF, binding);
+
+		configF.setSpamWords(config.getSpamWords());
+		configF.setPositiveWords(config.getPositiveWords());
+		configF.setNegativeWords(config.getNegativeWords());
+
 		if (binding.hasErrors())
 			result = this.editModelAndView(configF, null);
 		else
