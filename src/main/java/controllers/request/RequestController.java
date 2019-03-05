@@ -226,6 +226,37 @@ public class RequestController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/brotherhood/accept", method = RequestMethod.POST, params = "save")
+	public ModelAndView accept(final Request r, final BindingResult binding) {
+		ModelAndView result;
+		final Request r2 = this.requestService.findOne(r.getId());
+		if (r2 == null)
+			result = new ModelAndView("redirect:/misc/403");
+		else {
+			final Collection<Request> requests = this.requestService.getRequestAcceptedByProcession(r2.getProcession());
+			boolean notFree = false;
+			for (final Request r3 : requests)
+				if (r3.getPositionColumn() == r.getPositionColumn() && r3.getPositionRow() == r.getPositionRow())
+					notFree = true;
+			if (notFree || r.getPositionRow() > r2.getProcession().getMaxRow() || r.getPositionColumn() > r2.getProcession().getMaxColumn()) {
+				r.setProcession(r2.getProcession());
+				result = this.createEditModelAndView2(r, "error.position");
+			} else
+				try {
+					r.setMember(r2.getMember());
+					r.setProcession(r2.getProcession());
+					r.setStatus(r2.getStatus());
+					r.setVersion(r2.getVersion());
+					this.requestService.acceptRequest(r);
+					result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId" + r2.getProcession().getId());
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView1(r, "request.commit.error");
+				}
+		}
+
+		return result;
+	}
+
 	public ModelAndView createEditModelAndView2(final Request r, final String messageCode) {
 		ModelAndView result;
 		result = new ModelAndView("request/brotherhood/accept");
@@ -235,7 +266,8 @@ public class RequestController extends AbstractController {
 		if (positions.size() > 0) {
 			result.addObject("row", positions.get(0));
 			result.addObject("column", positions.get(1));
-		}
+		} else
+			result.addObject("messageFull", "request.procession.full");
 
 		return result;
 	}
@@ -247,12 +279,20 @@ public class RequestController extends AbstractController {
 		final Collection<Request> requests = this.requestService.getRequestAcceptedByProcession(p);
 		loop: for (int i = 0; i < maxR; i++)
 			for (int j = 0; j < maxC; j++)
-				for (final Request r : requests)
-					if (i != r.getPositionRow() && j != r.getPositionColumn()) {
-						result.add(i);
-						result.add(j);
-						break loop;
-					}
+				if (requests.size() > 0) {
+					for (final Request r : requests)
+						if (i != r.getPositionRow() && j != r.getPositionColumn()) {
+							result.add(i);
+							result.add(j);
+							break loop;
+						}
+
+				} else {
+					result.add(i);
+					result.add(j);
+					break loop;
+				}
+
 		return result;
 
 	}
