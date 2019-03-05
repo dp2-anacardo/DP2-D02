@@ -333,6 +333,7 @@ public class AdministratorService {
 		return res;
 	}
 
+	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
 		Boolean res = false;
 		if (pass.compareTo(confirmPass) == 0)
@@ -344,22 +345,17 @@ public class AdministratorService {
 
 		final Administrator result = this.create();
 		result.setAddress(admin.getAddress());
-		//		result.setBoxes(admin.getBoxes());
 		result.setEmail(admin.getEmail());
 		result.setId(admin.getId());
-		//		result.setIsBanned(admin.getIsBanned());
-		//		result.setIsSuspicious(admin.getIsSuspicious());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
-		//		result.setScore(admin.getScore());
-		//		result.setSocialProfiles(admin.getSocialProfiles());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
-		//		result.setUserAccount(admin.getUserAccount());
 		result.getUserAccount().setPassword(admin.getPassword());
 		result.getUserAccount().setUsername(admin.getUsername());
 		result.setVersion(admin.getVersion());
+
 		this.validator.validate(result, binding);
 		return result;
 	}

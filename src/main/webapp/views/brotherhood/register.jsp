@@ -17,7 +17,8 @@
 </head>
 <body>
 <spring:message code="administrator.firstMessage" />
-<form:form action="brotherhood/create.do" modelAttribute="brotherhoodForm">
+<form:form id="myform" action="brotherhood/create.do" modelAttribute="brotherhoodForm"
+onsubmit="return validarForm(this)">
 
 	<form:hidden path="id" />
  
@@ -71,6 +72,14 @@
 	<br />
 	
 	<script type="text/javascript">
+	function validarForm(form){
+		phoneValidation();
+		checkForm(form);
+	}
+	
+	</script>
+	
+	<script type="text/javascript">
 	function phoneValidation(){
 		var phoneNumber = document.getElementById("phoneNumber").value;
 		var regexPN = /^(\d\d\d\d+)$/;
@@ -89,33 +98,27 @@
 	}
 	</script>
 	
-	<script type="text/javascript">
-	
-	function check_pass() {
-	    if (document.getElementById('userAccount.password').value ==
-	            document.getElementById('confirmPass').value) {
-	        document.getElementById('submit').disabled = false;
-	    } else {
-	        document.getElementById('submit').disabled = true;
+	<script>
+
+	function checkForm(form){
+		
+	    if(!form.terms.checked) {
+	      alert("Please indicate that you accept the Terms and Conditions");
+	      form.terms.focus();
+	      return false;
 	    }
-	}
-	
+	    return true;
+	  }
+
 	</script>
 	
-	<script type="text/javascript">
-	function enableSending() {
-	document.loginform.submit.disabled = !document.loginform.terms.checked;
-	}
-</script>
-	
 	 <div class=terms>
-	 <input type="checkbox" name="terms" onclick="disableSending()">
+	 <input type="checkbox" required name="terms">
 	 <label for="terms"><spring:message code="terms" /></label>
 	 </div>
 	
 	<input type="submit" name="save"
 		value="<spring:message code="administrator.save"/>"
-		onclick="phoneValidation();check_pass();"
 		 />&nbsp; 
 	
 		<input type="button" name="cancel"

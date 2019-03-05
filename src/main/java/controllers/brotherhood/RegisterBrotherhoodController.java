@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.AdministratorService;
 import services.AreaService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
@@ -24,10 +26,14 @@ import forms.BrotherhoodForm;
 public class RegisterBrotherhoodController extends AbstractController {
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private AreaService			areaService;
+	private AreaService				areaService;
+	@Autowired
+	private ActorService			actorService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -46,7 +52,13 @@ public class RegisterBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		Brotherhood bro;
 
-		if (binding.hasErrors())
+		if (this.actorService.existUsername(brotherhoodForm.getUsername()) == false) {
+			binding.rejectValue("username", "error.username");
+			result = this.createEditModelAndView(brotherhoodForm);
+		} else if (this.administratorService.checkPass(brotherhoodForm.getPassword(), brotherhoodForm.getConfirmPass()) == false) {
+			binding.rejectValue("password", "error.password");
+			result = this.createEditModelAndView(brotherhoodForm);
+		} else if (binding.hasErrors())
 			result = this.createEditModelAndView(brotherhoodForm);
 		else
 			try {

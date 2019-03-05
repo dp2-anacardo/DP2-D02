@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -115,6 +117,16 @@ public class ActorService {
 		Collection<Actor> result;
 		result = this.actorRepository.findBannedActors();
 		return result;
+	}
+
+	public Boolean existUsername(final String username) {
+		Boolean res = false;
+		final List<String> lista = new ArrayList<String>();
+		for (final Actor a : this.actorRepository.findAll())
+			lista.add(a.getUserAccount().getUsername());
+		if (!(lista.contains(username)))
+			res = true;
+		return res;
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AdministratorService;
 import controllers.AbstractController;
 import domain.Administrator;
@@ -22,6 +23,9 @@ public class RegisterAdministratorController extends AbstractController {
 	@Autowired
 	private AdministratorService	administratorService;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	//Para registrarse como administador, primero un admin llama al create del servicio
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -29,7 +33,6 @@ public class RegisterAdministratorController extends AbstractController {
 
 		ModelAndView result;
 		AdministratorForm administratorForm;
-		//**************
 		administratorForm = new AdministratorForm();
 		result = this.createEditModelAndView(administratorForm);
 
@@ -41,7 +44,13 @@ public class RegisterAdministratorController extends AbstractController {
 		ModelAndView result;
 		Administrator admin;
 
-		if (binding.hasErrors())
+		if (this.actorService.existUsername(administratorForm.getUsername()) == false) {
+			binding.rejectValue("username", "error.username");
+			result = this.createEditModelAndView(administratorForm);
+		} else if (this.administratorService.checkPass(administratorForm.getPassword(), administratorForm.getConfirmPass()) == false) {
+			binding.rejectValue("password", "error.password");
+			result = this.createEditModelAndView(administratorForm);
+		} else if (binding.hasErrors())
 			result = this.createEditModelAndView(administratorForm);
 		else
 			try {
@@ -55,14 +64,6 @@ public class RegisterAdministratorController extends AbstractController {
 			}
 		return result;
 	}
-
-	protected ModelAndView createEditModelAndView(final Administrator administrator) {
-		ModelAndView result;
-		final AdministratorForm adminForm = new AdministratorForm(administrator);
-		result = this.createEditModelAndView(adminForm, null);
-		return result;
-	}
-
 	protected ModelAndView createEditModelAndView(final AdministratorForm adminForm) {
 		ModelAndView result;
 		result = this.createEditModelAndView(adminForm, null);

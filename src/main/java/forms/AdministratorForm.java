@@ -2,6 +2,7 @@
 package forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,12 +21,6 @@ public class AdministratorForm {
 	private String	email;
 	private String	phoneNumber;
 	private String	address;
-	//	private Boolean						isSuspicious;
-	//	private Boolean						isBanned;
-	//	private Double						score;
-	//	private Collection<MessageBox>		boxes;
-	//	private UserAccount					userAccount;
-	//	private Collection<SocialProfile>	socialProfiles;
 	private int		id;
 	private int		version;
 
@@ -34,25 +29,20 @@ public class AdministratorForm {
 
 		final AdministratorForm result = new AdministratorForm();
 		result.setAddress(admin.getAddress());
-		//		result.setBoxes(admin.getBoxes());
 		result.setEmail(admin.getEmail());
 		result.setId(admin.getId());
-		//		result.setIsBanned(admin.getIsBanned());
-		//		result.setIsSuspicious(admin.getIsSuspicious());
 		result.setName(admin.getName());
 		result.setPhoneNumber(admin.getPhoneNumber());
 		result.setPhoto(admin.getPhoto());
-		//		result.setScore(admin.getScore());
-		//		result.setSocialProfiles(admin.getSocialProfiles());
 		result.setSurname(admin.getSurname());
 		result.setMiddleName(admin.getMiddleName());
-		//		result.setUserAccount(admin.getUserAccount());
 		result.setVersion(admin.getVersion());
 	}
 	public AdministratorForm() {
 
 	}
 
+	@Size(min = 5, max = 32)
 	@NotNull
 	@NotBlank
 	public String getConfirmPass() {
@@ -123,54 +113,6 @@ public class AdministratorForm {
 		this.address = address;
 	}
 
-	//	public Boolean getIsSuspicious() {
-	//		return this.isSuspicious;
-	//	}
-	//
-	//	public void setIsSuspicious(final Boolean isSuspicious) {
-	//		this.isSuspicious = isSuspicious;
-	//	}
-	//
-	//	public Boolean getIsBanned() {
-	//		return this.isBanned;
-	//	}
-	//
-	//	public void setIsBanned(final Boolean isBanned) {
-	//		this.isBanned = isBanned;
-	//	}
-	//
-	//	public Double getScore() {
-	//		return this.score;
-	//	}
-	//
-	//	public void setScore(final Double score) {
-	//		this.score = score;
-	//	}
-	//
-	//	public Collection<MessageBox> getBoxes() {
-	//		return this.boxes;
-	//	}
-	//
-	//	public void setBoxes(final Collection<MessageBox> boxes) {
-	//		this.boxes = boxes;
-	//	}
-	//
-	//	public UserAccount getUserAccount() {
-	//		return this.userAccount;
-	//	}
-	//
-	//	public void setUserAccount(final UserAccount userAccount) {
-	//		this.userAccount = userAccount;
-	//	}
-	//
-	//	public Collection<SocialProfile> getSocialProfiles() {
-	//		return this.socialProfiles;
-	//	}
-	//
-	//	public void setSocialProfiles(final Collection<SocialProfile> socialProfiles) {
-	//		this.socialProfiles = socialProfiles;
-	//	}
-
 	public int getId() {
 		return this.id;
 	}
@@ -187,6 +129,7 @@ public class AdministratorForm {
 		this.version = version;
 	}
 
+	@Size(min = 5, max = 32)
 	@NotBlank
 	public String getPassword() {
 		return this.password;
@@ -195,6 +138,7 @@ public class AdministratorForm {
 		this.password = password;
 	}
 
+	@Size(min = 5, max = 32)
 	@NotBlank
 	public String getUsername() {
 		return this.username;

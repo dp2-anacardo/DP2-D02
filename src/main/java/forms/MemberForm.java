@@ -2,6 +2,7 @@
 package forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -41,6 +42,7 @@ public class MemberForm {
 
 	}
 
+	@Size(min = 5, max = 32)
 	@NotNull
 	@NotBlank
 	public String getConfirmPass() {
@@ -110,6 +112,7 @@ public class MemberForm {
 		this.version = version;
 	}
 
+	@Size(min = 5, max = 32)
 	@NotBlank
 	public String getPassword() {
 		return this.password;
@@ -118,6 +121,7 @@ public class MemberForm {
 		this.password = password;
 	}
 
+	@Size(min = 5, max = 32)
 	@NotBlank
 	public String getUsername() {
 		return this.username;
