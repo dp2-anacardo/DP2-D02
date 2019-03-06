@@ -149,12 +149,12 @@ public class AdministratorService {
 	}
 
 	/* Q1 */
-	public Collection<Double> getStatsMemberPerBrotherhood() {
+	public List<Double> getStatsMemberPerBrotherhood() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Collection<Double> result;
+		List<Double> result;
 		result = new ArrayList<Double>();
 
 		result.add(this.administratorRepository.getAvgOfMembersPerBrotherhood());
@@ -214,12 +214,12 @@ public class AdministratorService {
 	}
 
 	/* Q6 */
-	public Collection<Double> getRatioOfRequestPerStatus() {
+	public List<Double> getRatioOfRequestPerStatus() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Collection<Double> result;
+		List<Double> result;
 		result = new ArrayList<Double>();
 
 		result.add(this.administratorRepository.getRatioOfRequestsApproveds());

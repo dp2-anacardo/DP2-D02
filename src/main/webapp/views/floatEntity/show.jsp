@@ -15,3 +15,6 @@
 <acme:showtext fieldset="true" code="float.description" value="${floatEntity.description}"/>
 <acme:showtext fieldset="true" code="float.brotherhood" value="${floatEntity.brotherhood.title}"/>
 
+<acme:cancel url="floatEntity/brotherhood/list.do" code="float.back"/>
+	<br />
+
