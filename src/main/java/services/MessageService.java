@@ -103,10 +103,11 @@ public class MessageService {
 
 				if (spam) {
 					box = "SPAMBOX";
-					message.getSender().setIsSuspicious(true);
-				} else
+					message.setIsSpam(true);
+				} else {
 					box = "INBOX";
-
+					message.setIsSpam(false);
+				}
 				if (sender != null)
 					message.getMessageBoxes().add(sender.getMessageBox("OUTBOX"));
 
@@ -134,13 +135,13 @@ public class MessageService {
 
 		Assert.isTrue(message.getRecipients().contains(actor) || message.getSender().equals(actor));
 
-		final Boolean actorRole;
-		if (message.getSender() == null)
-			actorRole = true;
-		else if (message.getSender().equals(actor))
-			actorRole = true;
-		else
-			actorRole = false;
+		//final Boolean actorRole;
+		//if (message.getSender() == null)
+		//	actorRole = true;
+		//		else if (message.getSender().equals(actor))
+		//			actorRole = true;
+		//else
+		//	actorRole = false;
 
 		if (srcMessageBox.getName().equals("TRASHBOX")) {
 			for (final MessageBox box : actor.getBoxes())
@@ -148,14 +149,17 @@ public class MessageService {
 					actor.getMessageBox(box.getName()).deleteMessage(message);
 					message.getMessageBoxes().remove(box);
 				}
-			if (!actorRole)
-				message.getRecipients().remove(actor);
-			else
-				message.setSender(null);
-			if (message.getRecipients().size() == 0 && message.getMessageBoxes().size() == 0 && message.getSender() == null)
+
+			//if (!actorRole)
+			//	message.getRecipients().remove(actor);
+			//			else
+			//				message.setSender(null);
+
+			if (message.getMessageBoxes().size() == 0) //&& message.getSender() == null message.getRecipients().size() == 0 && 
 				this.messageRepository.delete(message);
 			else
 				this.messageRepository.save(message);
+
 		} else {
 			Assert.isTrue(srcMessageBox.getMessages().contains(message));
 			this.moveMessage(message, srcMessageBox, actor.getMessageBox("TRASHBOX"));
@@ -246,6 +250,14 @@ public class MessageService {
 	public Collection<Message> findAllByActor(final int actorID) {
 		final Collection<Message> result = this.messageRepository.findAllByActor(actorID);
 		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Double findSpamRatioByActor(final int actorID) {
+		Double result = this.messageRepository.findSpamRatioByActor(actorID);
+		if (result == null)
+			result = 0.0;
 
 		return result;
 	}
