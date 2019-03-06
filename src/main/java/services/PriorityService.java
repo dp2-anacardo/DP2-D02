@@ -113,7 +113,6 @@ public class PriorityService {
 		return result;
 
 	}
-<<<<<<< HEAD
 	// TEST
 
 	public Boolean exists(final Priority a) {
@@ -127,11 +126,9 @@ public class PriorityService {
 			}
 
 		return exist;
-
-=======
+	}
 
 	public Priority getHighPriority() {
 		return this.priorityRepository.getHighPriority();
->>>>>>> origin/miguel
 	}
 }

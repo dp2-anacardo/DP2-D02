@@ -31,11 +31,7 @@
 					<li><a href="message/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
 				</ul>
 			</li>
-<<<<<<< HEAD
 			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
-=======
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
->>>>>>> origin/miguel
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MEMBER')">
@@ -53,7 +49,6 @@
 					<li><a href="finder/member/list.do"><spring:message code="master.page.finder.list" /></a></li>
 				</ul>
 			</li>
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BROTHERHOOD')">
@@ -64,7 +59,6 @@
 					<li><a href="procession/brotherhood/list.do"><spring:message code="master.page.brotherhood.processions" /></a></li>						
 				</ul>
 			</li>
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
