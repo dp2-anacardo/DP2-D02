@@ -1,6 +1,7 @@
 
 package controllers.administrator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.ProcessionService;
+import controllers.AbstractController;
 import domain.Procession;
 
 @Controller
 @RequestMapping("administrator")
-public class DashboardAdministratorController {
+public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ProcessionService		processionService;
 
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView dashboard() {
 		final ModelAndView result;
-
 		/* Q1 */
 		final Double AvgOfMembersPerBrotherhood = this.administratorService.getStatsMemberPerBrotherhood().get(0);
 		final Double MinOfMembersPerBrotherhood = this.administratorService.getStatsMemberPerBrotherhood().get(1);
@@ -37,6 +42,35 @@ public class DashboardAdministratorController {
 		final Collection<Procession> ProcessionIn30Days = this.administratorService.getProcessionIn30Days();
 		/* Q5 TODO:Revisar */
 		//final Double RatioOfRequestToProcessionPerStatus = this.administratorService.getRatioOfRequestToProcessionPerStatus(procession, status);
+
+		final Collection<Double> RatioOfRequestToProcessionPerAPPROVED = new ArrayList<Double>();
+		final Collection<Procession> procesiones = this.processionService.findAll();
+		for (final Procession p : procesiones) {
+			final Double d = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "APPROVED");
+			if (d == null)
+				RatioOfRequestToProcessionPerAPPROVED.add(0.0);
+			else
+				RatioOfRequestToProcessionPerAPPROVED.add(d);
+		}
+
+		final Collection<Double> RatioOfRequestToProcessionPerREJECTED = new ArrayList<Double>();
+		for (final Procession p : procesiones) {
+			final Double e = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "REJECTED");
+			if (e == null)
+				RatioOfRequestToProcessionPerREJECTED.add(0.0);
+			else
+				RatioOfRequestToProcessionPerREJECTED.add(e);
+		}
+
+		final Collection<Double> RatioOfRequestToProcessionPerPENDING = new ArrayList<Double>();
+		for (final Procession p : procesiones) {
+			final Double f = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "PENDING");
+			if (f == null)
+				RatioOfRequestToProcessionPerPENDING.add(0.0);
+			else
+				RatioOfRequestToProcessionPerPENDING.add(f);
+		}
+
 		/* Q6 */
 		final Double RatioOfRequestsApproveds = this.administratorService.getRatioOfRequestPerStatus().get(0);
 		final Double RatioOfRequestsPendings = this.administratorService.getRatioOfRequestPerStatus().get(1);
@@ -50,10 +84,12 @@ public class DashboardAdministratorController {
 		result.addObject("LargestBrotherhood", LargestBrotherhood);
 		result.addObject("SmallestBrotherhoood", SmallestBrotherhoood);
 		result.addObject("ProcessionIn30Days", ProcessionIn30Days);
-		//		result.addObject("RatioOfRequestToProcessionPerStatus", RatioOfRequestToProcessionPerStatus);
 		result.addObject("RatioOfRequestsApproveds", RatioOfRequestsApproveds);
 		result.addObject("RatioOfRequestsPendings", RatioOfRequestsPendings);
 		result.addObject("RatioOfRequestsRejecteds", RatioOfRequestsRejecteds);
+		result.addObject("RatioOfRequestToProcessionPerAPPROVED", RatioOfRequestToProcessionPerAPPROVED);
+		result.addObject("RatioOfRequestToProcessionPerREJECTED", RatioOfRequestToProcessionPerREJECTED);
+		result.addObject("RatioOfRequestToProcessionPerPENDING", RatioOfRequestToProcessionPerPENDING);
 
 		return result;
 	}

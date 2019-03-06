@@ -55,7 +55,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select 100*(select count(f) from Request f where f.status like 'APPROVED')/count(f) from Request f")
 	Double getRatioOfRequestsApproveds();
 
-	@Query("select 100*(select count(f) from Request f where f.status like 'APPROVED')/count(f) from Request f")
+	@Query("select 100*(select count(f) from Request f where f.status like 'PENDING')/count(f) from Request f")
 	Double getRatioOfRequestsPendings();
 
 	@Query("select 100*(select count(f) from Request f where f.status like 'REJECTED')/count(f) from Request f")
