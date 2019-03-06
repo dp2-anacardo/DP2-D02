@@ -92,8 +92,8 @@
 		<property name="email" value="emailDePrueba@gmail.com"/>
 		<property name="phoneNumber" value="+34 678123674"/>
 		<property name="address" value="Avenida Reina Mercedes"/>
-		<property name="isSuspicious" value=""/>
-		<property name="isBanned" value=""/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
 		<property name="score" value=""/>
 		<property name="socialProfiles">
 			<list>
@@ -195,8 +195,8 @@
 		<property name="email" value="brotherhood1@gmail.com"/>
 		<property name="phoneNumber" value="+34 675234132"/>
 		<property name="address" value="C/ Recaredo"/>
-		<property name="isSuspicious" value=""/>
-		<property name="isBanned" value=""/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
 		<property name="score" value=""/>
 		<property name="title" value="Triana's Brotherhood"/>
 		<property name="establishmentDate" value="19/02/2019 15:51"/>
@@ -326,8 +326,8 @@
 		<property name="email" value="emailMember1@gmail.com"/>
 		<property name="phoneNumber" value="+34 692312501"/>
 		<property name="address" value="Carretera Carmona"/>
-		<property name="isSuspicious" value="1"/>
-		<property name="isBanned" value=""/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
 		<property name="score" value="-0.8"/>
 		<property name="socialProfiles">
 			<list>
@@ -354,8 +354,8 @@
 		<property name="email" value="emailMember2@gmail.com"/>
 		<property name="phoneNumber" value="+34 691212501"/>
 		<property name="address" value="Calle Tetuán"/>
-		<property name="isSuspicious" value="0"/>
-		<property name="isBanned" value="0"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
 		<property name="score" value="0.5"/>
 		<property name="socialProfiles">
 			<list>
@@ -383,8 +383,8 @@
 		<property name="email" value="emailMember3@gmail.com"/>
 		<property name="phoneNumber" value="+34 662217501"/>
 		<property name="address" value="Calle 8 de Septiembre"/>
-		<property name="isSuspicious" value="1"/>
-		<property name="isBanned" value="1"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
 		<property name="score" value="-0.9"/>
 		<property name="socialProfiles">
 			<list>

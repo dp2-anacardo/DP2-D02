@@ -453,4 +453,26 @@ public class AdministratorService {
 			return (positiveWordsValue - negativeWordsValue) / (positiveWordsValue + negativeWordsValue);
 
 	}
+
+	public void computeAllSpam() {
+
+		Collection<Member> members;
+		Collection<Brotherhood> brotherhoods;
+
+		// Make sure that the principal is an Admin
+		final Actor principal = this.actorService.getActorLogged();
+		Assert.isInstanceOf(Administrator.class, principal);
+
+		members = this.memberService.findAll();
+		for (final Member member : members) {
+			member.setIsSuspicious(this.messageService.findSpamRatioByActor(member.getId()) > .10);
+			this.memberService.save(member);
+		}
+
+		brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood brotherhood : brotherhoods) {
+			brotherhood.setIsSuspicious(this.messageService.findSpamRatioByActor(brotherhood.getId()) > .10);
+			this.brotherhoodService.save(brotherhood);
+		}
+	}
 }
