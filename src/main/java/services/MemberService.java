@@ -8,6 +8,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -90,14 +91,6 @@ public class MemberService {
 	public Member save(final Member member) {
 
 		Assert.notNull(member);
-
-<<<<<<< HEAD
-		//		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		//		final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
-		//		member.getUserAccount().setPassword(res);
-
-=======
->>>>>>> origin/sergio
 		Member result;
 		if (member.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
