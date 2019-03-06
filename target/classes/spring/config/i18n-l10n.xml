@@ -38,6 +38,7 @@
 		<value>/views/enrolment/messages</value>
 		<value>/views/floatEntity/messages</value>
 		<value>/views/procession/messages</value>
+		<value>/views/request/messages</value>
 	</util:list>
 
 </beans>

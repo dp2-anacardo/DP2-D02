@@ -748,8 +748,6 @@
 	<!-- Request -->
 	
 	<bean id="request1" class="domain.Request">
-		<property name="positionRow" value="2"/>
-		<property name="positionColumn" value="1"/>
 		<property name="status" value="PENDING"/>
 		<property name="comment" value=""/>
 		<property name="procession" ref="procession1"/>
@@ -757,8 +755,6 @@
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
-		<property name="positionRow" value="2"/>
-		<property name="positionColumn" value="1"/>
 		<property name="status" value="REJECTED"/>
 		<property name="comment" value="No te queremos member2"/>
 		<property name="procession" ref="procession1"/>

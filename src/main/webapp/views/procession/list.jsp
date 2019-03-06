@@ -12,7 +12,7 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 <display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	<spring:message code="procession.title" var="columnTitle"/>
-	<display:column title="columnTitle">
+	<display:column title="${columnTitle}">
 		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
@@ -25,6 +25,11 @@
 	<display:column>
 		<a href="procession/show.do?processionId=${row.id}">
 			<spring:message code="procession.show"/>
+		</a>
+	</display:column>
+	<display:column>
+		<a href="request/brotherhood/list.do?processionId=${row.id}">
+			<spring:message code="procession.request"/>
 		</a>
 	</display:column>
 	
