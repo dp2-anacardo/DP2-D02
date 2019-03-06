@@ -13,8 +13,10 @@
 <security:authorize access="hasRole('BROTHERHOOD')">
 <form:form action="request/brotherhood/accept.do" modelAttribute="r">
 	<form:hidden path="id" />
-	<div class="error"><jstl:out value="${messageFull}"></jstl:out>
+	<jstl:if test="${messageFullB==true }">
+	<div class="error"><spring:message code="${messageFull}"/>
 	</div>
+	</jstl:if>
 	
 	<form:label path="positionRow">
 	<spring:message code="request.positionRow"/>

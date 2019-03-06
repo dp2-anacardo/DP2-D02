@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 <style type="text/css">
-.ACCEPTED{
+.APPROVED{
   background-color: green;
 }
 .REJECTED{

@@ -20,12 +20,15 @@ import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
 import services.MemberService;
+import services.MessageService;
+import services.PriorityService;
 import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
+import domain.Message;
 import domain.Procession;
 import domain.Request;
 
@@ -43,6 +46,10 @@ public class RequestController extends AbstractController {
 	ProcessionService	processionService;
 	@Autowired
 	BrotherhoodService	brotherhoodService;
+	@Autowired
+	MessageService		messageService;
+	@Autowired
+	PriorityService		priorityService;
 
 
 	@RequestMapping(value = "/member/list")
@@ -93,7 +100,7 @@ public class RequestController extends AbstractController {
 				if (r.getProcession().equals(request.getProcession()))
 					Assert.isTrue(false);
 			this.requestService.save(request);
-			result = new ModelAndView("redirect:request/member/list.do");
+			result = new ModelAndView("redirect:/request/member/list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("request/member/edit");
 			result.addObject("message", "request.commit.error");
@@ -196,7 +203,16 @@ public class RequestController extends AbstractController {
 				r.setStatus(r2.getStatus());
 				r.setVersion(r2.getVersion());
 				this.requestService.rejectRequest(r);
-				result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId" + r2.getProcession().getId());
+				final Message message = this.messageService.create();
+				final Collection<Actor> recipients = new ArrayList<>();
+				recipients.add(r.getMember());
+				recipients.add(r.getProcession().getBrotherhood());
+				message.setRecipients(recipients);
+				message.setPriority(this.priorityService.getHighPriority());
+				message.setSubject("A request changed its status \n Una petición ha cambiado su estatus");
+				message.setBody("A request has been rejected \n Una petición ha sido rechazada");
+				this.messageService.save(message);
+				result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId=" + r2.getProcession().getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView1(r, "request.commit.error");
 			}
@@ -238,7 +254,7 @@ public class RequestController extends AbstractController {
 			for (final Request r3 : requests)
 				if (r3.getPositionColumn() == r.getPositionColumn() && r3.getPositionRow() == r.getPositionRow())
 					notFree = true;
-			if (notFree || r.getPositionRow() > r2.getProcession().getMaxRow() || r.getPositionColumn() > r2.getProcession().getMaxColumn()) {
+			if (notFree || r.getPositionRow() >= r2.getProcession().getMaxRow() || r.getPositionColumn() >= r2.getProcession().getMaxColumn()) {
 				r.setProcession(r2.getProcession());
 				result = this.createEditModelAndView2(r, "error.position");
 			} else
@@ -248,7 +264,16 @@ public class RequestController extends AbstractController {
 					r.setStatus(r2.getStatus());
 					r.setVersion(r2.getVersion());
 					this.requestService.acceptRequest(r);
-					result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId" + r2.getProcession().getId());
+					final Message message = this.messageService.create();
+					final Collection<Actor> recipients = new ArrayList<>();
+					recipients.add(r.getMember());
+					recipients.add(r.getProcession().getBrotherhood());
+					message.setRecipients(recipients);
+					message.setPriority(this.priorityService.getHighPriority());
+					message.setSubject("A request changed its status \n Una petición ha cambiado su estatus");
+					message.setBody("A request has been accepted \n Una petición ha sido aceptada");
+					this.messageService.save(message);
+					result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId=" + r2.getProcession().getId());
 				} catch (final Throwable oops) {
 					result = this.createEditModelAndView1(r, "request.commit.error");
 				}
@@ -266,9 +291,11 @@ public class RequestController extends AbstractController {
 		if (positions.size() > 0) {
 			result.addObject("row", positions.get(0));
 			result.addObject("column", positions.get(1));
-		} else
+			result.addObject("messageFullB", false);
+		} else {
 			result.addObject("messageFull", "request.procession.full");
-
+			result.addObject("messageFullB", true);
+		}
 		return result;
 	}
 
