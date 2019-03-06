@@ -9,9 +9,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FloatEntityRepository;
+import security.LoginService;
 import datatype.Url;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.FloatEntity;
 import domain.Procession;
@@ -29,6 +33,32 @@ public class FloatEntityService {
 	@Autowired
 	private ProcessionService		processionService;
 
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private Validator				validator;
+
+
+	public FloatEntity reconstruct(final FloatEntity f, final BindingResult binding) {
+		FloatEntity result;
+
+		if (f.getId() == 0) {
+			result = f;
+			this.validator.validate(f, binding);
+		} else {
+			result = this.floatRepository.findOne(f.getId());
+
+			f.setBrotherhood(result.getBrotherhood());
+			f.setVersion(result.getVersion());
+
+			result = f;
+			this.validator.validate(f, binding);
+		}
+
+		return result;
+
+	}
 
 	public FloatEntity create() {
 		FloatEntity res;
@@ -48,7 +78,6 @@ public class FloatEntityService {
 	public FloatEntity findOne(final int floatEntityId) {
 		FloatEntity res;
 		res = this.floatRepository.findOne(floatEntityId);
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -56,7 +85,15 @@ public class FloatEntityService {
 		FloatEntity res;
 		Assert.notNull(floatEntity);
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
-		res = this.floatRepository.save(floatEntity);
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		if (floatEntity.getId() == 0) {
+			floatEntity.setBrotherhood(b);
+			res = this.floatRepository.save(floatEntity);
+		} else {
+			Assert.isTrue(floatEntity.getBrotherhood().equals(b));
+			res = this.floatRepository.save(floatEntity);
+		}
 		return res;
 	}
 

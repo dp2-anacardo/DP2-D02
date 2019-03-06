@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles_es.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * tiles_es.xml * * Copyright (C) 2018 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+
 <tiles-definitions>
 
-	<definition name="floatEntity/listNotRegister" extends="master.page">	
+	<definition name="floatEntity/listNotRegister" extends="master.page">
 		<put-attribute name="title" value="Pasos" />
-		<put-attribute name="body" value="/views/floatEntity/listNotRegister.jsp" />
+		<put-attribute name="body"
+			value="/views/floatEntity/listNotRegister.jsp" />
 	</definition>
+
+	<definition name="floatEntity/brotherhood/list" extends="master.page">
+		<put-attribute name="title" value="Pasos" />
+		<put-attribute name="body" value="/views/floatEntity/list.jsp" />
+	</definition>
+	
+		<definition name="floatEntity/brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Paso" />
+		<put-attribute name="body" value="/views/floatEntity/edit.jsp" />
+		</definition>
+	
+		<definition name="floatEntity/brotherhood/show" extends="master.page">	
+		<put-attribute name="title" value="Paso" />
+		<put-attribute name="body" value="/views/floatEntity/show.jsp" />
+		</definition>	
 </tiles-definitions>

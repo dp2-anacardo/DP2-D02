@@ -21,5 +21,19 @@
 		<put-attribute name="body" value="/views/floatEntity/listNotRegister.jsp" />
 	</definition>
 	
+	<definition name="floatEntity/brotherhood/list" extends="master.page">	
+		<put-attribute name="title" value="Floats" />
+		<put-attribute name="body" value="/views/floatEntity/list.jsp" />
+	</definition>
+	
+		<definition name="floatEntity/brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Float" />
+		<put-attribute name="body" value="/views/floatEntity/edit.jsp" />
+		</definition>
+	
+		<definition name="floatEntity/brotherhood/show" extends="master.page">	
+		<put-attribute name="title" value="Float" />
+		<put-attribute name="body" value="/views/floatEntity/show.jsp" />
+		</definition>	
 	
 </tiles-definitions>

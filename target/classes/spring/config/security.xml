@@ -39,11 +39,16 @@
 		<security:intercept-url pattern="/procession/listNotRegister.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/procession/show.do" access="permitAll" /> 
+		
 		<security:intercept-url pattern="/floatEntity/listNotRegister.do" access="permitAll" /> 
+<<<<<<< HEAD
 
 		<security:intercept-url pattern="/brotherhood/create.do" access="permitAll" />
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 
+=======
+		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
+>>>>>>> origin/juanma
 		
 		<security:intercept-url pattern="/socialProfile/brotherhood,member,admin/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/request/member,brotherhood/**" access="isAuthenticated()" />
