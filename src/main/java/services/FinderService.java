@@ -62,7 +62,7 @@ public class FinderService {
 		}
 
 		Configuration conf;
-		conf = this.configurationService.findAll().get(0);
+		conf = this.configurationService.getConfiguration();
 
 		List<Procession> result = new ArrayList<Procession>(allProcessions);
 

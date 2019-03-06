@@ -36,4 +36,14 @@
 		<put-attribute name="body" value="/views/administrator/register.jsp" />
 	</definition>
 	
+	<definition name="administrator/actorList" extends="master.page">	
+		<put-attribute name="title" value="Lista de actores" />
+		<put-attribute name="body" value="/views/administrator/actorList.jsp" />
+	</definition>
+	
+	<definition name="administrator/actorList/calculateScore" extends="master.page">	
+		<put-attribute name="title" value="List of actors" />
+		<put-attribute name="body" value="/views/administrator/actorList.jsp" />
+	</definition>
+	
 </tiles-definitions>

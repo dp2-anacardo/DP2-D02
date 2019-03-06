@@ -189,4 +189,18 @@ public class MessageBoxService {
 		return result;
 
 	}
+
+	public Boolean exists(final MessageBox a) {
+		Boolean exist = false;
+
+		final Collection<MessageBox> boxes = this.findAllByActor(this.actorService.getActorLogged().getId());
+		for (final MessageBox b : boxes)
+			if (a.equals(b)) {
+				exist = true;
+				break;
+			}
+
+		return exist;
+
+	}
 }

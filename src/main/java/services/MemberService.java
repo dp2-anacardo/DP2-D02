@@ -8,7 +8,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -92,14 +91,14 @@ public class MemberService {
 
 		Assert.notNull(member);
 
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
-		member.getUserAccount().setPassword(res);
+		//		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		//		final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);
+		//		member.getUserAccount().setPassword(res);
 
 		Member result;
 		if (member.getId() == 0) {
 			Finder finderCreate;
-			Finder finder;
+			final Finder finder;
 			finderCreate = this.finderService.create();
 			finder = this.finderService.save(finderCreate);
 			member.setFinder(finder);
@@ -108,6 +107,14 @@ public class MemberService {
 		result = this.memberRepository.save(member);
 		return result;
 
+	}
+
+	public Member update(final Member member) {
+		Member result;
+
+		result = this.memberRepository.save(member);
+
+		return result;
 	}
 	public void delete(final Member member) {
 

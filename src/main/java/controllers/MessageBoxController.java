@@ -104,7 +104,9 @@ public class MessageBoxController extends AbstractController {
 			msgBox = this.messageBoxService.reconstruct(messageBox, binding);
 
 			if (binding.hasErrors())
-				result = this.createEditModelAndView(messageBox);
+				result = this.createEditModelAndView(msgBox);
+			else if (this.messageBoxService.exists(msgBox))
+				result = this.createEditModelAndView(msgBox, "messageBox.duplicated");
 			else {
 				try {
 					final Actor principal = this.actorService.getActorLogged();

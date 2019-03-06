@@ -17,62 +17,45 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="message/broadcast.do" modelAttribute="mesage">
 
-	<security:authorize
-		access="hasRole('ADMIN')">
-
-		<%-- Hidden properties from message--%>
-		<form:hidden path="id" />
-		<form:hidden path="version" />
-		<form:hidden path="sender" />
-		<form:hidden path="moment" />
-		<form:hidden path="messageBoxes" />
-		<form:hidden path="recipients" />
-
+	<security:authorize access="hasRole('ADMIN')">
 
 		<%-- Subject --%>
-		<form:label path="subject">
-			<spring:message code="message.subject" />
-		</form:label>
-		<form:input path="subject" />
-		<form:errors class="error" path="subject" />
-		<br>
+		<acme:textbox code="message.subject" path="subject" />
 		<br>
 
-		<form:label path="priority">
-			<spring:message code="message.priority" />
-		</form:label>
-		<form:select id="priorityDropdown" path="priority">
-			<form:option value="0">--Select Priority--</form:option>
-			<form:option value="LOW">LOW</form:option>
-			<form:option value="MEDIUM">MEDIUM</form:option>
-			<form:option value="HIGH">HIGH</form:option>
+		<spring:message code="message.priority" />
+		<form:select path="priority" multiple="false">
+			<jstl:choose>
+				<jstl:when test="${pageContext.response.locale.language == 'es'}">
+					<form:options items="${priorityList}" itemLabel="name[ES]"
+						itemValue="id" />
+				</jstl:when>
+				<jstl:when test="${pageContext.response.locale.language == 'en'}">
+					<form:options items="${priorityList}" itemLabel="name[EN]"
+						itemValue="id" />
+				</jstl:when>
+			</jstl:choose>
+
 		</form:select>
 		<form:errors class="error" path="priority" />
 		<br>
-		<br>
 
 		<%-- Body --%>
-		<form:label path="body">
-			<spring:message code="message.body" />
-		</form:label>
-		<form:textarea path="body" />
-		<form:errors class="error" path="body" />
-		<br>
+		<acme:textarea code="message.body" path="body" />
 		<br>
 
+		<%-- Tags --%>
+		<acme:textbox code="message.tags" path="tags" />
+		<br>
 
 		<%-- Buttons --%>
-		<input type="submit" name="send"
-			value="<spring:message code="message.send"/>" />
+		<acme:submit name="send" code="message.send" />
 
-		<input type="button" name="cancel"
-			value="<spring:message code="message.cancel" />"
-			onClick="javascript: window.location.replace('messageBox/list.do')" />
+		<acme:cancel url="messageBox/list.do" code="message.cancel" />
 
-		<br>
-		<br>
 	</security:authorize>
 </form:form>

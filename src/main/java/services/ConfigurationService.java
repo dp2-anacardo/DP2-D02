@@ -40,6 +40,10 @@ public class ConfigurationService {
 		return this.configurationRepository.findOne(arg0);
 	}
 
+	public Configuration getConfiguration() {
+		final Configuration result = this.configurationRepository.getConfiguration().iterator().next();
+		return result;
+	}
 	public Configuration save(final Configuration configuration) {
 		Assert.notNull(configuration);
 
