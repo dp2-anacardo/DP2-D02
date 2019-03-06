@@ -26,12 +26,9 @@
 					<li class="arrow"></li>
 					<li><a href="area/administrator/list.do"><spring:message code="master.page.administrator.listArea" /></a></li>		
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.listPosition" /></a></li>
-<<<<<<< HEAD
 					<li><a href="priority/administrator/list.do"><spring:message code="master.page.administrator.listPriority" /></a></li>
 					<li><a href="message/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
-=======
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
->>>>>>> origin/juanma
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
