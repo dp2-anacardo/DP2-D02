@@ -8,9 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.FinderRepository;
 import domain.Configuration;
@@ -22,10 +25,18 @@ import domain.Procession;
 public class FinderService {
 
 	//Managed repository
+	@Autowired
 	private FinderRepository		finderRepository;
 
 	//Services
+	@Autowired
 	private ConfigurationService	configurationService;
+	@Autowired
+	private ProcessionService		processionService;
+
+	//Validator
+	@Autowired
+	private Validator				validator;
 
 
 	//Simple CRUD Methods
@@ -36,7 +47,7 @@ public class FinderService {
 		result.setProcessions(processions);
 		return result;
 	}
-	public List<Finder> findAll() {
+	public Collection<Finder> findAll() {
 		return this.finderRepository.findAll();
 	}
 
@@ -48,17 +59,17 @@ public class FinderService {
 
 		Assert.notNull(finder);
 		final Set<Procession> allProcessions = new HashSet<Procession>();
-		if (finder.getKeyWord() != null && finder.getKeyWord() != "") {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
-			allProcessions.addAll(processions);
+		if (!(finder.getKeyWord() == null || finder.getKeyWord() == "")) {
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
+			allProcessions.addAll(pro);
 		}
 		if (finder.getMinimumDate() != null && finder.getMaximumDate() != null) {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
-			allProcessions.addAll(processions);
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
+			allProcessions.addAll(pro);
 		}
-		if (finder.getAreaName() != null) {
-			final Collection<Procession> processions = this.finderRepository.getProcessionsByArea(finder.getAreaName());
-			allProcessions.addAll(processions);
+		if (!(finder.getAreaName() == null || finder.getAreaName() == "")) {
+			final Collection<Procession> pro = this.finderRepository.getProcessionsByArea(finder.getAreaName());
+			allProcessions.addAll(pro);
 		}
 
 		Configuration conf;
@@ -74,6 +85,8 @@ public class FinderService {
 			result = processionsLim;
 
 		}
+		if (allProcessions.isEmpty())
+			result = (List<Procession>) this.processionService.findAll();
 
 		finder.setProcessions(result);
 		final Date moment = new Date();
@@ -81,6 +94,20 @@ public class FinderService {
 
 		finder = this.finderRepository.save(finder);
 		return finder;
+	}
+
+	//Reconstruct
+	public Finder reconstruct(final Finder finder, final BindingResult binding) {
+		Finder result;
+
+		result = this.finderRepository.findOne(finder.getId());
+
+		finder.setVersion(result.getVersion());
+
+		result = finder;
+		this.validator.validate(finder, binding);
+
+		return result;
 	}
 
 }

@@ -21,6 +21,7 @@
 	<form:hidden path="id"/>
 
 	<!-- Single areas -->
+	<jstl:out value="${messageCode}"/>
 	
 	<acme:textboxbs code="configuration.edit.maxResults" path="maxResults"/>
 	<acme:textboxbs code="configuration.edit.maxTime" path="maxTime"/>
@@ -96,7 +97,7 @@
 	
 	<acme:submit name="save" code="configuration.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/configuration/administrator/edit.do" code="configuration.edit.cancel"/>
+	<acme:cancel url="/configuration/administrator/show.do" code="configuration.edit.cancel"/>
 	
 </form:form>
 </body>

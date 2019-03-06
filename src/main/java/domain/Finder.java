@@ -65,8 +65,8 @@ public class Finder extends DomainEntity {
 		this.areaName = areaName;
 	}
 
-	//Relationships
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yy HH:mm")
 	public Date getLastUpdate() {
 		return this.lastUpdate;
 	}
@@ -74,6 +74,8 @@ public class Finder extends DomainEntity {
 	public void setLastUpdate(final Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+
+	//Relationships
 
 	@Valid
 	@OneToMany

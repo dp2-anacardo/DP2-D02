@@ -55,6 +55,8 @@
 		<bean class="converters.StringToEnrolmentConverter"/>
 		<bean class="converters.FloatEntityToStringConverter"/>
 		<bean class="converters.StringToFloatEntityConverter"/>
+		<bean class="converters.FinderToStringConverter"/>
+		<bean class="converters.StringToFinderConverter"/>
 		<bean class="converters.StringToIntConverter"/>
 		
 

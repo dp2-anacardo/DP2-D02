@@ -38,7 +38,11 @@
 		<value>/views/enrolment/tiles.xml</value>
 		<value>/views/floatEntity/tiles.xml</value>
 		<value>/views/procession/tiles.xml</value>
+<<<<<<< HEAD
 		<value>/views/request/tiles.xml</value>
+=======
+		<value>/views/finder/tiles.xml</value>
+>>>>>>> origin/manuercaximba
 
 	</util:list>
 
