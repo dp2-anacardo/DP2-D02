@@ -31,8 +31,6 @@ public class FinderService {
 	//Services
 	@Autowired
 	private ConfigurationService	configurationService;
-	@Autowired
-	private ProcessionService		processionService;
 
 	//Validator
 	@Autowired
@@ -44,6 +42,7 @@ public class FinderService {
 		Finder result;
 		result = new Finder();
 		final Collection<Procession> processions = new ArrayList<Procession>();
+		result.setLastUpdate(new Date());
 		result.setProcessions(processions);
 		return result;
 	}
@@ -85,8 +84,6 @@ public class FinderService {
 			result = processionsLim;
 
 		}
-		if (allProcessions.isEmpty())
-			result = (List<Procession>) this.processionService.findAll();
 
 		finder.setProcessions(result);
 		final Date moment = new Date();

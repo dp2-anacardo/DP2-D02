@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -47,6 +49,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSystemName() {
 		return this.systemName;
 	}
@@ -57,6 +60,7 @@ public class Configuration extends DomainEntity {
 
 	@NotBlank
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBanner() {
 		return this.banner;
 	}
@@ -66,6 +70,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getWelcomeMessageEn() {
 		return this.welcomeMessageEn;
 	}
@@ -75,6 +80,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getWelcomeMessageEs() {
 		return this.welcomeMessageEs;
 	}
@@ -115,6 +121,7 @@ public class Configuration extends DomainEntity {
 		return this.defaultCC;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public void setDefaultCC(final String defaultCC) {
 		this.defaultCC = defaultCC;
 	}

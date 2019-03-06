@@ -7,11 +7,13 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -29,6 +31,7 @@ public class Finder extends DomainEntity {
 	private Collection<Procession>	processions;
 
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getKeyWord() {
 		return this.keyWord;
 	}
@@ -57,6 +60,7 @@ public class Finder extends DomainEntity {
 		this.maximumDate = maximumDate;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAreaName() {
 		return this.areaName;
 	}
@@ -78,7 +82,7 @@ public class Finder extends DomainEntity {
 	//Relationships
 
 	@Valid
-	@OneToMany
+	@ManyToMany
 	public Collection<Procession> getProcessions() {
 		return this.processions;
 	}
