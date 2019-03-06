@@ -408,6 +408,7 @@
 		<property name="keyWord" value="Triana" />
 		<property name="minimumDate" value="19/02/2019 18:11"/>
 		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="lastUpdate" value="01/01/2019 00:00"/>
 		<property name="areaName" value="Triana"/>
 		<property name="processions">
 			<list>
@@ -420,6 +421,7 @@
 		<property name="keyWord" value="Cristo Gran Poder" />
 		<property name="minimumDate" value="19/02/2019 18:11"/>
 		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="lastUpdate" value="01/01/2019 00:00"/>
 		<property name="areaName" value="Centro"/>
 		<property name="processions">
 			<list>
@@ -431,6 +433,7 @@
 		<property name="keyWord" value="Tres caidas" />
 		<property name="minimumDate" value="19/02/2019 18:11"/>
 		<property name="maximumDate" value="1/04/2019 00:00"/>
+		<property name="lastUpdate" value="01/01/2019 00:00"/>
 		<property name="areaName" value="Poligono Norte"/>
 		<property name="processions">
 			<list>

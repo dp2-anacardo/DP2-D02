@@ -2,7 +2,6 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,6 +18,7 @@ import services.ActorService;
 import services.ConfigurationService;
 import services.FinderService;
 import services.MemberService;
+import services.ProcessionService;
 import domain.Actor;
 import domain.Finder;
 import domain.Member;
@@ -36,6 +36,8 @@ public class FinderController extends AbstractController {
 	private MemberService			memberService;
 	@Autowired
 	private ConfigurationService	configurationService;
+	@Autowired
+	private ProcessionService		processionService;
 
 
 	//LIST RESULTS
@@ -52,29 +54,32 @@ public class FinderController extends AbstractController {
 		Finder finder;
 		finder = member.getFinder();
 
-		//Borrar si lastUpdate > fechaActual
+		//Borrar si fechaLimite < fechaActual
 		final Date fechaActual = new Date();
 		final Date lastUpdate = finder.getLastUpdate();
 		final int horasDeGuardado = this.configurationService.findAll().get(0).getMaxTime();
-		final Calendar calendar = Calendar.getInstance();
-		calendar.setTime(lastUpdate);
-		calendar.add(Calendar.HOUR, horasDeGuardado);
-		final Date fechaLimite = calendar.getTime();
+		final Date fechaLimite = new Date(lastUpdate.getTime() + (horasDeGuardado * 3600000L));
 
-		if (fechaLimite.after(fechaActual)) {
+		if (fechaActual.after(fechaLimite)) {
 			finder.setProcessions(new ArrayList<Procession>());
 			this.finderService.save(finder);
 		}
 
-		processions = finder.getProcessions();
+		if (finder.getProcessions().isEmpty()) {
+			result = new ModelAndView("procession/listNotRegister");
+			result.addObject("procession", this.processionService.findAll());
+			result.addObject("requestURI", "procession/listNotRegister.do");
+		} else {
 
-		result.addObject("processions", processions);
-		result.addObject("finder", finder);
-		result.addObject("requestURI", "finder/member/list.do");
+			processions = finder.getProcessions();
+
+			result.addObject("processions", processions);
+			result.addObject("finder", finder);
+			result.addObject("requestURI", "finder/member/list.do");
+		}
 
 		return result;
 	}
-
 	//EDIT FINDER
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
