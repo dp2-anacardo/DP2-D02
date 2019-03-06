@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.EnrolmentRepository;
 import security.LoginService;
@@ -35,6 +37,9 @@ public class EnrolmentService {
 
 	@Autowired
 	private PositionService		positionService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	public Enrolment create(final int brotherhoodId) {
@@ -115,6 +120,28 @@ public class EnrolmentService {
 		enrolments = this.enrolmentRepository.findAll();
 
 		return enrolments;
+	}
+
+	public Enrolment reconstruct(final Enrolment enrolment, final BindingResult binding) {
+		Enrolment result;
+
+		if (enrolment.getId() == 0)
+			result = enrolment;
+		else {
+			result = this.enrolmentRepository.findOne(enrolment.getId());
+			enrolment.setRegisterMoment(result.getRegisterMoment());
+			enrolment.setDropOutMoment(result.getDropOutMoment());
+			enrolment.setBrotherhood(result.getBrotherhood());
+			enrolment.setStatus(result.getStatus());
+			enrolment.setMember(result.getMember());
+			enrolment.setVersion(result.getVersion());
+
+			result = enrolment;
+
+			this.validator.validate(result, binding);
+		}
+
+		return result;
 	}
 
 }

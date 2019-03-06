@@ -73,9 +73,14 @@ public class MessageService {
 
 			final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
 			final String dropoutBrotherhood = "Drop out brotherhood \n Salida de hermandad";
+<<<<<<< HEAD
 			final Integer actors = this.actorService.findAll().size();
 
 			if (message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood) || (message.getRecipients().size() == actors && userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"))) {
+=======
+
+			if (message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)) {
+>>>>>>> origin/miguel
 
 				final Collection<Actor> recipients = message.getRecipients();
 				Assert.notNull(recipients);

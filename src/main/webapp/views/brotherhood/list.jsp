@@ -31,5 +31,11 @@
 	
 	<display:column> <a href="floatEntity/listNotRegister.do?brotherhoodId=${row.id}">
 	<spring:message code="brotherhood.float" /></a> </display:column>
+	
+	<security:authorize access="hasRole('MEMBER')">
+	<display:column> <a href="enrolment/member/create.do?brotherhoodId=${row.id}">
+	<spring:message code="enrolment.create"/></a>
+	</display:column>
+	</security:authorize>
 
 </display:table>

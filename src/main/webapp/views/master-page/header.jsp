@@ -24,8 +24,6 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
 					<li><a href="area/administrator/list.do"><spring:message code="master.page.administrator.listArea" /></a></li>		
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.listPosition" /></a></li>
 					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.Register" /></a></li>
@@ -33,7 +31,11 @@
 					<li><a href="message/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
 				</ul>
 			</li>
+<<<<<<< HEAD
 			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+=======
+			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
+>>>>>>> origin/miguel
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MEMBER')">
@@ -51,6 +53,7 @@
 					<li><a href="finder/member/list.do"><spring:message code="master.page.finder.list" /></a></li>
 				</ul>
 			</li>
+			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BROTHERHOOD')">
@@ -61,6 +64,7 @@
 					<li><a href="procession/brotherhood/list.do"><spring:message code="master.page.brotherhood.processions" /></a></li>						
 				</ul>
 			</li>
+			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

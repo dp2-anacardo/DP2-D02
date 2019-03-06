@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -16,6 +17,7 @@ public class Position extends DomainEntity {
 
 
 	@NotBlank
+	@Column(unique = true)
 	public String getRoleEs() {
 		return this.roleEs;
 	}
@@ -25,6 +27,7 @@ public class Position extends DomainEntity {
 	}
 
 	@NotBlank
+	@Column(unique = true)
 	public String getRoleEn() {
 		return this.roleEn;
 	}
