@@ -17,7 +17,26 @@
 </head>
 <body>
 	<security:authorize access="hasRole('ADMIN')">
-		<b><spring:message code="administrator.AvgOfMembersPerBrotherhood" /></b> ${AvgOfMembersPerBrotherhood} <br/>
+		<b><spring:message code="administrator.AvgOfMembersPerBrotherhood" /></b> ${AvgOfMembersPerBrotherhood} <br />
+		<b><spring:message code="administrator.MinOfMembersPerBrotherhood" /></b> ${MinOfMembersPerBrotherhood} <br />
+		<b><spring:message code="administrator.MaxOfMembersPerBrotherhood" /></b> ${MaxOfMembersPerBrotherhood} <br />
+		<b><spring:message
+				code="administrator.SteddevOfMembersPerBrotherhood" /></b> ${SteddevOfMembersPerBrotherhood} <br />
+		<b><spring:message code="administrator.LargestBrotherhood" /></b> ${LargestBrotherhood} <br />
+		<b><spring:message code="administrator.SmallestBrotherhoood" /></b> ${SmallestBrotherhoood} <br />
+		<%-- <b><spring:message code="administrator.ProcessionIn30Days" /></b> ${ProcessionIn30Days} <br/> --%>
+
+		<b><spring:message code="administrator.ProcessionIn30Days" /></b>
+		<jstl:forEach var="x" items="${ProcessionIn30Days}">
+			<jstl:out value="${x.tittle}"> </jstl:out>
+		</jstl:forEach>
+		<br />
+		<b><spring:message code="administrator.RatioOfRequestsApproveds" /></b> ${RatioOfRequestsApproveds} <br />
+		<b><spring:message code="administrator.RatioOfRequestsPendings" /></b> ${RatioOfRequestsPendings} <br />
+		<b><spring:message code="administrator.RatioOfRequestsRejecteds" /></b> ${RatioOfRequestsRejecteds} <br />
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b> ${RatioOfRequestToProcessionPerAPPROVED} <br />
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b> ${RatioOfRequestToProcessionPerREJECTED} <br />
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerPENDING" /></b> ${RatioOfRequestToProcessionPerPENDING} <br />
 	</security:authorize>
 </body>
 </html>
