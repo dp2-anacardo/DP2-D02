@@ -23,42 +23,42 @@
 	<form:hidden path="id" />
  
 	<form:label path="name">
-		<spring:message code="administrator.name" />*:
+		<spring:message code="administrator.name" />
 	</form:label>
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
 	
 	<form:label path="title">
-		<spring:message code="administrator.title" />:
+		<spring:message code="administrator.title" />
 	</form:label>
 	<form:input path="title" />
 	<form:errors cssClass="error" path="title" />
 	<br />
 	
 	<form:label path="photo">
-		<spring:message code="administrator.photo" />:
+		<spring:message code="administrator.photo" />
 	</form:label>
 	<form:input path="photo" />
 	<form:errors cssClass="error" path="photo" />
 	<br />
 	
 	<form:label path="email">
-		<spring:message code="administrator.email" />:
+		<spring:message code="administrator.email" />
 	</form:label>
 	<form:input path="email" />
 	<form:errors cssClass="error" path="email" />
 	<br />
 	
 	<form:label path="phoneNumber">
-		<spring:message code="administrator.phoneNumber" />:
+		<spring:message code="administrator.phoneNumber" />
 	</form:label>
 	<form:input path="phoneNumber" />
 	<form:errors cssClass="error" path="phoneNumber" />
 	<br />
 	
 	<form:label path="address">
-		<spring:message code="administrator.address" />:
+		<spring:message code="administrator.address" />
 	</form:label>
 	<form:input path="address" />
 	<form:errors cssClass="error" path="address" />

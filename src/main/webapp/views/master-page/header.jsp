@@ -26,12 +26,12 @@
 					<li class="arrow"></li>
 					<li><a href="area/administrator/list.do"><spring:message code="master.page.administrator.listArea" /></a></li>		
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.listPosition" /></a></li>
-					<li><a href="administrator/administrator/create.do"><spring:message code="master.page.administrator.Register" /></a></li>
 					<li><a href="priority/administrator/list.do"><spring:message code="master.page.administrator.listPriority" /></a></li>
 					<li><a href="message/broadcast.do"><spring:message code="master.page.administrator.broadcast" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/show.do"><spring:message code="master.page.administrator.configuration" /></a></li>
+			<li><a class="fNiv" href="administrator/administrator/create.do"><spring:message code="master.page.administrator.Register"/></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MEMBER')">

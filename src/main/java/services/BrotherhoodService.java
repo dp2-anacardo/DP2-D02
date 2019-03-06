@@ -102,12 +102,11 @@ public class BrotherhoodService {
 		Assert.notNull(brotherhood);
 		final Date nuevaFecha = new Date();
 
-		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-		final String res = encoder.encodePassword(brotherhood.getUserAccount().getPassword(), null);
-		brotherhood.getUserAccount().setPassword(res);
-
 		Brotherhood result;
 		if (brotherhood.getId() == 0) {
+			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			final String res = encoder.encodePassword(brotherhood.getUserAccount().getPassword(), null);
+			brotherhood.getUserAccount().setPassword(res);
 			brotherhood.setEstablishmentDate(nuevaFecha);
 			brotherhood.setBoxes(this.messageBoxService.createSystemMessageBox());
 		}

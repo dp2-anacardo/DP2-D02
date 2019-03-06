@@ -6,6 +6,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Member;
 
@@ -45,6 +47,7 @@ public class MemberForm {
 	@Size(min = 5, max = 32)
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getConfirmPass() {
 		return this.confirmPass;
 	}
@@ -54,6 +57,7 @@ public class MemberForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -62,6 +66,7 @@ public class MemberForm {
 		this.name = name;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -72,6 +77,7 @@ public class MemberForm {
 
 	@NotBlank
 	@Email
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getEmail() {
 		return this.email;
 	}
@@ -80,6 +86,7 @@ public class MemberForm {
 		this.email = email;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
@@ -88,6 +95,7 @@ public class MemberForm {
 		this.phoneNumber = phoneNumber;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
 	}
@@ -114,6 +122,7 @@ public class MemberForm {
 
 	@Size(min = 5, max = 32)
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}
@@ -123,6 +132,7 @@ public class MemberForm {
 
 	@Size(min = 5, max = 32)
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getUsername() {
 		return this.username;
 	}
@@ -131,6 +141,7 @@ public class MemberForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -139,6 +150,7 @@ public class MemberForm {
 		this.surname = surname;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
