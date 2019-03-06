@@ -3,10 +3,8 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.validation.Valid;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -125,39 +122,36 @@ public class MessageController extends AbstractController {
 		Message mesage;
 
 		mesage = this.messageService.create();
+		final Collection<Priority> priorityList = this.priorityService.findAll();
 
 		result = new ModelAndView("message/broadcast");
 		result.addObject("mesage", mesage);
+		result.addObject("priorityList", priorityList);
 
 		return result;
 	}
 
 	// Send Broadcast  -------------------------------------------------------------
 	@RequestMapping(value = "/broadcast", method = RequestMethod.POST, params = "send")
-	public ModelAndView sendBroadcast(@ModelAttribute("mesage") @Valid final Message mesage, final BindingResult binding) {
+	public ModelAndView sendBroadcast(@ModelAttribute("mesage") final Message mesage, final BindingResult binding) {
 		ModelAndView result;
+		Message msg;
 
-		if (binding.hasErrors()) {
-			final List<ObjectError> errors = binding.getAllErrors();
-			for (final ObjectError e : errors)
-				System.out.println(e.toString());
-			result = new ModelAndView("message/broadcast");
-			result.addObject("mesage", mesage);
-		} else
-			try {
-				final Collection<Actor> recipients = this.actorService.findAll();
-				mesage.setRecipients(recipients);
-				this.messageService.save(mesage);
-				final int messageBoxID = this.actorService.getActorLogged().getMessageBox("out").getId();
+		try {
+			mesage.setRecipients(this.actorService.findAll());
+			msg = this.messageService.reconstruct(mesage, binding);
+			if (binding.hasErrors())
+				result = this.createModelAndView(mesage);
+			else {
+				this.messageService.save(msg);
+				final int messageBoxID = this.actorService.getActorLogged().getMessageBox("OUTBOX").getId();
 				result = new ModelAndView("redirect:list.do?messageBoxID=" + messageBoxID + "");
-			} catch (final Throwable oops) {
-				result = new ModelAndView("message/broadcast");
-				result.addObject("mesage", mesage);
-				result.addObject("mesage", "message.commit.error");
 			}
+		} catch (final Throwable oops) {
+			result = this.createModelAndView(mesage, "message.commit.error");
+		}
 		return result;
 	}
-
 	// Send -------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("mesage") final Message mesage, final BindingResult binding) {

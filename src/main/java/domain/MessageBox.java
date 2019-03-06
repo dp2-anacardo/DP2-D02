@@ -79,4 +79,11 @@ public class MessageBox extends DomainEntity {
 
 	}
 
+	public boolean equals(final MessageBox obj) {
+		boolean res = false;
+		if (this.getName().equals(obj.getName()))
+			res = true;
+		return res;
+	}
+
 }

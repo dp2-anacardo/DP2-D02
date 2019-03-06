@@ -18,9 +18,11 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
+import domain.Message;
 import domain.MessageBox;
 import domain.Position;
 import domain.Procession;
@@ -35,10 +37,25 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	@Autowired
+	private ActorService			actorService;
+
+	@Autowired
+	private MemberService			memberService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
+	@Autowired
 	private Validator				validator;
 
 	@Autowired
 	private MessageBoxService		messageBoxService;
+
+	@Autowired
+	private MessageService			messageService;
 
 
 	public Administrator create() {
@@ -358,5 +375,82 @@ public class AdministratorService {
 
 		this.validator.validate(result, binding);
 		return result;
+	}
+
+	// SKERE
+
+	public void computeAllScores() {
+
+		Collection<Member> members;
+		Collection<Brotherhood> brotherhoods;
+
+		// Make sure that the principal is an Admin
+		final Actor principal = this.actorService.getActorLogged();
+		Assert.isInstanceOf(Administrator.class, principal);
+
+		members = this.memberService.findAll();
+		for (final Member member : members) {
+			member.setScore(this.computeScore(this.messageService.findAllByActor(member.getId())));
+			this.memberService.save(member);
+		}
+
+		brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood brotherhood : brotherhoods) {
+			brotherhood.setScore(this.computeScore(this.messageService.findAllByActor(brotherhood.getId())));
+			this.brotherhoodService.save(brotherhood);
+		}
+	}
+
+	private Double computeScore(final Collection<Message> messages) {
+		final Collection<String> positiveWords = this.configurationService.getConfiguration().getPositiveWords();
+
+		final Collection<String> negativeWords = this.configurationService.getConfiguration().getNegativeWords();
+
+		Double positiveWordsValue = 0.0;
+		Double negativeWordsValue = 0.0;
+
+		for (final Message message : messages) {
+			final String body = message.getBody();
+			final String subject = message.getSubject();
+
+			for (final String positiveWord : positiveWords) {
+				System.out.println(positiveWord);
+				if (body.contains(positiveWord)) {
+					positiveWordsValue += 1.0;
+					System.out.println(positiveWordsValue);
+				}
+			}
+			for (final String negativeWord : negativeWords) {
+				System.out.println(negativeWord);
+				if (body.contains(negativeWord)) {
+					negativeWordsValue += 1.0;
+					System.out.println(negativeWordsValue);
+				}
+			}
+
+			for (final String positiveWord : positiveWords) {
+				System.out.println(positiveWord);
+				if (subject.contains(positiveWord)) {
+					positiveWordsValue += 1.0;
+					System.out.println(positiveWordsValue);
+				}
+			}
+			for (final String negativeWord : negativeWords) {
+				System.out.println(negativeWord);
+				if (subject.contains(negativeWord)) {
+					negativeWordsValue += 1.0;
+					System.out.println(negativeWordsValue);
+				}
+			}
+		}
+
+		// check for NaN values
+		if (positiveWordsValue + negativeWordsValue == 0)
+			return 0.0;
+		else if (positiveWordsValue - negativeWordsValue == 0)
+			return 0.0;
+		else
+			return (positiveWordsValue - negativeWordsValue) / (positiveWordsValue + negativeWordsValue);
+
 	}
 }
