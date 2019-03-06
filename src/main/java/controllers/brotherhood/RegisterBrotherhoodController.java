@@ -5,9 +5,11 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +37,11 @@ public class RegisterBrotherhoodController extends AbstractController {
 	@Autowired
 	private AdministratorService	administratorService;
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/misc/403");
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {

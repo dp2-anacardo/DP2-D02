@@ -6,6 +6,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -15,6 +17,7 @@ public class Administrator extends Actor {
 	private String	surname;
 
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
@@ -24,6 +27,7 @@ public class Administrator extends Actor {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}

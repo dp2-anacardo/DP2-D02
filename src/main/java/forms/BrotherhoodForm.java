@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import datatype.Url;
 import domain.Area;
@@ -55,6 +57,7 @@ public class BrotherhoodForm {
 	@Size(min = 5, max = 32)
 	@NotNull
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getConfirmPass() {
 		return this.confirmPass;
 	}
@@ -64,6 +67,7 @@ public class BrotherhoodForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -72,6 +76,7 @@ public class BrotherhoodForm {
 		this.name = name;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -82,6 +87,7 @@ public class BrotherhoodForm {
 
 	@NotBlank
 	@Email
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getEmail() {
 		return this.email;
 	}
@@ -90,6 +96,7 @@ public class BrotherhoodForm {
 		this.email = email;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
@@ -98,6 +105,7 @@ public class BrotherhoodForm {
 		this.phoneNumber = phoneNumber;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
 	}
@@ -124,6 +132,7 @@ public class BrotherhoodForm {
 
 	@Size(min = 5, max = 32)
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}
@@ -133,6 +142,7 @@ public class BrotherhoodForm {
 
 	@Size(min = 5, max = 32)
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getUsername() {
 		return this.username;
 	}
@@ -141,6 +151,7 @@ public class BrotherhoodForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTitle() {
 		return this.title;
 	}

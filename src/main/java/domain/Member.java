@@ -8,6 +8,8 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -33,6 +35,7 @@ public class Member extends Actor {
 		this.finder = finder;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
@@ -42,6 +45,7 @@ public class Member extends Actor {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}

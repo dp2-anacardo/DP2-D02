@@ -3,10 +3,12 @@ package controllers.brotherhood;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +29,11 @@ public class EditBrotherhoodController extends AbstractController {
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/misc/403");
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {

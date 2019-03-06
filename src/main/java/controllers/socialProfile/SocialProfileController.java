@@ -3,10 +3,12 @@ package controllers.socialProfile;
 
 import java.util.Collection;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +31,11 @@ public class SocialProfileController extends AbstractController {
 	@Autowired
 	private ActorService			actorService;
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/misc/403");
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -63,14 +70,18 @@ public class SocialProfileController extends AbstractController {
 		SocialProfile profile;
 		Actor user;
 
-		user = this.actorService.getActorLogged();
-		profile = this.socialProfileService.findOne(socialProfileId);
-		Assert.notNull(profile);
-		if (user.getSocialProfiles().contains(profile))
-			result = this.createEditModelAndView(profile);
-		else
-			result = new ModelAndView("redirect:/misc/403");
+		try {
+			user = this.actorService.getActorLogged();
+			profile = this.socialProfileService.findOne(socialProfileId);
+			Assert.notNull(profile);
+			Assert.isTrue(user.getSocialProfiles().contains(profile));
+			Assert.isTrue(this.actorService.existIdSocialProfile(socialProfileId));
+		} catch (final Exception e) {
+			result = this.forbiddenOperation();
+			return result;
+		}
 
+		result = this.createEditModelAndView(profile);
 		return result;
 	}
 
@@ -124,5 +135,9 @@ public class SocialProfileController extends AbstractController {
 		result.addObject("socialProfile", profile);
 		result.addObject("message", messageCode);
 		return result;
+	}
+
+	private ModelAndView forbiddenOperation() {
+		return new ModelAndView("redirect:/misc/403");
 	}
 }

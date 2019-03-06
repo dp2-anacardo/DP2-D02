@@ -16,6 +16,7 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import domain.SocialProfile;
 
 @Service
 @Transactional
@@ -23,11 +24,14 @@ public class ActorService {
 
 	//Managed Repositories
 	@Autowired
-	private ActorRepository		actorRepository;
+	private ActorRepository			actorRepository;
 
 	//Supporting services
 	@Autowired
-	private UserAccountService	userAccountService;
+	private UserAccountService		userAccountService;
+
+	@Autowired
+	private SocialProfileService	socialProfileService;
 
 
 	public Collection<Actor> findAll() {
@@ -125,6 +129,16 @@ public class ActorService {
 		for (final Actor a : this.actorRepository.findAll())
 			lista.add(a.getUserAccount().getUsername());
 		if (!(lista.contains(username)))
+			res = true;
+		return res;
+	}
+
+	public Boolean existIdSocialProfile(final Integer id) {
+		Boolean res = false;
+		final List<Integer> lista = new ArrayList<Integer>();
+		for (final SocialProfile s : this.socialProfileService.findAll())
+			lista.add(s.getId());
+		if (lista.contains(id))
 			res = true;
 		return res;
 	}
