@@ -40,6 +40,7 @@
 		<value>/views/procession/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
 		<value>/views/finder/tiles.xml</value>
+		<value>/views/gdpr/tiles.xml</value>
 
 	</util:list>
 

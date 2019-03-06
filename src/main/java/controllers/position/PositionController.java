@@ -39,6 +39,7 @@ public class PositionController extends AbstractController {
 		final Collection<Position> positions;
 
 		positions = this.positionService.findAll();
+		positions.remove(this.positionService.getDefaultPosition());
 		final String language = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("position/administrator/list");
@@ -102,7 +103,10 @@ public class PositionController extends AbstractController {
 	public ModelAndView save(@Valid Position position, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (this.positionService.existRole(position.getRoleEn(), position.getRoleEs()) == false) {
+			binding.rejectValue("roleEs", "error.roleEs");
+			result = this.createEditModelAndView(position);
+		} else if (binding.hasErrors())
 			result = this.createEditModelAndView(position);
 		else
 			try {

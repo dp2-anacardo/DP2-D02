@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -113,4 +115,16 @@ public class PositionService {
 		return defaultPosition;
 	}
 
+	public Boolean existRole(final String roleEn, final String roleEs) {
+		Boolean res = false;
+		final List<String> listaEn = new ArrayList<String>();
+		final List<String> listaEs = new ArrayList<String>();
+		for (final Position p : this.positionRepository.findAll()) {
+			listaEs.add(p.getRoleEs());
+			listaEn.add(p.getRoleEn());
+		}
+		if (!(listaEn.contains(roleEn)) && !(listaEs.contains(roleEs)))
+			res = true;
+		return res;
+	}
 }
