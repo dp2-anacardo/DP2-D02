@@ -18,7 +18,6 @@ import services.ActorService;
 import services.ConfigurationService;
 import services.FinderService;
 import services.MemberService;
-import services.ProcessionService;
 import domain.Actor;
 import domain.Finder;
 import domain.Member;
@@ -36,8 +35,6 @@ public class FinderController extends AbstractController {
 	private MemberService			memberService;
 	@Autowired
 	private ConfigurationService	configurationService;
-	@Autowired
-	private ProcessionService		processionService;
 
 
 	//LIST RESULTS
@@ -65,11 +62,9 @@ public class FinderController extends AbstractController {
 			this.finderService.save(finder);
 		}
 
-		if (finder.getProcessions().isEmpty()) {
-			result = new ModelAndView("procession/listNotRegister");
-			result.addObject("procession", this.processionService.findAll());
-			result.addObject("requestURI", "procession/listNotRegister.do");
-		} else {
+		if (finder.getProcessions().isEmpty())
+			result = new ModelAndView("redirect:/procession/listForMembers.do");
+		else {
 
 			processions = finder.getProcessions();
 
@@ -113,6 +108,30 @@ public class FinderController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/clear", method = RequestMethod.GET)
+	public ModelAndView clear() {
+		final ModelAndView result;
+
+		//Sacar finder del Member
+		final Actor user = this.actorService.getActorLogged();
+		final Member member = this.memberService.findOne(user.getId());
+
+		Finder finder;
+		finder = member.getFinder();
+
+		finder.setAreaName(null);
+		finder.setMaximumDate(null);
+		finder.setMinimumDate(null);
+		finder.setKeyWord(null);
+
+		this.finderService.save(finder);
+
+		result = new ModelAndView("redirect:/procession/listForMembers.do");
+
+		return result;
+	}
+
+	//MODEL AND VIEWS
 	protected ModelAndView createEditModelAndView(final Finder finder) {
 		ModelAndView result;
 

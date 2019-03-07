@@ -3,10 +3,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,30 +56,39 @@ public class FinderService {
 	public Finder save(Finder finder) {
 
 		Assert.notNull(finder);
-		final Set<Procession> allProcessions = new HashSet<Procession>();
-		if (!(finder.getKeyWord() == null || finder.getKeyWord() == "")) {
-			final Collection<Procession> pro = this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
-			allProcessions.addAll(pro);
-		}
-		if (finder.getMinimumDate() != null && finder.getMaximumDate() != null) {
-			final Collection<Procession> pro = this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
-			allProcessions.addAll(pro);
-		}
-		if (!(finder.getAreaName() == null || finder.getAreaName() == "")) {
-			final Collection<Procession> pro = this.finderRepository.getProcessionsByArea(finder.getAreaName());
-			allProcessions.addAll(pro);
+		Collection<Procession> result = Collections.emptyList();
+		List<Procession> pro1 = null;
+		List<Procession> pro2 = null;
+		List<Procession> pro3 = null;
+		if (!(finder.getKeyWord() == null || finder.getKeyWord() == ""))
+			pro1 = (List<Procession>) this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
+		if (finder.getMinimumDate() != null && finder.getMaximumDate() != null)
+			pro2 = (List<Procession>) this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
+		if (!(finder.getAreaName() == null || finder.getAreaName() == ""))
+			pro3 = (List<Procession>) this.finderRepository.getProcessionsByArea(finder.getAreaName());
+		if (!(pro1 == null && pro2 == null && pro3 == null)) {
+			if (pro1 == null)
+				pro1 = (List<Procession>) this.finderRepository.findAllFinal();
+			if (pro2 == null)
+				pro2 = (List<Procession>) this.finderRepository.findAllFinal();
+			if (pro3 == null)
+				pro3 = (List<Procession>) this.finderRepository.findAllFinal();
+			pro1.retainAll(pro2);
+			pro1.retainAll(pro3);
+
+			result = pro1;
 		}
 
 		Configuration conf;
 		conf = this.configurationService.getConfiguration();
 
-		List<Procession> result = new ArrayList<Procession>(allProcessions);
+		if (result.size() > conf.getMaxResults()) {
 
-		if (allProcessions.size() > conf.getMaxResults()) {
+			final List<Procession> copy = (List<Procession>) result;
 
 			final List<Procession> processionsLim = new ArrayList<Procession>();
 			for (int i = 0; i < conf.getMaxResults(); i++)
-				processionsLim.add(result.get(i));
+				processionsLim.add(copy.get(i));
 			result = processionsLim;
 
 		}
@@ -105,6 +113,11 @@ public class FinderService {
 		this.validator.validate(finder, binding);
 
 		return result;
+	}
+
+	//Another methods
+	public Collection<Procession> findAllFinal() {
+		return this.finderRepository.findAllFinal();
 	}
 
 }

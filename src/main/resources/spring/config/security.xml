@@ -40,6 +40,7 @@
 		<security:intercept-url pattern="/procession/listNotRegister.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/procession/show.do" access="permitAll" /> 
+		<security:intercept-url pattern="/procession/listForMembers.do" access="hasRole('MEMBER')" /> 
 		
 		<security:intercept-url pattern="/floatEntity/listNotRegister.do" access="permitAll" /> 
 
@@ -98,6 +99,7 @@
 		
 		<security:intercept-url pattern="/finder/member/edit.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/finder/member/list.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/finder/member/clear.do" access="hasRole('MEMBER')" /> 
 		
 		<security:intercept-url pattern="/enrolment/member/**" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enrolment/brotherhood/**" access="hasRole('BROTHERHOOD')" />
