@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -16,6 +17,7 @@ public class Priority extends DomainEntity {
 
 
 	@ElementCollection(targetClass = String.class)
+	@NotNull
 	public Map<String, String> getName() {
 		return this.name;
 	}

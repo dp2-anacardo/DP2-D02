@@ -39,6 +39,7 @@ public class SocialProfile extends DomainEntity {
 		this.socialNetworkName = socialNetworkName;
 	}
 
+	@NotBlank
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getProfileLink() {
