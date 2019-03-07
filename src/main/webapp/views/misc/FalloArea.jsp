@@ -15,7 +15,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
-<spring:message code="error.403" /> 
+<security:authorize access="hasRole('BROTHERHOOD')">
+<p>Oops! You can't change your area, you have one assigned.</p> 
 
 <p><a href="<spring:url value='/' />"><spring:message code="welcomePage" /></a><p>
+
+</security:authorize>

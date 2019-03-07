@@ -40,7 +40,7 @@ public class SelectAreaBrotherhoodController extends AbstractController {
 		final Brotherhood bro = this.brotherhoodService.findOne(user.getId());
 		Assert.notNull(bro);
 		if (bro.getArea() != null)
-			return new ModelAndView("redirect:/misc/403");
+			return new ModelAndView("redirect:/misc/FalloArea");
 		else
 			result = this.editModelAndView(bro);
 

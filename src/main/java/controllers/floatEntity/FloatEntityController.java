@@ -42,11 +42,10 @@ public class FloatEntityController extends AbstractController {
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 
 		ModelAndView result;
+		if (this.brotherhoodService.findOne(brotherhoodId) == null)
+			return new ModelAndView("redirect:/misc/403");
 		Collection<FloatEntity> f = new ArrayList<FloatEntity>();
-		f = this.floatEntityService.findAll();
-		for (final FloatEntity f1 : f)
-			if (!(f1.getBrotherhood().getId() == brotherhoodId))
-				f.remove(f1);
+		f = this.floatEntityService.getFloatsByBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
 		result = new ModelAndView("floatEntity/listNotRegister");
 		result.addObject("floatEntity", f);
 		result.addObject("requestURI", "floatEntity/listNotRegister.do");

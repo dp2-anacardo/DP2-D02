@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.EnrolmentService;
+import repositories.BrotherhoodRepository;
+import services.BrotherhoodService;
 import controllers.AbstractController;
-import domain.Enrolment;
 import domain.Member;
 
 @Controller
@@ -23,7 +23,9 @@ import domain.Member;
 public class MemberController extends AbstractController {
 
 	@Autowired
-	private EnrolmentService	enrolmentService;
+	private BrotherhoodRepository	brotherhoodRepository;
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
 
 
 	@ExceptionHandler(TypeMismatchException.class)
@@ -35,11 +37,10 @@ public class MemberController extends AbstractController {
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 
 		ModelAndView result;
-		final Collection<Enrolment> e = this.enrolmentService.findAll();
-		final Collection<Member> member = new ArrayList<Member>();
-		for (final Enrolment e1 : e)
-			if (e1.getBrotherhood().getId() == brotherhoodId)
-				member.add(e1.getMember());
+		if (this.brotherhoodService.findOne(brotherhoodId) == null)
+			return new ModelAndView("redirect:/misc/403");
+		Collection<Member> member = new ArrayList<Member>();
+		member = this.brotherhoodRepository.getMembers(this.brotherhoodService.findOne(brotherhoodId));
 		result = new ModelAndView("member/list");
 		result.addObject("member", member);
 		result.addObject("requestURI", "member/list.do");

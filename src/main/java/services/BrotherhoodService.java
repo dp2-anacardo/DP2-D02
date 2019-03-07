@@ -83,7 +83,6 @@ public class BrotherhoodService {
 		Assert.notNull(brotherhoodId);
 		Brotherhood result;
 		result = this.brotherhoodRepository.findOne(brotherhoodId);
-		Assert.notNull(result);
 		return result;
 
 	}
