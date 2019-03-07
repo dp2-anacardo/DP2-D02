@@ -14,6 +14,11 @@
 <display:table name="actors" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
+	<spring:message code="member.show" var="show" />
+	<display:column title="${show}">
+		<acme:cancel url='administrator/actorList/showMember.do?actorId=${row.id}' code="member.show" />
+	</display:column>
+
 	<spring:message code="member.name" var="name" />
 	<display:column property="name" title="${name}" />
 
@@ -32,7 +37,7 @@
 			<jstl:out value="${row.score}"></jstl:out>
 		</jstl:if>
 	</display:column>
-	
+
 	<spring:message code="member.isSpammer" var="isSpammer" />
 	<display:column title="${isSpammer}">
 		<jstl:if test="${row.isSuspicious == null}">
@@ -42,18 +47,24 @@
 			<jstl:out value="${row.isSuspicious}"></jstl:out>
 		</jstl:if>
 	</display:column>
-	
+
 	<spring:message code="member.ban" var="ban" />
 	<display:column title="${ban}">
-		<jstl:if test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == false}">
-			<acme:cancel url='administrator/actorList/ban.do?actorId=${row.id}' code="administrator.ban" />
+		<jstl:if
+			test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == false}">
+			<acme:cancel url='administrator/actorList/ban.do?actorId=${row.id}'
+				code="administrator.ban" />
 		</jstl:if>
-		<jstl:if test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == true}">
-			<acme:cancel url='administrator/actorList/unban.do?actorId=${row.id}' code="administrator.unban" />
+		<jstl:if
+			test="${(row.isSuspicious == true || (row.score <= -0.5 )) && row.isBanned == true}">
+			<acme:cancel url='administrator/actorList/unban.do?actorId=${row.id}'
+				code="administrator.unban" />
 		</jstl:if>
 	</display:column>
 </display:table>
 
-<acme:cancel url="administrator/actorList/calculateScore.do?" code="administrator.calculateScore" />
-<acme:cancel url="administrator/actorList/calculateSpam.do" code="administrator.calculateSpam" />
+<acme:cancel url="administrator/actorList/calculateScore.do?"
+	code="administrator.calculateScore" />
+<acme:cancel url="administrator/actorList/calculateSpam.do"
+	code="administrator.calculateSpam" />
 <acme:cancel url="/" code="messageBox.goBack" />

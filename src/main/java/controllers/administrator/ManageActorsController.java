@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import services.AdministratorService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Administrator;
+import domain.Member;
 
 @Controller
 @RequestMapping("/administrator")
@@ -101,6 +103,31 @@ public class ManageActorsController extends AbstractController {
 		this.actorService.save(actor);
 
 		result = new ModelAndView("redirect:/administrator/actorList.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/actorList/showMember", method = RequestMethod.GET)
+	public ModelAndView showMember(@RequestParam final int actorId) {
+		ModelAndView result;
+
+		result = new ModelAndView("administrator/actorList/showMember");
+
+		try {
+
+			final Actor actor = this.actorService.findOne(actorId);
+			Assert.notNull(actor);
+
+			Boolean member = false;
+			if (actor instanceof Member)
+				member = true;
+
+			result.addObject("actor", actor);
+			result.addObject("member", member);
+
+		} catch (final Throwable oops) {
+			return new ModelAndView("redirect:/misc/403");
+		}
 
 		return result;
 	}

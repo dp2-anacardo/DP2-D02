@@ -8,6 +8,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
 
 <security:authorize access="hasRole('ADMIN')">
 <display:table name="positions" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
@@ -36,5 +38,7 @@
 	<a href="position/administrator/create.do">
 	<spring:message code="position.create" />
 	</a>
+	
+	<acme:cancel url="/" code="priority.back" />
 </div>
 </security:authorize>
