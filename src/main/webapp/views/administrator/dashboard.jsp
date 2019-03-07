@@ -15,23 +15,23 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 </head>
 <body>
+
 	<security:authorize access="hasRole('ADMIN')">
 	
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-
-<div><canvas id="myChart" width="40" height="10"></canvas></div>
-
-
+<canvas id="myChart" width="40" height="10" aria-label="coza" role="img"></canvas>
+<b><spring:message code="administrator.histogram"/></b> <br />
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-labels: ["hola", 1, 2, 3, 4],
+labels: ["President","Vicepresident","Secretary","Treasurer","Fundraiser","Historian","Officer"],
 datasets: [{
-  label: '',
-  data: [12, 19, 3, 5],
+  label: 'Number of positions',
+  data: ["${HistogramOfPositions.get(0)}","${HistogramOfPositions.get(1)}","${HistogramOfPositions.get(2)}","${HistogramOfPositions.get(3)}",
+         "${HistogramOfPositions.get(4)}","${HistogramOfPositions.get(5)}","${HistogramOfPositions.get(6)}"],
   backgroundColor: 'rgba(0, 0, 255, 1)',
 }]
   }
