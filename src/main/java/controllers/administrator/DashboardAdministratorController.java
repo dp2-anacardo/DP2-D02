@@ -3,8 +3,10 @@ package controllers.administrator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -115,12 +117,24 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double RatioOfNotEmptyFinders = this.administratorService.getRatioOfNotEmptyFinders();
 		final Double RatioOfEmptyFinders = this.administratorService.getRatioOfEmptyFinders();
 
-		final Collection<Position> positions = this.positionService.findAll();
+		//HISTOGRAM
+		final String language = LocaleContextHolder.getLocale().getLanguage();
+		final List<String> positions2 = new ArrayList<>();
+		final List<Position> positions = (List<Position>) this.positionService.findAll();
+		String s = "";
 		positions.remove(this.positionService.getDefaultPosition());
-		final Collection<Integer> HistogramOfPositions = new ArrayList<>();
-		for (final Position p : positions)
+		final List<Integer> HistogramOfPositions = new ArrayList<>();
+		for (final Position p : positions) {
 			HistogramOfPositions.add(this.administratorService.getHistogramOfPositions(p.getRoleEn(), p.getRoleEs()));
+			if (language.equals("es"))
+				if (p != positions.get(positions.size() - 1))
+					s = s + '"' + p.getRoleEs() + '"' + ",";
+				else
+					s = s + '"' + p.getRoleEs() + '"';
 
+			else
+				positions2.add(p.getRoleEn());
+		}
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
@@ -161,6 +175,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("RatioOfNotEmptyFinders", RatioOfNotEmptyFinders);
 		result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);
 		result.addObject("HistogramOfPositions", HistogramOfPositions);
+		result.addObject("positions2", positions2);
 
 		return result;
 	}
