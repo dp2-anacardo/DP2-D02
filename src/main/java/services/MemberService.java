@@ -30,16 +30,19 @@ import forms.MemberForm;
 public class MemberService {
 
 	@Autowired
-	private MemberRepository	memberRepository;
+	private MemberRepository		memberRepository;
 
 	@Autowired
-	private Validator			validator;
+	private Validator				validator;
 
 	@Autowired
-	private FinderService		finderService;
+	private FinderService			finderService;
 
 	@Autowired
-	private MessageBoxService	messageBoxService;
+	private MessageBoxService		messageBoxService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	public Member create() {
@@ -92,6 +95,12 @@ public class MemberService {
 
 		Assert.notNull(member);
 		Member result;
+
+		if ((!member.getPhoneNumber().equals(null) && !member.getPhoneNumber().equals(""))) {
+			final String i = this.configurationService.findAll().get(0).getDefaultCC();
+			member.setPhoneNumber("+" + i + " " + member.getPhoneNumber());
+		}
+
 		if (member.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String res = encoder.encodePassword(member.getUserAccount().getPassword(), null);

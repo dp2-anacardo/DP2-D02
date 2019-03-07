@@ -20,7 +20,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import datatype.Url;
-import domain.Area;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
@@ -34,12 +33,14 @@ public class BrotherhoodService {
 
 	@Autowired
 	private BrotherhoodRepository	brotherhoodRepository;
-
 	@Autowired
 	private Validator				validator;
 
 	@Autowired
 	private MessageBoxService		messageBoxService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	public Brotherhood create() {
@@ -47,7 +48,6 @@ public class BrotherhoodService {
 		Brotherhood result;
 		final Authority auth;
 		final UserAccount userAccount;
-		Area area;
 		Date d;
 		final Collection<Url> pictures;
 		final Collection<Authority> authorities;
@@ -55,7 +55,6 @@ public class BrotherhoodService {
 		final Collection<MessageBox> boxes;
 
 		result = new Brotherhood();
-		area = new Area();
 		d = new Date();
 		pictures = new ArrayList<Url>();
 		userAccount = new UserAccount();
@@ -74,7 +73,6 @@ public class BrotherhoodService {
 		result.setEstablishmentDate(d);
 		result.setSocialProfiles(profiles);
 		result.setPictures(pictures);
-		result.setArea(area);
 
 		return result;
 
@@ -102,8 +100,13 @@ public class BrotherhoodService {
 
 		Assert.notNull(brotherhood);
 		final Date nuevaFecha = new Date();
-
 		Brotherhood result;
+
+		if ((!brotherhood.getPhoneNumber().equals(null) && !brotherhood.getPhoneNumber().equals(""))) {
+			final String i = this.configurationService.findAll().get(0).getDefaultCC();
+			brotherhood.setPhoneNumber("+" + i + " " + brotherhood.getPhoneNumber());
+		}
+
 		if (brotherhood.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String res = encoder.encodePassword(brotherhood.getUserAccount().getPassword(), null);
@@ -172,7 +175,6 @@ public class BrotherhoodService {
 		result.setPhoto(bro.getPhoto());
 		result.setTitle(bro.getTitle());
 		result.setPictures(bro.getPictures());
-		result.setArea(bro.getArea());
 		result.getUserAccount().setPassword(bro.getPassword());
 		result.getUserAccount().setUsername(bro.getUsername());
 		result.setVersion(bro.getVersion());

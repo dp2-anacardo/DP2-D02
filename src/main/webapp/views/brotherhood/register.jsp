@@ -47,7 +47,9 @@ onsubmit="return validarForm(this)">
 	<br />
 	
 	<acme:textarea code="brotherhood.pictures" path="pictures"/>
-	<br />
+	<jstl:if test="${not empty attachmentError }">
+		<p class="error">${attachmentError }</p>
+	</jstl:if>
 	
 	<acme:textbox code="administrator.photo" path="photo"/>
 	<br />
@@ -59,16 +61,6 @@ onsubmit="return validarForm(this)">
 	<br />
 	
 	<acme:textbox code="administrator.address" path="address"/>
-	<br />
-	
-	<form:label path="area">
-		<spring:message code="administrator.area"/>
-	</form:label>
-	<form:select path="area">	
-		<form:options items="${areas}" itemValue="id" itemLabel="name"
-			/>
-	</form:select>
-	<form:errors cssClass="error" path="area" />
 	<br />
 	
 	<script type="text/javascript">
