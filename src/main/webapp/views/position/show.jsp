@@ -8,22 +8,13 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('ADMIN')">
 
-	<jstl:if test="${lang=='en' }">
-	<p>
-	<spring:message code="position.roleEn"/>:
-	<jstl:out value="${position.roleEn}"></jstl:out> 
-	</p>
-	</jstl:if>
+	<acme:showtext fieldset="true" code="position.roleEn" value="${position.roleEn}"/>
 	
-	<jstl:if test="${lang=='es' }">
-	<p>
-	<spring:message code="position.roleEs"/>:
-	<jstl:out value="${position.roleEs}"></jstl:out>
-	</p>
-	</jstl:if>
+	<acme:showtext fieldset="true" code="position.roleEs" value="${position.roleEs}"/>
 
 	<input type="button" name="back"
 		value="<spring:message code="position.back" />"
