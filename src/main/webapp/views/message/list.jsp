@@ -33,10 +33,10 @@
 				code="messageBox.display" /></a>
 	</display:column>
 
-	<spring:message code="messageBox.display" var="displayHeader" />
-	<display:column title="${displayHeader}">
-		<a href="message/list.do?messageBoxID=${row.id}"> <spring:message
-				code="messageBox.display" /></a>
+	<spring:message code="messageBox.edit" var="editHeader" />
+	<display:column title="${editHeader}">
+		<a href="messageBox/edit.do?messageBoxID=${row.id}"> <spring:message
+				code="messageBox.edit" /></a>
 	</display:column>
 
 </display:table>

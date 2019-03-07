@@ -107,8 +107,8 @@
 	function changeLink() {
 		var box = document.getElementById("actorBoxes").selectedOptions[0].value;
 		var strBox = box.toString();
-		var moveUrl = "javascript: relativeRedir('message/move.do?messageID=32769&srcBoxID=561&destBoxID=";
-		var copyUrl = "javascript: relativeRedir('message/copy.do?messageID=32769&srcBoxID=561&destBoxID=";
+		var moveUrl = "javascript: relativeRedir('message/move.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID=";
+		var copyUrl = "javascript: relativeRedir('message/copy.do?messageID=${row.id}&srcBoxID=${messageBoxID}&destBoxID=";
 		document.getElementById("moveButton").setAttribute("onclick", moveUrl + strBox + "')");
 		document.getElementById("copyButton").setAttribute("onclick", copyUrl + strBox + "')");
 	}
