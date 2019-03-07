@@ -8,6 +8,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -194,10 +195,15 @@ public class EnrolmentController extends AbstractController {
 		ModelAndView result;
 		Enrolment enrolment;
 
-		enrolment = this.enrolmentService.create(brotherhoodId);
-		this.enrolmentService.save(enrolment);
-		result = new ModelAndView("redirect:list.do");
-
+		try {
+			Assert.notNull(this.brotherhoodService.findOne(brotherhoodId));
+			enrolment = this.enrolmentService.create(brotherhoodId);
+			this.enrolmentService.save(enrolment);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 		return result;
 	}
 
