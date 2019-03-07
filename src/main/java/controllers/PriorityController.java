@@ -53,11 +53,15 @@ public class PriorityController extends AbstractController {
 		ModelAndView result;
 		Priority priority;
 
-		priority = this.priorityService.findOne(priorityId);
-
-		result = new ModelAndView("priority/administrator/show");
-		result.addObject("priority", priority);
-		result.addObject("requestURI", "priority/administrator/show.do");
+		try {
+			priority = this.priorityService.findOne(priorityId);
+			Assert.notNull(priority);
+			result = new ModelAndView("priority/administrator/show");
+			result.addObject("priority", priority);
+			result.addObject("requestURI", "priority/administrator/show.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 
 		return result;
 	}
@@ -91,7 +95,7 @@ public class PriorityController extends AbstractController {
 
 			result = this.createEditModelAndView(priorityForm);
 		} catch (final Exception e) {
-
+			result = new ModelAndView("redirect:/misc/403");
 		}
 
 		return result;

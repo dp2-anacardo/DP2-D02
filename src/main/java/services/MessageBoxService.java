@@ -115,6 +115,21 @@ public class MessageBoxService {
 		return this.messageBoxRepository.save(dst);
 	}
 
+	public MessageBox unnestMessageBox(final MessageBox src, final MessageBox dst) {
+		Assert.notNull(LoginService.getPrincipal());
+
+		final Actor actor = this.actorService.findByUserAccount(LoginService.getPrincipal());
+
+		Assert.isTrue(actor.getBoxes().contains(src));
+		Assert.isTrue(actor.getBoxes().contains(dst));
+		Assert.isTrue(src.getNestedBoxes().contains(dst));
+		Assert.isTrue(!dst.getNestedBoxes().contains(src));
+
+		dst.getNestedBoxes().add(src);
+
+		return this.messageBoxRepository.save(dst);
+	}
+
 	public MessageBox findOneByActorAndName(final int actorID, final String name) {
 		Assert.notNull(name);
 		final MessageBox result = this.messageBoxRepository.findOneByActorAndName(actorID, name);
@@ -130,23 +145,23 @@ public class MessageBoxService {
 		final MessageBox trash = new MessageBox();
 		final MessageBox spam = new MessageBox();
 		final MessageBox notification = new MessageBox();
-		in.setName("in");
+		in.setName("INBOX");
 		in.setMessages(messages);
 		in.setIsSystem(true);
 
-		out.setName("out");
+		out.setName("OUTBOX");
 		out.setMessages(messages);
 		out.setIsSystem(true);
 
-		notification.setName("notification");
+		notification.setName("NOTIFICATIONBOX");
 		notification.setMessages(messages);
 		notification.setIsSystem(true);
 
-		trash.setName("trash");
+		trash.setName("TRASHBOX");
 		trash.setMessages(messages);
 		trash.setIsSystem(true);
 
-		spam.setName("spam");
+		spam.setName("SPAMBOX");
 		spam.setMessages(messages);
 		spam.setIsSystem(true);
 

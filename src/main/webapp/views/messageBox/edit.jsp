@@ -28,11 +28,13 @@
 	<%-- Name--%>
 	<acme:textbox code="messageBox.name" path="name" />
 	<br>
-	
+
 	<jstl:if test="${!empty actorBoxes}">
 		<select id="actorBoxes">
 			<jstl:forEach items="${actorBoxes}" var="msgBox">
-				<option value="${msgBox.id}"><jstl:out value="${msgBox.name}"/></option>
+				<option value="${msgBox.id}">
+					<jstl:out value="${msgBox.name}" />
+				</option>
 			</jstl:forEach>
 		</select>
 
@@ -67,7 +69,9 @@
 
 		<acme:cancel url="messageBox/list.do" code="messageBox.cancel" />
 
-		<jstl:if test="${messageBox.id != 0 && messageBox.isSystem == false}">
+
+		<jstl:if
+			test="${messageBox.id != 0 && messageBox.isSystem == false && (empty messageBox.messages) && (empty messageBox.nestedBoxes)}">
 			<acme:submit name="delete" code="messageBox.delete" />
 		</jstl:if>
 
