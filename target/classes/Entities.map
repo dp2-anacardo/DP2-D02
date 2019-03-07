@@ -1,250 +1,81 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Wed Mar 06 20:45:33 CET 2019
-=======
-#Thu Mar 07 10:53:42 CET 2019
->>>>>>> origin/juanma
-=======
-#Thu Mar 07 11:13:06 CET 2019
->>>>>>> origin/sergio
-=======
-#Thu Mar 07 12:24:43 CET 2019
->>>>>>> origin/adrian
-trashBoxAdmin1=475
-inBoxBrotherhood1=479
-configuration1=520
-finderMember3=488
-finderMember2=487
-finderMember1=486
-historian=517
-trashBoxMember3=503
-outBoxMember3=501
-trashBoxMember2=498
-inBoxAdmin1=472
-trashBoxMember1=493
-outBoxMember2=496
-HIGH=505
-outBoxMember1=491
-spamBoxBrotherhood1=481
-request2=526
-vicepresident=513
-request1=525
-secretary=514
-default=519
-enrolment4=529
-inBoxMember3=500
-enrolment3=530
-socialProfileMember2=489
-inBoxMember2=495
-notificationBoxBrotherhood1=483
-enrolment2=528
-inBoxMember1=490
-enrolment1=527
-member3=523
-member2=522
-notificationBoxAdmin1=476
-member1=521
-spamBoxAdmin1=474
-brotherhood1=478
-floatEntity2=509
-floatEntity1=508
-outBoxAdmin1=473
-officer=518
-LOW=507
-notificationBoxMember3=504
-notificationBoxMember2=499
-trashBoxBrotherhood1=482
-notificationBoxMember1=494
-procession2=511
-procession1=510
-messageMember1=524
-userAccount5=470
-userAccount4=469
-president=512
-areaBrotherhood1=484
-userAccount3=468
-userAccount2=467
-userAccount1=466
-MEDIUM=506
-fundraiser=516
-treasurer=515
-socialProfileBrotherhood1=485
-admin1=471
-outBoxBrotherhood1=480
-spamBoxMember3=502
-spamBoxMember2=497
-spamBoxMember1=492
-socialProfileAdmin1=477
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-#Wed Mar 06 19:46:43 CET 2019
-=======
-#Wed Mar 06 18:42:53 CET 2019
->>>>>>> origin/juanma
-=======
-#Wed Mar 06 22:04:03 CET 2019
->>>>>>> origin/adrian
-=======
-#Wed Mar 06 21:57:59 CET 2019
->>>>>>> origin/manuercaximba
-trashBoxAdmin1=427
-inBoxBrotherhood1=431
-configuration1=472
-finderMember3=440
-finderMember2=439
-finderMember1=438
-historian=469
-trashBoxMember3=455
-outBoxMember3=453
-trashBoxMember2=450
-inBoxAdmin1=424
-trashBoxMember1=445
-outBoxMember2=448
-HIGH=457
-outBoxMember1=443
-spamBoxBrotherhood1=433
-request2=478
-vicepresident=465
-request1=477
-secretary=466
-default=471
-inBoxMember3=452
-enrolment3=481
-socialProfileMember2=441
-inBoxMember2=447
-notificationBoxBrotherhood1=435
-enrolment2=480
-inBoxMember1=442
-enrolment1=479
-member3=475
-member2=474
-notificationBoxAdmin1=428
-member1=473
-spamBoxAdmin1=426
-brotherhood1=430
-floatEntity2=461
-floatEntity1=460
-outBoxAdmin1=425
-officer=470
-LOW=459
-notificationBoxMember3=456
-notificationBoxMember2=451
-trashBoxBrotherhood1=434
-notificationBoxMember1=446
-procession2=463
-procession1=462
-messageMember1=476
-userAccount5=422
-userAccount4=421
-president=464
-areaBrotherhood1=436
-userAccount3=420
-userAccount2=419
-userAccount1=418
-MEDIUM=458
-fundraiser=468
-treasurer=467
-socialProfileBrotherhood1=437
-admin1=423
-outBoxBrotherhood1=432
-spamBoxMember3=454
-spamBoxMember2=449
-spamBoxMember1=444
-socialProfileAdmin1=429
->>>>>>> origin/miguel
-=======
->>>>>>> origin/juanma
-=======
->>>>>>> origin/sergio
-=======
-#Thu Mar 07 11:30:43 CET 2019
-procession9=609
-procession8=608
-procession7=607
-procession6=606
-procession5=605
-procession4=604
-procession3=603
-procession2=602
-procession1=601
-socialProfileMember2=580
-outBoxAdmin1=564
-brotherhood1=569
-trashBoxBrotherhood1=573
-spamBoxMember3=593
-spamBoxMember2=588
-spamBoxMember1=583
-messageMember1=628
-vicepresident=617
-MEDIUM=597
-socialProfileAdmin1=568
-trashBoxAdmin1=566
-spamBoxBrotherhood1=572
-finderMember3=579
-finderMember2=578
-finderMember1=577
-LOW=598
-member3=627
-member2=626
-member1=625
-notificationBoxBrotherhood1=574
-spamBoxAdmin1=565
-default=623
-inBoxBrotherhood1=570
-floatEntity2=600
-floatEntity1=599
-configuration1=624
-officer=622
-treasurer=619
-inBoxMember3=591
-notificationBoxMember3=595
-inBoxMember2=586
-notificationBoxMember2=590
-inBoxMember1=581
-notificationBoxMember1=585
-outBoxBrotherhood1=571
-inBoxAdmin1=563
-HIGH=596
-enrolment4=633
-enrolment3=634
-enrolment2=632
-admin1=562
-enrolment1=631
-request2=630
-request1=629
-trashBoxMember3=594
-trashBoxMember2=589
-trashBoxMember1=584
-outBoxMember3=592
-outBoxMember2=587
-outBoxMember1=582
-historian=621
-areaBrotherhood1=575
-president=616
-notificationBoxAdmin1=567
-fundraiser=620
-procession15=615
-procession14=614
-procession13=613
-userAccount5=561
-procession12=612
-userAccount4=560
-procession11=611
-userAccount3=559
-procession10=610
-userAccount2=558
-userAccount1=557
-socialProfileBrotherhood1=576
-secretary=618
->>>>>>> origin/manuercaximba
-=======
->>>>>>> origin/adrian
+#Thu Mar 07 15:22:43 CET 2019
+procession9=616
+procession8=615
+procession7=614
+procession6=613
+procession5=612
+procession4=611
+procession3=610
+procession2=609
+procession1=608
+socialProfileMember2=587
+outBoxAdmin1=571
+brotherhood1=576
+trashBoxBrotherhood1=580
+spamBoxMember3=600
+spamBoxMember2=595
+spamBoxMember1=590
+messageMember1=636
+vicepresident=625
+MEDIUM=604
+socialProfileAdmin1=575
+trashBoxAdmin1=573
+spamBoxBrotherhood1=579
+finderMember3=586
+finderMember2=585
+finderMember1=584
+LOW=605
+member3=635
+member2=634
+member1=633
+notificationBoxBrotherhood1=581
+spamBoxAdmin1=572
+default=631
+inBoxBrotherhood1=577
+floatEntity2=607
+floatEntity1=606
+configuration1=632
+officer=630
+treasurer=627
+inBoxMember3=598
+notificationBoxMember3=602
+inBoxMember2=593
+notificationBoxMember2=597
+inBoxMember1=588
+notificationBoxMember1=592
+outBoxBrotherhood1=578
+inBoxAdmin1=570
+HIGH=603
+enrolment4=641
+enrolment3=642
+enrolment2=640
+admin1=569
+enrolment1=639
+request2=638
+request1=637
+trashBoxMember3=601
+trashBoxMember2=596
+trashBoxMember1=591
+outBoxMember3=599
+outBoxMember2=594
+outBoxMember1=589
+historian=629
+areaBrotherhood1=582
+president=624
+notificationBoxAdmin1=574
+fundraiser=628
+procession16=623
+procession15=622
+procession14=621
+procession13=620
+userAccount5=568
+procession12=619
+userAccount4=567
+procession11=618
+userAccount3=566
+procession10=617
+userAccount2=565
+userAccount1=564
+socialProfileBrotherhood1=583
+secretary=626
