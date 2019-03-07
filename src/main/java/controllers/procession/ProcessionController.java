@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.FinderService;
 import services.FloatEntityService;
 import services.ProcessionService;
 import controllers.AbstractController;
@@ -37,6 +38,9 @@ public class ProcessionController extends AbstractController {
 
 	@Autowired
 	private FloatEntityService	floatService;
+
+	@Autowired
+	private FinderService		finderService;
 
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -126,6 +130,22 @@ public class ProcessionController extends AbstractController {
 			result = new ModelAndView("procession/listNotRegister");
 			result.addObject("procession", pro);
 			result.addObject("requestURI", "procession/listNotRegister.do");
+		}
+		return result;
+	}
+	@RequestMapping(value = "/listForMembers", method = RequestMethod.GET)
+	public ModelAndView listMembers() {
+
+		ModelAndView result;
+		final Collection<Procession> pro = this.finderService.findAllFinal();
+
+		if (pro == null || pro.size() <= 0)
+			result = new ModelAndView("redirect:/misc/403");
+		else {
+
+			result = new ModelAndView("procession/listForMembers");
+			result.addObject("procession", pro);
+			result.addObject("requestURI", "procession/listForMembers.do");
 		}
 		return result;
 	}

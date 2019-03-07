@@ -9,17 +9,20 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
+<head>
+<link rel="stylesheet" href="styles/errorEmpty.css" type="text/css">
+</head>
+
+<div class="error">
+<spring:message code="procession.notMatches"/>
+</div>
+<br/>
+
 <display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 	<spring:message code="procession.title" var="columnTitle"/>
-	<display:column title="${columnTitle}">
-		<jstl:out value="${row.title }"></jstl:out>
-	</display:column>
 	
-	<display:column>
-		<a href="procession/brotherhood/edit.do?processionId=${row.id}">
-			<spring:message code="procession.edit"/>
-		</a>
+	<display:column title="${columnTitle}">
+		<jstl:out value="${row.title}"></jstl:out>
 	</display:column>
 	
 	<display:column>
@@ -27,17 +30,5 @@
 			<spring:message code="procession.show"/>
 		</a>
 	</display:column>
-	<display:column>
-		<a href="request/brotherhood/list.do?processionId=${row.id}">
-			<spring:message code="procession.request"/>
-		</a>
-	</display:column>
-	
 	
 </display:table>
-<div>
-	<a href="procession/brotherhood/create.do"> <spring:message
-				code="procession.create" />
-	</a>
-</div>
-</security:authorize>
