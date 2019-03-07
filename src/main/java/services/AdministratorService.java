@@ -291,30 +291,64 @@ public class AdministratorService {
 	}
 
 	/* Q10 */
-	public Collection<Double> getStatsBrotherHoodPerArea(final Integer areaId) {
+
+	public Double getCountOfBrotherhoodPerArea(final Integer areaId) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Collection<Double> result;
-		result = new ArrayList<Double>();
+		Double result;
+		result = this.administratorRepository.getCountOfBrotherhoodPerArea(areaId);
+		return result;
+	}
 
-		result.add(this.administratorRepository.getCountOfBrotherhoodPerArea(areaId));
-		result.add(this.administratorRepository.getMinBrotherhoodPerArea());
-		result.add(this.administratorRepository.getMaxBrotherhoodPerArea());
-		result.add(this.administratorRepository.getAvgBrotherhoodPerArea());
-		result.add(this.administratorRepository.getStddevBrotherhoodPerArea());
+	public Double getMinBrotherhoodPerArea() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
+		Double result;
+		result = this.administratorRepository.getMinBrotherhoodPerArea();
+		return result;
+	}
+
+	public Double getMaxBrotherhoodPerArea() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double result;
+		result = this.administratorRepository.getMaxBrotherhoodPerArea();
+		return result;
+	}
+
+	public Double getAvgBrotherhoodPerArea() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double result;
+		result = this.administratorRepository.getAvgBrotherhoodPerArea();
+		return result;
+	}
+
+	public Double getStddevBrotherhoodPerArea() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double result;
+		result = this.administratorRepository.getStddevBrotherhoodPerArea();
 		return result;
 	}
 
 	/* Q11 */
-	public Collection<Double> getStatsFinders() {
+	public List<Double> getStatsFinders() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Collection<Double> result;
+		List<Double> result;
 		result = new ArrayList<Double>();
 
 		result.add(this.administratorRepository.getMinResultFinder());
