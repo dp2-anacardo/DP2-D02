@@ -68,26 +68,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select m from Member m where((select count(r) from Request r where r.member.id=m.id and r.status = 'APPROVED')/(select count(r) from Request r where r.member.id=m.id))>0.1")
 	Collection<Member> getMembersAtLeast10PercentOfNumberOfRequestAccepted();
 
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='President' or e.position.roleEs='Presidente') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfPresidents();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Vice President' or e.position.roleEs='Vicepresidente') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfVicePresidents();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Secretary' or e.position.roleEs='Secretario') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfSecretaries();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Treasurer' or e.position.roleEs='Tesorero') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfTreasurers();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Fundraiser' or e.position.roleEs='Promotor') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfFundraisers();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Historian' or e.position.roleEs='Historiador') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfHistorians();
-
-	@Query("select count(e) from Enrolment e where (e.position.roleEn='Officer' or e.position.roleEs='Vocal') and e.status='ACCEPTED' and e.dropOutMoment is null")
-	Integer getNumberOfOfficers();
+	@Query("select count(e) from Enrolment e where (e.position.roleEn=?1 or e.position.roleEs=?2) and e.status='ACCEPTED' and e.dropOutMoment is null")
+	Integer getHistogramOfPositions(String roleEn, String roleEs);
 
 	@Query("select 1.0 * count(b) from Brotherhood b where b.area.id=?1")
 	//@Query("select count(b), b.area.name from Brotherhood b group by b.area")

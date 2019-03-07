@@ -12,10 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.AreaService;
+import services.PositionService;
 import services.ProcessionService;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Member;
+import domain.Position;
 import domain.Procession;
 
 @Controller
@@ -30,6 +32,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private AreaService				areaService;
+
+	@Autowired
+	private PositionService			positionService;
 
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -110,6 +115,12 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double RatioOfNotEmptyFinders = this.administratorService.getRatioOfNotEmptyFinders();
 		final Double RatioOfEmptyFinders = this.administratorService.getRatioOfEmptyFinders();
 
+		final Collection<Position> positions = this.positionService.findAll();
+		positions.remove(this.positionService.getDefaultPosition());
+		final Collection<Integer> HistogramOfPositions = new ArrayList<>();
+		for (final Position p : positions)
+			HistogramOfPositions.add(this.administratorService.getHistogramOfPositions(p.getRoleEn(), p.getRoleEs()));
+
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
@@ -149,6 +160,7 @@ public class DashboardAdministratorController extends AbstractController {
 
 		result.addObject("RatioOfNotEmptyFinders", RatioOfNotEmptyFinders);
 		result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);
+		result.addObject("HistogramOfPositions", HistogramOfPositions);
 
 		return result;
 	}
