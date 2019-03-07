@@ -60,7 +60,8 @@
 					<li class="arrow"></li>
 					<li><a href="enrolment/brotherhood/list.do"><spring:message code="master.page.enrolment.list" /></a></li>
 					<li><a href="procession/brotherhood/list.do"><spring:message code="master.page.brotherhood.processions" /></a></li>		
-					<li><a href="floatEntity/brotherhood/list.do"><spring:message code="master.page.floatEntity.list" /></a></li>					
+					<li><a href="floatEntity/brotherhood/list.do"><spring:message code="master.page.floatEntity.list" /></a></li>
+					<li><a href="brotherhood/listMember.do"><spring:message code="master.page.members" /></a></li>						
 				</ul>
 			</li>
 		</security:authorize>

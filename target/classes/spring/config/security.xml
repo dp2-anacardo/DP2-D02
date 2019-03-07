@@ -50,6 +50,7 @@
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/brotherhood/listMember.do" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/brotherhood/deleteMember.do" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/brotherhood/showMember.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/socialProfile/brotherhood,member,admin/**" access="isAuthenticated()" />

@@ -26,5 +26,11 @@
 		</a>
 	</display:column>
 	
+	<display:column>
+		<a href="brotherhood/deleteMember.do?memberId=${row.id}">
+			<spring:message code="procession.delete"/>
+		</a>
+	</display:column>
+	
 
 </display:table>

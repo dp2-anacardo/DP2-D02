@@ -20,4 +20,6 @@ public interface BrotherhoodRepository extends JpaRepository<Brotherhood, Intege
 	@Query("select e.member from Enrolment e where e.brotherhood = ?1 and e.status like 'ACCEPTED' and e.dropOutMoment is null")
 	Collection<Member> getMembers(Brotherhood b);
 
+	@Query("select e from Enrolment e where e.member = ?2 and e.brotherhood = ?1 and status like 'ACCEPTED'and e.dropOutMoment is null")
+	Enrolment getEnrolmentsByBrotherhoodAndMember(Brotherhood b, Member m);
 }

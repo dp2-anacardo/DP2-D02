@@ -1,90 +1,5 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Thu Mar 07 11:21:25 CET 2019
-=======
-#Thu Mar 07 10:53:42 CET 2019
->>>>>>> origin/juanma
-=======
-#Thu Mar 07 11:13:06 CET 2019
->>>>>>> origin/sergio
-=======
-#Thu Mar 07 12:24:43 CET 2019
->>>>>>> origin/adrian
-=======
-#Thu Mar 07 13:31:30 CET 2019
->>>>>>> origin/miguel
-trashBoxAdmin1=475
-inBoxBrotherhood1=479
-configuration1=520
-finderMember3=488
-finderMember2=487
-finderMember1=486
-historian=517
-trashBoxMember3=503
-outBoxMember3=501
-trashBoxMember2=498
-inBoxAdmin1=472
-trashBoxMember1=493
-outBoxMember2=496
-HIGH=505
-outBoxMember1=491
-spamBoxBrotherhood1=481
-request2=526
-vicepresident=513
-request1=525
-secretary=514
-default=519
-enrolment4=529
-inBoxMember3=500
-enrolment3=530
-socialProfileMember2=489
-inBoxMember2=495
-notificationBoxBrotherhood1=483
-enrolment2=528
-inBoxMember1=490
-enrolment1=527
-member3=523
-member2=522
-notificationBoxAdmin1=476
-member1=521
-spamBoxAdmin1=474
-brotherhood1=478
-floatEntity2=509
-floatEntity1=508
-outBoxAdmin1=473
-officer=518
-LOW=507
-notificationBoxMember3=504
-notificationBoxMember2=499
-trashBoxBrotherhood1=482
-notificationBoxMember1=494
-procession2=511
-procession1=510
-messageMember1=524
-userAccount5=470
-userAccount4=469
-president=512
-areaBrotherhood1=484
-userAccount3=468
-userAccount2=467
-userAccount1=466
-MEDIUM=506
-fundraiser=516
-treasurer=515
-socialProfileBrotherhood1=485
-admin1=471
-outBoxBrotherhood1=480
-spamBoxMember3=502
-spamBoxMember2=497
-spamBoxMember1=492
-socialProfileAdmin1=477
-<<<<<<< HEAD
-=======
-#Thu Mar 07 11:30:43 CET 2019
+#Thu Mar 07 15:00:28 CET 2019
 procession9=609
 procession8=608
 procession7=607
@@ -163,6 +78,3 @@ userAccount2=558
 userAccount1=557
 socialProfileBrotherhood1=576
 secretary=618
->>>>>>> origin/manuercaximba
-=======
->>>>>>> origin/adrian
