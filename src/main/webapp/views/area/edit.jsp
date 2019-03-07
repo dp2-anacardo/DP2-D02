@@ -18,6 +18,9 @@
 	<br />
 	
 	<acme:textarea code="area.pictures" path="pictures"/>
+	<jstl:if test="${not empty attachmentError }">
+		<p class="error">${attachmentError }</p>
+	</jstl:if>
 	<br />
 	
 	<acme:submit name="save" code="area.save"/>
