@@ -23,6 +23,7 @@ import datatype.Url;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Enrolment;
+import domain.Member;
 import domain.MessageBox;
 import domain.SocialProfile;
 import forms.BrotherhoodForm;
@@ -177,6 +178,10 @@ public class BrotherhoodService {
 		result.setVersion(bro.getVersion());
 		this.validator.validate(result, binding);
 		return result;
+	}
+
+	public Collection<Member> getMembersByBrotherhood(final Brotherhood b) {
+		return this.brotherhoodRepository.getMembers(b);
 	}
 
 }
