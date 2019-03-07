@@ -14,6 +14,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
 </head>
 <body>
 	<security:authorize access="hasRole('ADMIN')">
@@ -28,15 +29,58 @@
 
 		<b><spring:message code="administrator.ProcessionIn30Days" /></b>
 		<jstl:forEach var="x" items="${ProcessionIn30Days}">
-			<jstl:out value="${x.tittle}"> </jstl:out>
+			<jstl:out value="${x.tittle}">
+			</jstl:out>
 		</jstl:forEach>
 		<br />
 		<b><spring:message code="administrator.RatioOfRequestsApproveds" /></b> ${RatioOfRequestsApproveds} <br />
 		<b><spring:message code="administrator.RatioOfRequestsPendings" /></b> ${RatioOfRequestsPendings} <br />
 		<b><spring:message code="administrator.RatioOfRequestsRejecteds" /></b> ${RatioOfRequestsRejecteds} <br />
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b> ${RatioOfRequestToProcessionPerAPPROVED} <br />
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b> ${RatioOfRequestToProcessionPerREJECTED} <br />
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerPENDING" /></b> ${RatioOfRequestToProcessionPerPENDING} <br />
+
+
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b>
+		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
+			<br>
+			- ${x.title} : ${RatioOfRequestToProcessionPerAPPROVED[status.index]}
+		</jstl:forEach>
+		
+		<br>
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerPENDING" /></b>
+		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
+			<br>
+			- ${x.title} : ${RatioOfRequestToProcessionPerPENDING[status.index]}
+		</jstl:forEach>
+		
+		<br>
+		<b><spring:message code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b>
+		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
+			<br>
+			- ${x.title} : ${RatioOfRequestToProcessionPerREJECTED[status.index]}
+		</jstl:forEach>
+
+		<br>
+		<b><spring:message
+				code="administrator.MembersAtLeast10PercentOfNumberOfRequestAccepted" /></b>
+		<jstl:forEach var="MembersAtLeast10PercentOfNumberOfRequestAccepted"
+			items="${MembersAtLeast10PercentOfNumberOfRequestAccepted}">
+			<jstl:out
+				value="${MembersAtLeast10PercentOfNumberOfRequestAccepted.name}"></jstl:out>
+			<br />
+		</jstl:forEach>
+
+		<b><spring:message code="administrator.MinBrotherhoodPerArea" /></b> ${MinBrotherhoodPerArea} <br />
+		<b><spring:message code="administrator.MaxBrotherhoodPerArea" /></b> ${MaxBrotherhoodPerArea} <br />
+		<b><spring:message code="administrator.AvgBrotherhoodPerArea" /></b> ${AvgBrotherhoodPerArea} <br />
+		<b><spring:message code="administrator.StddevBrotherhoodPerArea" /></b> ${StddevBrotherhoodPerArea} <br />
+
+		<b><spring:message code="administrator.MinResultFinder" /></b> ${MinResultFinder} <br />
+		<b><spring:message code="administrator.MaxResultFinder" /></b> ${MaxResultFinder} <br />
+		<b><spring:message code="administrator.AvgResultFinder" /></b> ${AvgResultFinder} <br />
+		<b><spring:message code="administrator.StddevResultFinder" /></b> ${StddevResultFinder} <br />
+
+		<b><spring:message code="administrator.RatioOfNotEmptyFinders" /></b> ${RatioOfNotEmptyFinders} <br />
+		<b><spring:message code="administrator.RatioOfEmptyFinders" /></b> ${RatioOfEmptyFinders} <br />
+
 	</security:authorize>
 </body>
 </html>

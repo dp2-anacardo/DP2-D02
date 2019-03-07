@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,9 +63,12 @@ public class AreaController extends AbstractController {
 	public ModelAndView save(Area area, final BindingResult binding) {
 		ModelAndView result;
 		area = this.areaService.reconstruct(area, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(area);
-		else
+			for (final ObjectError e : binding.getAllErrors())
+				if (e.getDefaultMessage().equals("URL incorrecta") || e.getDefaultMessage().equals("Invalid URL"))
+					result.addObject("attachmentError", e.getDefaultMessage());
+		} else
 			try {
 				this.areaService.save(area);
 				result = new ModelAndView("redirect:list.do");

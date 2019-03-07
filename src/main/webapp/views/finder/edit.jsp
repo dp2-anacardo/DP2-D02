@@ -41,5 +41,7 @@
 	
 	<acme:cancel url="/" code="finder.update.cancel"/>
 	
+	<acme:cancel url="finder/member/clear.do" code="finder.update.clear"/>&nbsp;
+	
 </form:form>
 </security:authorize>

@@ -1,25 +1,20 @@
 
 package controllers.brotherhood;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
-import services.AreaService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
-import domain.Area;
 import domain.Brotherhood;
 import forms.BrotherhoodForm;
 
@@ -29,19 +24,11 @@ public class RegisterBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
-
-	@Autowired
-	private AreaService				areaService;
 	@Autowired
 	private ActorService			actorService;
 	@Autowired
 	private AdministratorService	administratorService;
 
-
-	@ExceptionHandler(TypeMismatchException.class)
-	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
-		return new ModelAndView("redirect:/misc/403");
-	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -65,9 +52,16 @@ public class RegisterBrotherhoodController extends AbstractController {
 		} else if (this.administratorService.checkPass(brotherhoodForm.getPassword(), brotherhoodForm.getConfirmPass()) == false) {
 			binding.rejectValue("password", "error.password");
 			result = this.createEditModelAndView(brotherhoodForm);
-		} else if (binding.hasErrors())
+		} else if (binding.hasErrors()) {
 			result = this.createEditModelAndView(brotherhoodForm);
-		else
+			for (final ObjectError e : binding.getAllErrors())
+				if (e.getDefaultMessage().equals("URL incorrecta") || e.getDefaultMessage().equals("Invalid URL")) {
+					result.addObject("attachmentError", e.getDefaultMessage());
+					break;
+				}
+			//					result = this.createEditModelAndView(brotherhoodForm);
+			//					result.addObject("attachmentError", e.getDefaultMessage());
+		} else
 			try {
 				bro = this.brotherhoodService.reconstruct(brotherhoodForm, binding);
 				this.brotherhoodService.save(bro);
@@ -89,11 +83,9 @@ public class RegisterBrotherhoodController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final BrotherhoodForm broForm, final String messageCode) {
 
 		ModelAndView result;
-		final Collection<Area> areas = this.areaService.findAll();
 
 		result = new ModelAndView("brotherhood/create");
 		result.addObject("brotherhoodForm", broForm);
-		result.addObject("areas", areas);
 		result.addObject("message", messageCode);
 
 		return result;

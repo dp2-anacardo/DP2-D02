@@ -9,26 +9,22 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<head>
-<link rel="stylesheet" href="styles/errorEmpty.css" type="text/css">
-</head>
+<display:table name="members" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
-<div class="error">
-<spring:message code="procession.notMatches"/>
-</div>
-<br/>
-
-<display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-	<spring:message code="procession.title" var="columnTitle"/>
+	<spring:message code="administrator.name" var="name" />
+	<display:column property="name" title="${name}"/>
 	
-	<display:column title="${columnTitle}">
-		<jstl:out value="${row.title}"></jstl:out>
-	</display:column>
+	<spring:message code="administrator.email" var="email" />
+	<display:column property="email" title="${email}"/>
+	
+	<spring:message code="administrator.phoneNumber" var="phoneNumber" />
+	<display:column property="phoneNumber" title="${phoneNumber}"/>
 	
 	<display:column>
-		<a href="procession/show.do?processionId=${row.id}">
+		<a href="brotherhood/showMember.do?memberId=${row.id}">
 			<spring:message code="procession.show"/>
 		</a>
 	</display:column>
 	
+
 </display:table>

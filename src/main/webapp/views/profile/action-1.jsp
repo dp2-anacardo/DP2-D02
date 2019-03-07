@@ -15,18 +15,26 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 
 
 <security:authorize access="hasRole('ADMIN')">
 
-<spring:message code="administrator.name" /> ${administrator.name} <br/>
+<acme:showtext code="administrator.name" value="${administrator.name}" fieldset="true"/>
+<br>
 <jstl:if test="${administrator.middleName != ''}">
-		<spring:message code="administrator.middleName" /> ${administrator.middleName} <br/>
-	</jstl:if>
-<spring:message code="administrator.surname" /> ${administrator.surname} <br/>
-<spring:message code="administrator.email" /> ${administrator.email} <br/>
-<spring:message code="administrator.phoneNumber" /> ${administrator.phoneNumber} <br/>
-<spring:message code="administrator.address" /> ${administrator.address} <br/>
+		<acme:showtext code="administrator.middleName" value="${administrator.middleName}" fieldset="true"/>
+		<br>
+</jstl:if>
+<acme:showtext code="administrator.surname" value="${administrator.surname}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.email" value="${administrator.email}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.phoneNumber" value="${administrator.phoneNumber}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.address" value="${administrator.address}" fieldset="true"/>
+<br>
 
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
@@ -38,13 +46,18 @@
 	
 <security:authorize access="hasRole('BROTHERHOOD')">
 
-<spring:message code="administrator.name" /> ${brotherhood.name} <br/>
-<spring:message code="administrator.title" /> ${brotherhood.title} <br/>
-<spring:message code="administrator.email" /> ${brotherhood.email} <br/>
-<spring:message code="administrator.phoneNumber" /> ${brotherhood.phoneNumber} <br/>
-<spring:message code="administrator.address" /> ${brotherhood.address} <br/>
-<spring:message code="administrator.pictures" /> ${brotherhood.pictures} <br/>
-
+<acme:showtext code="administrator.name" value="${brotherhood.name}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.title" value="${brotherhood.title}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.email" value="${brotherhood.email}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.phoneNumber" value="${brotherhood.phoneNumber}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.address" value="${brotherhood.address}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.pictures" value="${brotherhood.pictures}" fieldset="true"/>
+<br>
 
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('brotherhood/brotherhood/edit.do');" />
@@ -54,16 +67,20 @@
 
 <security:authorize access="hasRole('MEMBER')">
 
-<spring:message code="administrator.name" /> ${member.name} <br/>
+<acme:showtext code="administrator.name" value="${member.name}" fieldset="true"/>
+<br>
 <jstl:if test="${member.middleName != ''}">
-		<spring:message code="administrator.middleName" /> ${member.middleName} <br/>
-	</jstl:if>
-<spring:message code="administrator.surname" /> ${member.surname} <br/>
-<spring:message code="administrator.email" /> ${member.email} <br/>
-<spring:message code="administrator.phoneNumber" /> ${member.phoneNumber} <br/>
-<spring:message code="administrator.address" /> ${member.address} <br/>
-
-
+		<acme:showtext code="administrator.middleName" value="${member.middleName}" fieldset="true"/>
+		<br>
+</jstl:if>
+<acme:showtext code="administrator.surname" value="${member.surname}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.email" value="${member.email}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.phoneNumber" value="${member.phoneNumber}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.address" value="${member.address}" fieldset="true"/>
+<br>
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('/member/member/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"

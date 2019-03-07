@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.AreaService;
 import services.ProcessionService;
 import controllers.AbstractController;
+import domain.Area;
+import domain.Member;
 import domain.Procession;
 
 @Controller
@@ -24,6 +27,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ProcessionService		processionService;
+
+	@Autowired
+	private AreaService				areaService;
 
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -76,20 +82,71 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double RatioOfRequestsPendings = this.administratorService.getRatioOfRequestPerStatus().get(1);
 		final Double RatioOfRequestsRejecteds = this.administratorService.getRatioOfRequestPerStatus().get(2);
 
+		/* Q8 */
+		final Collection<Member> MembersAtLeast10PercentOfNumberOfRequestAccepted = this.administratorService.getMembersAtLeast10PercentOfNumberOfRequestAccepted();
+
+		/* Q10 */
+		//TODO: CountOfBrotherhoodPerArea(areaId))
+		final Collection<Area> areas = this.areaService.findAll();
+		final Collection<Double> CountOfBrotherhoodPerArea = new ArrayList<Double>();
+		for (final Area a : areas) {
+			final Integer areaId = a.getId();
+			final Double res = this.administratorService.getCountOfBrotherhoodPerArea(areaId);
+			CountOfBrotherhoodPerArea.add(res);
+		}
+
+		final Double MinBrotherhoodPerArea = this.administratorService.getMinBrotherhoodPerArea();
+		final Double MaxBrotherhoodPerArea = this.administratorService.getMaxBrotherhoodPerArea();
+		final Double AvgBrotherhoodPerArea = this.administratorService.getAvgBrotherhoodPerArea();
+		final Double StddevBrotherhoodPerArea = this.administratorService.getStddevBrotherhoodPerArea();
+
+		/* Q11 */
+		final Double MinResultFinder = this.administratorService.getStatsFinders().get(0);
+		final Double MaxResultFinder = this.administratorService.getStatsFinders().get(1);
+		final Double AvgResultFinder = this.administratorService.getStatsFinders().get(2);
+		final Double StddevResultFinder = this.administratorService.getStatsFinders().get(3);
+
+		/* Q12 */
+		final Double RatioOfNotEmptyFinders = this.administratorService.getRatioOfNotEmptyFinders();
+		final Double RatioOfEmptyFinders = this.administratorService.getRatioOfEmptyFinders();
+
 		result = new ModelAndView("administrator/dashboard");
+
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
 		result.addObject("MinOfMembersPerBrotherhood", MinOfMembersPerBrotherhood);
 		result.addObject("MaxOfMembersPerBrotherhood", MaxOfMembersPerBrotherhood);
 		result.addObject("SteddevOfMembersPerBrotherhood", SteddevOfMembersPerBrotherhood);
+
 		result.addObject("LargestBrotherhood", LargestBrotherhood);
+
 		result.addObject("SmallestBrotherhoood", SmallestBrotherhoood);
+
 		result.addObject("ProcessionIn30Days", ProcessionIn30Days);
+
 		result.addObject("RatioOfRequestsApproveds", RatioOfRequestsApproveds);
 		result.addObject("RatioOfRequestsPendings", RatioOfRequestsPendings);
 		result.addObject("RatioOfRequestsRejecteds", RatioOfRequestsRejecteds);
+
 		result.addObject("RatioOfRequestToProcessionPerAPPROVED", RatioOfRequestToProcessionPerAPPROVED);
 		result.addObject("RatioOfRequestToProcessionPerREJECTED", RatioOfRequestToProcessionPerREJECTED);
 		result.addObject("RatioOfRequestToProcessionPerPENDING", RatioOfRequestToProcessionPerPENDING);
+
+		result.addObject("MembersAtLeast10PercentOfNumberOfRequestAccepted", MembersAtLeast10PercentOfNumberOfRequestAccepted);
+
+		result.addObject("MinBrotherhoodPerArea", MinBrotherhoodPerArea);
+		result.addObject("MaxBrotherhoodPerArea", MaxBrotherhoodPerArea);
+		result.addObject("AvgBrotherhoodPerArea", AvgBrotherhoodPerArea);
+		result.addObject("StddevBrotherhoodPerArea", StddevBrotherhoodPerArea);
+
+		result.addObject("MinResultFinder", MinResultFinder);
+		result.addObject("MaxResultFinder", MaxResultFinder);
+		result.addObject("AvgResultFinder", AvgResultFinder);
+		result.addObject("StddevResultFinder", StddevResultFinder);
+
+		result.addObject("procesiones", procesiones);
+
+		result.addObject("RatioOfNotEmptyFinders", RatioOfNotEmptyFinders);
+		result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);
 
 		return result;
 	}

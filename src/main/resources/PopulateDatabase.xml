@@ -748,6 +748,149 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<bean id="procession3" class="domain.Procession">
+		<property name="title" value="Procession3's title"/>
+		<property name="description" value="Procession3's description"/>
+		<property name="moment" value="05/20/2019"/>
+		<property name="ticker" value="190421-MANUE"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession4" class="domain.Procession">
+		<property name="title" value="Procession4's title"/>
+		<property name="description" value="Procession4's description"/>
+		<property name="moment" value="06/20/2019"/>
+		<property name="ticker" value="190422-MIGUE"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession5" class="domain.Procession">
+		<property name="title" value="Procession5's title"/>
+		<property name="description" value="Procession5's description"/>
+		<property name="moment" value="07/20/2019"/>
+		<property name="ticker" value="190423-SERGI"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession6" class="domain.Procession">
+		<property name="title" value="Procession6's title"/>
+		<property name="description" value="Procession6's description"/>
+		<property name="moment" value="08/20/2019"/>
+		<property name="ticker" value="190424-JUANM"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession7" class="domain.Procession">
+		<property name="title" value="Procession7's title"/>
+		<property name="description" value="Procession7's description"/>
+		<property name="moment" value="09/20/2019"/>
+		<property name="ticker" value="190425-COZIT"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession8" class="domain.Procession">
+		<property name="title" value="Procession8's title"/>
+		<property name="description" value="Procession8's description"/>
+		<property name="moment" value="10/20/2019"/>
+		<property name="ticker" value="190426-ANACA"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession9" class="domain.Procession">
+		<property name="title" value="Procession9's title"/>
+		<property name="description" value="Procession9's description"/>
+		<property name="moment" value="11/20/2019"/>
+		<property name="ticker" value="190427-PLZHP"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession10" class="domain.Procession">
+		<property name="title" value="Procession10's title"/>
+		<property name="description" value="Procession10's description"/>
+		<property name="moment" value="12/20/2019"/>
+		<property name="ticker" value="190428-DPUNO"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession11" class="domain.Procession">
+		<property name="title" value="Procession11's title"/>
+		<property name="description" value="Procession11's description"/>
+		<property name="moment" value="01/20/2020"/>
+		<property name="ticker" value="190429-DPDOS"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession12" class="domain.Procession">
+		<property name="title" value="Procession12's title"/>
+		<property name="description" value="Procession12's description"/>
+		<property name="moment" value="02/20/2020"/>
+		<property name="ticker" value="190430-MALAH"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession13" class="domain.Procession">
+		<property name="title" value="Procession13's title"/>
+		<property name="description" value="Procession13's description"/>
+		<property name="moment" value="03/20/2020"/>
+		<property name="ticker" value="190431-CAVEI"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession14" class="domain.Procession">
+		<property name="title" value="Procession14's title"/>
+		<property name="description" value="Procession14's description"/>
+		<property name="moment" value="04/20/2020"/>
+		<property name="ticker" value="190432-ROOKI"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<bean id="procession15" class="domain.Procession">
+		<property name="title" value="Procession15's title"/>
+		<property name="description" value="Procession15's description"/>
+		<property name="moment" value="05/20/2020"/>
+		<property name="ticker" value="190432-MONTA"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
 	<!-- Request -->
 	
 	<bean id="request1" class="domain.Request">
