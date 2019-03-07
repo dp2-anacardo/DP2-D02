@@ -275,25 +275,16 @@ public class AdministratorService {
 	}
 
 	/* Q9 */
-	public Collection<Integer> getHistogramOfPositions() {
+	public Integer getHistogramOfPositions(final String roleEn, final String roleEs) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Integer result;
 
-		Collection<Integer> result;
-		result = new ArrayList<Integer>();
-
-		result.add(this.administratorRepository.getNumberOfPresidents());
-		result.add(this.administratorRepository.getNumberOfVicePresidents());
-		result.add(this.administratorRepository.getNumberOfSecretaries());
-		result.add(this.administratorRepository.getNumberOfTreasurers());
-		result.add(this.administratorRepository.getNumberOfFundraisers());
-		result.add(this.administratorRepository.getNumberOfHistorians());
-		result.add(this.administratorRepository.getNumberOfOfficers());
+		result = this.administratorRepository.getHistogramOfPositions(roleEn, roleEs);
 
 		return result;
 	}
-
 	/* Q10 */
 
 	public Double getCountOfBrotherhoodPerArea(final Integer areaId) {
