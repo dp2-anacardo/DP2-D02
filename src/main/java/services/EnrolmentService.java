@@ -65,10 +65,6 @@ public class EnrolmentService {
 
 	public void dropOut(final Enrolment enrolment) {
 		Assert.notNull(enrolment);
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 		Assert.isTrue(enrolment.getStatus().equals("ACCEPTED"));
 		enrolment.setDropOutMoment(new Date());
 	}

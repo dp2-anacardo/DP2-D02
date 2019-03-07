@@ -186,4 +186,8 @@ public class BrotherhoodService {
 		return this.brotherhoodRepository.getMembers(b);
 	}
 
+	public Enrolment getEnrolmentByBrotherhoodAndMember(final Brotherhood b, final Member m) {
+		return this.brotherhoodRepository.getEnrolmentsByBrotherhoodAndMember(b, m);
+	}
+
 }

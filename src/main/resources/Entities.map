@@ -1,10 +1,14 @@
 #./src/main/resources/Entities.map
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #Thu Mar 07 14:57:16 CET 2019
 =======
 #Thu Mar 07 16:16:55 CET 2019
 >>>>>>> origin/miguel
+=======
+#Thu Mar 07 15:00:28 CET 2019
+>>>>>>> jesus
 procession9=609
 procession8=608
 procession7=607
@@ -83,6 +87,7 @@ userAccount2=558
 userAccount1=557
 socialProfileBrotherhood1=576
 secretary=618
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 #Thu Mar 07 15:22:43 CET 2019
@@ -168,3 +173,5 @@ secretary=626
 >>>>>>> origin/juanma
 =======
 >>>>>>> origin/miguel
+=======
+>>>>>>> jesus

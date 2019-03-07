@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.EnrolmentService;
 import services.MemberService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Enrolment;
 import domain.Member;
 
 @Controller
@@ -29,6 +31,8 @@ public class BrotherhoodController extends AbstractController {
 	private ActorService		actorService;
 	@Autowired
 	private MemberService		memberService;
+	@Autowired
+	private EnrolmentService	enrolmentService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -76,5 +80,21 @@ public class BrotherhoodController extends AbstractController {
 		}
 		return result;
 
+	}
+
+	@RequestMapping(value = "/deleteMember", method = RequestMethod.GET)
+	public ModelAndView deleteMember(@RequestParam final int memberId) {
+		ModelAndView result;
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		final Member m = this.memberService.findOne(memberId);
+		final Enrolment e = this.brotherhoodService.getEnrolmentByBrotherhoodAndMember(b, m);
+		if (e == null || !e.getBrotherhood().equals(b) || !e.getMember().equals(m))
+			result = new ModelAndView("redirect:/brotherhood/listMember.do");
+		else {
+			this.enrolmentService.dropOut(e);
+			result = new ModelAndView("redirect:/brotherhood/listMember.do");
+		}
+		return result;
 	}
 }
