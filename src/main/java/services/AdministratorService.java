@@ -112,8 +112,11 @@ public class AdministratorService {
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		Assert.notNull(administrator);
-
 		Administrator result;
+		if ((!administrator.getPhoneNumber().equals(null) && !administrator.getPhoneNumber().equals(""))) {
+			final String i = this.configurationService.findAll().get(0).getDefaultCC();
+			administrator.setPhoneNumber("+" + i + " " + administrator.getPhoneNumber());
+		}
 		if (administrator.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String res = encoder.encodePassword(administrator.getUserAccount().getPassword(), null);
@@ -123,7 +126,6 @@ public class AdministratorService {
 		result = this.administratorRepository.save(administrator);
 		return result;
 	}
-
 	public void delete(final Administrator administrator) {
 
 		UserAccount userAccount;
