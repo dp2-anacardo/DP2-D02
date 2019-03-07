@@ -88,3 +88,5 @@
 			
 </security:authorize>
 
+<acme:cancel url="/" code="messageBox.goBack"/>
+

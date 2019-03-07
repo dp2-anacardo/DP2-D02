@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -74,23 +75,27 @@ public class PriorityController extends AbstractController {
 
 	@RequestMapping(value = "/administrator/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int priorityId) {
-		final ModelAndView result;
+		ModelAndView result = null;
 		Priority priority;
 		final PriorityForm priorityForm;
 
-		priority = this.priorityService.findOne(priorityId);
-		priorityForm = new PriorityForm();
+		try {
+			priority = this.priorityService.findOne(priorityId);
+			Assert.notNull(priority);
+			priorityForm = new PriorityForm();
 
-		priorityForm.setId(priority.getId());
-		priorityForm.setVersion(priority.getVersion());
-		priorityForm.setTitleEN(priority.getName().get("EN"));
-		priorityForm.setTitleES(priority.getName().get("ES"));
+			priorityForm.setId(priority.getId());
+			priorityForm.setVersion(priority.getVersion());
+			priorityForm.setTitleEN(priority.getName().get("EN"));
+			priorityForm.setTitleES(priority.getName().get("ES"));
 
-		result = this.createEditModelAndView(priorityForm);
+			result = this.createEditModelAndView(priorityForm);
+		} catch (final Exception e) {
+
+		}
 
 		return result;
 	}
-
 	@RequestMapping(value = "/administrator/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("priorityForm") @Valid final PriorityForm priorityForm, final BindingResult binding) {
 		ModelAndView result;
@@ -112,7 +117,7 @@ public class PriorityController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/administrator/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final PriorityForm priorityForm, final BindingResult binding) {
+	public ModelAndView delete(final PriorityForm priorityForm, final BindingResult binding) {
 		ModelAndView result;
 		final Priority priority;
 

@@ -7,6 +7,8 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
 
 <security:authorize access="hasAnyRole('BROTHERHOOD,MEMBER,ADMIN')">				   
 <display:table pagesize="5" class="socialProfiles" name="socialProfiles" requestURI="${requestURI}" id="row">
@@ -29,4 +31,7 @@
 <input type="button" value="<spring:message code="socialProfile.create" />"
 		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin/create.do');" />
 		
+		
+
+<acme:cancel url="profile/action-1.do" code="messageBox.goBack" />
 </security:authorize>
