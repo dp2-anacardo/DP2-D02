@@ -931,7 +931,7 @@
 	<bean id="enrolment2" class="domain.Enrolment">
 		<property name="registerMoment" value="17/02/2019 12:00"/>
 		<property name="status" value="ACCEPTED"/>
-		<property name="position" ref="historian"/>
+		<property name="position" ref="default"/>
 		<property name="member" ref="member1"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
@@ -946,7 +946,7 @@
 	<bean id="enrolment3" class="domain.Enrolment">
 		<property name="registerMoment" value="20/02/2019 17:30"/>
 		<property name="status" value="PENDING"/>
-		<property name="position" ref="officer"/>
+		<property name="position" ref="default"/>
 		<property name="member" ref="member3"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
