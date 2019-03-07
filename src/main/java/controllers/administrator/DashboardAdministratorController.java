@@ -116,6 +116,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double RatioOfEmptyFinders = this.administratorService.getRatioOfEmptyFinders();
 
 		final Collection<Position> positions = this.positionService.findAll();
+		positions.remove(this.positionService.getDefaultPosition());
 		final Collection<Integer> HistogramOfPositions = new ArrayList<>();
 		for (final Position p : positions)
 			HistogramOfPositions.add(this.administratorService.getHistogramOfPositions(p.getRoleEn(), p.getRoleEs()));
