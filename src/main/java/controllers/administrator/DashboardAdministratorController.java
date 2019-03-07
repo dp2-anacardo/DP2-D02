@@ -46,8 +46,8 @@ public class DashboardAdministratorController extends AbstractController {
 		final String SmallestBrotherhoood = this.administratorService.getSmallestBrotherhoood().getName();
 		/* Q4 */
 		final Collection<Procession> ProcessionIn30Days = this.administratorService.getProcessionIn30Days();
-		/* Q5 TODO:Revisar */
-		//final Double RatioOfRequestToProcessionPerStatus = this.administratorService.getRatioOfRequestToProcessionPerStatus(procession, status);
+
+		/* Q5 */
 
 		final Collection<Double> RatioOfRequestToProcessionPerAPPROVED = new ArrayList<Double>();
 		final Collection<Procession> procesiones = this.processionService.findAll();
@@ -133,6 +133,7 @@ public class DashboardAdministratorController extends AbstractController {
 
 		result.addObject("MembersAtLeast10PercentOfNumberOfRequestAccepted", MembersAtLeast10PercentOfNumberOfRequestAccepted);
 
+		result.addObject("CountOfBrotherhoodPerArea", CountOfBrotherhoodPerArea);
 		result.addObject("MinBrotherhoodPerArea", MinBrotherhoodPerArea);
 		result.addObject("MaxBrotherhoodPerArea", MaxBrotherhoodPerArea);
 		result.addObject("AvgBrotherhoodPerArea", AvgBrotherhoodPerArea);
@@ -144,6 +145,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("StddevResultFinder", StddevResultFinder);
 
 		result.addObject("procesiones", procesiones);
+		result.addObject("areas", areas);
 
 		result.addObject("RatioOfNotEmptyFinders", RatioOfNotEmptyFinders);
 		result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);

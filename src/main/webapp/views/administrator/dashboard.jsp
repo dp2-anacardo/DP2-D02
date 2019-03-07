@@ -29,8 +29,7 @@
 
 		<b><spring:message code="administrator.ProcessionIn30Days" /></b>
 		<jstl:forEach var="x" items="${ProcessionIn30Days}">
-			<jstl:out value="${x.tittle}">
-			</jstl:out>
+			${x.title}
 		</jstl:forEach>
 		<br />
 		<b><spring:message code="administrator.RatioOfRequestsApproveds" /></b> ${RatioOfRequestsApproveds} <br />
@@ -38,21 +37,24 @@
 		<b><spring:message code="administrator.RatioOfRequestsRejecteds" /></b> ${RatioOfRequestsRejecteds} <br />
 
 
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b>
+		<b><spring:message
+				code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
 			- ${x.title} : ${RatioOfRequestToProcessionPerAPPROVED[status.index]}
 		</jstl:forEach>
-		
+
 		<br>
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerPENDING" /></b>
+		<b><spring:message
+				code="administrator.RatioOfRequestToProcessionPerPENDING" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
 			- ${x.title} : ${RatioOfRequestToProcessionPerPENDING[status.index]}
 		</jstl:forEach>
-		
+
 		<br>
-		<b><spring:message code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b>
+		<b><spring:message
+				code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
 			- ${x.title} : ${RatioOfRequestToProcessionPerREJECTED[status.index]}
@@ -63,11 +65,17 @@
 				code="administrator.MembersAtLeast10PercentOfNumberOfRequestAccepted" /></b>
 		<jstl:forEach var="MembersAtLeast10PercentOfNumberOfRequestAccepted"
 			items="${MembersAtLeast10PercentOfNumberOfRequestAccepted}">
-			<jstl:out
-				value="${MembersAtLeast10PercentOfNumberOfRequestAccepted.name}"></jstl:out>
-			<br />
+			- ${MembersAtLeast10PercentOfNumberOfRequestAccepted.name}
 		</jstl:forEach>
 
+		<br>
+		<b><spring:message code="administrator.CountOfBrotherhoodPerArea" /></b>
+		<jstl:forEach var="x" items="${areas}" varStatus="status">
+			<br>
+			- ${x.name} : ${CountOfBrotherhoodPerArea[status.index]}
+		</jstl:forEach>
+
+		<br>
 		<b><spring:message code="administrator.MinBrotherhoodPerArea" /></b> ${MinBrotherhoodPerArea} <br />
 		<b><spring:message code="administrator.MaxBrotherhoodPerArea" /></b> ${MaxBrotherhoodPerArea} <br />
 		<b><spring:message code="administrator.AvgBrotherhoodPerArea" /></b> ${AvgBrotherhoodPerArea} <br />

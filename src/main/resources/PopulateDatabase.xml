@@ -891,6 +891,17 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<bean id="procession16" class="domain.Procession">
+		<property name="title" value="Procession16's title"/>
+		<property name="description" value="Procession15's description"/>
+		<property name="moment" value="03/08/2019"/>
+		<property name="ticker" value="190436-CRONI"/>
+		<property name="isFinal" value="true"/>
+		<property name="maxRow" value="20"/>
+		<property name="maxColumn" value="2"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
 	<!-- Request -->
 	
 	<bean id="request1" class="domain.Request">
