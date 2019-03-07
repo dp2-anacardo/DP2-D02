@@ -102,10 +102,12 @@ public class BrotherhoodService {
 		final Date nuevaFecha = new Date();
 		Brotherhood result;
 
-		if ((!brotherhood.getPhoneNumber().equals(null) && !brotherhood.getPhoneNumber().equals(""))) {
-			final String i = this.configurationService.findAll().get(0).getDefaultCC();
-			brotherhood.setPhoneNumber("+" + i + " " + brotherhood.getPhoneNumber());
-		}
+		final char[] c = brotherhood.getPhoneNumber().toCharArray();
+		if ((!brotherhood.getPhoneNumber().equals(null) && !brotherhood.getPhoneNumber().equals("")))
+			if (c[0] != '+') {
+				final String i = this.configurationService.findAll().get(0).getDefaultCC();
+				brotherhood.setPhoneNumber("+" + i + " " + brotherhood.getPhoneNumber());
+			}
 
 		if (brotherhood.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

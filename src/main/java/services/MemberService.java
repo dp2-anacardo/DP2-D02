@@ -96,10 +96,12 @@ public class MemberService {
 		Assert.notNull(member);
 		Member result;
 
-		if ((!member.getPhoneNumber().equals(null) && !member.getPhoneNumber().equals(""))) {
-			final String i = this.configurationService.findAll().get(0).getDefaultCC();
-			member.setPhoneNumber("+" + i + " " + member.getPhoneNumber());
-		}
+		final char[] c = member.getPhoneNumber().toCharArray();
+		if ((!member.getPhoneNumber().equals(null) && !member.getPhoneNumber().equals("")))
+			if (c[0] != '+') {
+				final String i = this.configurationService.findAll().get(0).getDefaultCC();
+				member.setPhoneNumber("+" + i + " " + member.getPhoneNumber());
+			}
 
 		if (member.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
