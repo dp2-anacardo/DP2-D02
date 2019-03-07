@@ -3,11 +3,8 @@ package forms;
 
 import java.util.Collection;
 
-import javax.persistence.ElementCollection;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Configuration;
 
@@ -57,65 +54,57 @@ public class ConfigurationForm {
 		return this.version;
 	}
 
-	//@Range(min = 10, max = 100)
 	public int getMaxResults() {
 		return this.maxResults;
 	}
 
-	@Range(min = 1, max = 24)
 	public int getMaxTime() {
 		return this.maxTime;
 	}
 
-	@NotBlank
 	public String getSystemName() {
 		return this.systemName;
 	}
 
-	@NotBlank
-	@URL
 	public String getBanner() {
 		return this.banner;
 	}
 
-	@NotBlank
 	public String getWelcomeMessageEn() {
 		return this.welcomeMessageEn;
 	}
 
-	@NotBlank
 	public String getWelcomeMessageEs() {
 		return this.welcomeMessageEs;
 	}
 
-	@ElementCollection
 	public Collection<String> getSpamWords() {
 		return this.spamWords;
 	}
 
-	@ElementCollection
 	public Collection<String> getPositiveWords() {
 		return this.positiveWords;
 	}
 
-	@ElementCollection
 	public Collection<String> getNegativeWords() {
 		return this.negativeWords;
 	}
 
-	@NotBlank
 	public String getDefaultCC() {
 		return this.defaultCC;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddSW() {
 		return this.addSW;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddPW() {
 		return this.addPW;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddNW() {
 		return this.addNW;
 	}

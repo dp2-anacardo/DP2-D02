@@ -104,9 +104,16 @@ public class ConfigurationController extends AbstractController {
 
 		config = this.configurationService.reconstructAddWord(configF, binding);
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+
+			config = this.configurationService.findAll().get(0);
+
+			configF.setSpamWords(config.getSpamWords());
+			configF.setPositiveWords(config.getPositiveWords());
+			configF.setNegativeWords(config.getNegativeWords());
+
 			result = this.editModelAndView(configF, null);
-		else
+		} else
 			try {
 				this.configurationService.save(config);
 				result = new ModelAndView("redirect:/configuration/administrator/edit.do");
