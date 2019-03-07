@@ -16,6 +16,27 @@
 </head>
 <body>
 	<security:authorize access="hasRole('ADMIN')">
+	
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+<div><canvas id="myChart" width="40" height="10"></canvas></div>
+
+
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+labels: ["hola", 1, 2, 3, 4],
+datasets: [{
+  label: '',
+  data: [12, 19, 3, 5],
+  backgroundColor: 'rgba(0, 0, 255, 1)',
+}]
+  }
+});
+</script>
 		<b><spring:message code="administrator.AvgOfMembersPerBrotherhood" /></b> ${AvgOfMembersPerBrotherhood} <br />
 		<b><spring:message code="administrator.MinOfMembersPerBrotherhood" /></b> ${MinOfMembersPerBrotherhood} <br />
 		<b><spring:message code="administrator.MaxOfMembersPerBrotherhood" /></b> ${MaxOfMembersPerBrotherhood} <br />
