@@ -61,11 +61,9 @@
 					<li><a href="enrolment/brotherhood/list.do"><spring:message code="master.page.enrolment.list" /></a></li>
 					<li><a href="procession/brotherhood/list.do"><spring:message code="master.page.brotherhood.processions" /></a></li>		
 					<li><a href="floatEntity/brotherhood/list.do"><spring:message code="master.page.floatEntity.list" /></a></li>
-<<<<<<< HEAD
 					<li><a href="brotherhood/listMember.do"><spring:message code="master.page.members" /></a></li>						
-=======
 					<li><a href="area/brotherhood/edit.do"><spring:message code="master.page.brotherhood.editArea" /></a></li>					
->>>>>>> origin/sergio
+
 				</ul>
 			</li>
 		</security:authorize>
