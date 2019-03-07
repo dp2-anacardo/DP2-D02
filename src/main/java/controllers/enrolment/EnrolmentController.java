@@ -194,9 +194,14 @@ public class EnrolmentController extends AbstractController {
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		Enrolment enrolment;
+		final int memberId = this.actorService.getActorLogged().getId();
+		Collection<Enrolment> enrolments;
 
 		try {
 			Assert.notNull(this.brotherhoodService.findOne(brotherhoodId));
+			enrolments = this.memberService.getEnrolments(memberId);
+			for (final Enrolment en : enrolments)
+				Assert.isTrue(!(en.getBrotherhood().equals(this.brotherhoodService.findOne(brotherhoodId)) && (en.getStatus().equals("ACCEPTED") || en.getStatus().equals("PENDING")) && en.getDropOutMoment() == null));
 			enrolment = this.enrolmentService.create(brotherhoodId);
 			this.enrolmentService.save(enrolment);
 			result = new ModelAndView("redirect:list.do");
