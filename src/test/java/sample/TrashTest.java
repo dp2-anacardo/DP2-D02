@@ -12,7 +12,6 @@ public class TrashTest {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		// TODO Auto-generated method stub
 
 		final Priority p1 = new Priority();
 		final Priority p2 = new Priority();
