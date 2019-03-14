@@ -104,4 +104,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.processions is empty")
 	Double getRatioOfEmptyFinders();
+
+	//AQUI EMPIEZAN LAS QUERIES DEL DASHBOARD DE ACME PARADE
+
 }
