@@ -59,8 +59,6 @@ public class RegisterBrotherhoodController extends AbstractController {
 					result.addObject("attachmentError", e.getDefaultMessage());
 					break;
 				}
-			//					result = this.createEditModelAndView(brotherhoodForm);
-			//					result.addObject("attachmentError", e.getDefaultMessage());
 		} else
 			try {
 				bro = this.brotherhoodService.reconstruct(brotherhoodForm, binding);
