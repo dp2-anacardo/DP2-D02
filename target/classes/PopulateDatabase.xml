@@ -240,6 +240,13 @@
 			value="https://i.blogs.es/556f4e/madrid-central-restricciones-trafico/1366_2000.jpg" />
 	</bean>
 	
+	<!-- Photo -->
+	
+	<bean id="photo1" class="datatype.Url">
+		<property name="link"
+			value="https://i.blogs.es/556f4e/barcelona-central-restricciones-trafico.jpg" />
+	</bean>
+	
 	<!-- Brotherhood's SocialProfile -->
 		
 	<bean id="socialProfileBrotherhood1" class="domain.SocialProfile">
@@ -1070,4 +1077,25 @@
 		</property>
 	</bean>
 	
+	<!-- Inception Record -->
+	
+	<bean id="inceptionRecord1" class="domain.InceptionRecord">
+		<property name="title" value="Registro de comienzo numero 1"/>
+		<property name="description" value="Este es el primer registro de comienzo"/>
+		<property name="photo">
+			<list>
+			<ref bean="photo1"/>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
+	<!-- Misc Record -->
+	
+	<bean id="miscRecord1" class="domain.MiscRecord">
+		<property name="title" value="Primer miscelaneo"/>
+		<property name="description" value="Primer miscelaneo de la bbdd"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+			
 </beans>
