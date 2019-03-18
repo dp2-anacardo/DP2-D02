@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.AreaRepository;
 import datatype.Url;
 import domain.Area;
+import domain.Chapter;
 
 @Service
 @Transactional
@@ -88,5 +89,13 @@ public class AreaService {
 		final Collection<Area> areas = this.areaRepository.canBeDeleted();
 		b = areas.contains(a);
 		return b;
+	}
+
+	public Chapter getChapter(final int areaId) {
+		Assert.notNull(areaId);
+
+		final Chapter result = this.areaRepository.getChapter(areaId);
+
+		return result;
 	}
 }
