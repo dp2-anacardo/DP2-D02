@@ -1104,6 +1104,21 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<!-- Period Record -->
+	
+	<bean id="periodRecord1" class="domain.PeriodRecord">
+		<property name="title" value="Registro de periodo numero 1"/>
+		<property name="description" value="Este es el primer registro de periodo"/>
+		<property name="startYear" value="2016"/>
+		<property name="endYear" value="2019"/>
+		<property name="photo">
+			<list>
+			<ref bean="photo1"/>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
 	<!-- Misc Record -->
 	
 	<bean id="miscRecord1" class="domain.MiscRecord">
