@@ -25,17 +25,17 @@ public class Segment extends DomainEntity {
 	private GPSCoordinate	destination;
 	private Date			timeOrigin;
 	private Date			timeDestination;
-	private Procession		procession;
+	private Procession		parade;
 
 
 	@Valid
 	@ManyToOne(optional = true)
-	public Procession getProcession() {
-		return this.procession;
+	public Procession getParade() {
+		return this.parade;
 	}
 
-	public void setProcession(final Procession procession) {
-		this.procession = procession;
+	public void setParade(final Procession parade) {
+		this.parade = parade;
 	}
 	@Valid
 	@AttributeOverrides({

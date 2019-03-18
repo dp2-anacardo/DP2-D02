@@ -4,6 +4,7 @@ package services;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -21,6 +22,7 @@ import domain.Brotherhood;
 import domain.Finder;
 import domain.Procession;
 import domain.Request;
+import domain.Segment;
 
 @Service
 @Transactional
@@ -38,6 +40,8 @@ public class ProcessionService {
 	RequestService			requestService;
 	@Autowired
 	FinderService			finderService;
+	@Autowired
+	SegmentService			segmentService;
 
 
 	public Procession reconstruct(final Procession p, final BindingResult binding) {
@@ -122,7 +126,9 @@ public class ProcessionService {
 		for (final Finder f : finders)
 			if (f.getProcessions().contains(p))
 				f.getProcessions().remove(p);
-
+		final Collection<Segment> segments = this.segmentService.getPathByParade(p.getId());
+		for (final Segment s : segments)
+			this.segmentService.delete(s);
 		this.processionRepository.delete(p);
 	}
 
@@ -157,6 +163,34 @@ public class ProcessionService {
 	}
 
 	public Procession copyParade(final int paradeId) {
-		return null;
+		Procession result = this.create();
+		final Procession p1 = this.findOne(paradeId);
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+		Assert.isTrue(p1.getBrotherhood().equals(b));
+		result.setBrotherhood(b);
+		result.setDescription(p1.getDescription());
+		result.setFloats(p1.getFloats());
+		result.setMaxColumn(p1.getMaxColumn());
+		result.setMaxRow(p1.getMaxRow());
+		final Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 1);
+		final Date nextYear = cal.getTime();
+		result.setMoment(nextYear);
+		result.setTicker(this.tickerGenerator());
+		result.setTitle(p1.getTitle());
+		result = this.saveDraft(result);
+
+		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
+		for (final Segment s : segments) {
+			final Segment newSegment = this.segmentService.create();
+			newSegment.setParade(result);
+			newSegment.setOrigin(s.getOrigin());
+			newSegment.setDestination(s.getDestination());
+			newSegment.setTimeOrigin(s.getTimeOrigin());
+			newSegment.setTimeDestination(s.getTimeDestination());
+			this.segmentService.save(newSegment);
+		}
+		return result;
 	}
 }
