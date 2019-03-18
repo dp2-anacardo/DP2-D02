@@ -38,6 +38,13 @@
 		<a href="messageBox/edit.do?messageBoxID=${row.id}"> <spring:message
 				code="messageBox.edit" /></a>
 	</display:column>
+	
+	<spring:message code="messageBox.unnest" var="unnestHeader" />
+	<display:column title="${unnestHeader}">
+		<a href="messageBox/unnest.do?srcBoxID=${row.id}&destBoxID=${messageBox}"> <spring:message
+				code="messageBox.unnest" /></a>
+	</display:column>
+	
 
 </display:table>
 

@@ -107,6 +107,7 @@
 				<ref bean="spamBoxAdmin1"/>
 				<ref bean="trashBoxAdmin1"/>
 				<ref bean="notificationBoxAdmin1" />
+				<ref bean="testBox1" />
 			</list>
 		</property>
 	</bean>
@@ -128,7 +129,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -141,7 +142,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -154,7 +155,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -167,7 +168,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -180,7 +181,20 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="testBox1" class="domain.MessageBox">
+		<property name="name" value="testBox"/>
+		<property name="isSystem" value="false"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -257,7 +271,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -270,7 +284,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -283,7 +297,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -296,7 +310,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -309,7 +323,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -459,7 +473,7 @@
 				<ref bean="messageMember1"/>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -472,7 +486,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -485,7 +499,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -498,7 +512,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -511,7 +525,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -524,7 +538,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -537,7 +551,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -550,7 +564,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -563,7 +577,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -576,7 +590,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -589,7 +603,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -602,7 +616,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -615,7 +629,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -628,7 +642,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -641,7 +655,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="nestedBoxes">
+		<property name="sons">
 			<list>
 			</list>
 		</property>
@@ -839,7 +853,7 @@
 	<bean id="procession11" class="domain.Procession">
 		<property name="title" value="Procession11's title"/>
 		<property name="description" value="Procession11's description"/>
-		<property name="moment" value="01/20/2020"/>
+		<property name="moment" value="05/20/2020"/>
 		<property name="ticker" value="190429-DPDOS"/>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>
@@ -850,7 +864,7 @@
 	<bean id="procession12" class="domain.Procession">
 		<property name="title" value="Procession12's title"/>
 		<property name="description" value="Procession12's description"/>
-		<property name="moment" value="02/20/2020"/>
+		<property name="moment" value="07/20/2020"/>
 		<property name="ticker" value="190430-MALAH"/>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>
@@ -861,7 +875,7 @@
 	<bean id="procession13" class="domain.Procession">
 		<property name="title" value="Procession13's title"/>
 		<property name="description" value="Procession13's description"/>
-		<property name="moment" value="03/20/2020"/>
+		<property name="moment" value="07/20/2020"/>
 		<property name="ticker" value="190431-CAVEI"/>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>
@@ -894,7 +908,7 @@
 	<bean id="procession16" class="domain.Procession">
 		<property name="title" value="Procession16's title"/>
 		<property name="description" value="Procession15's description"/>
-		<property name="moment" value="03/08/2019"/>
+		<property name="moment" value="05/08/2019"/>
 		<property name="ticker" value="190436-CRONI"/>
 		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>

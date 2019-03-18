@@ -97,7 +97,7 @@ public class MessageController extends AbstractController {
 
 		result = new ModelAndView("message/list");
 		result.addObject("messageBox", messageBoxID);
-		result.addObject("nestedBoxes", msgBox.getNestedBoxes());
+		result.addObject("nestedBoxes", msgBox.getSons());
 		result.addObject("messages", messages);
 		result.addObject("requestURI", "message/list.do");
 

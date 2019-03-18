@@ -77,6 +77,7 @@ public class MessageBoxService {
 
 	public MessageBox update(final MessageBox messageBox) {
 		Assert.notNull(messageBox);
+		Assert.isTrue(this.actorService.getActorLogged().getBoxes().contains(messageBox));
 		Assert.isTrue(messageBox.getIsSystem() == false);
 
 		return this.messageBoxRepository.save(messageBox);
@@ -100,34 +101,34 @@ public class MessageBoxService {
 		return result;
 	}
 
-	public MessageBox nestMessageBox(final MessageBox src, final MessageBox dst) {
+	public MessageBox nestMessageBox(final MessageBox son, final MessageBox father) {
 		Assert.notNull(LoginService.getPrincipal());
 
 		final Actor actor = this.actorService.findByUserAccount(LoginService.getPrincipal());
 
-		Assert.isTrue(actor.getBoxes().contains(src));
-		Assert.isTrue(actor.getBoxes().contains(dst));
-		Assert.isTrue(!src.getNestedBoxes().contains(dst));
-		Assert.isTrue(!dst.getNestedBoxes().contains(src));
+		Assert.isTrue(actor.getBoxes().contains(son));
+		Assert.isTrue(actor.getBoxes().contains(father));
+		Assert.isTrue(!son.getSons().contains(father));
+		Assert.isTrue(!father.getSons().contains(son));
 
-		dst.getNestedBoxes().add(src);
+		father.addSon(son);
 
-		return this.messageBoxRepository.save(dst);
+		return this.messageBoxRepository.save(father);
 	}
 
-	public MessageBox unnestMessageBox(final MessageBox src, final MessageBox dst) {
+	public MessageBox unnestMessageBox(final MessageBox son, final MessageBox father) {
 		Assert.notNull(LoginService.getPrincipal());
 
 		final Actor actor = this.actorService.findByUserAccount(LoginService.getPrincipal());
 
-		Assert.isTrue(actor.getBoxes().contains(src));
-		Assert.isTrue(actor.getBoxes().contains(dst));
-		Assert.isTrue(src.getNestedBoxes().contains(dst));
-		Assert.isTrue(!dst.getNestedBoxes().contains(src));
+		Assert.isTrue(actor.getBoxes().contains(son));
+		Assert.isTrue(actor.getBoxes().contains(father));
+		Assert.isTrue(son.getFather() == father);
+		Assert.isTrue(father.getSons().contains(son));
 
-		dst.getNestedBoxes().add(src);
+		father.removeSon(son);
 
-		return this.messageBoxRepository.save(dst);
+		return this.messageBoxRepository.save(father);
 	}
 
 	public MessageBox findOneByActorAndName(final int actorID, final String name) {
@@ -192,7 +193,7 @@ public class MessageBoxService {
 			result = this.messageBoxRepository.findOne(messageBox.getId());
 
 			messageBox.setMessages(result.getMessages());
-			messageBox.setNestedBoxes(result.getNestedBoxes());
+			messageBox.setSons(result.getSons());
 			messageBox.setIsSystem(result.getIsSystem());
 			messageBox.setVersion(result.getVersion());
 
