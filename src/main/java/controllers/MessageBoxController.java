@@ -41,15 +41,19 @@ public class MessageBoxController extends AbstractController {
 	public ModelAndView list() {
 		final ModelAndView result;
 		Collection<MessageBox> messageBoxes;
-		final Collection<MessageBox> nestedBoxes = new ArrayList<MessageBox>();
+		final Collection<MessageBox> sons = new ArrayList<MessageBox>();
 
 		messageBoxes = this.messageBoxService.findAllByActor(this.actorService.getActorLogged().getId());
 
-		for (final MessageBox m : messageBoxes)
-			if (m.getNestedBoxes() != null && m.getNestedBoxes().size() > 0)
-				nestedBoxes.addAll(m.getNestedBoxes());
+		for (final MessageBox m : messageBoxes) {
+			if (m.getSons() != null && m.getSons().size() > 0)
+				sons.addAll(m.getSons());
 
-		messageBoxes.removeAll(nestedBoxes);
+			if (m.getFather() != null && m.getIsSystem() == false)
+				sons.add(m);
+		}
+
+		messageBoxes.removeAll(sons);
 
 		result = new ModelAndView("messageBox/list");
 		result.addObject("messageBoxes", messageBoxes);
@@ -87,13 +91,24 @@ public class MessageBoxController extends AbstractController {
 
 		result = this.createEditModelAndView(messageBox);
 
-		final Collection<MessageBox> messageBoxes = new ArrayList<MessageBox>();
 		final Collection<MessageBox> actorBoxes = this.messageBoxService.findAllByActor(this.actorService.getActorLogged().getId());
-		for (final MessageBox b : actorBoxes)
-			if ((!b.getNestedBoxes().contains(messageBox) && !messageBox.getNestedBoxes().contains(b)) && b.getIsSystem() == false)
-				messageBoxes.add(b);
+		final Collection<MessageBox> messageBoxes = new ArrayList<MessageBox>();
 
-		messageBoxes.remove(messageBox);
+		if (messageBox.getFather() == null) {
+			messageBoxes.addAll(actorBoxes);
+			messageBoxes.remove(messageBox);
+			if (messageBox.getSons() != null && messageBox.getSons().size() > 0)
+				messageBoxes.removeAll(messageBox.getSons());
+
+			for (final MessageBox b : actorBoxes) {
+				if (b.getIsSystem() == true)
+					messageBoxes.remove(b);
+
+				if (b.getFather() != null)
+					messageBoxes.remove(b);
+			}
+
+		}
 
 		result.addObject("actorBoxes", messageBoxes);
 		result.addObject("messageBoxID", messageBoxID);
@@ -169,29 +184,29 @@ public class MessageBoxController extends AbstractController {
 	@RequestMapping(value = "/nest", method = RequestMethod.GET)
 	public ModelAndView move(@RequestParam final int srcBoxID, @RequestParam final int destBoxID) {
 		ModelAndView result;
-		MessageBox srcBox;
-		MessageBox destBox;
+		MessageBox son;
+		MessageBox father;
 
 		try {
 			try {
 				final Actor principal = this.actorService.getActorLogged();
-				srcBox = this.messageBoxService.findOne(srcBoxID);
-				destBox = this.messageBoxService.findOne(destBoxID);
+				son = this.messageBoxService.findOne(srcBoxID);
+				father = this.messageBoxService.findOne(destBoxID);
 
-				Assert.isTrue(principal.getBoxes().contains(srcBox));
-				Assert.isTrue(principal.getBoxes().contains(destBox));
-				Assert.isTrue(!srcBox.getNestedBoxes().contains(destBox) && !destBox.getNestedBoxes().contains(srcBox));
+				Assert.isTrue(principal.getBoxes().contains(son));
+				Assert.isTrue(principal.getBoxes().contains(father));
+				Assert.isTrue(!son.getSons().contains(father) && !father.getSons().contains(son));
 
 			} catch (final Exception e) {
 				result = this.forbiddenOperation();
 				return result;
 			}
-			this.messageBoxService.nestMessageBox(srcBox, destBox);
+			this.messageBoxService.nestMessageBox(son, father);
 			result = new ModelAndView("redirect:list.do?messageBoxID=" + destBoxID + "");
 			result.addObject("messageBox", srcBoxID);
 		} catch (final Throwable oops) {
-			srcBox = this.messageBoxService.findOne(srcBoxID);
-			result = this.createEditModelAndView(srcBox, "messageBox.commit.error");
+			son = this.messageBoxService.findOne(srcBoxID);
+			result = this.createEditModelAndView(son, "messageBox.commit.error");
 		}
 
 		return result;
@@ -201,29 +216,30 @@ public class MessageBoxController extends AbstractController {
 	@RequestMapping(value = "/unnest", method = RequestMethod.GET)
 	public ModelAndView unnest(@RequestParam final int srcBoxID, @RequestParam final int destBoxID) {
 		ModelAndView result;
-		MessageBox srcBox;
-		MessageBox destBox;
+		MessageBox son;
+		MessageBox father;
 
 		try {
 			try {
 				final Actor principal = this.actorService.getActorLogged();
-				srcBox = this.messageBoxService.findOne(srcBoxID);
-				destBox = this.messageBoxService.findOne(destBoxID);
+				son = this.messageBoxService.findOne(srcBoxID);
+				father = this.messageBoxService.findOne(destBoxID);
 
-				Assert.isTrue(principal.getBoxes().contains(srcBox));
-				Assert.isTrue(principal.getBoxes().contains(destBox));
-				Assert.isTrue(!srcBox.getNestedBoxes().contains(destBox) && !destBox.getNestedBoxes().contains(srcBox));
+				Assert.isTrue(principal.getBoxes().contains(son));
+				Assert.isTrue(principal.getBoxes().contains(father));
+				Assert.isTrue(son.getFather() == father);
+				Assert.isTrue(father.getSons().contains(son));
 
 			} catch (final Exception e) {
 				result = this.forbiddenOperation();
 				return result;
 			}
-			this.messageBoxService.nestMessageBox(srcBox, destBox);
+			this.messageBoxService.unnestMessageBox(son, father);
 			result = new ModelAndView("redirect:list.do?messageBoxID=" + destBoxID + "");
 			result.addObject("messageBox", srcBoxID);
 		} catch (final Throwable oops) {
-			srcBox = this.messageBoxService.findOne(srcBoxID);
-			result = this.createEditModelAndView(srcBox, "messageBox.commit.error");
+			son = this.messageBoxService.findOne(srcBoxID);
+			result = this.createEditModelAndView(son, "messageBox.commit.error");
 		}
 
 		return result;

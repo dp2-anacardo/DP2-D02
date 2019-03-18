@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -51,7 +52,8 @@ public class MessageBox extends DomainEntity {
 
 	// Relationships -------------------------------------------------------------
 	private Collection<Message>		messages;
-	private Collection<MessageBox>	nestedBoxes;
+	private MessageBox				father;
+	private Collection<MessageBox>	sons;
 
 
 	@Valid
@@ -64,14 +66,33 @@ public class MessageBox extends DomainEntity {
 		this.messages = messages;
 	}
 
-	@Valid
-	@OneToMany
-	public Collection<MessageBox> getNestedBoxes() {
-		return this.nestedBoxes;
+	@ManyToOne(optional = true)
+	public MessageBox getFather() {
+		return this.father;
 	}
 
-	public void setNestedBoxes(final Collection<MessageBox> nestedBoxes) {
-		this.nestedBoxes = nestedBoxes;
+	public void setFather(final MessageBox father) {
+		this.father = father;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "father")
+	public Collection<MessageBox> getSons() {
+		return this.sons;
+	}
+
+	public void setSons(final Collection<MessageBox> sons) {
+		this.sons = sons;
+	}
+
+	public void addSon(final MessageBox son) {
+		this.sons.add(son);
+		son.setFather(this);
+	}
+
+	public void removeSon(final MessageBox son) {
+		this.sons.remove(son);
+		son.setFather(null);
 	}
 
 	//Methods

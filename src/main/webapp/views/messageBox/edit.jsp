@@ -71,7 +71,7 @@
 
 
 		<jstl:if
-			test="${messageBox.id != 0 && messageBox.isSystem == false && (empty messageBox.messages) && (empty messageBox.nestedBoxes)}">
+			test="${messageBox.id != 0 && messageBox.isSystem == false && (empty messageBox.messages) && (empty messageBox.sons)}">
 			<acme:submit name="delete" code="messageBox.delete" />
 		</jstl:if>
 

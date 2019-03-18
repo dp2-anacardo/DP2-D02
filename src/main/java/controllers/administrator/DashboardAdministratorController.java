@@ -93,6 +93,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Member> MembersAtLeast10PercentOfNumberOfRequestAccepted = this.administratorService.getMembersAtLeast10PercentOfNumberOfRequestAccepted();
 
 		/* Q10 */
+		//TODO: CountOfBrotherhoodPerArea(areaId))
 		final Collection<Area> areas = this.areaService.findAll();
 		final Collection<Double> CountOfBrotherhoodPerArea = new ArrayList<Double>();
 		for (final Area a : areas) {
