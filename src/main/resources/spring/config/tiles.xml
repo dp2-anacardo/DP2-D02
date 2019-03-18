@@ -41,6 +41,7 @@
 		<value>/views/request/tiles.xml</value>
 		<value>/views/finder/tiles.xml</value>
 		<value>/views/gdpr/tiles.xml</value>
+		<value>/views/chapter/tiles.xml</value>
 
 	</util:list>
 

@@ -62,6 +62,8 @@
 		<bean class="converters.StringToSegmentConverter"/>
 		<bean class="converters.GPSCoordinateToStringConverter"/>
 		<bean class="converters.StringToGPSCoordinateConverter"/>
+		<bean class="converters.ChapterToStringConverter"/>
+		<bean class="converters.StringToChapterConverter"/>
 		
 
 	</util:list>

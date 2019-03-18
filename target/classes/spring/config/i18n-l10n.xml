@@ -41,6 +41,7 @@
 		<value>/views/request/messages</value>
 		<value>/views/finder/messages</value>
 		<value>/views/gdpr/messages</value>
+		<value>/views/chapter/messages</value>
 	</util:list>
 
 </beans>

@@ -30,5 +30,9 @@
 <input type="button" name="registerMember"
 		value="<spring:message code="welcome.register.member" />"
 		onclick="javascript: relativeRedir('member/create.do');" />&nbsp;
+		
+<input type="button" name="registerChapter"
+		value="<spring:message code="welcome.register.chapter" />"
+		onclick="javascript: relativeRedir('chapter/create.do');" />&nbsp;
 </security:authorize>
 

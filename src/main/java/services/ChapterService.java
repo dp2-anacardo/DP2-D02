@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ChapterRepository;
 import security.Authority;
@@ -20,6 +22,7 @@ import domain.Chapter;
 import domain.MessageBox;
 import domain.Procession;
 import domain.SocialProfile;
+import forms.ChapterForm;
 
 @Service
 @Transactional
@@ -34,7 +37,7 @@ public class ChapterService {
 	@Autowired
 	private MessageBoxService		messageBoxService;
 	@Autowired
-	private ActorService			actorService;
+	private Validator				validator;
 
 
 	public Chapter create() {
@@ -122,5 +125,24 @@ public class ChapterService {
 
 		if (this.areaService.getChapter(areaId) == null)
 			chapter.setArea(area);
+	}
+
+	public Chapter reconstruct(final ChapterForm c, final BindingResult binding) {
+
+		final Chapter result = this.create();
+		result.setAddress(c.getAddress());
+		result.setEmail(c.getEmail());
+		result.setId(c.getId());
+		result.setName(c.getName());
+		result.setPhoneNumber(c.getPhoneNumber());
+		result.setPhoto(c.getPhoto());
+		result.setTitle(c.getTitle());
+		result.setMiddleName(c.getMiddleName());
+		result.setSurname(c.getSurname());
+		result.getUserAccount().setPassword(c.getPassword());
+		result.getUserAccount().setUsername(c.getUsername());
+		result.setVersion(c.getVersion());
+		this.validator.validate(result, binding);
+		return result;
 	}
 }

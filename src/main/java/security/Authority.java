@@ -40,6 +40,7 @@ public class Authority implements GrantedAuthority {
 	public static final String	ADMIN		= "ADMIN";
 	public static final String	BROTHERHOOD	= "BROTHERHOOD";
 	public static final String	MEMBER		= "MEMBER";
+	public static final String	CHAPTER		= "CHAPTER";
 
 	// Attributes -------------------------------------------------------------
 
