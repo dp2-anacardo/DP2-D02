@@ -44,6 +44,8 @@ public class Procession extends DomainEntity {
 	private Integer					maxColumn;
 	private Brotherhood				brotherhood;
 	private Collection<FloatEntity>	floats;
+	private String					status;
+	private String					rejectComment;
 
 
 	@Valid
@@ -129,6 +131,24 @@ public class Procession extends DomainEntity {
 	@ManyToOne(optional = false)
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
+	}
+
+	@Pattern(regexp = "^ACCEPTED|SUBMITTED|REJECTED$")
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(final String status) {
+		this.status = status;
+	}
+
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getRejectComment() {
+		return this.rejectComment;
+	}
+
+	public void setRejectComment(final String rejectComment) {
+		this.rejectComment = rejectComment;
 	}
 
 	public void setBrotherhood(final Brotherhood brotherhood) {

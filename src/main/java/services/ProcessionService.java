@@ -104,6 +104,7 @@ public class ProcessionService {
 	public Procession saveFinal(final Procession p) {
 		Assert.notNull(p);
 		p.setIsFinal(true);
+		p.setStatus("SUBMITTED");
 		final Procession result = this.save(p);
 		return result;
 	}
@@ -153,5 +154,9 @@ public class ProcessionService {
 		}
 
 		return dateRes + "-" + numericRes;
+	}
+
+	public Procession copyParade(final int paradeId) {
+		return null;
 	}
 }
