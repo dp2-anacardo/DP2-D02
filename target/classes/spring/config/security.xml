@@ -94,7 +94,8 @@
 		<security:intercept-url pattern="/messageBox/edit.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/messageBox/create.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/messageBox/nest.do" access="isAuthenticated()" />  
+		<security:intercept-url pattern="/messageBox/nest.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/messageBox/unnest.do" access="isAuthenticated()" />   
 		<security:intercept-url pattern="/position/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/priority/administrator/**" access="hasRole('ADMIN')" />
 
