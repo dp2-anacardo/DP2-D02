@@ -20,7 +20,12 @@ import security.UserAccount;
 import domain.Area;
 import domain.Chapter;
 import domain.MessageBox;
+<<<<<<< HEAD
 import domain.Parade;
+=======
+import domain.Procession;
+import domain.Proclaim;
+>>>>>>> origin/miguel
 import domain.SocialProfile;
 import forms.ChapterForm;
 
@@ -108,8 +113,13 @@ public class ChapterService {
 		return result;
 	}
 
+<<<<<<< HEAD
 	public Collection<Parade> getParadesByArea() {
 		final Chapter chapter = this.chapterRepository.findOne(LoginService.getPrincipal().getId());
+=======
+	public Collection<Procession> getProcessionsByArea() {
+		final Chapter chapter = this.chapterRepository.findOne(this.actorService.getActorLogged().getId());
+>>>>>>> origin/miguel
 
 		final Collection<Parade> parades = this.chapterRepository.getParadesOfChapter(chapter.getArea().getId());
 
@@ -127,6 +137,7 @@ public class ChapterService {
 			chapter.setArea(area);
 	}
 
+<<<<<<< HEAD
 	public Chapter reconstruct(final ChapterForm c, final BindingResult binding) {
 
 		final Chapter result = this.create();
@@ -143,6 +154,17 @@ public class ChapterService {
 		result.getUserAccount().setUsername(c.getUsername());
 		result.setVersion(c.getVersion());
 		this.validator.validate(result, binding);
+=======
+	public Collection<Proclaim> getProclaims(final int chapterId) {
+		Assert.notNull(chapterId);
+		Collection<Proclaim> result;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+
+		result = this.chapterRepository.getProclaims(chapterId);
+
+>>>>>>> origin/miguel
 		return result;
 	}
 }
