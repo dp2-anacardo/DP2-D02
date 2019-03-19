@@ -13,28 +13,28 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Procession;
+import domain.Parade;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class ProcessionServiceTest extends AbstractTest {
+public class ParadeServiceTest extends AbstractTest {
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService	paradeService;
 
 
 	//TEST FINDALL DE PROCESSION #8.2 y 9.1 
 
 	@Test
-	public void testFindAllProcessionService() {
-		final Integer numProcession = 15;
+	public void testFindAllParadeService() {
+		final Integer numParade = 15;
 		final Integer broId = super.getEntityId("brotherhood1");
-		final Collection<Procession> lista = this.processionService.getProcessionsFinalByBrotherhood(broId);
+		final Collection<Parade> lista = this.paradeService.getParadesFinalByBrotherhood(broId);
 		Assert.notNull(lista);
-		Assert.isTrue(lista.size() == numProcession);
+		Assert.isTrue(lista.size() == numParade);
 	}
 
 }

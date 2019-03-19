@@ -9,23 +9,26 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+<head>
+<link rel="stylesheet" href="styles/errorEmpty.css" type="text/css">
+</head>
 
-	<spring:message code="procession.title" var="columnTitle"/>
-	<display:column title="columnTitle">
-		<jstl:out value="${row.title }"></jstl:out>
-	</display:column>
+<div class="error">
+<spring:message code="parade.notMatches"/>
+</div>
+<br/>
+
+<display:table name="parade" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<spring:message code="parade.title" var="columnTitle"/>
 	
-	<spring:message code="procession.date" var="columnTitle"/>
-	<display:column title="columnTitle">
-		<jstl:out value="${row.moment }"></jstl:out>
+	<display:column title="${columnTitle}">
+		<jstl:out value="${row.title}"></jstl:out>
 	</display:column>
 	
 	<display:column>
-		<a href="procession/show.do?processionId=${row.id}">
-			<spring:message code="procession.show"/>
+		<a href="parade/show.do?paradeId=${row.id}">
+			<spring:message code="parade.show"/>
 		</a>
 	</display:column>
 	
-
 </display:table>

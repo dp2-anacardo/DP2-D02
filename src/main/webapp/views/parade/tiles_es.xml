@@ -16,29 +16,29 @@
       
 <tiles-definitions>
 
-	<definition name="procession/brotherhood/edit" extends="master.page">	
+	<definition name="parade/brotherhood/edit" extends="master.page">	
 		<put-attribute name="title" value="Procesión" />
-		<put-attribute name="body" value="/views/procession/edit.jsp" />
+		<put-attribute name="body" value="/views/parade/edit.jsp" />
 	</definition>
 	
-	<definition name="procession/brotherhood/list" extends="master.page">	
+	<definition name="parade/brotherhood/list" extends="master.page">	
 		<put-attribute name="title" value="Procesiones" />
-		<put-attribute name="body" value="/views/procession/list.jsp" />
+		<put-attribute name="body" value="/views/parade/list.jsp" />
 	</definition>
 	
-	<definition name="procession/listNotRegister" extends="master.page">	
+	<definition name="parade/listNotRegister" extends="master.page">	
 		<put-attribute name="title" value="Procesiones" />
-		<put-attribute name="body" value="/views/procession/listNotRegister.jsp" />
+		<put-attribute name="body" value="/views/parade/listNotRegister.jsp" />
 	</definition>
 		
-	<definition name="procession/show" extends="master.page">	
+	<definition name="parade/show" extends="master.page">	
 		<put-attribute name="title" value="Procesión" />
-		<put-attribute name="body" value="/views/procession/show.jsp" />
+		<put-attribute name="body" value="/views/parade/show.jsp" />
 	</definition>
 	
-	<definition name="procession/listForMembers" extends="master.page">	
-		<put-attribute name="title" value="Processions" />
-		<put-attribute name="body" value="/views/procession/listForMembers.jsp" />
+	<definition name="parade/listForMembers" extends="master.page">	
+		<put-attribute name="title" value="Parades" />
+		<put-attribute name="body" value="/views/parade/listForMembers.jsp" />
 	</definition>
 	
 	</tiles-definitions>

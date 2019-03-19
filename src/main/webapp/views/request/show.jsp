@@ -15,7 +15,7 @@
 <acme:showtext fieldset="true" code="request.positionColumn" value="${r.positionColumn}"/>
 <acme:showtext fieldset="true" code="request.status" value="${r.status}"/>
 <acme:showtext fieldset="true" code="request.comment" value="${r.comment}"/>
-<acme:showtext fieldset="true" code="request.procession" value="${r.procession.title}"/>
+<acme:showtext fieldset="true" code="request.parade" value="${r.parade.title}"/>
 
 
 <security:authorize access="hasRole('BROTHERHOOD')">

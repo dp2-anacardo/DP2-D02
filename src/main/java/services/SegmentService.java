@@ -28,7 +28,7 @@ public class SegmentService {
 	@Autowired
 	private ActorService		actorService;
 	@Autowired
-	private ProcessionService	paradeService;
+	private ParadeService	paradeService;
 
 
 	public Segment create() {
@@ -48,7 +48,7 @@ public class SegmentService {
 		Segment result;
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-		Assert.isTrue(this.paradeService.getProcessionsByBrotherhood(b).contains(s.getParade()));
+		Assert.isTrue(this.paradeService.getParadesByBrotherhood(b).contains(s.getParade()));
 
 		final List<Segment> segments = (List<Segment>) this.getPathByParade(s.getParade().getId());
 		if (segments.size() > 0)
@@ -60,7 +60,7 @@ public class SegmentService {
 	public void delete(final Segment s) {
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-		Assert.isTrue(this.paradeService.getProcessionsByBrotherhood(b).contains(s.getParade()));
+		Assert.isTrue(this.paradeService.getParadesByBrotherhood(b).contains(s.getParade()));
 		final List<Segment> segments = (List<Segment>) this.getPathByParade(s.getParade().getId());
 		final int posicion = segments.indexOf(s);
 		if (posicion != segments.size() - 1 && posicion != 0) {

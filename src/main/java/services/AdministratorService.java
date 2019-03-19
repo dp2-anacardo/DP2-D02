@@ -25,7 +25,7 @@ import domain.Member;
 import domain.Message;
 import domain.MessageBox;
 import domain.Position;
-import domain.Procession;
+import domain.Parade;
 import domain.SocialProfile;
 import forms.AdministratorForm;
 
@@ -211,25 +211,25 @@ public class AdministratorService {
 	}
 
 	/* Q4 */
-	public Collection<Procession> getProcessionIn30Days() {
+	public Collection<Parade> getParadeIn30Days() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Collection<Procession> result;
-		result = this.administratorRepository.getProcessionsIn30Days();
+		Collection<Parade> result;
+		result = this.administratorRepository.getParadesIn30Days();
 
 		return result;
 	}
 
 	/* Q5 */
-	public Double getRatioOfRequestToProcessionPerStatus(final Procession procession, final String status) {
+	public Double getRatioOfRequestToParadePerStatus(final Parade parade, final String status) {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
 		Double result;
-		result = this.administratorRepository.getRatioOfRequestToProcessionPerStatus(procession, status);
+		result = this.administratorRepository.getRatioOfRequestToParadePerStatus(parade, status);
 
 		return result;
 	}

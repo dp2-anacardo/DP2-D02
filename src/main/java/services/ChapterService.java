@@ -20,7 +20,7 @@ import security.UserAccount;
 import domain.Area;
 import domain.Chapter;
 import domain.MessageBox;
-import domain.Procession;
+import domain.Parade;
 import domain.SocialProfile;
 import forms.ChapterForm;
 
@@ -108,10 +108,10 @@ public class ChapterService {
 		return result;
 	}
 
-	public Collection<Procession> getProcessionsByArea() {
+	public Collection<Parade> getParadesByArea() {
 		final Chapter chapter = this.chapterRepository.findOne(LoginService.getPrincipal().getId());
 
-		final Collection<Procession> parades = this.chapterRepository.getProcessionsOfChapter(chapter.getArea().getId());
+		final Collection<Parade> parades = this.chapterRepository.getParadesOfChapter(chapter.getArea().getId());
 
 		return parades;
 	}

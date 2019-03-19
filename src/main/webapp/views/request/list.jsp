@@ -29,9 +29,9 @@
 		</a>
 	</display:column>
 	
-	<spring:message code="request.procession" var="columnTitle"/>
+	<spring:message code="request.parade" var="columnTitle"/>
 	<display:column title="${columnTitle}" class="${row.status }">
-		<jstl:out value="${row.procession.title}"></jstl:out>
+		<jstl:out value="${row.parade.title}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="request.status" var="columnTitle"/>

@@ -21,7 +21,7 @@ public class Sponsorship extends DomainEntity {
 	private String		targetURL;
 	private String		status;
 	private CreditCard	creditCard;
-	private Procession	parade;
+	private Parade	parade;
 
 
 	@NotBlank
@@ -64,11 +64,11 @@ public class Sponsorship extends DomainEntity {
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Procession getParade() {
+	public Parade getParade() {
 		return this.parade;
 	}
 
-	public void setParade(final Procession parade) {
+	public void setParade(final Parade parade) {
 		this.parade = parade;
 	}
 

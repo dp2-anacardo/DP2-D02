@@ -24,13 +24,13 @@
 	
 	<display:column>
 		<a href="brotherhood/showMember.do?memberId=${row.id}">
-			<spring:message code="procession.show"/>
+			<spring:message code="parade.show"/>
 		</a>
 	</display:column>
 	
 	<display:column>
 		<a href="brotherhood/deleteMember.do?memberId=${row.id}">
-			<spring:message code="procession.delete"/>
+			<spring:message code="parade.delete"/>
 		</a>
 	</display:column>
 	

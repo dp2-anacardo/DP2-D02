@@ -22,14 +22,14 @@ import services.BrotherhoodService;
 import services.MemberService;
 import services.MessageService;
 import services.PriorityService;
-import services.ProcessionService;
+import services.ParadeService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Message;
-import domain.Procession;
+import domain.Parade;
 import domain.Request;
 
 @Controller
@@ -43,7 +43,7 @@ public class RequestController extends AbstractController {
 	@Autowired
 	MemberService		memberService;
 	@Autowired
-	ProcessionService	processionService;
+	ParadeService	paradeService;
 	@Autowired
 	BrotherhoodService	brotherhoodService;
 	@Autowired
@@ -72,13 +72,13 @@ public class RequestController extends AbstractController {
 	@RequestMapping(value = "/member/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Collection<Procession> processions;
+		Collection<Parade> parades;
 		final Request request = this.requestService.create();
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Member m = this.memberService.findOne(user.getId());
-		processions = this.requestService.getProcessionsByMember(m);
+		parades = this.requestService.getParadesByMember(m);
 		result = new ModelAndView("request/member/edit");
-		result.addObject("processions", processions);
+		result.addObject("parades", parades);
 		result.addObject("request", request);
 
 		return result;
@@ -87,24 +87,24 @@ public class RequestController extends AbstractController {
 	@RequestMapping(value = "/member/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("request") final Request request, final BindingResult binding) {
 		ModelAndView result;
-		Collection<Procession> processions;
+		Collection<Parade> parades;
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Member m = this.memberService.findOne(user.getId());
-		processions = this.requestService.getProcessionsByMember(m);
+		parades = this.requestService.getParadesByMember(m);
 		try {
 			request.setVersion(0);
-			Assert.notNull(request.getProcession());
+			Assert.notNull(request.getParade());
 			Collection<Request> requests;
 			requests = this.requestService.getRequestsByMember(m);
 			for (final Request r : requests)
-				if (r.getProcession().equals(request.getProcession()))
+				if (r.getParade().equals(request.getParade()))
 					Assert.isTrue(false);
 			this.requestService.save(request);
 			result = new ModelAndView("redirect:/request/member/list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("request/member/edit");
 			result.addObject("message", "request.commit.error");
-			result.addObject("processions", processions);
+			result.addObject("parades", parades);
 		}
 		return result;
 	}
@@ -122,7 +122,7 @@ public class RequestController extends AbstractController {
 				if (user instanceof Member)
 					Assert.isTrue(r.getMember().equals(this.memberService.findOne(user.getId())));
 				else if (user instanceof Brotherhood)
-					Assert.isTrue(r.getProcession().getBrotherhood().equals(this.brotherhoodService.findOne(user.getId())));
+					Assert.isTrue(r.getParade().getBrotherhood().equals(this.brotherhoodService.findOne(user.getId())));
 				result = new ModelAndView("request/member,brotherhood/show");
 				result.addObject("r", r);
 			} catch (final Throwable oops) {
@@ -154,17 +154,17 @@ public class RequestController extends AbstractController {
 	//AQUI EMPIEZA LA PARTE DE BROTHERHOOD
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
-	public ModelAndView listB(@RequestParam final int processionId) {
+	public ModelAndView listB(@RequestParam final int paradeId) {
 		ModelAndView result;
 		Collection<Request> requests;
 
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-		final Procession p = this.processionService.findOne(processionId);
+		final Parade p = this.paradeService.findOne(paradeId);
 		if (p == null || !p.getBrotherhood().equals(b))
 			result = new ModelAndView("redirect:/misc/403");
 		else {
-			requests = this.requestService.getRequestByProcession(p);
+			requests = this.requestService.getRequestByParade(p);
 
 			result = new ModelAndView("request/brotherhood/list");
 			result.addObject("requests", requests);
@@ -199,20 +199,20 @@ public class RequestController extends AbstractController {
 			try {
 				final Request r2 = this.requestService.findOne(r.getId());
 				r.setMember(r2.getMember());
-				r.setProcession(r2.getProcession());
+				r.setParade(r2.getParade());
 				r.setStatus(r2.getStatus());
 				r.setVersion(r2.getVersion());
 				this.requestService.rejectRequest(r);
 				final Message message = this.messageService.create();
 				final Collection<Actor> recipients = new ArrayList<>();
 				recipients.add(r.getMember());
-				recipients.add(r.getProcession().getBrotherhood());
+				recipients.add(r.getParade().getBrotherhood());
 				message.setRecipients(recipients);
 				message.setPriority(this.priorityService.getHighPriority());
 				message.setSubject("A request changed its status \n Una petición ha cambiado su estatus");
 				message.setBody("A request has been rejected \n Una petición ha sido rechazada");
 				this.messageService.save(message);
-				result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId=" + r2.getProcession().getId());
+				result = new ModelAndView("redirect:/request/brotherhood/list.do?paradeId=" + r2.getParade().getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView1(r, "request.commit.error");
 			}
@@ -249,31 +249,31 @@ public class RequestController extends AbstractController {
 		if (r2 == null)
 			result = new ModelAndView("redirect:/misc/403");
 		else {
-			final Collection<Request> requests = this.requestService.getRequestAcceptedByProcession(r2.getProcession());
+			final Collection<Request> requests = this.requestService.getRequestAcceptedByParade(r2.getParade());
 			boolean notFree = false;
 			for (final Request r3 : requests)
 				if (r3.getPositionColumn() == r.getPositionColumn() && r3.getPositionRow() == r.getPositionRow())
 					notFree = true;
-			if (notFree || r.getPositionRow() >= r2.getProcession().getMaxRow() || r.getPositionColumn() >= r2.getProcession().getMaxColumn()) {
-				r.setProcession(r2.getProcession());
+			if (notFree || r.getPositionRow() >= r2.getParade().getMaxRow() || r.getPositionColumn() >= r2.getParade().getMaxColumn()) {
+				r.setParade(r2.getParade());
 				result = this.createEditModelAndView2(r, "error.position");
 			} else
 				try {
 					r.setMember(r2.getMember());
-					r.setProcession(r2.getProcession());
+					r.setParade(r2.getParade());
 					r.setStatus(r2.getStatus());
 					r.setVersion(r2.getVersion());
 					this.requestService.acceptRequest(r);
 					final Message message = this.messageService.create();
 					final Collection<Actor> recipients = new ArrayList<>();
 					recipients.add(r.getMember());
-					recipients.add(r.getProcession().getBrotherhood());
+					recipients.add(r.getParade().getBrotherhood());
 					message.setRecipients(recipients);
 					message.setPriority(this.priorityService.getHighPriority());
 					message.setSubject("A request changed its status \n Una petición ha cambiado su estatus");
 					message.setBody("A request has been accepted \n Una petición ha sido aceptada");
 					this.messageService.save(message);
-					result = new ModelAndView("redirect:/request/brotherhood/list.do?processionId=" + r2.getProcession().getId());
+					result = new ModelAndView("redirect:/request/brotherhood/list.do?paradeId=" + r2.getParade().getId());
 				} catch (final Throwable oops) {
 					result = this.createEditModelAndView1(r, "request.commit.error");
 				}
@@ -287,23 +287,23 @@ public class RequestController extends AbstractController {
 		result = new ModelAndView("request/brotherhood/accept");
 		result.addObject("r", r);
 		result.addObject("message", messageCode);
-		final List<Integer> positions = this.calculateFreePosition(r.getProcession());
+		final List<Integer> positions = this.calculateFreePosition(r.getParade());
 		if (positions.size() > 0) {
 			result.addObject("row", positions.get(0));
 			result.addObject("column", positions.get(1));
 			result.addObject("messageFullB", false);
 		} else {
-			result.addObject("messageFull", "request.procession.full");
+			result.addObject("messageFull", "request.parade.full");
 			result.addObject("messageFullB", true);
 		}
 		return result;
 	}
 
-	public List<Integer> calculateFreePosition(final Procession p) {
+	public List<Integer> calculateFreePosition(final Parade p) {
 		final List<Integer> result = new ArrayList<Integer>();
 		final Integer maxR = p.getMaxRow();
 		final Integer maxC = p.getMaxColumn();
-		final Collection<Request> requests = this.requestService.getRequestAcceptedByProcession(p);
+		final Collection<Request> requests = this.requestService.getRequestAcceptedByParade(p);
 		loop: for (int i = 0; i < maxR; i++)
 			for (int j = 0; j < maxC; j++)
 				if (requests.size() > 0) {
