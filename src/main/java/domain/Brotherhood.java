@@ -6,10 +6,13 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -26,13 +29,19 @@ import datatype.Url;
 @Access(AccessType.PROPERTY)
 public class Brotherhood extends Actor {
 
-	private String			title;
-	private Date			establishmentDate;
-	private Collection<Url>	pictures;
+	private String						title;
+	private Date						establishmentDate;
+	private Collection<Url>				pictures;
 
 	//Relationships
 
-	private Area			area;
+	private Area						area;
+	private InceptionRecord				inceptionRecord;
+	private Collection<PeriodRecord>	periodsRecords;
+	private Collection<LegalRecord>		legalsRecords;
+	private Collection<MiscRecord>		miscsRecords;
+	private Collection<LinkRecord>		linksRecords;
+	private Collection<LinkRecord>		linkedsRecordsBrotherhood;
 
 
 	@NotBlank
@@ -78,4 +87,58 @@ public class Brotherhood extends Actor {
 		this.area = area;
 	}
 
+	@Valid
+	@OneToOne(optional = false)
+	public InceptionRecord getInceptionRecord() {
+		return this.inceptionRecord;
+	}
+
+	public void setInceptionRecord(final InceptionRecord inceptionRecord) {
+		this.inceptionRecord = inceptionRecord;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<PeriodRecord> getPeriodsRecords() {
+		return this.periodsRecords;
+	}
+
+	public void setPeriodsRecords(final Collection<PeriodRecord> periodsRecords) {
+		this.periodsRecords = periodsRecords;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<LegalRecord> getLegalsRecords() {
+		return this.legalsRecords;
+	}
+
+	public void setLegalsRecords(final Collection<LegalRecord> legalsRecords) {
+		this.legalsRecords = legalsRecords;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<MiscRecord> getMiscsRecords() {
+		return this.miscsRecords;
+	}
+
+	public void setMiscsRecords(final Collection<MiscRecord> miscsRecords) {
+		this.miscsRecords = miscsRecords;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<LinkRecord> getLinksRecords() {
+		return this.linksRecords;
+	}
+
+	public void setLinksRecords(final Collection<LinkRecord> linksRecords) {
+		this.linksRecords = linksRecords;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<LinkRecord> getLinkedsRecordsBrotherhood() {
+		return this.linkedsRecordsBrotherhood;
+	}
+
+	public void setLinkedsRecordsBrotherhood(final Collection<LinkRecord> linkedsRecordsBrotherhood) {
+		this.linkedsRecordsBrotherhood = linkedsRecordsBrotherhood;
+	}
 }

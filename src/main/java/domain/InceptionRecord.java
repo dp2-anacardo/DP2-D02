@@ -8,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -26,10 +25,8 @@ public class InceptionRecord extends DomainEntity {
 	private String			description;
 	private Collection<Url>	photo;
 
+
 	//Relaciones
-
-	private Brotherhood		brotherhood;
-
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	@NotBlank
@@ -60,16 +57,6 @@ public class InceptionRecord extends DomainEntity {
 
 	public void setPhoto(final Collection<Url> photo) {
 		this.photo = photo;
-	}
-
-	@Valid
-	@OneToOne(optional = false)
-	public Brotherhood getBrotherhood() {
-		return this.brotherhood;
-	}
-
-	public void setBrotherhood(final Brotherhood brotherhood) {
-		this.brotherhood = brotherhood;
 	}
 
 }
