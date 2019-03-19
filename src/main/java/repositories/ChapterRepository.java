@@ -9,10 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import domain.Chapter;
 import domain.Procession;
+import domain.Proclaim;
 
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
 
 	@Query("select p from Parade p join p.brotherhood b join b.area a where a.id=?1")
 	Collection<Procession> getProcessionsOfChapter(int areaId);
+
+	@Query("select p from Proclaim p join p.chapter c where c.id=?1")
+	Collection<Proclaim> getProclaims(int chapterId);
 }

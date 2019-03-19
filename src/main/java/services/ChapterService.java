@@ -19,6 +19,7 @@ import domain.Area;
 import domain.Chapter;
 import domain.MessageBox;
 import domain.Procession;
+import domain.Proclaim;
 import domain.SocialProfile;
 
 @Service
@@ -106,7 +107,7 @@ public class ChapterService {
 	}
 
 	public Collection<Procession> getProcessionsByArea() {
-		final Chapter chapter = this.chapterRepository.findOne(LoginService.getPrincipal().getId());
+		final Chapter chapter = this.chapterRepository.findOne(this.actorService.getActorLogged().getId());
 
 		final Collection<Procession> parades = this.chapterRepository.getProcessionsOfChapter(chapter.getArea().getId());
 
@@ -122,5 +123,17 @@ public class ChapterService {
 
 		if (this.areaService.getChapter(areaId) == null)
 			chapter.setArea(area);
+	}
+
+	public Collection<Proclaim> getProclaims(final int chapterId) {
+		Assert.notNull(chapterId);
+		Collection<Proclaim> result;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+
+		result = this.chapterRepository.getProclaims(chapterId);
+
+		return result;
 	}
 }
