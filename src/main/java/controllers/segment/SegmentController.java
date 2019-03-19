@@ -49,7 +49,7 @@ public class SegmentController extends AbstractController {
 			segments = this.segmentService.getPathByParade(paradeId);
 			result = new ModelAndView("parade/brotherhood/list");
 			result.addObject("segments", segments);
-			result.addObject("RequestURI", "segmet/brotherhood/list");
+			result.addObject("requestURI", "segment/brotherhood/list");
 		}
 
 		return result;

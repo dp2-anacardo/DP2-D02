@@ -11,12 +11,13 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasRole('BROTHERHOOD')">
 <display:table name="segments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<display:column property="originLatitude"></display:column>
 	
 	<spring:message code="segment.origin" var="origin"/>
 	<display:column title="${origin}">
-		<jstl:out value="${row.origin.latitude},${row.origin.longitude}"></jstl:out>
+		<jstl:out value="${row.originLatitude}"></jstl:out>
 	</display:column>
 	
 </display:table>

@@ -23,5 +23,5 @@
 <acme:showtext fieldset="true" code="parade.maxColumn" value="${p.maxColumn}"/>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<acme:cancel url="segment/brotherhood" code="parade.path"/>
+<acme:cancel url="segment/brotherhood/list.do?paradeId=${p.id}" code="parade.path"/>
 </security:authorize>
