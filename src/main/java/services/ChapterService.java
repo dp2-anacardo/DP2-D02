@@ -70,9 +70,6 @@ public class ChapterService {
 
 	public Chapter save(final Chapter chapter) {
 
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 		Assert.notNull(chapter);
 		Chapter result;
 		final char[] c = chapter.getPhoneNumber().toCharArray();
