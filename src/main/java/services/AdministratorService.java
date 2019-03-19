@@ -24,8 +24,8 @@ import domain.Brotherhood;
 import domain.Member;
 import domain.Message;
 import domain.MessageBox;
-import domain.Position;
 import domain.Parade;
+import domain.Position;
 import domain.SocialProfile;
 import forms.AdministratorForm;
 
@@ -378,6 +378,18 @@ public class AdministratorService {
 
 		return res;
 	}
+
+	/* Q13 */
+
+	public Double getAvgRecordsPerHistory() {
+		final Double records = (this.administratorRepository.getNumOfInceptionRecord() + this.administratorRepository.getNumOfLegalRecord() + this.administratorRepository.getNumOfLinkRecord() + this.administratorRepository.getNumOfPeriodRecord()) * 1.;
+		final Double brotherhoods = this.administratorRepository.getNumOfBrotherhoods() * 1.;
+		final Double result = records / brotherhoods;
+
+		return result;
+	}
+
+	/* Q14 */
 
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {

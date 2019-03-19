@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
-import domain.Position;
 import domain.Parade;
+import domain.Position;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -106,5 +106,20 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Double getRatioOfEmptyFinders();
 
 	//AQUI EMPIEZAN LAS QUERIES DEL DASHBOARD DE ACME PARADE
+
+	@Query("select count(f)from Brotherhood f")
+	Integer getNumOfBrotherhoods();
+
+	@Query("select count(f) from InceptionRecord f")
+	Integer getNumOfInceptionRecord();
+
+	@Query("select count(f) from PeriodRecord f")
+	Integer getNumOfPeriodRecord();
+
+	@Query("select count(f) from LegalRecord f")
+	Integer getNumOfLegalRecord();
+
+	@Query("select count(f) from LinkRecord f")
+	Integer getNumOfLinkRecord();
 
 }
