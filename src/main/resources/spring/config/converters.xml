@@ -64,6 +64,12 @@
 		<bean class="converters.StringToGPSCoordinateConverter"/>
 		<bean class="converters.ChapterToStringConverter"/>
 		<bean class="converters.StringToChapterConverter"/>
+		<bean class="converters.CreditCardToStringConverter"/>
+		<bean class="converters.StringToCreditCardConverter"/>
+		<bean class="converters.SponsorToStringConverter"/>
+		<bean class="converters.StringToSponsorConverter"/>
+		<bean class="converters.SponsorshipToStringConverter"/>
+		<bean class="converters.StringToSponsorshipConverter"/>
 		
 
 	</util:list>

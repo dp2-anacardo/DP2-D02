@@ -5,41 +5,42 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import datatype.Url;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
+import datatype.CreditCard;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Sponsorship extends DomainEntity {
 
-	private Url			banner;
-	private Url			targetURL;
+	private String		banner;
+	private String		targetURL;
 	private String		status;
-	private Sponsor		sponsor;
 	private CreditCard	creditCard;
 	private Procession	parade;
 
 
-	@NotNull
-	@Valid
-	public Url getBanner() {
+	@NotBlank
+	@URL
+	public String getBanner() {
 		return this.banner;
 	}
 
-	public void setBanner(final Url banner) {
+	public void setBanner(final String banner) {
 		this.banner = banner;
 	}
 
-	@NotNull
-	@Valid
-	public Url getTargetURL() {
+	@NotBlank
+	@URL
+	public String getTargetURL() {
 		return this.targetURL;
 	}
 
-	public void setTargetURL(final Url targetURL) {
+	public void setTargetURL(final String targetURL) {
 		this.targetURL = targetURL;
 	}
 
@@ -52,17 +53,7 @@ public class Sponsorship extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
-	public Sponsor getSponsor() {
-		return this.sponsor;
-	}
-
-	public void setSponsor(final Sponsor sponsor) {
-		this.sponsor = sponsor;
-	}
-
-	@Valid
-	@OneToOne(optional = false)
+	@NotNull
 	public CreditCard getCreditCard() {
 		return this.creditCard;
 	}
@@ -79,6 +70,20 @@ public class Sponsorship extends DomainEntity {
 
 	public void setParade(final Procession parade) {
 		this.parade = parade;
+	}
+
+
+	// Relationships ----------------------------------------------------------
+	private Sponsor	sponsor;
+
+
+	@ManyToOne(optional = false)
+	public Sponsor getSponsor() {
+		return this.sponsor;
+	}
+
+	public void setSponsor(final Sponsor sponsor) {
+		this.sponsor = sponsor;
 	}
 
 }
