@@ -5,11 +5,14 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import datatype.Url;
 
@@ -46,6 +49,9 @@ public class PeriodRecord extends DomainEntity {
 		return this.endYear;
 	}
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Valid
+	@NotEmpty
 	public Collection<Url> getPhoto() {
 		return this.photo;
 	}
