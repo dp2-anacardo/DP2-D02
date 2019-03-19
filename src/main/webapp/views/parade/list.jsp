@@ -10,34 +10,34 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<display:table name="procession" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-	<spring:message code="procession.title" var="columnTitle"/>
+<display:table name="parade" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<spring:message code="parade.title" var="columnTitle"/>
 	<display:column title="${columnTitle}">
 		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
 	<display:column>
-		<a href="procession/brotherhood/edit.do?processionId=${row.id}">
-			<spring:message code="procession.edit"/>
+		<a href="parade/brotherhood/edit.do?paradeId=${row.id}">
+			<spring:message code="parade.edit"/>
 		</a>
 	</display:column>
 	
 	<display:column>
-		<a href="procession/show.do?processionId=${row.id}">
-			<spring:message code="procession.show"/>
+		<a href="parade/show.do?paradeId=${row.id}">
+			<spring:message code="parade.show"/>
 		</a>
 	</display:column>
 	<display:column>
-		<a href="request/brotherhood/list.do?processionId=${row.id}">
-			<spring:message code="procession.request"/>
+		<a href="request/brotherhood/list.do?paradeId=${row.id}">
+			<spring:message code="parade.request"/>
 		</a>
 	</display:column>
 	
 	
 </display:table>
 <div>
-	<a href="procession/brotherhood/create.do"> <spring:message
-				code="procession.create" />
+	<a href="parade/brotherhood/create.do"> <spring:message
+				code="parade.create" />
 	</a>
 </div>
 </security:authorize>

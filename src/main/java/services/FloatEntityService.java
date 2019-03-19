@@ -18,7 +18,7 @@ import datatype.Url;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.FloatEntity;
-import domain.Procession;
+import domain.Parade;
 
 @Service
 @Transactional
@@ -31,7 +31,7 @@ public class FloatEntityService {
 	private ActorService			actorService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService		paradeService;
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
@@ -101,10 +101,10 @@ public class FloatEntityService {
 		Assert.notNull(floatEntity);
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 
-		Collection<Procession> processions;
-		processions = this.processionService.findAll();
+		Collection<Parade> parades;
+		parades = this.paradeService.findAll();
 
-		for (final Procession p : processions) {
+		for (final Parade p : parades) {
 			Collection<FloatEntity> floats;
 			floats = p.getFloats();
 			if (floats.contains(floatEntity)) {

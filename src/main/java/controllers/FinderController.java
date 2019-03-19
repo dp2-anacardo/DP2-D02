@@ -21,7 +21,7 @@ import services.MemberService;
 import domain.Actor;
 import domain.Finder;
 import domain.Member;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
 @RequestMapping("finder/member")
@@ -41,7 +41,7 @@ public class FinderController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Procession> processions;
+		Collection<Parade> parades;
 		result = new ModelAndView("finder/member/list");
 
 		//Sacar finder del Member
@@ -58,17 +58,17 @@ public class FinderController extends AbstractController {
 		final Date fechaLimite = new Date(lastUpdate.getTime() + (horasDeGuardado * 3600000L));
 
 		if (fechaActual.after(fechaLimite)) {
-			finder.setProcessions(new ArrayList<Procession>());
+			finder.setParades(new ArrayList<Parade>());
 			this.finderService.save(finder);
 		}
 
-		if (finder.getProcessions().isEmpty())
-			result = new ModelAndView("redirect:/procession/listForMembers.do");
+		if (finder.getParades().isEmpty())
+			result = new ModelAndView("redirect:/parade/listForMembers.do");
 		else {
 
-			processions = finder.getProcessions();
+			parades = finder.getParades();
 
-			result.addObject("processions", processions);
+			result.addObject("parades", parades);
 			result.addObject("finder", finder);
 			result.addObject("requestURI", "finder/member/list.do");
 		}
@@ -126,7 +126,7 @@ public class FinderController extends AbstractController {
 
 		this.finderService.save(finder);
 
-		result = new ModelAndView("redirect:/procession/listForMembers.do");
+		result = new ModelAndView("redirect:/parade/listForMembers.do");
 
 		return result;
 	}

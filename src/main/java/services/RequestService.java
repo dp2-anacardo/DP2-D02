@@ -16,7 +16,7 @@ import domain.Actor;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
-import domain.Procession;
+import domain.Parade;
 import domain.Request;
 
 @Service
@@ -28,7 +28,7 @@ public class RequestService {
 	@Autowired
 	private MemberService		memberService;
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService	paradeService;
 	@Autowired
 	private ActorService		actorService;
 
@@ -86,27 +86,27 @@ public class RequestService {
 		return result;
 	}
 
-	public Collection<Request> getRequestByProcession(final Procession p) {
-		return this.requestRepository.getRequestByProcession(p);
+	public Collection<Request> getRequestByParade(final Parade p) {
+		return this.requestRepository.getRequestByParade(p);
 	}
 	public Collection<Request> getRequestsByMember(final Member m) {
 		return this.requestRepository.getRequestsByMember(m);
 	}
-	public Collection<Procession> getProcessionsByMember(final Member m) {
-		final Collection<Procession> result = new ArrayList<Procession>();
+	public Collection<Parade> getParadesByMember(final Member m) {
+		final Collection<Parade> result = new ArrayList<Parade>();
 		final Collection<Enrolment> enrolments = this.memberService.getEnrolments(m.getId());
 		final Collection<Brotherhood> brotherhoods = new HashSet<Brotherhood>();
 		for (final Enrolment e : enrolments)
 			if (e.getDropOutMoment() == null && e.getStatus().equals("ACCEPTED"))
 				brotherhoods.add(e.getBrotherhood());
 		for (final Brotherhood b : brotherhoods)
-			result.addAll(this.processionService.getProcessionsFinalByBrotherhood(b.getId()));
+			result.addAll(this.paradeService.getParadesFinalByBrotherhood(b.getId()));
 
 		return result;
 	}
 
-	public Collection<Request> getRequestAcceptedByProcession(final Procession p) {
-		return this.requestRepository.getRequestAcceptedByProcession(p);
+	public Collection<Request> getRequestAcceptedByParade(final Parade p) {
+		return this.requestRepository.getRequestAcceptedByParade(p);
 	}
 
 }

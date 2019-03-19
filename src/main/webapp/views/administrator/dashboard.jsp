@@ -44,10 +44,10 @@ datasets: [{
 				code="administrator.SteddevOfMembersPerBrotherhood" /></b> ${SteddevOfMembersPerBrotherhood} <br />
 		<b><spring:message code="administrator.LargestBrotherhood" /></b> ${LargestBrotherhood} <br />
 		<b><spring:message code="administrator.SmallestBrotherhoood" /></b> ${SmallestBrotherhoood} <br />
-		<%-- <b><spring:message code="administrator.ProcessionIn30Days" /></b> ${ProcessionIn30Days} <br/> --%>
+		<%-- <b><spring:message code="administrator.ParadeIn30Days" /></b> ${ParadeIn30Days} <br/> --%>
 
-		<b><spring:message code="administrator.ProcessionIn30Days" /></b>
-		<jstl:forEach var="x" items="${ProcessionIn30Days}">
+		<b><spring:message code="administrator.ParadeIn30Days" /></b>
+		<jstl:forEach var="x" items="${ParadeIn30Days}">
 			${x.title}
 		</jstl:forEach>
 		<br />
@@ -57,26 +57,26 @@ datasets: [{
 
 
 		<b><spring:message
-				code="administrator.RatioOfRequestToProcessionPerAPPROVED" /></b>
+				code="administrator.RatioOfRequestToParadePerAPPROVED" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
-			- ${x.title} : ${RatioOfRequestToProcessionPerAPPROVED[status.index]}
+			- ${x.title} : ${RatioOfRequestToParadePerAPPROVED[status.index]}
 		</jstl:forEach>
 
 		<br>
 		<b><spring:message
-				code="administrator.RatioOfRequestToProcessionPerPENDING" /></b>
+				code="administrator.RatioOfRequestToParadePerPENDING" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
-			- ${x.title} : ${RatioOfRequestToProcessionPerPENDING[status.index]}
+			- ${x.title} : ${RatioOfRequestToParadePerPENDING[status.index]}
 		</jstl:forEach>
 
 		<br>
 		<b><spring:message
-				code="administrator.RatioOfRequestToProcessionPerREJECTED" /></b>
+				code="administrator.RatioOfRequestToParadePerREJECTED" /></b>
 		<jstl:forEach var="x" items="${procesiones}" varStatus="status">
 			<br>
-			- ${x.title} : ${RatioOfRequestToProcessionPerREJECTED[status.index]}
+			- ${x.title} : ${RatioOfRequestToParadePerREJECTED[status.index]}
 		</jstl:forEach>
 
 		<br>

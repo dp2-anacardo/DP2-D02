@@ -14,14 +14,14 @@
 <form:form action="request/member/edit.do" modelAttribute="request">
 	<form:hidden path="id" />
 	
-	<form:label path="procession">
-		<spring:message code="request.procession"/>
+	<form:label path="parade">
+		<spring:message code="request.parade"/>
 	</form:label>
-	<form:select path="procession">	
-		<form:options items="${processions}" itemValue="id" itemLabel="title" multiple="false"
+	<form:select path="parade">	
+		<form:options items="${parades}" itemValue="id" itemLabel="title" multiple="false"
 			/>
 	</form:select>
-	<form:errors cssClass="error" path="procession" />
+	<form:errors cssClass="error" path="parade" />
 	<br />
 	<acme:submit name="save" code="request.save"/>
 	<acme:cancel url="request/member/list.do" code="area.cancel"/>

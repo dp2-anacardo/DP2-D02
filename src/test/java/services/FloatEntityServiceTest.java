@@ -31,7 +31,7 @@ public class FloatEntityServiceTest extends AbstractTest {
 	//TEST FINDALL DE FLOATENTITY #8.2 y 9.1 
 
 	@Test
-	public void testFindAllProcessionService() {
+	public void testFindAllParadeService() {
 		final Integer numFloats = 2;
 		final Integer broId = super.getEntityId("brotherhood1");
 		final Collection<FloatEntity> lista = this.floatEntityService.getFloatsByBrotherhood(this.brotherhoodService.findOne(broId));

@@ -15,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 import services.AreaService;
 import services.PositionService;
-import services.ProcessionService;
+import services.ParadeService;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Member;
 import domain.Position;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
 @RequestMapping("administrator")
@@ -30,7 +30,7 @@ public class DashboardAdministratorController extends AbstractController {
 	private AdministratorService	administratorService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService		paradeService;
 
 	@Autowired
 	private AreaService				areaService;
@@ -52,36 +52,36 @@ public class DashboardAdministratorController extends AbstractController {
 		/* Q3 */
 		final String SmallestBrotherhoood = this.administratorService.getSmallestBrotherhoood().getName();
 		/* Q4 */
-		final Collection<Procession> ProcessionIn30Days = this.administratorService.getProcessionIn30Days();
+		final Collection<Parade> ParadeIn30Days = this.administratorService.getParadeIn30Days();
 
 		/* Q5 */
 
-		final Collection<Double> RatioOfRequestToProcessionPerAPPROVED = new ArrayList<Double>();
-		final Collection<Procession> procesiones = this.processionService.findAll();
-		for (final Procession p : procesiones) {
-			final Double d = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "APPROVED");
+		final Collection<Double> RatioOfRequestToParadePerAPPROVED = new ArrayList<Double>();
+		final Collection<Parade> procesiones = this.paradeService.findAll();
+		for (final Parade p : procesiones) {
+			final Double d = this.administratorService.getRatioOfRequestToParadePerStatus(p, "APPROVED");
 			if (d == null)
-				RatioOfRequestToProcessionPerAPPROVED.add(0.0);
+				RatioOfRequestToParadePerAPPROVED.add(0.0);
 			else
-				RatioOfRequestToProcessionPerAPPROVED.add(d);
+				RatioOfRequestToParadePerAPPROVED.add(d);
 		}
 
-		final Collection<Double> RatioOfRequestToProcessionPerREJECTED = new ArrayList<Double>();
-		for (final Procession p : procesiones) {
-			final Double e = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "REJECTED");
+		final Collection<Double> RatioOfRequestToParadePerREJECTED = new ArrayList<Double>();
+		for (final Parade p : procesiones) {
+			final Double e = this.administratorService.getRatioOfRequestToParadePerStatus(p, "REJECTED");
 			if (e == null)
-				RatioOfRequestToProcessionPerREJECTED.add(0.0);
+				RatioOfRequestToParadePerREJECTED.add(0.0);
 			else
-				RatioOfRequestToProcessionPerREJECTED.add(e);
+				RatioOfRequestToParadePerREJECTED.add(e);
 		}
 
-		final Collection<Double> RatioOfRequestToProcessionPerPENDING = new ArrayList<Double>();
-		for (final Procession p : procesiones) {
-			final Double f = this.administratorService.getRatioOfRequestToProcessionPerStatus(p, "PENDING");
+		final Collection<Double> RatioOfRequestToParadePerPENDING = new ArrayList<Double>();
+		for (final Parade p : procesiones) {
+			final Double f = this.administratorService.getRatioOfRequestToParadePerStatus(p, "PENDING");
 			if (f == null)
-				RatioOfRequestToProcessionPerPENDING.add(0.0);
+				RatioOfRequestToParadePerPENDING.add(0.0);
 			else
-				RatioOfRequestToProcessionPerPENDING.add(f);
+				RatioOfRequestToParadePerPENDING.add(f);
 		}
 
 		/* Q6 */
@@ -146,15 +146,15 @@ public class DashboardAdministratorController extends AbstractController {
 
 		result.addObject("SmallestBrotherhoood", SmallestBrotherhoood);
 
-		result.addObject("ProcessionIn30Days", ProcessionIn30Days);
+		result.addObject("ParadeIn30Days", ParadeIn30Days);
 
 		result.addObject("RatioOfRequestsApproveds", RatioOfRequestsApproveds);
 		result.addObject("RatioOfRequestsPendings", RatioOfRequestsPendings);
 		result.addObject("RatioOfRequestsRejecteds", RatioOfRequestsRejecteds);
 
-		result.addObject("RatioOfRequestToProcessionPerAPPROVED", RatioOfRequestToProcessionPerAPPROVED);
-		result.addObject("RatioOfRequestToProcessionPerREJECTED", RatioOfRequestToProcessionPerREJECTED);
-		result.addObject("RatioOfRequestToProcessionPerPENDING", RatioOfRequestToProcessionPerPENDING);
+		result.addObject("RatioOfRequestToParadePerAPPROVED", RatioOfRequestToParadePerAPPROVED);
+		result.addObject("RatioOfRequestToParadePerREJECTED", RatioOfRequestToParadePerREJECTED);
+		result.addObject("RatioOfRequestToParadePerPENDING", RatioOfRequestToParadePerPENDING);
 
 		result.addObject("MembersAtLeast10PercentOfNumberOfRequestAccepted", MembersAtLeast10PercentOfNumberOfRequestAccepted);
 

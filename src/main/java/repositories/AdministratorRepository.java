@@ -11,7 +11,7 @@ import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Position;
-import domain.Procession;
+import domain.Parade;
 
 @Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
@@ -40,15 +40,15 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select min(f.brotherhood) from Enrolment f where f.status like 'ACCEPTED' and f.dropOutMoment is null")
 	Brotherhood getSmallestBrotherhood();
 
-	/* Q4: The processions that are going to be organised in 30 days or less. */
+	/* Q4: The parades that are going to be organised in 30 days or less. */
 
-	@Query("select p from Procession p where datediff(p.moment, current_date()) <=30")
-	Collection<Procession> getProcessionsIn30Days();
+	@Query("select p from Parade p where datediff(p.moment, current_date()) <=30")
+	Collection<Parade> getParadesIn30Days();
 
-	/* Q5: The ratio of request to march in a procession, group by their status */
+	/* Q5: The ratio of request to march in a parade, group by their status */
 
-	@Query("select 100*(select count(f) from Request f where f.procession = ?1 and f.status like ?2)/count(f) from Request f where f.procession = ?1")
-	Double getRatioOfRequestToProcessionPerStatus(Procession procession, String status);
+	@Query("select 100*(select count(f) from Request f where f.parade = ?1 and f.status like ?2)/count(f) from Request f where f.parade = ?1")
+	Double getRatioOfRequestToParadePerStatus(Parade parade, String status);
 
 	/* Q6: The ratio of requests to march, grouped by their status. */
 
@@ -87,22 +87,22 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select stddev(1.0*(select count(b) from Brotherhood b where b.area.id=a.id)) from Area a")
 	Double getStddevBrotherhoodPerArea();
 
-	@Query("select min(f.processions.size) from Finder f")
+	@Query("select min(f.parades.size) from Finder f")
 	Double getMinResultFinder();
 
-	@Query("select max(f.processions.size)*1.0 from Finder f")
+	@Query("select max(f.parades.size)*1.0 from Finder f")
 	Double getMaxResultFinder();
 
-	@Query("select avg(f.processions.size)*1.0 from Finder f")
+	@Query("select avg(f.parades.size)*1.0 from Finder f")
 	Double getAvgResultFinder();
 
-	@Query("select stddev(f.processions.size)*1.0 from Finder f")
+	@Query("select stddev(f.parades.size)*1.0 from Finder f")
 	Double getStddevResultFinder();
 
-	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.processions is not empty")
+	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is not empty")
 	Double getRatioOfNotEmptyFinders();
 
-	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.processions is empty")
+	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is empty")
 	Double getRatioOfEmptyFinders();
 
 	//AQUI EMPIEZAN LAS QUERIES DEL DASHBOARD DE ACME PARADE

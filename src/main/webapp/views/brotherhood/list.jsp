@@ -28,8 +28,8 @@
 	<display:column> <a href="member/list.do?brotherhoodId=${row.id}">
 	<spring:message code="brotherhood.member" /></a> </display:column>
 	
-	<display:column> <a href="procession/listNotRegister.do?brotherhoodId=${row.id}">
-	<spring:message code="brotherhood.procession" /></a> </display:column>
+	<display:column> <a href="parade/listNotRegister.do?brotherhoodId=${row.id}">
+	<spring:message code="brotherhood.parade" /></a> </display:column>
 	
 	<display:column> <a href="floatEntity/listNotRegister.do?brotherhoodId=${row.id}">
 	<spring:message code="brotherhood.float" /></a> </display:column>

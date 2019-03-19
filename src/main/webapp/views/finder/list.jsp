@@ -9,19 +9,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('MEMBER')">
-<display:table pagesize="5" class="procession" name="processions" requestURI="finder/member/list.do" id="row">
+<display:table pagesize="5" class="parade" name="parades" requestURI="finder/member/list.do" id="row">
 	
 	<!-- Action links -->
 	
 	<!-- Attributes -->
 	
-	<spring:message code="procession.title" var="title" />
+	<spring:message code="parade.title" var="title" />
 	<display:column property="title" title="${title}"/>
 	
-	<spring:message code="procession.description" var="description" />
+	<spring:message code="parade.description" var="description" />
 	<display:column property="description" title="${description}"/>
 	
-	<spring:message code="procession.moment" var="moment" />
+	<spring:message code="parade.moment" var="moment" />
 	<display:column property="moment" title="${moment}" format="{0,date,dd/MM/yyyy HH:mm}"/>
 
 </display:table>

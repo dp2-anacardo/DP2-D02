@@ -17,7 +17,7 @@ import org.springframework.validation.Validator;
 import repositories.FinderRepository;
 import domain.Configuration;
 import domain.Finder;
-import domain.Procession;
+import domain.Parade;
 
 @Service
 @Transactional
@@ -40,9 +40,9 @@ public class FinderService {
 	public Finder create() {
 		Finder result;
 		result = new Finder();
-		final Collection<Procession> processions = new ArrayList<Procession>();
+		final Collection<Parade> parades = new ArrayList<Parade>();
 		result.setLastUpdate(new Date());
-		result.setProcessions(processions);
+		result.setParades(parades);
 		return result;
 	}
 	public Collection<Finder> findAll() {
@@ -56,23 +56,23 @@ public class FinderService {
 	public Finder save(Finder finder) {
 
 		Assert.notNull(finder);
-		Collection<Procession> result = Collections.emptyList();
-		List<Procession> pro1 = null;
-		List<Procession> pro2 = null;
-		List<Procession> pro3 = null;
+		Collection<Parade> result = Collections.emptyList();
+		List<Parade> pro1 = null;
+		List<Parade> pro2 = null;
+		List<Parade> pro3 = null;
 		if (!(finder.getKeyWord() == null || finder.getKeyWord() == ""))
-			pro1 = (List<Procession>) this.finderRepository.getProcessionsByKeyWord(finder.getKeyWord());
+			pro1 = (List<Parade>) this.finderRepository.getParadesByKeyWord(finder.getKeyWord());
 		if (finder.getMinimumDate() != null && finder.getMaximumDate() != null)
-			pro2 = (List<Procession>) this.finderRepository.getProcessionsByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
+			pro2 = (List<Parade>) this.finderRepository.getParadesByDateRange(finder.getMinimumDate(), finder.getMaximumDate());
 		if (!(finder.getAreaName() == null || finder.getAreaName() == ""))
-			pro3 = (List<Procession>) this.finderRepository.getProcessionsByArea(finder.getAreaName());
+			pro3 = (List<Parade>) this.finderRepository.getParadesByArea(finder.getAreaName());
 		if (!(pro1 == null && pro2 == null && pro3 == null)) {
 			if (pro1 == null)
-				pro1 = (List<Procession>) this.finderRepository.findAllFinal();
+				pro1 = (List<Parade>) this.finderRepository.findAllFinal();
 			if (pro2 == null)
-				pro2 = (List<Procession>) this.finderRepository.findAllFinal();
+				pro2 = (List<Parade>) this.finderRepository.findAllFinal();
 			if (pro3 == null)
-				pro3 = (List<Procession>) this.finderRepository.findAllFinal();
+				pro3 = (List<Parade>) this.finderRepository.findAllFinal();
 			pro1.retainAll(pro2);
 			pro1.retainAll(pro3);
 
@@ -84,16 +84,16 @@ public class FinderService {
 
 		if (result.size() > conf.getMaxResults()) {
 
-			final List<Procession> copy = (List<Procession>) result;
+			final List<Parade> copy = (List<Parade>) result;
 
-			final List<Procession> processionsLim = new ArrayList<Procession>();
+			final List<Parade> paradesLim = new ArrayList<Parade>();
 			for (int i = 0; i < conf.getMaxResults(); i++)
-				processionsLim.add(copy.get(i));
-			result = processionsLim;
+				paradesLim.add(copy.get(i));
+			result = paradesLim;
 
 		}
 
-		finder.setProcessions(result);
+		finder.setParades(result);
 		final Date moment = new Date();
 		finder.setLastUpdate(moment);
 
@@ -116,7 +116,7 @@ public class FinderService {
 	}
 
 	//Another methods
-	public Collection<Procession> findAllFinal() {
+	public Collection<Parade> findAllFinal() {
 		return this.finderRepository.findAllFinal();
 	}
 

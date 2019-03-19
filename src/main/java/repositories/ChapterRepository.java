@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Chapter;
-import domain.Procession;
+import domain.Parade;
 
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
 
 	@Query("select p from Parade p join p.brotherhood b join b.area a where a.id=?1")
-	Collection<Procession> getProcessionsOfChapter(int areaId);
+	Collection<Parade> getParadesOfChapter(int areaId);
 }

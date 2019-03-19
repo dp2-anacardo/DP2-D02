@@ -28,7 +28,7 @@ public class Finder extends DomainEntity {
 
 	//Relationships
 
-	private Collection<Procession>	processions;
+	private Collection<Parade>	parades;
 
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
@@ -83,12 +83,12 @@ public class Finder extends DomainEntity {
 
 	@Valid
 	@ManyToMany
-	public Collection<Procession> getProcessions() {
-		return this.processions;
+	public Collection<Parade> getParades() {
+		return this.parades;
 	}
 
-	public void setProcessions(final Collection<Procession> processions) {
-		this.processions = processions;
+	public void setParades(final Collection<Parade> parades) {
+		this.parades = parades;
 	}
 
 }

@@ -11,15 +11,15 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<form:form action="procession/brotherhood/edit.do" modelAttribute="procession">
+<form:form action="parade/brotherhood/edit.do" modelAttribute="parade">
 	<form:hidden path="id" />
-	<acme:textbox code="procession.title" path="title"/>
-	<acme:textarea code="procession.description" path="description"/>
-	<acme:textbox code="procession.maxRow" path="maxRow"/>
-	<acme:textbox code="procession.maxColumn" path="maxColumn"/>
-	<acme:textbox code="procession.date" path="moment"/>
+	<acme:textbox code="parade.title" path="title"/>
+	<acme:textarea code="parade.description" path="description"/>
+	<acme:textbox code="parade.maxRow" path="maxRow"/>
+	<acme:textbox code="parade.maxColumn" path="maxColumn"/>
+	<acme:textbox code="parade.date" path="moment"/>
 	<form:label path="floats">
-		<spring:message code="procession.floats"/>
+		<spring:message code="parade.floats"/>
 	</form:label>
 	<form:select path="floats">	
 		<form:options items="${floats}" itemValue="id" itemLabel="title"
@@ -30,18 +30,18 @@
 	
 	
 	
-	<jstl:if test="${procession.isFinal == false }">
-		<acme:submit name="saveFinal" code="procession.saveFinal"/>
-		<acme:submit name="saveDraft" code="procession.saveDraft"/>
+	<jstl:if test="${parade.isFinal == false }">
+		<acme:submit name="saveFinal" code="parade.saveFinal"/>
+		<acme:submit name="saveDraft" code="parade.saveDraft"/>
 	</jstl:if>
-	<jstl:if test="${procession.isFinal == true }">
-		<acme:submit name="saveFinal" code="procession.save"/>
+	<jstl:if test="${parade.isFinal == true }">
+		<acme:submit name="saveFinal" code="parade.save"/>
 	</jstl:if>
-	<jstl:if test="${procession.id != 0}">
+	<jstl:if test="${parade.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="procession.delete" />" />
+			value="<spring:message code="parade.delete" />" />
 	</jstl:if>
-	<acme:cancel url="procession/brotherhood/list.do" code="procession.cancel"/>
+	<acme:cancel url="parade/brotherhood/list.do" code="parade.cancel"/>
 	<br />
 	
 	

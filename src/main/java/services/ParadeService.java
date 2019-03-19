@@ -15,21 +15,21 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ProcessionRepository;
+import repositories.ParadeRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Finder;
-import domain.Procession;
+import domain.Parade;
 import domain.Request;
 import domain.Segment;
 
 @Service
 @Transactional
-public class ProcessionService {
+public class ParadeService {
 
 	@Autowired
-	ProcessionRepository	processionRepository;
+	ParadeRepository	paradeRepository;
 	@Autowired
 	Validator				validator;
 	@Autowired
@@ -44,14 +44,14 @@ public class ProcessionService {
 	SegmentService			segmentService;
 
 
-	public Procession reconstruct(final Procession p, final BindingResult binding) {
-		Procession result;
+	public Parade reconstruct(final Parade p, final BindingResult binding) {
+		Parade result;
 		if (p.getId() == 0) {
 			p.setTicker(this.tickerGenerator());
 			result = p;
 			this.validator.validate(p, binding);
 		} else {
-			result = this.processionRepository.findOne(p.getId());
+			result = this.paradeRepository.findOne(p.getId());
 			p.setBrotherhood(result.getBrotherhood());
 			p.setTicker(result.getTicker());
 			p.setVersion(result.getVersion());
@@ -63,88 +63,88 @@ public class ProcessionService {
 
 	}
 
-	public Procession create() {
-		Procession result;
-		result = new Procession();
+	public Parade create() {
+		Parade result;
+		result = new Parade();
 		result.setIsFinal(false);
 		return result;
 	}
 
-	public Procession findOne(final int id) {
-		Procession result;
-		result = this.processionRepository.findOne(id);
+	public Parade findOne(final int id) {
+		Parade result;
+		result = this.paradeRepository.findOne(id);
 		return result;
 	}
 
-	public Collection<Procession> findAll() {
-		final Collection<Procession> result = this.processionRepository.findAll();
+	public Collection<Parade> findAll() {
+		final Collection<Parade> result = this.paradeRepository.findAll();
 		return result;
 	}
 
-	public Procession save(final Procession p) {
+	public Parade save(final Parade p) {
 		Assert.notNull(p);
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-		Procession result;
+		Parade result;
 		if (p.getId() == 0) {
 			p.setTicker(this.tickerGenerator());
 			p.setBrotherhood(b);
-			result = this.processionRepository.save(p);
+			result = this.paradeRepository.save(p);
 		} else {
 			Assert.isTrue(p.getBrotherhood().equals(b));
-			result = this.processionRepository.save(p);
+			result = this.paradeRepository.save(p);
 		}
 		return result;
 	}
 
-	public Procession saveDraft(final Procession p) {
+	public Parade saveDraft(final Parade p) {
 		Assert.notNull(p);
 		p.setIsFinal(false);
-		final Procession result = this.save(p);
+		final Parade result = this.save(p);
 		return result;
 	}
 
-	public Procession saveFinal(final Procession p) {
+	public Parade saveFinal(final Parade p) {
 		Assert.notNull(p);
 		p.setIsFinal(true);
 		p.setStatus("SUBMITTED");
-		final Procession result = this.save(p);
+		final Parade result = this.save(p);
 		return result;
 	}
 
-	public void delete(final Procession p) {
+	public void delete(final Parade p) {
 		Assert.notNull(p);
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
 		Assert.isTrue(p.getBrotherhood().equals(b));
-		final Collection<Request> requests = this.requestService.getRequestByProcession(p);
+		final Collection<Request> requests = this.requestService.getRequestByParade(p);
 		for (final Request r : requests)
 			this.requestService.delete(r);
 		final Collection<Finder> finders = this.getFinders();
 		for (final Finder f : finders)
-			if (f.getProcessions().contains(p))
-				f.getProcessions().remove(p);
+			if (f.getParades().contains(p))
+				f.getParades().remove(p);
 		final Collection<Segment> segments = this.segmentService.getPathByParade(p.getId());
 		for (final Segment s : segments)
 			this.segmentService.delete(s);
-		this.processionRepository.delete(p);
+		this.paradeRepository.delete(p);
 	}
 
-	public Collection<Procession> getProcessionsByBrotherhood(final Brotherhood b) {
-		Collection<Procession> result;
-		result = this.processionRepository.getProcessionsByBrotherhood(b);
+	public Collection<Parade> getParadesByBrotherhood(final Brotherhood b) {
+		Collection<Parade> result;
+		result = this.paradeRepository.getParadesByBrotherhood(b);
 		return result;
 	}
 
 	public Collection<Finder> getFinders() {
-		return this.processionRepository.getFinders();
+		return this.paradeRepository.getFinders();
 	}
 
-	public Collection<Procession> getProcessionsFinalByBrotherhood(final int id) {
-		Collection<Procession> result;
-		result = this.processionRepository.getProcessionsFinalByBrotherhood(id);
+	public Collection<Parade> getParadesFinalByBrotherhood(final int id) {
+		Collection<Parade> result;
+		result = this.paradeRepository.getParadesFinalByBrotherhood(id);
 		return result;
 	}
 
@@ -162,9 +162,9 @@ public class ProcessionService {
 		return dateRes + "-" + numericRes;
 	}
 
-	public Procession copyParade(final int paradeId) {
-		Procession result = this.create();
-		final Procession p1 = this.findOne(paradeId);
+	public Parade copyParade(final int paradeId) {
+		Parade result = this.create();
+		final Parade p1 = this.findOne(paradeId);
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
 		Assert.isTrue(p1.getBrotherhood().equals(b));
