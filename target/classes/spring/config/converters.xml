@@ -58,6 +58,12 @@
 		<bean class="converters.FinderToStringConverter"/>
 		<bean class="converters.StringToFinderConverter"/>
 		<bean class="converters.StringToIntConverter"/>
+		<bean class="converters.CreditCardToStringConverter"/>
+		<bean class="converters.StringToCreditCardConverter"/>
+		<bean class="converters.SponsorToStringConverter"/>
+		<bean class="converters.StringToSponsorConverter"/>
+		<bean class="converters.SponsorshipToStringConverter"/>
+		<bean class="converters.StringToSponsorshipConverter"/>
 		
 
 	</util:list>
