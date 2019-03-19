@@ -35,7 +35,9 @@
 		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
 		<security:intercept-url pattern="/gdpr/show.do" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/brotherhood/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/brotherhood/list.do" access="permitAll" />
+		<security:intercept-url pattern="/proclaim/list.do" access="permitAll" />
+		<security:intercept-url pattern="/proclaim/show.do" access="permitAll" /> 
 		<security:intercept-url pattern="/member/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/parade/listNotRegister.do" access="permitAll" /> 
 
@@ -51,6 +53,8 @@
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/brotherhood/listMember.do" access="hasRole('BROTHERHOOD')" /> 
+		
+		<security:intercept-url pattern="/proclaim/chapter/**" access="hasRole('CHAPTER')" />  
 
 		<security:intercept-url pattern="/brotherhood/deleteMember.do" access="hasRole('BROTHERHOOD')" /> 
 

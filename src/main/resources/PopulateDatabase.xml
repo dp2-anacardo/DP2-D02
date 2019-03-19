@@ -78,6 +78,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="chapter1" />
+		<property name="password" value="178494d73a41f7d68e80f685324d3662" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHAPTER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Other domain beans come here -->	
 	
@@ -1126,5 +1138,120 @@
 		<property name="description" value="Primer miscelaneo de la bbdd"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
+	
+	<!-- Chapter -->
 			
+	<bean id="chapter1" class="domain.Chapter">
+		<property name="userAccount" ref="userAccount6"/>
+		<property name="name" value="chapter1" />
+		<property name="middleName" value="middleName" />
+		<property name="surname" value="chapter1"/>
+		<property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+		<property name="email" value="emailDePrueba@gmail.com"/>
+		<property name="phoneNumber" value="+34 678123674"/>
+		<property name="address" value="Avenida Reina Mercedes"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
+		<property name="score" value=""/>
+		<property name="socialProfiles">
+			<list>
+				<ref bean="socialProfileChapter1"/>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxChapter1"/>
+				<ref bean="outBoxChapter1"/>
+				<ref bean="spamBoxChapter1"/>
+				<ref bean="trashBoxChapter1"/>
+				<ref bean="notificationBoxChapter1" />
+			</list>
+		</property>
+		<property name="title" value="titleChapter1"/>
+		<property name="area" ref="areaBrotherhood1"/>
+	</bean>
+	
+	<!-- Chapter's SocialProfiles -->	
+	
+	<bean id="socialProfileChapter1" class="domain.SocialProfile">
+		<property name="nick" value="chapter1Nick" />
+		<property name="socialNetworkName" value="twitter" />
+		<property name="profileLink" value="http://www.twitter.com" />
+	</bean>
+	
+	<!-- Chapter's Boxes -->
+	
+	<bean id="inBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Chapter's proclaims -->
+	
+	<bean id="proclaimChapter1" class="domain.Proclaim">
+		<property name="moment" value="19/03/2019 18:52"/>
+		<property name="description" value="descriptionProclaim"/>
+		<property name="chapter" ref ="chapter1"/>
+	</bean>
+	
 </beans>

@@ -77,6 +77,15 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('CHAPTER')">
+			<li><a class="fNiv"><spring:message	code="master.page.chapter" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="proclaim/chapter/list.do"><spring:message code="master.page.proclaim.list" /></a></li>					
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>

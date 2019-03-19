@@ -44,6 +44,7 @@
 		<value>/views/chapter/messages</value>
 		<value>/views/sponsor/messages</value>
 		<value>/views/sponsorship/messages</value>
+		<value>/views/proclaim/messages</value>
 	</util:list>
 
 </beans>
