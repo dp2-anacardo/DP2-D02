@@ -19,9 +19,9 @@ public class Sponsorship extends DomainEntity {
 
 	private String		banner;
 	private String		targetURL;
-	private String		status;
+	private Boolean		status;
 	private CreditCard	creditCard;
-	private Parade	parade;
+	private Parade		parade;
 
 
 	@NotBlank
@@ -44,11 +44,12 @@ public class Sponsorship extends DomainEntity {
 		this.targetURL = targetURL;
 	}
 
-	public String getStatus() {
+	@NotNull
+	public Boolean getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(final String status) {
+	public void setStatus(final Boolean status) {
 		this.status = status;
 	}
 

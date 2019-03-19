@@ -7,8 +7,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
@@ -28,6 +30,7 @@ public class Configuration extends DomainEntity {
 	private Collection<String>	positiveWords;
 	private Collection<String>	negativeWords;
 	private String				defaultCC;
+	private Collection<String>	brandName;
 
 
 	@Range(min = 10, max = 100)
@@ -124,6 +127,16 @@ public class Configuration extends DomainEntity {
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public void setDefaultCC(final String defaultCC) {
 		this.defaultCC = defaultCC;
+	}
+
+	@NotNull
+	@NotEmpty
+	@ElementCollection
+	public Collection<String> getBrandName() {
+		return this.brandName;
+	}
+	public void setBrandName(final Collection<String> brandName) {
+		this.brandName = brandName;
 	}
 
 }
