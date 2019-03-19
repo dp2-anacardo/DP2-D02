@@ -923,6 +923,18 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<!-- Segment -->
+	
+	<bean id="segment1" class="domain.Segment">
+		<property name="originLatitude" value="0.0"/>
+		<property name="originLongitude" value="0.0"/>
+		<property name="destinationLatitude" value="1.0"/>
+		<property name="destinationLongitude" value="1.0"/>
+		<property name="timeOrigin" value="02/12/2020 12:00"/>
+		<property name="timeDestination" value="02/12/2020 12:05"/>
+		<property name="parade" ref="parade1"/>
+	</bean>
+	
 	<!-- Request -->
 	
 	<bean id="request1" class="domain.Request">
