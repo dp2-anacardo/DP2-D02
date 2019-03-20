@@ -16,5 +16,8 @@
 	<spring:message code="area.name" var="name" />
 	<display:column property="name" title="${name}"/>
 	
+	<display:column> <a href="brotherhood/listNotRegister.do?areaId=${row.id}">
+	<spring:message code="area.brotherhood" /></a> </display:column>
+	
 </display:table>
 <acme:cancel url="/" code="record.goBack" />

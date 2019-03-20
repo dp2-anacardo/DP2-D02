@@ -8,6 +8,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <display:table name="parade" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
@@ -29,3 +30,4 @@
 	
 
 </display:table>
+<acme:cancel url="/" code="messageBox.goBack" />

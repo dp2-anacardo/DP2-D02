@@ -34,7 +34,7 @@ public class AreaNotRegisterController extends AbstractController {
 		}
 		final Area a = this.chapterService.findOne(chapterId).getArea();
 		result = new ModelAndView("area/list");
-		result.addObject("area", a);
+		result.addObject("areas", a);
 
 		return result;
 	}

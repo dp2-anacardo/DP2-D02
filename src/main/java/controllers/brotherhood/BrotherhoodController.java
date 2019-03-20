@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.AreaService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.MemberService;
@@ -33,6 +34,8 @@ public class BrotherhoodController extends AbstractController {
 	private MemberService		memberService;
 	@Autowired
 	private EnrolmentService	enrolmentService;
+	@Autowired
+	private AreaService			areaService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -44,6 +47,19 @@ public class BrotherhoodController extends AbstractController {
 		result = new ModelAndView("brotherhood/list");
 		result.addObject("brotherhood", bros);
 		result.addObject("requestURI", "brotherhood/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int areaId) {
+
+		ModelAndView result;
+		final Collection<Brotherhood> bros = this.areaService.getBrotherhood(areaId);
+
+		result = new ModelAndView("brotherhood/listNotRegister");
+		result.addObject("brotherhood", bros);
+		result.addObject("requestURI", "brotherhood/listNotRegister.do");
 
 		return result;
 	}
