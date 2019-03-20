@@ -47,8 +47,7 @@ public class RecordsController extends AbstractController {
 
 		ModelAndView result;
 		try {
-			final Boolean contains = this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId));
-			Assert.isTrue(contains);
+			Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId)));
 			Assert.notNull(brotherhoodId);
 		} catch (final Exception e) {
 			result = this.forbiddenOperation();
@@ -69,7 +68,6 @@ public class RecordsController extends AbstractController {
 
 		return result;
 	}
-
 	private ModelAndView forbiddenOperation() {
 		return new ModelAndView("redirect:/");
 	}

@@ -41,3 +41,4 @@
 	<acme:cancel url="/" code="proclaim.back" />
 </div>
 </security:authorize>
+<acme:cancel url="/" code="record.goBack" />
