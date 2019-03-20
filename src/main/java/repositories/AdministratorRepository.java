@@ -133,4 +133,8 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query("select count(f) from LinkRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfLinkRecordPerBrotherhood(Integer brotherhoodId);
+
+	//TODO
+	@Query("select (count(f1)*1.0)/(select count(f2) from Area f2) from Chapter f1 where f1.area is null")
+	Double getRatioOfAreaNotCoordinateByChapter();
 }

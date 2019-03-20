@@ -31,17 +31,17 @@ public class ParadeService {
 	@Autowired
 	ParadeRepository	paradeRepository;
 	@Autowired
-	Validator				validator;
+	Validator			validator;
 	@Autowired
-	ActorService			actorService;
+	ActorService		actorService;
 	@Autowired
-	BrotherhoodService		brotherhoodService;
+	BrotherhoodService	brotherhoodService;
 	@Autowired
-	RequestService			requestService;
+	RequestService		requestService;
 	@Autowired
-	FinderService			finderService;
+	FinderService		finderService;
 	@Autowired
-	SegmentService			segmentService;
+	SegmentService		segmentService;
 
 
 	public Parade reconstruct(final Parade p, final BindingResult binding) {
@@ -128,8 +128,8 @@ public class ParadeService {
 				f.getParades().remove(p);
 		final Collection<Segment> segments = this.segmentService.getPathByParade(p.getId());
 		for (final Segment s : segments)
-			this.segmentService.delete(s);
-		this.paradeRepository.delete(p);
+			//this.segmentService.delete(s);
+			this.paradeRepository.delete(p);
 	}
 
 	public Collection<Parade> getParadesByBrotherhood(final Brotherhood b) {
@@ -181,16 +181,16 @@ public class ParadeService {
 		result.setTitle(p1.getTitle());
 		result = this.saveDraft(result);
 
-		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
-		for (final Segment s : segments) {
-			final Segment newSegment = this.segmentService.create();
-			newSegment.setParade(result);
-			newSegment.setOrigin(s.getOrigin());
-			newSegment.setDestination(s.getDestination());
-			newSegment.setTimeOrigin(s.getTimeOrigin());
-			newSegment.setTimeDestination(s.getTimeDestination());
-			this.segmentService.save(newSegment);
-		}
+		//		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
+		//		for (final Segment s : segments) {
+		//			final Segment newSegment = this.segmentService.create();
+		//			newSegment.setParade(result);
+		//			newSegment.setOrigin(s.getOrigin());
+		//			newSegment.setDestination(s.getDestination());
+		//			newSegment.setTimeOrigin(s.getTimeOrigin());
+		//			newSegment.setTimeDestination(s.getTimeDestination());
+		//			this.segmentService.save(newSegment);
+		//		}
 		return result;
 	}
 }

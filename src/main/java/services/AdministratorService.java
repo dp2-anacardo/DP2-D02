@@ -431,8 +431,22 @@ public class AdministratorService {
 		return res * 1.;
 	}
 
-	/* Q14 */
+	/* Q14 TODO: */
 
+	/* Q15 */
+
+	public List<Brotherhood> getBrotherhoodHistoryLargerThanAvg() {
+		final List<Brotherhood> res = new ArrayList<Brotherhood>();
+		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		final Double avg = this.getAvgRecordsPerHistory();
+		for (final Brotherhood b : brotherhoods) {
+			final Integer id = b.getId();
+			final Double numRecords = this.getNumRecordsPerBrotherhoods(id);
+			if (numRecords > avg)
+				res.add(b);
+		}
+		return res;
+	}
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
 		Boolean res = false;

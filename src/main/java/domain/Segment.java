@@ -5,9 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -15,17 +12,20 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import datatype.GPSCoordinate;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Segment extends DomainEntity {
 
-	private GPSCoordinate	origin;
-	private GPSCoordinate	destination;
-	private Date			timeOrigin;
-	private Date			timeDestination;
-	private Parade		parade;
+	private Double	originLatitude;
+	private Double	originLongitude;
+	private Double	destinationLatitude;
+	private Double	destinationLongitude;
+	private Date	timeOrigin;
+	private Date	timeDestination;
+	private Parade	parade;
 
 
 	@Valid
@@ -37,30 +37,46 @@ public class Segment extends DomainEntity {
 	public void setParade(final Parade parade) {
 		this.parade = parade;
 	}
-	@Valid
-	@AttributeOverrides({
-		@AttributeOverride(name = "latitude", column = @Column(name = "originLatitude")), @AttributeOverride(name = "longitude", column = @Column(name = "originLongitude"))
-	})
-	public GPSCoordinate getOrigin() {
-		return this.origin;
-	}
 
-	public void setOrigin(final GPSCoordinate origin) {
-		this.origin = origin;
-	}
-	@Valid
-	@AttributeOverrides({
-		@AttributeOverride(name = "latitude", column = @Column(name = "destinationLatitude")), @AttributeOverride(name = "longitude", column = @Column(name = "destinationLongitude"))
-	})
-	public GPSCoordinate getDestination() {
-		return this.destination;
-	}
-
-	public void setDestination(final GPSCoordinate destination) {
-		this.destination = destination;
-	}
-	@Temporal(TemporalType.TIME)
 	@NotNull
+	@Range(min = -90, max = 90)
+	public Double getOriginLatitude() {
+		return this.originLatitude;
+	}
+
+	public void setOriginLatitude(final Double originLatitude) {
+		this.originLatitude = originLatitude;
+	}
+	@NotNull
+	@Range(min = -180, max = 180)
+	public Double getOriginLongitude() {
+		return this.originLongitude;
+	}
+
+	public void setOriginLongitude(final Double originLongitude) {
+		this.originLongitude = originLongitude;
+	}
+	@NotNull
+	@Range(min = -90, max = 90)
+	public Double getDestinationLatitude() {
+		return this.destinationLatitude;
+	}
+
+	public void setDestinationLatitude(final Double destinationLatitude) {
+		this.destinationLatitude = destinationLatitude;
+	}
+	@NotNull
+	@Range(min = -180, max = 180)
+	public Double getDestinationLongitude() {
+		return this.destinationLongitude;
+	}
+
+	public void setDestinationLongitude(final Double destinationLongitude) {
+		this.destinationLongitude = destinationLongitude;
+	}
+	@NotNull
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
 	public Date getTimeOrigin() {
 		return this.timeOrigin;
 	}
@@ -68,8 +84,9 @@ public class Segment extends DomainEntity {
 	public void setTimeOrigin(final Date timeOrigin) {
 		this.timeOrigin = timeOrigin;
 	}
-	@Temporal(TemporalType.TIME)
 	@NotNull
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getTimeDestination() {
 		return this.timeDestination;
 	}
