@@ -47,6 +47,7 @@
 		<security:intercept-url pattern="/brotherhood/create.do" access="permitAll" />
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/create.do" access="permitAll" /> 
+		<security:intercept-url pattern="/chapter/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/records/list.do" access="permitAll" /> 
 		
 
