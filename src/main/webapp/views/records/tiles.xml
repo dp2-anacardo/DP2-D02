@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -13,17 +13,12 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
-
-	<definition name="chapter/create" extends="master.page">	
-		<put-attribute name="title" value="Registro" />
-		<put-attribute name="body" value="/views/chapter/register.jsp" />
-	</definition>
 	
-	<definition name="chapter/list" extends="master.page">	
-		<put-attribute name="title" value="Listados de las sedes" />
-		<put-attribute name="body" value="/views/chapter/list.jsp" />
+	<definition name="records/list" extends="master.page">	
+		<put-attribute name="title" value="List History" />
+		<put-attribute name="body" value="/views/records/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

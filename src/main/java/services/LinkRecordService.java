@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -72,6 +73,10 @@ public class LinkRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(lR.getId() != 0);
 		this.linkRecordRepository.delete(lR);
+	}
+
+	public Collection<LinkRecord> getLinkRecordByBrotherhood(final int BrotherhoodId) {
+		return this.linkRecordRepository.getLinkRecordByBrotherhood(BrotherhoodId);
 	}
 
 }

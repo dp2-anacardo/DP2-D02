@@ -1101,6 +1101,15 @@
 				<value>desastrosas</value>
 			</list>
 		</property>
+		<property name="brandName">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>
+				<value>FLY</value>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Inception Record -->

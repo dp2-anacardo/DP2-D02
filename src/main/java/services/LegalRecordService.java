@@ -78,4 +78,8 @@ public class LegalRecordService {
 		this.legalRecordRepository.delete(lR);
 	}
 
+	public Collection<LegalRecord> getLegalRecordByBrotherhood(final int BrotherhoodId) {
+		return this.legalRecordRepository.getLegalRecordByBrotherhood(BrotherhoodId);
+	}
+
 }

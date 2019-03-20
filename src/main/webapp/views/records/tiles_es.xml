@@ -15,15 +15,9 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-
-	<definition name="chapter/create" extends="master.page">	
-		<put-attribute name="title" value="Registro" />
-		<put-attribute name="body" value="/views/chapter/register.jsp" />
-	</definition>
 	
-	<definition name="chapter/list" extends="master.page">	
-		<put-attribute name="title" value="Listados de las sedes" />
-		<put-attribute name="body" value="/views/chapter/list.jsp" />
+	<definition name="records/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de historias" />
+		<put-attribute name="body" value="/views/records/list.jsp" />
 	</definition>
-	
 </tiles-definitions>

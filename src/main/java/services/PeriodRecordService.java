@@ -79,4 +79,8 @@ public class PeriodRecordService {
 		this.periodRecordRepository.delete(pR);
 	}
 
+	public Collection<PeriodRecord> getPeriodRecordByBrotherhood(final int BrotherhoodId) {
+		return this.periodRecordRepository.getPeriodRecordByBrotherhood(BrotherhoodId);
+	}
+
 }

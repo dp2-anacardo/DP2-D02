@@ -49,6 +49,8 @@
 		<security:intercept-url pattern="/brotherhood/create.do" access="permitAll" />
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/create.do" access="permitAll" /> 
+		<security:intercept-url pattern="/chapter/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/records/list.do" access="permitAll" /> 
 		
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
@@ -122,6 +124,12 @@
 		
 		<security:intercept-url pattern="/sponsor/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/sponsor/edit.do" access="hasRole('SPONSOR')" />
+		
+		<security:intercept-url pattern="/sponsorship/create.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/update.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/list.do" access="hasRole('SPONSOR')" /> 
+		
+		
 		
 		
 		

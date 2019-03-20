@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -72,6 +73,10 @@ public class MiscRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(mr.getId() != 0);
 		this.miscRecordRepository.delete(mr);
+	}
+
+	public Collection<MiscRecord> getMiscRecordByBrotherhood(final int BrotherhoodId) {
+		return this.miscRecordRepository.getMiscRecordByBrotherhood(BrotherhoodId);
 	}
 
 }

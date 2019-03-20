@@ -2,6 +2,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -77,5 +78,9 @@ public class InceptionRecordService {
 
 		Assert.isTrue(inceptionRecord.getId() != 0);
 		this.inceptionRecordRepository.delete(inceptionRecord);
+	}
+
+	public Collection<InceptionRecord> getInceptionRecordByBrotherhood(final int BrotherhoodId) {
+		return this.inceptionRecordRepository.getInceptionRecordByBrotherhood(BrotherhoodId);
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.SponsorshipRepository;
 import domain.Sponsor;
@@ -22,6 +24,9 @@ public class SponsorshipService {
 
 	@Autowired
 	private SponsorService			sponsorService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	// CRUD methods
@@ -65,6 +70,35 @@ public class SponsorshipService {
 	// Other business methods
 	public Collection<Sponsorship> findBySponsor(final int sponsorId) {
 		return this.sponsorshipRepository.findBySponsor(sponsorId);
+	}
+
+	public Sponsorship reconstruct(final Sponsorship sponsorship, final BindingResult binding) {
+		Sponsorship result;
+
+		if (sponsorship.getId() == 0) {
+			result = sponsorship;
+			result.setSponsor(this.sponsorService.findByPrincipal());
+			result.setTargetURL("http://localhost:8080/Acme-Madruga/parade/show.do?paradeId=" + result.getParade().getId() + "");
+
+			this.validator.validate(result, binding);
+		} else {
+			result = this.sponsorshipRepository.findOne(sponsorship.getId());
+
+			//sponsorship.setBanner(result.getBanner());
+			//sponsorship.setCreditCard(result.getCreditCard());
+			//sponsorship.setStatus(result.getStatus());
+			sponsorship.setTargetURL(result.getTargetURL());
+			sponsorship.setParade(result.getParade());
+			sponsorship.setSponsor(result.getSponsor());
+			sponsorship.setVersion(result.getVersion());
+
+			result = sponsorship;
+
+			this.validator.validate(result, binding);
+		}
+
+		return result;
+
 	}
 
 }

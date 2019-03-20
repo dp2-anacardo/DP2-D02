@@ -24,8 +24,8 @@ import domain.Brotherhood;
 import domain.Member;
 import domain.Message;
 import domain.MessageBox;
-import domain.Position;
 import domain.Parade;
+import domain.Position;
 import domain.SocialProfile;
 import forms.AdministratorForm;
 
@@ -378,6 +378,60 @@ public class AdministratorService {
 
 		return res;
 	}
+
+	/* Q13 */
+
+	public Double getAvgRecordsPerHistory() {
+		final Double records = (this.administratorRepository.getNumOfInceptionRecord() + this.administratorRepository.getNumOfLegalRecord() + this.administratorRepository.getNumOfLinkRecord() + this.administratorRepository.getNumOfPeriodRecord()) * 1.;
+		final Double brotherhoods = this.administratorRepository.getNumOfBrotherhoods() * 1.;
+		final Double result = records / brotherhoods;
+
+		return result;
+	}
+
+	public Double getMaxRecordsPerHistory() {
+		Double max = 0.;
+		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood b : brotherhoods) {
+			final Integer id = b.getId();
+			final Double res = this.getNumRecordsPerBrotherhoods(id);
+			if (res > max)
+				max = res;
+		}
+		return max;
+	}
+
+	public Double getMinRecordsPerHistory() {
+		Double min = 0.;
+		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood b : brotherhoods) {
+			final Integer id = b.getId();
+			final Double res = this.getNumRecordsPerBrotherhoods(id);
+			if (min == 0.)
+				min = res;
+			else if (res < min)
+				min = res;
+		}
+		return min;
+	}
+
+	// TODO: Desviación estándar de Records por History	
+	//	public Double getStddevRecordsPerHistory() {
+	//		final Double avg = this.getAvgRecordsPerHistory();
+	//
+	//	}
+
+	private Double getNumRecordsPerBrotherhoods(final Integer brotherhoodId) {
+		Integer res = 0;
+		res++;
+		res += this.administratorRepository.getNumOfPeriodRecordsPerBrotherhood(brotherhoodId);
+		res += this.administratorRepository.getNumOfLegalRecordsPerBrotherhood(brotherhoodId);
+		res += this.administratorRepository.getNumOfMiscRecordsPerBrotherhood(brotherhoodId);
+		res += this.administratorRepository.getNumOfLegalRecordsPerBrotherhood(brotherhoodId);
+		return res * 1.;
+	}
+
+	/* Q14 */
 
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
