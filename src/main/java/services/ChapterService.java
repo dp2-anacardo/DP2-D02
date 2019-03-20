@@ -152,9 +152,6 @@ public class ChapterService {
 	public Collection<Proclaim> getProclaims(final int chapterId) {
 		Assert.notNull(chapterId);
 		Collection<Proclaim> result;
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 
 		result = this.chapterRepository.getProclaims(chapterId);
 

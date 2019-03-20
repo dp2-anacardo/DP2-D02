@@ -55,8 +55,10 @@ public class ProclaimService {
 
 	public Proclaim findOne(final int proclaimId) {
 		Proclaim result;
+		Assert.notNull(proclaimId);
 
 		result = this.proclaimRepository.findOne(proclaimId);
+		Assert.notNull(result);
 
 		return result;
 	}
@@ -68,4 +70,5 @@ public class ProclaimService {
 
 		return result;
 	}
+
 }

@@ -89,6 +89,7 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
+			<li><a href="proclaim/list.do"><spring:message code="master.page.proclaim.listAnonymous" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

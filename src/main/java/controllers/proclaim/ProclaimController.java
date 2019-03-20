@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,16 +46,21 @@ public class ProclaimController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam final int chapterId) {
 		ModelAndView result;
 		Collection<Proclaim> proclaims;
 
-		proclaims = this.proclaimService.findAll();
-		result = new ModelAndView("proclaim/list");
-		result.addObject("proclaims", proclaims);
-		result.addObject("requestURI", "proclaim/list.do");
-
-		return result;
+		try {
+			Assert.notNull(this.chapterService.findOne(chapterId));
+			proclaims = this.chapterService.getProclaims(chapterId);
+			result = new ModelAndView("proclaim/list");
+			result.addObject("proclaims", proclaims);
+			result.addObject("requestURI", "proclaim/list.do");
+			return result;
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
 	}
 
 	@RequestMapping(value = "/chapter/list", method = RequestMethod.GET)
@@ -79,15 +85,13 @@ public class ProclaimController extends AbstractController {
 
 		try {
 			proclaim = this.proclaimService.findOne(proclaimId);
+			result = new ModelAndView("proclaim/show");
+			result.addObject("proclaim", proclaim);
+			return result;
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/misc/403");
 			return result;
 		}
-		result = new ModelAndView("proclaim/show");
-		result.addObject("proclaim", proclaim);
-		result.addObject("requestURI", "proclaim/show.do");
-
-		return result;
 	}
 
 	@RequestMapping(value = "/chapter/create", method = RequestMethod.GET)
@@ -98,21 +102,6 @@ public class ProclaimController extends AbstractController {
 		proclaim = this.proclaimService.create();
 		result = this.createEditModelAndView(proclaim);
 
-		return result;
-	}
-
-	@RequestMapping(value = "/chapter/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int proclaimId) {
-		ModelAndView result;
-		Proclaim proclaim;
-
-		try {
-			proclaim = this.proclaimService.findOne(proclaimId);
-		} catch (final Exception e) {
-			result = new ModelAndView("redirect:/misc/403");
-			return result;
-		}
-		result = this.createEditModelAndView(proclaim);
 		return result;
 	}
 
