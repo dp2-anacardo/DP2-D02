@@ -46,6 +46,8 @@
 		<value>/views/sponsorship/tiles.xml</value>
 		<value>/views/proclaim/tiles.xml</value>
 		<value>/views/records/tiles.xml</value>
+		<value>/views/segment/tiles.xml</value>
+
 
 	</util:list>
 
