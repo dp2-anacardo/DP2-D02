@@ -60,8 +60,6 @@
 		<bean class="converters.StringToIntConverter"/>
 		<bean class="converters.SegmentToStringConverter"/>
 		<bean class="converters.StringToSegmentConverter"/>
-		<bean class="converters.GPSCoordinateToStringConverter"/>
-		<bean class="converters.StringToGPSCoordinateConverter"/>
 		<bean class="converters.ChapterToStringConverter"/>
 		<bean class="converters.StringToChapterConverter"/>
 		<bean class="converters.CreditCardToStringConverter"/>
