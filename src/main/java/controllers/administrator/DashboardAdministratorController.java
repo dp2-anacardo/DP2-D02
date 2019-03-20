@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.AreaService;
-import services.PositionService;
 import services.ParadeService;
+import services.PositionService;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Member;
-import domain.Position;
 import domain.Parade;
+import domain.Position;
 
 @Controller
 @RequestMapping("administrator")
@@ -30,7 +30,7 @@ public class DashboardAdministratorController extends AbstractController {
 	private AdministratorService	administratorService;
 
 	@Autowired
-	private ParadeService		paradeService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private AreaService				areaService;
@@ -93,7 +93,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Member> MembersAtLeast10PercentOfNumberOfRequestAccepted = this.administratorService.getMembersAtLeast10PercentOfNumberOfRequestAccepted();
 
 		/* Q10 */
-		//TODO: CountOfBrotherhoodPerArea(areaId))
+
 		final Collection<Area> areas = this.areaService.findAll();
 		final Collection<Double> CountOfBrotherhoodPerArea = new ArrayList<Double>();
 		for (final Area a : areas) {
