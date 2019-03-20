@@ -122,15 +122,15 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select count(f) from LinkRecord f")
 	Integer getNumOfLinkRecord();
 
-	@Query("select count(f) from PeriodRecord f where f.brotherhood.id = 1?")
+	@Query("select count(f) from PeriodRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfPeriodRecordsPerBrotherhood(Integer brotherhoodId);
 
-	@Query("select count(f) from LegalRecord f where f.brotherhood.id = 1?")
+	@Query("select count(f) from LegalRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfLegalRecordsPerBrotherhood(Integer brotherhoodId);
 
-	@Query("select count(f) from MiscRecord f where f.brotherhood.id = 1?")
+	@Query("select count(f) from MiscRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfMiscRecordsPerBrotherhood(Integer brotherhoodId);
 
-	@Query("select count(f) from LinkRecord f where f.brotherhood.id = 1?")
+	@Query("select count(f) from LinkRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfLinkRecordPerBrotherhood(Integer brotherhoodId);
 }
