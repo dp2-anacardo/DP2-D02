@@ -137,4 +137,5 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	//TODO
 	@Query("select (count(f1)*1.0)/(select count(f2) from Area f2) from Chapter f1 where f1.area is null")
 	Double getRatioOfAreaNotCoordinateByChapter();
+
 }

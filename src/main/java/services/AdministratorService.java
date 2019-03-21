@@ -14,10 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.AdministratorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
@@ -28,6 +24,10 @@ import domain.Parade;
 import domain.Position;
 import domain.SocialProfile;
 import forms.AdministratorForm;
+import repositories.AdministratorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -415,11 +415,18 @@ public class AdministratorService {
 		return min;
 	}
 
-	// TODO: Desviación estándar de Records por History	
-	//	public Double getStddevRecordsPerHistory() {
-	//		final Double avg = this.getAvgRecordsPerHistory();
-	//
-	//	}
+	public Double getStddevRecordsPerHistory() {
+		final Double avg = this.getAvgRecordsPerHistory();
+		Double sum = 0.;
+		final Double stddev = Math.sqrt(sum / avg);
+		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood b : brotherhoods) {
+			final Integer brotherhoodId = b.getId();
+			final Double res = this.getNumRecordsPerBrotherhoods(brotherhoodId);
+			sum += Math.pow(res - avg, 2);
+		}
+		return stddev;
+	}
 
 	private Double getNumRecordsPerBrotherhoods(final Integer brotherhoodId) {
 		Integer res = 0;
