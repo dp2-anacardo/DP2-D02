@@ -131,4 +131,15 @@ public class ManageActorsController extends AbstractController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/actorList/desactivate", method = RequestMethod.GET)
+	public ModelAndView desactivateSponsorship() {
+		ModelAndView result;
+
+		this.administratorService.desactivateExpiredSponsorships();
+
+		result = new ModelAndView("redirect:/administrator/actorList.do");
+
+		return result;
+	}
 }

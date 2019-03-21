@@ -67,4 +67,7 @@
 	code="administrator.calculateScore" />
 <acme:cancel url="administrator/actorList/calculateSpam.do"
 	code="administrator.calculateSpam" />
+	
+	<acme:cancel url="administrator/actorList/desactivate.do"
+	code="administrator.desactivate" />
 <acme:cancel url="/" code="messageBox.goBack" />

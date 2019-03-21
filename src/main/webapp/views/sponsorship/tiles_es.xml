@@ -41,4 +41,9 @@
 		<put-attribute name="body" value="/views/sponsorship/list.jsp" />
 	</definition>
 	
+	<definition name="sponsorship/show" extends="master.page">	
+		<put-attribute name="title" value="Mostrar Sponsorship" />
+		<put-attribute name="body" value="/views/sponsorship/show.jsp" />
+	</definition>
+	
 </tiles-definitions>

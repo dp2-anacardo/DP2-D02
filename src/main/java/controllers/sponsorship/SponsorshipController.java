@@ -2,12 +2,14 @@
 package controllers.sponsorship;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,8 +58,11 @@ public class SponsorshipController extends AbstractController {
 
 		sponsorships = this.sponsorshipService.findBySponsor(principal.getId());
 
+		final Date date = new Date();
+
 		result = new ModelAndView("sponsorship/list");
 		result.addObject("sponsorships", sponsorships);
+		result.addObject("date", date);
 		result.addObject("requestURI", "sponsorship/list.do");
 
 		return result;
@@ -76,14 +81,14 @@ public class SponsorshipController extends AbstractController {
 	}
 
 	// Edition -------------------------------------------------------------
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int sponsorshipID) {
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int sponsorshipId) {
 		ModelAndView result;
 		final Sponsorship sponsorship;
 
 		try {
 			final Sponsor principal = this.sponsorService.findByPrincipal();
-			sponsorship = this.sponsorshipService.findOne(sponsorshipID);
+			sponsorship = this.sponsorshipService.findOne(sponsorshipId);
 
 		} catch (final Exception e) {
 			result = this.forbiddenOpperation();
@@ -100,13 +105,16 @@ public class SponsorshipController extends AbstractController {
 		ModelAndView result;
 		Sponsorship spship;
 		Sponsorship security;
+		final Date date = new Date();
 
 		try {
 			spship = this.sponsorshipService.reconstruct(sponsorship, binding);
 
-			if (binding.hasErrors())
+			if (spship.getCreditCard().getExpiration() != null && spship.getCreditCard().getExpiration().before(date)) {
+				binding.rejectValue("creditCard.expiration", "sponsorship.creditCard.expiration.future");
 				result = this.createEditModelAndView(spship);
-
+			} else if (binding.hasErrors())
+				result = this.createEditModelAndView(spship);
 			else {
 				try {
 					final Sponsor principal = this.sponsorService.findByPrincipal();
@@ -126,20 +134,19 @@ public class SponsorshipController extends AbstractController {
 
 		return result;
 	}
-
-	// Delete ------------------------------------------------------
-	@RequestMapping(value = "/remove", method = RequestMethod.GET)
+	// Show ------------------------------------------------------
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int sponsorshipId) {
 		ModelAndView result;
-		Sponsorship sponsorship;
-
-		sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+		final Sponsorship sponsorship;
 
 		try {
-			this.sponsorshipService.delete(sponsorship);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(sponsorship, "profile.commit.error");
+			sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+			Assert.notNull(sponsorship);
+			result = new ModelAndView("sponsorship/show");
+			result.addObject("sponsorship", sponsorship);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
 		}
 
 		return result;
@@ -181,17 +188,16 @@ public class SponsorshipController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Sponsorship sponsorship, final String message) {
 		ModelAndView result;
 
-		if (sponsorship.getId() == 0)
+		if (sponsorship.getId() == 0) {
 			result = new ModelAndView("sponsorship/create");
-		else
+			final Collection<Parade> paradeList = this.paradeService.getParadesFinal();
+			result.addObject("paradeList", paradeList);
+		} else
 			result = new ModelAndView("sponsorship/update");
 
-		//final Collection<Parade> paradeList = this.paradeService.findAll();
-		final Collection<Parade> paradeList = this.paradeService.getParadesFinal();
 		final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
 
 		result.addObject("sponsorship", sponsorship);
-		result.addObject("paradeList", paradeList);
 		result.addObject("brandList", brandList);
 		result.addObject("message", message);
 

@@ -100,6 +100,7 @@ public class SponsorshipService {
 			result.setTargetURL("http://localhost:8080/Acme-Madruga/parade/show.do?paradeId=" + result.getParade().getId() + "");
 
 			this.validator.validate(result, binding);
+
 		} else {
 			result = this.sponsorshipRepository.findOne(sponsorship.getId());
 
@@ -114,6 +115,7 @@ public class SponsorshipService {
 			result = sponsorship;
 
 			this.validator.validate(result, binding);
+
 		}
 
 		return result;
@@ -124,6 +126,12 @@ public class SponsorshipService {
 		Assert.notNull(paradeId);
 
 		final List<Sponsorship> sponsorships = this.sponsorshipRepository.findAllByParade(paradeId);
+
+		return sponsorships;
+	}
+
+	public Collection<Sponsorship> findAllActive() {
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllActive();
 
 		return sponsorships;
 	}

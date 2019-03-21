@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,6 +15,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.AdministratorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
@@ -23,11 +28,8 @@ import domain.MessageBox;
 import domain.Parade;
 import domain.Position;
 import domain.SocialProfile;
+import domain.Sponsorship;
 import forms.AdministratorForm;
-import repositories.AdministratorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 
 @Service
 @Transactional
@@ -56,6 +58,9 @@ public class AdministratorService {
 
 	@Autowired
 	private MessageService			messageService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 
 	public Administrator create() {
@@ -605,5 +610,15 @@ public class AdministratorService {
 			brotherhood.setIsSuspicious(this.messageService.findSpamRatioByActor(brotherhood.getId()) > .10);
 			this.brotherhoodService.save(brotherhood);
 		}
+	}
+
+	public void desactivateExpiredSponsorships() {
+		final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllActive();
+		final Date date = new Date();
+
+		for (final Sponsorship s : sponsorships)
+			if (s.getCreditCard().getExpiration().before(date))
+				this.sponsorshipService.desactivate(s);
+
 	}
 }
