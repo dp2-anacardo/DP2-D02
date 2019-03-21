@@ -12,13 +12,18 @@
 
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<display:table name="segments" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-	<display:column property="originLatitude"></display:column>
+<display:table name="path" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+	<spring:message code="segment.originLatitude" var="originLa" />
+	<display:column property="originLatitude" title="${originLa}"/>
 	
-	<spring:message code="segment.origin" var="origin"/>
-	<display:column title="${origin}">
-		<jstl:out value="${row.originLatitude}"></jstl:out>
-	</display:column>
+	<spring:message code="segment.originLongitude" var="originLo" />
+	<display:column property="originLongitude" title="${originLo}"/>
+	
+	<spring:message code="segment.destinationLatitude" var="destLa" />
+	<display:column property="destinationLatitude" title="${destLa}"/>
+	
+	<spring:message code="segment.destinationLongitude" var="destLo" />
+	<display:column property="destinationLongitude" title="${destLo}"/>
 	
 </display:table>
 <div>

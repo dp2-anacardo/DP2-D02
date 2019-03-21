@@ -1,19 +1,18 @@
 
 package domain;
 
-import java.util.Date;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -23,8 +22,8 @@ public class Segment extends DomainEntity {
 	private Double	originLongitude;
 	private Double	destinationLatitude;
 	private Double	destinationLongitude;
-	private Date	timeOrigin;
-	private Date	timeDestination;
+	private String	timeOrigin;
+	private String	timeDestination;
 	private Parade	parade;
 
 
@@ -74,24 +73,26 @@ public class Segment extends DomainEntity {
 	public void setDestinationLongitude(final Double destinationLongitude) {
 		this.destinationLongitude = destinationLongitude;
 	}
-	@NotNull
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "dd/MM/yyy HH:mm")
-	public Date getTimeOrigin() {
+
+	@NotBlank
+	@Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getTimeOrigin() {
 		return this.timeOrigin;
 	}
 
-	public void setTimeOrigin(final Date timeOrigin) {
+	public void setTimeOrigin(final String timeOrigin) {
 		this.timeOrigin = timeOrigin;
 	}
-	@NotNull
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getTimeDestination() {
+
+	@NotBlank
+	@Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getTimeDestination() {
 		return this.timeDestination;
 	}
 
-	public void setTimeDestination(final Date timeDestination) {
+	public void setTimeDestination(final String timeDestination) {
 		this.timeDestination = timeDestination;
 	}
 

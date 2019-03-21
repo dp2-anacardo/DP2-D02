@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.BrotherhoodService;
-import services.ParadeService;
-import services.SegmentService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Parade;
 import domain.Segment;
+import security.LoginService;
+import services.ActorService;
+import services.BrotherhoodService;
+import services.ParadeService;
+import services.SegmentService;
 
 @Controller
 @RequestMapping("segment/brotherhood")
@@ -47,12 +47,13 @@ public class SegmentController extends AbstractController {
 			result = new ModelAndView("redirect:/misc/403");
 		else {
 			segments = this.segmentService.getPathByParade(paradeId);
-			result = new ModelAndView("parade/brotherhood/list");
-			result.addObject("segments", segments);
+			result = new ModelAndView("segment/brotherhood/list");
+			result.addObject("path", segments);
 			result.addObject("requestURI", "segment/brotherhood/list");
 		}
 
 		return result;
 
 	}
+
 }
