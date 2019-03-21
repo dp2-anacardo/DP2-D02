@@ -21,12 +21,31 @@
 	<display:column title="columnTitle">
 		<jstl:out value="${row.moment }"></jstl:out>
 	</display:column>
-	
+
 	<display:column>
 		<a href="parade/show.do?paradeId=${row.id}">
 			<spring:message code="parade.show"/>
 		</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('CHAPTER')">
+	<spring:message code="parade.accept" var="accept"/>
+	<display:column title="${accept}">
+	<jstl:if test="${row.status == 'SUBMITTED'}">
+		<input type="button" 
+		onclick="javascript: relativeRedir('parade/chapter/accept.do?paradeId=${row.id}');"
+		value="<spring:message code="parade.accept"/>"/>
+	</jstl:if>
+	</display:column>
+	<spring:message code="enrolment.reject" var="reject"/>
+	<display:column title="${reject}">
+	<jstl:if test="${row.status == 'SUBMITTED'}">
+		<input type="button" 
+		onclick="javascript: relativeRedir('parade/chapter/reject.do?paradetId=${row.id}');"
+		value="<spring:message code="parade.reject"/>"/>
+	</jstl:if>
+	</display:column>
+	</security:authorize>
 	
 
 </display:table>

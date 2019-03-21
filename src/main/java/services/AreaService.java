@@ -105,4 +105,11 @@ public class AreaService {
 		final Collection<Brotherhood> result = this.areaRepository.getBrotherhood(areaId);
 		return result;
 	}
+
+	public boolean dontHaveChapter(final Area a) {
+		boolean b;
+		final Collection<Area> areas = this.areaRepository.dontHaveChapter();
+		b = areas.contains(a);
+		return b;
+	}
 }

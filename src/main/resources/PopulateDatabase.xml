@@ -768,6 +768,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="ACCEPTED"/>
 	</bean>
 	
 	<bean id="parade2" class="domain.Parade">
@@ -779,6 +780,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="ACCEPTED"/>
 	</bean>
 	
 	<bean id="parade3" class="domain.Parade">
@@ -790,6 +792,8 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="REJECTED"/>
+		<property name="rejectComment" value="rejectComment"/>
 	</bean>
 	
 	<bean id="parade4" class="domain.Parade">
@@ -801,6 +805,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade5" class="domain.Parade">
@@ -812,6 +817,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade6" class="domain.Parade">
@@ -823,6 +829,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade7" class="domain.Parade">
@@ -834,6 +841,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade8" class="domain.Parade">
@@ -845,6 +853,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade9" class="domain.Parade">
@@ -856,6 +865,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade10" class="domain.Parade">
@@ -867,6 +877,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade11" class="domain.Parade">
@@ -878,6 +889,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade12" class="domain.Parade">
@@ -889,6 +901,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade13" class="domain.Parade">
@@ -900,6 +913,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade14" class="domain.Parade">
@@ -911,6 +925,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade15" class="domain.Parade">
@@ -922,6 +937,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<bean id="parade16" class="domain.Parade">
@@ -933,6 +949,7 @@
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="status" value="SUBMITTED"/>
 	</bean>
 	
 	<!-- Segment -->
@@ -1189,7 +1206,6 @@
 			</list>
 		</property>
 		<property name="title" value="titleChapter1"/>
-		<property name="area" ref="areaBrotherhood1"/>
 	</bean>
 	
 	<!-- Chapter's SocialProfiles -->	
@@ -1273,6 +1289,26 @@
 		<property name="moment" value="19/03/2019 18:52"/>
 		<property name="description" value="descriptionProclaim"/>
 		<property name="chapter" ref ="chapter1"/>
+	</bean>
+	
+	<!-- Areas without Chapters -->
+	
+	<bean id="area2" class="domain.Area">
+		<property name="name" value="Area2" />
+		<property name="pictures">
+			<list>
+				<ref bean="picture2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="area3" class="domain.Area">
+		<property name="name" value="Area3" />
+		<property name="pictures">
+			<list>
+				<ref bean="picture2"/>
+			</list>
+		</property>
 	</bean>
 	
 </beans>
