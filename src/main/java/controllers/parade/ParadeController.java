@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.ChapterService;
 import services.ConfigurationService;
 import services.FinderService;
 import services.FloatEntityService;
@@ -24,6 +25,7 @@ import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.FloatEntity;
 import domain.Parade;
 import domain.Sponsorship;
@@ -52,6 +54,9 @@ public class ParadeController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private ChapterService			chapterService;
 
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -197,6 +202,74 @@ public class ParadeController extends AbstractController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/chapter/accept", method = RequestMethod.GET)
+	public ModelAndView accept(@RequestParam final int paradeId) {
+		ModelAndView result;
+		Parade parade;
+		int chapterId;
+		Chapter chapter;
+
+		try {
+			chapterId = this.actorService.getActorLogged().getId();
+			chapter = this.chapterService.findOne(chapterId);
+			parade = this.paradeService.findOne(paradeId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
+
+		if (chapter == null || !parade.getBrotherhood().getArea().equals(chapter.getArea()))
+			result = new ModelAndView("redirect:/misc/403");
+		else {
+			this.paradeService.acceptParade(parade);
+			this.paradeService.saveChapter(parade);
+			result = new ModelAndView("redirect:/parade/listNotRegister.do?brotherhoodId=" + parade.getBrotherhood().getId());
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/chapter/reject", method = RequestMethod.GET)
+	public ModelAndView reject(@RequestParam final int paradeId) {
+		ModelAndView result;
+		Parade parade;
+		int chapterId;
+		Chapter chapter;
+
+		try {
+			chapterId = this.actorService.getActorLogged().getId();
+			chapter = this.chapterService.findOne(chapterId);
+			parade = this.paradeService.findOne(paradeId);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+			return result;
+		}
+
+		if (chapter == null || !parade.getBrotherhood().getArea().equals(chapter.getArea()))
+			result = new ModelAndView("redirect:/misc/403");
+		else
+			result = this.rejectModelAndView(parade);
+		return result;
+	}
+
+	@RequestMapping(value = "/chapter/reject", method = RequestMethod.POST, params = "reject")
+	public ModelAndView reject(Parade parade, final BindingResult binding) {
+		ModelAndView result;
+		parade = this.paradeService.reconstructChapter(parade, binding);
+
+		if (binding.hasErrors())
+			result = this.rejectModelAndView(parade);
+		else
+			try {
+				this.paradeService.rejectParade(parade);
+				this.paradeService.saveChapter(parade);
+				result = new ModelAndView("redirect:/parade/listNotRegister.do?brotherhoodId=" + parade.getBrotherhood().getId());
+			} catch (final Exception e) {
+				result = this.rejectModelAndView(parade);
+			}
+		return result;
+	}
+
 	private ModelAndView createEditModelAndView(final Parade parade) {
 		ModelAndView result;
 		result = this.createEditModelAndView(parade, null);
@@ -214,6 +287,24 @@ public class ParadeController extends AbstractController {
 		result.addObject("parade", parade);
 		result.addObject("message", messageCode);
 		result.addObject("floats", floats);
+		return result;
+	}
+
+	protected ModelAndView rejectModelAndView(final Parade parade) {
+		ModelAndView result;
+
+		result = this.rejectModelAndView(parade, null);
+
+		return result;
+	}
+
+	protected ModelAndView rejectModelAndView(final Parade parade, final String messageCode) {
+		ModelAndView result;
+
+		result = new ModelAndView("parade/chapter/reject");
+		result.addObject("parade", parade);
+		result.addObject("message", messageCode);
+
 		return result;
 	}
 

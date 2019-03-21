@@ -41,7 +41,7 @@
 	<display:column title="${reject}">
 	<jstl:if test="${row.status == 'SUBMITTED'}">
 		<input type="button" 
-		onclick="javascript: relativeRedir('parade/chapter/reject.do?paradetId=${row.id}');"
+		onclick="javascript: relativeRedir('parade/chapter/reject.do?paradeId=${row.id}');"
 		value="<spring:message code="parade.reject"/>"/>
 	</jstl:if>
 	</display:column>

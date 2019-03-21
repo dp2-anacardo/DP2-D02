@@ -44,6 +44,7 @@
 
 		<security:intercept-url pattern="/parade/show.do" access="permitAll" /> 
 		<security:intercept-url pattern="/parade/listForMembers.do" access="hasRole('MEMBER')" /> 
+		<security:intercept-url pattern="/parade/chapter/**" access="hasRole('CHAPTER')" /> 
 		
 		<security:intercept-url pattern="/floatEntity/listNotRegister.do" access="permitAll" /> 
 

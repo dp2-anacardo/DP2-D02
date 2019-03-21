@@ -17,8 +17,10 @@ import org.springframework.validation.Validator;
 
 import repositories.ParadeRepository;
 import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Finder;
 import domain.Parade;
 import domain.Request;
@@ -42,6 +44,8 @@ public class ParadeService {
 	FinderService		finderService;
 	@Autowired
 	SegmentService		segmentService;
+	@Autowired
+	ChapterService		chapterService;
 
 
 	public Parade reconstruct(final Parade p, final BindingResult binding) {
@@ -56,11 +60,37 @@ public class ParadeService {
 			p.setTicker(result.getTicker());
 			p.setVersion(result.getVersion());
 			p.setIsFinal(result.getIsFinal());
+			p.setStatus(result.getStatus());
+			p.setRejectComment(result.getRejectComment());
 			this.validator.validate(p, binding);
 			result = p;
 		}
 		return result;
+	}
 
+	public Parade reconstructChapter(final Parade p, final BindingResult binding) {
+		Parade result;
+		if (p.getId() == 0) {
+			p.setTicker(this.tickerGenerator());
+			result = p;
+			this.validator.validate(p, binding);
+		} else {
+			result = this.paradeRepository.findOne(p.getId());
+			p.setBrotherhood(result.getBrotherhood());
+			p.setDescription(result.getDescription());
+			p.setFloats(result.getFloats());
+			p.setMaxColumn(result.getMaxColumn());
+			p.setMaxRow(result.getMaxRow());
+			p.setTitle(result.getTitle());
+			p.setMoment(result.getMoment());
+			p.setTicker(result.getTicker());
+			p.setStatus(result.getStatus());
+			p.setVersion(result.getVersion());
+			p.setIsFinal(result.getIsFinal());
+			this.validator.validate(p, binding);
+			result = p;
+		}
+		return result;
 	}
 
 	public Parade create() {
@@ -95,6 +125,17 @@ public class ParadeService {
 			Assert.isTrue(p.getBrotherhood().equals(b));
 			result = this.paradeRepository.save(p);
 		}
+		return result;
+	}
+
+	public Parade saveChapter(final Parade p) {
+		Assert.notNull(p);
+		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		final Chapter c = this.chapterService.findOne(user.getId());
+		Parade result;
+		Assert.isTrue(p.getBrotherhood().getArea().equals(c.getArea()));
+		result = this.paradeRepository.save(p);
 		return result;
 	}
 
@@ -198,6 +239,26 @@ public class ParadeService {
 		Collection<Parade> result;
 		result = this.paradeRepository.getParadesFinal();
 		return result;
+	}
+
+	public void acceptParade(final Parade parade) {
+		Assert.notNull(parade);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
+		parade.setStatus("ACCEPTED");
+	}
+
+	public void rejectParade(final Parade parade) {
+		Assert.notNull(parade);
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
+		parade.setStatus("REJECTED");
 	}
 
 }
