@@ -16,9 +16,14 @@
       
 <tiles-definitions>
 
-<definition name="segment/brotherhood/list" extends="master.page">	
+	<definition name="segment/brotherhood/list" extends="master.page">	
 		<put-attribute name="title" value="Ruta" />
 		<put-attribute name="body" value="/views/segment/list.jsp" />
+	</definition>
+	
+	<definition name="segment/brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Ruta" />
+		<put-attribute name="body" value="/views/segment/edit.jsp" />
 	</definition>
 	
 	

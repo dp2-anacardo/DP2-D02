@@ -8,36 +8,25 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('ADMIN')">
-<form:form action="position/administrator/edit.do" modelAttribute="position">
+<security:authorize access="hasRole('BROTHERHOOD')">
+<form:form action="segment/brotherhood/edit.do" modelAttribute="segment">
 	<form:hidden path="id" />
+	<form:hidden path="parade"/>
 	
-	<form:label path="roleEn">
-		<spring:message code="position.roleEn"/>
-	</form:label>
-	<form:input path="roleEn"/>
-	<form:errors cssClass="error" path="roleEn"/>
-	<br />
+	<acme:textbox code="segment.originLatitude" path="originLatitude"/>
+	<acme:textbox code="segment.originLongitude" path="originLongitude"/>
+	<acme:textbox code="segment.destinationLatitude" path="destinationLatitude"/>
+	<acme:textbox code="segment.destinationLongitude" path="destinationLongitude"/>
+	<acme:textbox code="segment.time.origin" path="timeOrigin"/>
+	<acme:textbox code="segment.time.destination" path="timeDestination"/>
 	
-	<form:label path="roleEs">
-		<spring:message code="position.roleEs"/>
-	</form:label>
-	<form:input path="roleEs"/>
-	<form:errors cssClass="error" path="roleEs"/>
-	<br />
-	
-	<input type="submit" name="save"
-		value="<spring:message code="position.save" />" />&nbsp; 
-	<jstl:if test="${position.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="position.delete" />" />
-	</jstl:if>
+	<acme:submit name="save" code="segment.save"/>
 	<input type="button" name="cancel"
-		value="<spring:message code="position.cancel" />"
-		onclick="javascript: relativeRedir('position/administrator/list.do');" />
+		value="<spring:message code="segment.cancel" />"
+		onclick="javascript: window.history.back();" />
 	<br />
-	
 	
 </form:form>
 </security:authorize>
