@@ -31,6 +31,8 @@ public class Configuration extends DomainEntity {
 	private Collection<String>	negativeWords;
 	private String				defaultCC;
 	private Collection<String>	brandName;
+	private Double				vat;
+	private Double				flatFee;
 
 
 	@Range(min = 10, max = 100)
@@ -137,6 +139,24 @@ public class Configuration extends DomainEntity {
 	}
 	public void setBrandName(final Collection<String> brandName) {
 		this.brandName = brandName;
+	}
+
+	@NotNull
+	public Double getVat() {
+		return this.vat;
+	}
+
+	public void setVat(final Double vat) {
+		this.vat = vat;
+	}
+
+	@NotNull
+	public Double getFlatFee() {
+		return this.flatFee;
+	}
+
+	public void setFlatFee(final Double flatFee) {
+		this.flatFee = flatFee;
 	}
 
 }

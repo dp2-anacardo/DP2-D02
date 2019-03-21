@@ -145,6 +145,30 @@ public class SponsorshipController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/activate", method = RequestMethod.GET)
+	public ModelAndView activate(@RequestParam final int sponsorshipId) {
+		ModelAndView result;
+
+		final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+		this.sponsorshipService.activate(sponsorship);
+
+		result = new ModelAndView("redirect:/sponsorship/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/desactivate", method = RequestMethod.GET)
+	public ModelAndView desactivate(@RequestParam final int sponsorshipId) {
+		ModelAndView result;
+
+		final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+		this.sponsorshipService.desactivate(sponsorship);
+
+		result = new ModelAndView("redirect:/sponsorship/list.do");
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final Sponsorship sponsorship) {
 		ModelAndView result;
@@ -162,7 +186,8 @@ public class SponsorshipController extends AbstractController {
 		else
 			result = new ModelAndView("sponsorship/update");
 
-		final Collection<Parade> paradeList = this.paradeService.findAll();
+		//final Collection<Parade> paradeList = this.paradeService.findAll();
+		final Collection<Parade> paradeList = this.paradeService.getParadesFinal();
 		final Collection<String> brandList = this.configurationService.getConfiguration().getBrandName();
 
 		result.addObject("sponsorship", sponsorship);

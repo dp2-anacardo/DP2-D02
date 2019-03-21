@@ -1048,6 +1048,8 @@
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones."/>
 		<property name="welcomeMessageEn" value="Welcome to Acme Madrugá, the site to organise your parades."/>
 		<property name="defaultCC" value="34"/>
+		<property name="vat" value="21"/>
+		<property name="flatFee" value="15"/>
 		<property name="spamWords">
 			<list>
 				<value>sex</value>

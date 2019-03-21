@@ -21,7 +21,7 @@
 </fieldset>
 <acme:showtext fieldset="true" code="parade.maxRow" value="${p.maxRow}"/>
 <acme:showtext fieldset="true" code="parade.maxColumn" value="${p.maxColumn}"/>
-
+<img src="${sponsorshipBanner}"/>
 <security:authorize access="hasRole('BROTHERHOOD')">
 <acme:cancel url="segment/brotherhood/list.do?paradeId=${p.id}" code="parade.path"/>
 </security:authorize>

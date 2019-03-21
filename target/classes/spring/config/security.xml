@@ -128,6 +128,8 @@
 		<security:intercept-url pattern="/sponsorship/create.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/sponsorship/update.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/sponsorship/list.do" access="hasRole('SPONSOR')" /> 
+		<security:intercept-url pattern="/sponsorship/activate.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/desactivate.do" access="hasRole('SPONSOR')" />
 		
 		
 		
