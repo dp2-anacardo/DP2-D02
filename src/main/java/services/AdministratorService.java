@@ -379,7 +379,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* Q13 */
+	/* Q13: The average, the minimum, the maximum, and the standard deviation of the number of records per history. */
 
 	public Double getAvgRecordsPerHistory() {
 		final Double records = (this.administratorRepository.getNumOfInceptionRecord() + this.administratorRepository.getNumOfLegalRecord() + this.administratorRepository.getNumOfLinkRecord() + this.administratorRepository.getNumOfPeriodRecord()) * 1.;
@@ -438,9 +438,9 @@ public class AdministratorService {
 		return res * 1.;
 	}
 
-	/* Q14 TODO: */
+	/* TODO Q14: The brotherhood with the largest history. */
 
-	/* Q15 */
+	/* Q15: The brotherhoods whose history is larger than the average. */
 
 	public List<Brotherhood> getBrotherhoodHistoryLargerThanAvg() {
 		final List<Brotherhood> res = new ArrayList<Brotherhood>();
@@ -454,6 +454,33 @@ public class AdministratorService {
 		}
 		return res;
 	}
+
+	/* TODO Q16: The ratio of areas that are not co-ordinated by any chapters. */
+
+	/* TODO Q17: The average, the minimum, the maximum, and the standard deviation of the number of parades co-ordinated by the chapters. */
+
+	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
+
+	/* Q19: The ratio of parades in draft mode versus parades in final mode. */
+	public Double getRatioParadeDraftVsFinal() {
+		Double res;
+		res = this.administratorRepository.getRatioParadeDraftVsFinal();
+		return res;
+	}
+
+	/* TODO Q20: The ratio of parades in final mode grouped by status. */
+
+	/* Q21: The ratio of active sponsorships */
+	public Double getRatioActiveSponsorships() {
+		Double res;
+		res = this.administratorRepository.getRatioActiveSponsorships();
+		return res;
+	}
+
+	/* TODO Q22: The average, the minimum, the maximum, and the standard deviation of ac-tive sponsorships per sponsor. */
+
+	/* TODO Q23: The top-5 sponsors in terms of number of active sponsorships. */
+
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
 		Boolean res = false;
