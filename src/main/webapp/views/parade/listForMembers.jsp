@@ -25,6 +25,21 @@
 		<jstl:out value="${row.title}"></jstl:out>
 	</display:column>
 	
+	<spring:message code="parade.status" var="status"/>
+	<display:column title="${status}">
+			<jstl:if test="${row.status == 'ACCEPTED' }">
+				<spring:message code="parade.accepted"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'SUBMITTED' }">
+				<spring:message code="parade.submitted"/>
+			</jstl:if>
+			
+			<jstl:if test="${row.status == 'REJECTED' }">
+				<spring:message code="parade.rejected"/>
+			</jstl:if>
+	</display:column>
+	
 	<display:column>
 		<a href="parade/show.do?paradeId=${row.id}">
 			<spring:message code="parade.show"/>
