@@ -139,4 +139,19 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query(" select (count(f1)*1.0) / (select count(f2) from Sponsorship f2) from Sponsorship f1 where f1.status = true")
 	Double getRatioActiveSponsorships();
+
+	@Query("select (count(f1)*1.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'ACCEPTED'")
+	Double getRatioParadeFinalModeAccepted();
+
+	@Query("select (count(f1)*1.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'SUBMITTED'")
+	Double getRatioParadeFinalModeSubmitted();
+
+	@Query("select (count(f1)*1.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'REJECTED'")
+	Double getRatioParadeFinalModeRejected();
+
+	@Query("select (count(f1)*1.0) / (select count(f2) from Area f2) from Chapter f1 where f1.area = null")
+	Double getRatioAreaNotCoordinatesByChapter();
+
+	@Query("select avg(f.sponsorships.size *1.0) from Sponsor f")
+	Double getAvgSponsorshipsPerSponsor();
 }
