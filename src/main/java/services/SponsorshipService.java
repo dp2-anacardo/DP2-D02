@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,24 @@ public class SponsorshipService {
 		return this.sponsorshipRepository.findBySponsor(sponsorId);
 	}
 
+	public void activate(final Sponsorship sponsorship) {
+		Assert.notNull(sponsorship);
+		Assert.isTrue(sponsorship.getStatus() == false);
+
+		sponsorship.setStatus(true);
+
+		this.sponsorshipRepository.save(sponsorship);
+	}
+
+	public void desactivate(final Sponsorship sponsorship) {
+		Assert.notNull(sponsorship);
+		Assert.isTrue(sponsorship.getStatus() == true);
+
+		sponsorship.setStatus(false);
+
+		this.sponsorshipRepository.save(sponsorship);
+	}
+
 	public Sponsorship reconstruct(final Sponsorship sponsorship, final BindingResult binding) {
 		Sponsorship result;
 
@@ -99,6 +118,14 @@ public class SponsorshipService {
 
 		return result;
 
+	}
+
+	public List<Sponsorship> findAllByParade(final int paradeId) {
+		Assert.notNull(paradeId);
+
+		final List<Sponsorship> sponsorships = this.sponsorshipRepository.findAllByParade(paradeId);
+
+		return sponsorships;
 	}
 
 }

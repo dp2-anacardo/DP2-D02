@@ -193,4 +193,11 @@ public class ParadeService {
 		//		}
 		return result;
 	}
+
+	public Collection<Parade> getParadesFinal() {
+		Collection<Parade> result;
+		result = this.paradeRepository.getParadesFinal();
+		return result;
+	}
+
 }
