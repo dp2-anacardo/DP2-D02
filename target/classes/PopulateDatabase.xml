@@ -942,8 +942,8 @@
 		<property name="originLongitude" value="0.0"/>
 		<property name="destinationLatitude" value="1.0"/>
 		<property name="destinationLongitude" value="1.0"/>
-		<property name="timeOrigin" value="02/12/2020 12:00"/>
-		<property name="timeDestination" value="02/12/2020 12:05"/>
+		<property name="timeOrigin" value="12:00"/>
+		<property name="timeDestination" value="12:05"/>
 		<property name="parade" ref="parade1"/>
 	</bean>
 	
