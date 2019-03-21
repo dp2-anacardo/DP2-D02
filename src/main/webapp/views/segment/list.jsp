@@ -25,6 +25,12 @@
 	<spring:message code="segment.destinationLongitude" var="destLo" />
 	<display:column property="destinationLongitude" title="${destLo}"/>
 	
+	<spring:message code="segment.time.origin" var="timeO" />
+	<display:column property="timeOrigin" title="${timeO}"/>
+	
+	<spring:message code="segment.time.destination" var="timeD" />
+	<display:column property="timeDestination" title="${timeD}"/>
+	
 </display:table>
 <div>
 	<a href="segment/brotherhood/create.do">

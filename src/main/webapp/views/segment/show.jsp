@@ -10,13 +10,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('ADMIN')">
+<security:authorize access="hasRole('BROTHERHOOD')">
 
 	<acme:showtext fieldset="true" code="position.roleEn" value="${position.roleEn}"/>
 	
 	<acme:showtext fieldset="true" code="position.roleEs" value="${position.roleEs}"/>
 
-	<input type="button" name="back"
-		value="<spring:message code="position.back" />"
-		onclick="javascript: relativeRedir('position/administrator/list.do');" />
+	
 </security:authorize>
