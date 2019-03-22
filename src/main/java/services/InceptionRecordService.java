@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.InceptionRecordRepository;
 import security.LoginService;
@@ -17,6 +19,7 @@ import datatype.Url;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.InceptionRecord;
+import forms.InceptionRecordForm;
 
 @Service
 @Transactional
@@ -28,8 +31,11 @@ public class InceptionRecordService {
 	private ActorService				actorService;
 	@Autowired
 	private BrotherhoodService			brotherhoodService;
+	@Autowired
+	private Validator					validator;
 
 
+	//CRUD
 	public InceptionRecord create() {
 
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
@@ -48,7 +54,7 @@ public class InceptionRecordService {
 
 		InceptionRecord res;
 		Assert.notNull(inceptionRecordId);
-		res = this.findOne(inceptionRecordId);
+		res = this.inceptionRecordRepository.findOne(inceptionRecordId);
 		Assert.notNull(res);
 		return res;
 	}
@@ -78,6 +84,51 @@ public class InceptionRecordService {
 
 		Assert.isTrue(inceptionRecord.getId() != 0);
 		this.inceptionRecordRepository.delete(inceptionRecord);
+	}
+
+	//Reconstructs
+	public InceptionRecord reconstructEdit(final InceptionRecordForm iRF, final BindingResult binding) {
+		InceptionRecord iR;
+		final InceptionRecord result = new InceptionRecord();
+
+		iR = this.inceptionRecordRepository.findOne(iRF.getId());
+
+		result.setId(iR.getId());
+		result.setVersion(iR.getVersion());
+		result.setBrotherhood(iR.getBrotherhood());
+		result.setPhoto(iR.getPhoto());
+
+		result.setTitle(iRF.getTitle());
+		result.setDescription(iRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public InceptionRecord reconstructAddPhoto(final InceptionRecordForm iRF, final BindingResult binding) {
+		InceptionRecord iR;
+		final InceptionRecord result = new InceptionRecord();
+
+		iR = this.inceptionRecordRepository.findOne(iRF.getId());
+
+		result.setTitle(iR.getTitle());
+		result.setDescription(iR.getDescription());
+		result.setBrotherhood(iR.getBrotherhood());
+
+		final Collection<Url> photos = new ArrayList<Url>();
+
+		photos.addAll(iR.getPhoto());
+
+		result.setPhoto(photos);
+
+		if (!iRF.getLink().equals(""))
+			result.getPhoto().add(iRF.getLink());
+
+		result.setId(iR.getId());
+		result.setVersion(iR.getVersion());
+
+		return result;
 	}
 
 	public Collection<InceptionRecord> getInceptionRecordByBrotherhood(final int BrotherhoodId) {

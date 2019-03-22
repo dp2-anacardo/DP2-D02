@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -13,12 +13,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
 	
-	<definition name="records/list" extends="master.page">	
-		<put-attribute name="title" value="Listado de historias" />
-		<put-attribute name="body" value="/views/records/list.jsp" />
+	<definition name="records/inceptionRecord/show" extends="master.page">	
+		<put-attribute name="title" value="Inception record" />
+		<put-attribute name="body" value="/views/inception-record/show.jsp" />
+	</definition>
+	
+	<definition name="records/inceptionRecord/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit inception record" />
+		<put-attribute name="body" value="/views/inception-record/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

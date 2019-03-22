@@ -47,6 +47,12 @@
 		<value>/views/proclaim/tiles.xml</value>
 		<value>/views/records/tiles.xml</value>
 		<value>/views/segment/tiles.xml</value>
+		<value>/views/inception-record/tiles.xml</value>
+		<value>/views/legal-record/tiles.xml</value>
+		<value>/views/link-record/tiles.xml</value>
+		<value>/views/period-record/tiles.xml</value>
+		<value>/views/misc-record/tiles.xml</value>
+
 	</util:list>
 
 </beans>

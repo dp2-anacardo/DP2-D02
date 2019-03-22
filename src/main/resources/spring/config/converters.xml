@@ -68,6 +68,8 @@
 		<bean class="converters.StringToSponsorConverter"/>
 		<bean class="converters.SponsorshipToStringConverter"/>
 		<bean class="converters.StringToSponsorshipConverter"/>
+		<bean class="converters.InceptionRecordToStringConverter"/>
+		<bean class="converters.StringToInceptionRecordConverter"/>
 		
 
 	</util:list>

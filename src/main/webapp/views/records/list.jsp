@@ -19,8 +19,9 @@
 	<spring:message code="record.description" var="description" />
 	<display:column property="description" title="${description}"/>
 	
-	<spring:message code="record.photo" var="photo" />
-	<display:column property="photo" title="${photo}"/>
+	<display:column>
+		<acme:cancel url="/records/inceptionRecord/show.do?id=${row.id}" code="record.show"/>
+	</display:column>
 	
 </display:table>
 <br>
@@ -33,14 +34,9 @@
 	<spring:message code="record.description" var="description" />
 	<display:column property="description" title="${description}"/>
 	
-	<spring:message code="record.legalName" var="legalName" />
-	<display:column property="legalName" title="${legalName}"/>
-	
-	<spring:message code="record.vatNumber" var="vatNumber" />
-	<display:column property="vatNumber" title="${vatNumber}"/>
-	
-	<spring:message code="record.applicableLaws" var="applicableLaws" />
-	<display:column property="applicableLaws" title="${applicableLaws}"/>
+	<display:column>
+		<acme:cancel url="/records/legalRecord/show.do?id=${row.id}" code="record.show"/>
+	</display:column>
 	
 </display:table>
 <br>
@@ -52,6 +48,10 @@
 	
 	<spring:message code="record.description" var="description" />
 	<display:column property="description" title="${description}"/>
+	
+	<display:column>
+		<acme:cancel url="/records/linkRecord/show.do?id=${row.id}" code="record.show"/>
+	</display:column>
 	
 </display:table>
 <br>
@@ -77,14 +77,9 @@
 	<spring:message code="record.description" var="description" />
 	<display:column property="description" title="${description}"/>
 	
-	<spring:message code="record.startYear" var="startYear" />
-	<display:column property="startYear" title="${startYear}"/>
-	
-	<spring:message code="record.endYear" var="endYear" />
-	<display:column property="endYear" title="${endYear}"/>
-	
-	<spring:message code="record.photo" var="photo" />
-	<display:column property="photo" title="${photo}"/>
+	<display:column>
+		<acme:cancel url="/records/periodRecord/show.do?id=${row.id}" code="record.show"/>
+	</display:column>
 	
 </display:table>
 

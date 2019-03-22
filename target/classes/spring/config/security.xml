@@ -50,7 +50,7 @@
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/list.do" access="permitAll" /> 
-		<security:intercept-url pattern="/records/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/records/**" access="permitAll" /> 
 		
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 

@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 	
-	<definition name="records/list" extends="master.page">	
-		<put-attribute name="title" value="Listado de historias" />
-		<put-attribute name="body" value="/views/records/list.jsp" />
+	<definition name="records/legalRecord/show" extends="master.page">	
+		<put-attribute name="title" value="Registro legal" />
+		<put-attribute name="body" value="/views/legal-record/show.jsp" />
 	</definition>
 	
 </tiles-definitions>
