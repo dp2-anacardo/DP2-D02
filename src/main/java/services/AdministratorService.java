@@ -15,10 +15,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.AdministratorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
@@ -30,6 +26,10 @@ import domain.Position;
 import domain.SocialProfile;
 import domain.Sponsorship;
 import forms.AdministratorForm;
+import repositories.AdministratorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -548,14 +548,44 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* TODO Q22: The average, the minimum, the maximum, and the standard deviation of ac-tive sponsorships per sponsor. */
+	/* Q22: The average, the minimum, the maximum, and the standard deviation of ac-tive sponsorships per sponsor. */
 	public Double getAvgSponsorshipsPerSponsor() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
 		Double res;
-		res = this.administratorRepository.getAvgSponsorshipsPerSponsor();
+		res = this.administratorRepository.getAvgSponsorshipsActivesPerSponsor();
+		return res;
+	}
+
+	public Double getMinSponsorshipsActivesPerSponsor() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getMinSponsorshipsActivesPerSponsor();
+		return res;
+	}
+
+	public Double getMaxSponsorshipsActivesPerSponsor() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getMaxSponsorshipsActivesPerSponsor();
+		return res;
+	}
+
+	public Double getStddevSponsorshipsActivesPerSponsor() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getStddevSponsorshipsActivesPerSponsor();
 		return res;
 	}
 

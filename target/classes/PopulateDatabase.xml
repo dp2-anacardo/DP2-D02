@@ -102,6 +102,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="sponsor2" />
+		<property name="password" value="3dc67f80a03324e01b1640f45d107485" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Other domain beans come here -->	
 	
@@ -1351,6 +1363,11 @@
 				<ref bean="notificationBoxSponsor1" />
 			</list>
 		</property>
+		<property name="sponsorships">
+			<list>
+			<ref bean= "sponsorship1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="inBoxSponsor1" class="domain.MessageBox">
@@ -1416,5 +1433,141 @@
 			<list>
 			</list>
 		</property>
+	</bean>
+	
+		<!--  Sponsor2 -->
+	
+	<bean id="sponsor2" class="domain.Sponsor">
+		<property name="userAccount" ref="userAccount8"/>
+		<property name="name" value="sponsor2" />
+		<property name="middleName" value="sponsor2" />
+		<property name="surname" value="sponsor2"/>
+		<property name="email" value="sponsor2@sponsor2.es"/>
+		<property name="phoneNumber" value="+34 600102031"/>
+		<property name="address" value="Sponsor 2"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
+		<property name="score" value=""/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxSponsor2"/>
+				<ref bean="outBoxSponsor2"/>
+				<ref bean="spamBoxSponsor2"/>
+				<ref bean="trashBoxSponsor2"/>
+				<ref bean="notificationBoxSponsor2" />
+			</list>
+		</property>
+		<property name="sponsorships">
+			<list>
+			<ref bean= "sponsorship2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inBoxSponsor2" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxSponsor2" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxSponsor2" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxSponsor2" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxSponsor2" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!--  Sponsorship activo-->
+	<bean id="sponsorship1" class = "domain.Sponsorship">
+		<property name = "banner" value = "https://www.sponsorship1.com"/>
+		<property name = "targetURL" value = "https://www.sponsorshipp1.com"/>
+		<property name="status" value="true"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="parade" ref="parade1"/>
+		<property name="sponsor" ref = "sponsor1"/>
+	</bean>
+	
+	<!--  Sponsorship inactivo-->
+	<bean id="sponsorship2" class = "domain.Sponsorship">
+		<property name = "banner" value = "https://www.sponsorship2.com"/>
+		<property name = "targetURL" value = "https://www.sponsorshipp2.com"/>
+		<property name="status" value="false"/>
+		<property name="creditCard" ref="creditCard2"/>
+		<property name="parade" ref="parade1"/>
+		<property name="sponsor" ref = "sponsor2"/>
+	</bean>
+	
+	
+	<!-- Credits cards-->
+	<bean id="creditCard1" class ="datatype.CreditCard">
+		<property name = "holderName" value = "Sponsor 1"/>
+		<property name = "brandName" value = "VISA"/>
+		<property name = "number" value = "4885149505523388"/>
+		<property name="expiration" value="01/11/2023"/>
+		<property name = "cvvCode" value = "891"/>
+	</bean>
+	
+	<bean id="creditCard2" class ="datatype.CreditCard">
+		<property name = "holderName" value = "Sponsor 2"/>
+		<property name = "brandName" value = "VISA"/>
+		<property name = "number" value = "4255278225668603"/>
+		<property name="expiration" value="01/02/2027"/>
+		<property name = "cvvCode" value = "485"/>
 	</bean>
 </beans>

@@ -152,6 +152,15 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select (count(f1)*1.0) / (select count(f2) from Area f2) from Chapter f1 where f1.area = null")
 	Double getRatioAreaNotCoordinatesByChapter();
 
-	@Query("select avg(f.sponsorships.size *1.0) from Sponsor f")
-	Double getAvgSponsorshipsPerSponsor();
+	@Query("select avg(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id))from Sponsor f2")
+	Double getAvgSponsorshipsActivesPerSponsor();
+
+	@Query("select min(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getMinSponsorshipsActivesPerSponsor();
+
+	@Query("select max(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getMaxSponsorshipsActivesPerSponsor();
+
+	@Query("select stddev(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getStddevSponsorshipsActivesPerSponsor();
 }
