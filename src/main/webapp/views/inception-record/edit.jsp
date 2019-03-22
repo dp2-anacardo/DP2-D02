@@ -40,9 +40,10 @@
 		<tr>
     		<td><jstl:out value="${photos.link}"/></td>
     		<td><img src="${photos.link}" alt="link" height=32 width=32/></td>
-    		<td><acme:cancel url="/records/inceptionRecord/deletePhoto.do?id=${iRF.id}&photo=${photos.link}" 
+    		<td><acme:cancel url="/records/inceptionRecord/deletePhoto.do?id=${iRF.id}&pos=${cont}" 
     			code="configuration.edit.delete"/></td>
   		</tr>
+  		<jstl:set var="cont" value="${cont+1}" />
 		</jstl:forEach>
 	</table>
 	

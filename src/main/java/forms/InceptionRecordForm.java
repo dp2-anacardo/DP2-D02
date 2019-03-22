@@ -52,6 +52,14 @@ public class InceptionRecordForm {
 		return this.link;
 	}
 
+	public void setId(final int id) {
+		this.id = id;
+	}
+
+	public void setVersion(final int version) {
+		this.version = version;
+	}
+
 	public void setTitle(final String title) {
 		this.title = title;
 	}

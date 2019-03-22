@@ -2,6 +2,7 @@
 package controllers.records;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,7 +79,6 @@ public class RecordsController extends AbstractController {
 
 		return result;
 	}
-<<<<<<< HEAD
 
 	//ALL RECORDS SHOWS
 	@RequestMapping(value = "inceptionRecord/show", method = RequestMethod.GET)
@@ -209,7 +209,7 @@ public class RecordsController extends AbstractController {
 		else
 			try {
 				this.inceptionRecordService.save(iR);
-				result = new ModelAndView("redirect:/records/inceptionRecord/show.do");
+				result = new ModelAndView("redirect:/records/inceptionRecord/show.do?id=" + iR.getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(iRF, "record.edit.error");
 			}
@@ -231,14 +231,13 @@ public class RecordsController extends AbstractController {
 		if (binding.hasErrors()) {
 
 			iR = this.inceptionRecordService.findOne(iRF.getId());
-
 			iRF.setPhoto(iR.getPhoto());
-
 			result = this.createEditModelAndView(iRF, null);
 		} else
 			try {
 				this.inceptionRecordService.save(iR);
-				result = new ModelAndView("redirect:/record/inceptionRecord/edit.do");
+				result = this.createEditModelAndView(iR);
+				;
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(iRF, "record.edit.error");
 			}
@@ -246,11 +245,9 @@ public class RecordsController extends AbstractController {
 	}
 	//INCEPTION RECORD DELETE PHOTO
 	@RequestMapping(value = "/inceptionRecord/deletePhoto", method = RequestMethod.GET)
-	public ModelAndView deleteInceptionPhoto(@RequestParam("id") final int id, @RequestParam("photo") final char[] photo) {
+	public ModelAndView deleteInceptionPhoto(@RequestParam("id") final int id, @RequestParam("pos") final int pos) {
 		ModelAndView result;
 		final InceptionRecord iR = this.inceptionRecordService.findOne(id);
-		//final Url ph = new Url();
-		//ph.setLink(photo);
 
 		final Actor user = this.actorService.getActorLogged();
 		final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
@@ -259,8 +256,8 @@ public class RecordsController extends AbstractController {
 		if (!iR.getBrotherhood().equals(bh))
 			result = this.createEditModelAndView(iR);
 
-		final Collection<Url> photos = iR.getPhoto();
-		photos.remove(photo);
+		final List<Url> photos = (List<Url>) iR.getPhoto();
+		photos.remove(photos.get(pos));
 		iR.setPhoto(photos);
 
 		this.inceptionRecordService.save(iR);
@@ -281,13 +278,12 @@ public class RecordsController extends AbstractController {
 
 		result = new ModelAndView("records/inceptionRecord/edit");
 		result.addObject("iRF", iRF);
+		result.addObject("cont", 0);
 		result.addObject("messageCode", messageCode);
 
 		return result;
 	}
 
-=======
->>>>>>> 5b70818570433a1ea6cd606228d6e1e796a495c1
 	private ModelAndView forbiddenOperation() {
 		return new ModelAndView("redirect:/");
 	}

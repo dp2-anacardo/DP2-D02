@@ -24,7 +24,7 @@ public class UrlToStringConverter implements Converter<Url, String> {
 		else
 			try {
 				builder = new StringBuilder();
-				builder.append(URLDecoder.decode(url.getLink(), StandardCharsets.UTF_8.name()));
+				builder.append(URLDecoder.decode(url.getLink(), StandardCharsets.ISO_8859_1.name()));
 				result = builder.toString();
 			} catch (final Throwable oops) {
 				throw new RuntimeException(oops);

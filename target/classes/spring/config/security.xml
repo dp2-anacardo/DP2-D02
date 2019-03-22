@@ -51,12 +51,9 @@
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/list.do" access="permitAll" /> 
-<<<<<<< HEAD
 		<security:intercept-url pattern="/records/**" access="permitAll" /> 
-=======
 		<security:intercept-url pattern="/records/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/area/list.do" access="permitAll" /> 
->>>>>>> 5b70818570433a1ea6cd606228d6e1e796a495c1
 		
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
