@@ -57,8 +57,7 @@ public class RecordsController extends AbstractController {
 
 		ModelAndView result;
 		try {
-			final Boolean contains = this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId));
-			Assert.isTrue(contains);
+			Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId)));
 			Assert.notNull(brotherhoodId);
 		} catch (final Exception e) {
 			result = this.forbiddenOperation();
@@ -79,6 +78,7 @@ public class RecordsController extends AbstractController {
 
 		return result;
 	}
+<<<<<<< HEAD
 
 	//ALL RECORDS SHOWS
 	@RequestMapping(value = "inceptionRecord/show", method = RequestMethod.GET)
@@ -286,6 +286,8 @@ public class RecordsController extends AbstractController {
 		return result;
 	}
 
+=======
+>>>>>>> 5b70818570433a1ea6cd606228d6e1e796a495c1
 	private ModelAndView forbiddenOperation() {
 		return new ModelAndView("redirect:/");
 	}

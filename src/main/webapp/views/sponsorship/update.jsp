@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,75 +10,97 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 </head>
 <body>
-<security:authorize access="hasRole('SPONSOR')">
-<spring:message code="member.firstMessage" />
-<form:form action="member/member/edit.do" modelAttribute="member">
+	<form:form action="sponsorship/create.do" modelAttribute="sponsorship">
 
-	<form:hidden path="id" />
- 
-	<form:label path="name">
-		<spring:message code="member.name" />
-	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
-	<br />
-	
-	<form:label path="middleName">
-		<spring:message code="member.middleName" />
-	</form:label>
-	<form:input path="middleName" />
-	<form:errors cssClass="error" path="middleName" />
-	<br />
-	
-	<form:label path="surname">
-		<spring:message code="member.surname" />
-	</form:label>
-	<form:input path="surname" />
-	<form:errors cssClass="error" path="surname" />
-	<br />
-	
-	<form:label path="photo">
-		<spring:message code="member.photo" />
-	</form:label>
-	<form:input path="photo" />
-	<form:errors cssClass="error" path="photo" />
-	<br />
-	
-	<form:label path="email">
-		<spring:message code="member.email" />
-	</form:label>
-	<form:input path="email" />
-	<form:errors cssClass="error" path="email" />
-	<br />
-	
-	<form:label path="phoneNumber">
-		<spring:message code="member.phoneNumber" />
-	</form:label>
-	<form:input path="phoneNumber" />
-	<form:errors cssClass="error" path="phoneNumber" />
-	<br />
-	
-	<form:label path="address">
-		<spring:message code="member.address" />
-	</form:label>
-	<form:input path="address" />
-	<form:errors cssClass="error" path="address" />
-	<br />
-	
-	<input type="submit" name="update"
-		value="<spring:message code="member.save" />" />&nbsp; 
-	
-	<input type="button" name="back"
-		value="<spring:message code="member.back" />"
-		onclick="javascript: relativeRedir('/');" />
-	<br />
- 	
-</form:form>
-</security:authorize>
+		<%--  Hidden properties --%>
+		<form:hidden path="id" />
+
+		<%-- Banner --%>
+		<acme:textbox code="sponsorship.banner" path="banner" />
+		<br>
+		
+		<%-- Status --%>
+		<spring:message code="sponsorship.status" />
+		<form:select path="status" multiple="false">
+			<jstl:choose>
+				<jstl:when test="${pageContext.response.locale.language == 'es'}">
+					 <form:option value="1"><spring:message code="sponsorship.status.on"/></form:option>
+					 <form:option value="0"><spring:message code="sponsorship.status.off"/></form:option>
+				</jstl:when>
+				<jstl:when test="${pageContext.response.locale.language == 'en'}">
+					 <form:option value="1"><spring:message code="sponsorship.status.on"/></form:option>
+					 <form:option value="0"><spring:message code="sponsorship.status.off"/></form:option>
+				</jstl:when>
+			</jstl:choose>
+
+		</form:select>
+		<form:errors class="error" path="status" />
+		<br>
+
+		<%-- CreditCard --%>
+		<div id="card">
+			<%-- creditCard --%>
+			<form:label path="creditCard">
+				<spring:message code="sponsorship.creditCard" />
+			</form:label>
+			<br>
+
+
+			<form:label path="creditCard.holderName">
+				<spring:message code="sponsorship.creditCard.holderName" />
+			</form:label>
+			<form:input path="creditCard.holderName" />
+			<form:errors class="error" path="creditCard.holderName" />
+			<br>
+
+			<form:label path="creditCard.brandName">
+				<spring:message code="sponsorship.creditCard.brandName" />:
+			</form:label>
+			<form:select id="brandName" path="creditCard.brandName">
+				<form:options items="${brandList}"/>
+			</form:select>
+			<form:errors class="error" path="creditCard.brandName" />
+			<br>
+
+			<form:label path="creditCard.number">
+				<spring:message code="sponsorship.creditCard.number" />
+			</form:label>
+			<form:input path="creditCard.number" type="number" />
+			<form:errors class="error" path="creditCard.number" />
+			<br>
+
+			<form:label path="creditCard.expiration">
+				<spring:message code="sponsorship.creditCard.expiration" />
+			</form:label>
+			<form:input path="creditCard.expiration" placeholder="MM/YY"
+				format="{0,date,MM/YY}" />
+			<form:errors class="error" path="creditCard.expiration" />
+			<br>
+
+			<form:label path="creditCard.cvvCode">
+				<spring:message code="sponsorship.creditCard.cvvCode" />
+			</form:label>
+			<form:input path="creditCard.cvvCode" type="number" />
+			<form:errors class="error" path="creditCard.cvvCode" />
+			<br>
+
+		</div>
+
+		<%-- Buttons --%>
+		<security:authorize access="hasRole('SPONSOR')">
+			<acme:submit name="save" code="sponsorship.save" />
+
+			<acme:cancel url="sponsorship/list.do" code="sponsorship.back" />
+
+		</security:authorize>
+
+	</form:form>
 </body>
 </html>

@@ -74,9 +74,10 @@ public class MessageService {
 			final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
 			final String dropoutBrotherhood = "Drop out brotherhood \n Salida de hermandad";
 			final String acceptedRequest = "A request changed its status \n Una petición ha cambiado su estatus";
+			final String sponsorshipFee = "A sponsorship has been shown \n Se ha mostrado un anuncio";
 			final Integer actors = this.actorService.findAll().size();
 
-			if (message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
+			if (message.getSubject().equals(sponsorshipFee) || message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
 				|| (message.getRecipients().size() == actors && userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"))) {
 
 				final Collection<Actor> recipients = message.getRecipients();

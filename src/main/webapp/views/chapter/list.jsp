@@ -18,11 +18,11 @@
 	<spring:message code="chapter.surname" var="surname" />
 	<display:column property="surname" title="${surname}"/>
 	
-	<spring:message code="chapter.area.name" var="area.name" />
-	<display:column property="area" title="${area.name}"/>
+	<display:column> <a href="proclaim/list.do?chapterId=${row.id}">
+	<spring:message code="chapter.proclaims" /></a> </display:column>
 	
-	<spring:message code="chapter.area.pictures" var="area.pictures" />
-	<display:column property="area.pictures" title="${area.pictures}"/>
+	<display:column> <a href="area/list.do?chapterId=${row.id}">
+	<spring:message code="chapter.area" /></a> </display:column>
 	
 </display:table>
 <acme:cancel url="/" code="record.goBack" />

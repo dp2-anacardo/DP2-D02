@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Area;
+import domain.Brotherhood;
 import domain.Chapter;
 
 @Repository
@@ -18,5 +19,11 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 
 	@Query("select c from Chapter c join c.area a where a.id=?1")
 	Chapter getChapter(int areaId);
+
+	@Query("select b from Brotherhood b join b.area a where a.id=?1")
+	Collection<Brotherhood> getBrotherhood(int areaId);
+
+	@Query("select a from Area a where not exists (select a2 from Chapter c join c.area a2 where a2 = a)")
+	Collection<Area> dontHaveChapter();
 
 }

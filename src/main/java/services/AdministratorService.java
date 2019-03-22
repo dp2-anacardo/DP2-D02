@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,6 +28,7 @@ import domain.MessageBox;
 import domain.Parade;
 import domain.Position;
 import domain.SocialProfile;
+import domain.Sponsorship;
 import forms.AdministratorForm;
 
 @Service
@@ -56,6 +58,9 @@ public class AdministratorService {
 
 	@Autowired
 	private MessageService			messageService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 
 	public Administrator create() {
@@ -379,9 +384,13 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* Q13 */
+	/* Q13: The average, the minimum, the maximum, and the standard deviation of the number of records per history. */
 
 	public Double getAvgRecordsPerHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
 		final Double records = (this.administratorRepository.getNumOfInceptionRecord() + this.administratorRepository.getNumOfLegalRecord() + this.administratorRepository.getNumOfLinkRecord() + this.administratorRepository.getNumOfPeriodRecord()) * 1.;
 		final Double brotherhoods = this.administratorRepository.getNumOfBrotherhoods() * 1.;
 		final Double result = records / brotherhoods;
@@ -390,6 +399,10 @@ public class AdministratorService {
 	}
 
 	public Double getMaxRecordsPerHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
 		Double max = 0.;
 		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		for (final Brotherhood b : brotherhoods) {
@@ -402,6 +415,10 @@ public class AdministratorService {
 	}
 
 	public Double getMinRecordsPerHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
 		Double min = 0.;
 		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		for (final Brotherhood b : brotherhoods) {
@@ -415,11 +432,22 @@ public class AdministratorService {
 		return min;
 	}
 
-	// TODO: Desviación estándar de Records por History	
-	//	public Double getStddevRecordsPerHistory() {
-	//		final Double avg = this.getAvgRecordsPerHistory();
-	//
-	//	}
+	public Double getStddevRecordsPerHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final Double avg = this.getAvgRecordsPerHistory();
+		Double sum = 0.;
+		final Double stddev = Math.sqrt(sum / avg);
+		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		for (final Brotherhood b : brotherhoods) {
+			final Integer brotherhoodId = b.getId();
+			final Double res = this.getNumRecordsPerBrotherhoods(brotherhoodId);
+			sum += Math.pow(res - avg, 2);
+		}
+		return stddev;
+	}
 
 	private Double getNumRecordsPerBrotherhoods(final Integer brotherhoodId) {
 		Integer res = 0;
@@ -431,11 +459,15 @@ public class AdministratorService {
 		return res * 1.;
 	}
 
-	/* Q14 TODO: */
+	/* TODO Q14: The brotherhood with the largest history. */
 
-	/* Q15 */
+	/* Q15: The brotherhoods whose history is larger than the average. */
 
 	public List<Brotherhood> getBrotherhoodHistoryLargerThanAvg() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
 		final List<Brotherhood> res = new ArrayList<Brotherhood>();
 		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		final Double avg = this.getAvgRecordsPerHistory();
@@ -447,6 +479,88 @@ public class AdministratorService {
 		}
 		return res;
 	}
+
+	/* Q16: The ratio of areas that are not co-ordinated by any chapters. */
+	Double getRatioAreaNotCoordinatesByChapter() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioAreaNotCoordinatesByChapter();
+		return res;
+	}
+
+	/* TODO Q17: The average, the minimum, the maximum, and the standard deviation of the number of parades co-ordinated by the chapters. */
+
+	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
+
+	/* Q19: The ratio of parades in draft mode versus parades in final mode. */
+	public Double getRatioParadeDraftVsFinal() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioParadeDraftVsFinal();
+		return res;
+	}
+
+	/* Q20: The ratio of parades in final mode grouped by status. */
+	public Double getRatioParadeFinalModeAccepted() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioParadeFinalModeAccepted();
+		return res;
+	}
+
+	public Double getRatioParadeFinalModeSubmitted() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioParadeFinalModeSubmitted();
+		return res;
+	}
+
+	public Double getRatioParadeFinalModeRejected() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioParadeFinalModeRejected();
+		return res;
+	}
+
+	/* Q21: The ratio of active sponsorships */
+	public Double getRatioActiveSponsorships() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getRatioActiveSponsorships();
+		return res;
+	}
+
+	/* TODO Q22: The average, the minimum, the maximum, and the standard deviation of ac-tive sponsorships per sponsor. */
+	public Double getAvgSponsorshipsPerSponsor() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getAvgSponsorshipsPerSponsor();
+		return res;
+	}
+
+	/* TODO Q23: The top-5 sponsors in terms of number of active sponsorships. */
+
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {
 		Boolean res = false;
@@ -571,5 +685,15 @@ public class AdministratorService {
 			brotherhood.setIsSuspicious(this.messageService.findSpamRatioByActor(brotherhood.getId()) > .10);
 			this.brotherhoodService.save(brotherhood);
 		}
+	}
+
+	public void desactivateExpiredSponsorships() {
+		final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllActive();
+		final Date date = new Date();
+
+		for (final Sponsorship s : sponsorships)
+			if (s.getCreditCard().getExpiration().before(date))
+				this.sponsorshipService.desactivate(s);
+
 	}
 }

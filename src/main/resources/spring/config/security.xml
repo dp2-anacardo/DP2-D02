@@ -40,6 +40,7 @@
 		<security:intercept-url pattern="/proclaim/show.do" access="permitAll" /> 
 		<security:intercept-url pattern="/member/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/parade/listNotRegister.do" access="permitAll" /> 
+		<security:intercept-url pattern="/brotherhood/listNotRegister.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/parade/show.do" access="permitAll" /> 
 		<security:intercept-url pattern="/parade/listForMembers.do" access="hasRole('MEMBER')" /> 
@@ -50,7 +51,12 @@
 		<security:intercept-url pattern="/member/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/create.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chapter/list.do" access="permitAll" /> 
+<<<<<<< HEAD
 		<security:intercept-url pattern="/records/**" access="permitAll" /> 
+=======
+		<security:intercept-url pattern="/records/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/area/list.do" access="permitAll" /> 
+>>>>>>> 5b70818570433a1ea6cd606228d6e1e796a495c1
 		
 
 		<security:intercept-url pattern="/floatEntity/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
@@ -61,6 +67,7 @@
 		<security:intercept-url pattern="/brotherhood/deleteMember.do" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/segment/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/area/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/area/chapter/**" access="hasRole('CHAPTER')" /> 
 
 		<security:intercept-url pattern="/brotherhood/showMember.do" access="permitAll" /> 
 		
@@ -128,6 +135,9 @@
 		<security:intercept-url pattern="/sponsorship/create.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/sponsorship/update.do" access="hasRole('SPONSOR')" />
 		<security:intercept-url pattern="/sponsorship/list.do" access="hasRole('SPONSOR')" /> 
+		<security:intercept-url pattern="/sponsorship/activate.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/desactivate.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/show.do" access="hasRole('SPONSOR')" />
 		
 		
 		

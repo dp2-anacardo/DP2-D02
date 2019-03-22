@@ -69,11 +69,7 @@
 				<spring:message code="sponsorship.creditCard.brandName" />:
 			</form:label>
 			<form:select id="brandName" path="creditCard.brandName">
-				<form:option value="VISA" label="VISA" />
-				<form:option value="MASTERCARD" label="MASTERCARD" />
-				<form:option value="DINNERS" label="DINNERS" />
-				<form:option value="DISCOVER" label="DISCOVER" />
-				<form:option value="AMEX" label="AMEX" />
+				<form:options items="${brandList}"/>
 			</form:select>
 			<form:errors class="error" path="creditCard.brandName" />
 			<br>

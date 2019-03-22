@@ -1,7 +1,10 @@
 
 package controllers.parade;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,33 +17,51 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
+import services.ConfigurationService;
 import services.FinderService;
 import services.FloatEntityService;
+import services.MessageService;
 import services.ParadeService;
+import services.PriorityService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.FloatEntity;
+import domain.Message;
 import domain.Parade;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("parade")
 public class ParadeController extends AbstractController {
 
 	@Autowired
-	private ParadeService	paradeService;
+	private ParadeService			paradeService;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private FloatEntityService	floatService;
+	private FloatEntityService		floatService;
 
 	@Autowired
-	private FinderService		finderService;
+	private FinderService			finderService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
+	@Autowired
+	private MessageService			messageService;
+
+	@Autowired
+	private PriorityService			priorityService;
 
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -160,11 +181,29 @@ public class ParadeController extends AbstractController {
 		else {
 			result = new ModelAndView("parade/show");
 			result.addObject("p", p);
+
+			final List<Sponsorship> sponsorships = this.sponsorshipService.findAllByParade(paradeId);
+			if (sponsorships.size() > 0) {
+				final Random rnd = new Random();
+				final Sponsorship sponsorship = sponsorships.get(rnd.nextInt(sponsorships.size()));
+				result.addObject("sponsorshipBanner", sponsorship.getBanner());
+
+				final Double vat = this.configurationService.getConfiguration().getVat();
+				final Double fee = this.configurationService.getConfiguration().getFlatFee();
+				final Double totalAmount = (vat / 100) * fee + fee;
+				final Message message = this.messageService.create();
+				final Collection<Actor> recipients = new ArrayList<>();
+				recipients.add(sponsorship.getSponsor());
+				message.setRecipients(recipients);
+				message.setPriority(this.priorityService.getHighPriority());
+				message.setSubject("A sponsorship has been shown \n Se ha mostrado un anuncio");
+				message.setBody("Se le cargará un importe de: " + totalAmount + "\n Se le cargará un importe de:" + totalAmount);
+				this.messageService.save(message);
+			}
 		}
 		return result;
 
 	}
-
 	@RequestMapping(value = "/brotherhood/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Parade parade) {
 		ModelAndView result;

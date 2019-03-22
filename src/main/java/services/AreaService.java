@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.AreaRepository;
 import datatype.Url;
 import domain.Area;
+import domain.Brotherhood;
 import domain.Chapter;
 
 @Service
@@ -97,5 +98,18 @@ public class AreaService {
 		final Chapter result = this.areaRepository.getChapter(areaId);
 
 		return result;
+	}
+
+	public Collection<Brotherhood> getBrotherhood(final int areaId) {
+		Assert.notNull(areaId);
+		final Collection<Brotherhood> result = this.areaRepository.getBrotherhood(areaId);
+		return result;
+	}
+
+	public boolean dontHaveChapter(final Area a) {
+		boolean b;
+		final Collection<Area> areas = this.areaRepository.dontHaveChapter();
+		b = areas.contains(a);
+		return b;
 	}
 }

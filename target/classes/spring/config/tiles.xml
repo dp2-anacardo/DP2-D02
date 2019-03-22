@@ -47,11 +47,15 @@
 		<value>/views/proclaim/tiles.xml</value>
 		<value>/views/records/tiles.xml</value>
 		<value>/views/segment/tiles.xml</value>
+<<<<<<< HEAD
 		<value>/views/inception-record/tiles.xml</value>
 		<value>/views/legal-record/tiles.xml</value>
 		<value>/views/link-record/tiles.xml</value>
 		<value>/views/period-record/tiles.xml</value>
 		<value>/views/misc-record/tiles.xml</value>
+=======
+
+>>>>>>> 5b70818570433a1ea6cd606228d6e1e796a495c1
 
 	</util:list>
 
