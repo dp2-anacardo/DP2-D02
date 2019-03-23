@@ -31,9 +31,22 @@
 	<spring:message code="segment.time.destination" var="timeD" />
 	<display:column property="timeDestination" title="${timeD}"/>
 	
+	<display:column>
+		<a href="segment/brotherhood/edit.do?segmentId=${row.id}">
+		<spring:message code="segment.edit" />
+		</a>
+	</display:column>
+	
+	<display:column>
+		<a href="segment/brotherhood/delete.do?segmentId=${row.id}">
+		<spring:message code="segment.delete" />
+		</a>
+	</display:column>
+	
+	
 </display:table>
 <div>
-	<a href="segment/brotherhood/create.do">
+	<a href="segment/brotherhood/create.do?paradeId=${paradeId}">
 	<spring:message code="segment.create" />
 	</a>
 	
