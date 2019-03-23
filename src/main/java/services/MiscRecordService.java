@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.MiscRecordRepository;
 import security.LoginService;
@@ -26,6 +28,8 @@ public class MiscRecordService {
 	private ActorService			actorService;
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+	@Autowired
+	private Validator				validator;
 
 
 	public MiscRecord create() {
@@ -73,6 +77,36 @@ public class MiscRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(mr.getId() != 0);
 		this.miscRecordRepository.delete(mr);
+	}
+
+	//Reconstructs
+	public MiscRecord reconstructCreate(final MiscRecord mRF, final BindingResult binding) {
+		final MiscRecord result = new MiscRecord();
+
+		result.setTitle(mRF.getTitle());
+		result.setDescription(mRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public MiscRecord reconstructEdit(final MiscRecord mRF, final BindingResult binding) {
+		MiscRecord mR;
+		final MiscRecord result = new MiscRecord();
+
+		mR = this.miscRecordRepository.findOne(mRF.getId());
+
+		result.setId(mR.getId());
+		result.setVersion(mR.getVersion());
+		result.setBrotherhood(mR.getBrotherhood());
+
+		result.setTitle(mRF.getTitle());
+		result.setDescription(mRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
 	}
 
 	public Collection<MiscRecord> getMiscRecordByBrotherhood(final int BrotherhoodId) {

@@ -87,6 +87,19 @@ public class InceptionRecordService {
 	}
 
 	//Reconstructs
+	public InceptionRecord reconstructCreate(final InceptionRecordForm iRF, final BindingResult binding) {
+		final InceptionRecord result = new InceptionRecord();
+
+		result.setPhoto(new ArrayList<Url>());
+
+		result.setTitle(iRF.getTitle());
+		result.setDescription(iRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
 	public InceptionRecord reconstructEdit(final InceptionRecordForm iRF, final BindingResult binding) {
 		InceptionRecord iR;
 		final InceptionRecord result = new InceptionRecord();

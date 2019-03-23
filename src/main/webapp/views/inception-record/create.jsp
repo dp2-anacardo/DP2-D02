@@ -16,10 +16,9 @@
 <link rel="stylesheet" href="styles/table.css" type="text/css">
 </head>
 <body>
-<form:form action ="records/inceptionRecord/edit.do?id=${iRF.id}" modelAttribute="iRF">
+<form:form action ="records/inceptionRecord/create.do" modelAttribute="iRF">
 
 	<form:hidden path="id"/>
-	
 
 	<!-- Single areas -->
 	<jstl:out value="${messageCode}"/>
@@ -27,37 +26,10 @@
 	<acme:textboxbs code="record.edit.title" path="title"/>
 	<acme:textboxbs code="record.edit.description" path="description"/>
 	
-	<!-- Edit photos -->
-
-	<table>
-		<tr>
-    		<th><spring:message code="record.edit.photos" /></th>
-    		<th><spring:message code="record.edit.miniature"/></th>
-    		<th></th>
-  		</tr>
-		<jstl:forEach items="${iRF.photo}" 
-						var="photos">
-		<tr>
-    		<td><jstl:out value="${photos.link}"/></td>
-    		<td><img src="${photos.link}" alt="link" height=32 width=32/></td>
-    		<td><acme:cancel url="/records/inceptionRecord/deletePhoto.do?id=${iRF.id}&pos=${cont}" 
-    			code="configuration.edit.delete"/></td>
-  		</tr>
-  		<jstl:set var="cont" value="${cont+1}" />
-		</jstl:forEach>
-	</table>
-	
-	<form:input path="link"/>
-	<form:errors path="link" cssClass="error" />
-	<acme:submit name="addPhoto" code="record.edit.addPhoto"/>&nbsp;
-	<br/>
-	<br/>
 	
 	<!-- Submit, delete and cancel -->
 	
-	<acme:submit name="save" code="record.edit.submit"/>&nbsp;
-	
-	<acme:cancel url="/records/inceptionRecord/delete.do?id=${iRF.id}" code="record.edit.delete"/>&nbsp;
+	<acme:submit name="create" code="record.edit.submit"/>&nbsp;
 	
 	<acme:cancel url="/records/inceptionRecord/show.do?id=${iRF.id}" code="record.edit.cancel"/>
 	

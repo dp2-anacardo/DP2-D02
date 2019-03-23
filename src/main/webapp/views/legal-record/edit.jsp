@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="styles/table.css" type="text/css">
 </head>
 <body>
-<form:form action ="records/inceptionRecord/edit.do?id=${iRF.id}" modelAttribute="iRF">
+<form:form action ="records/legalRecord/edit.do" modelAttribute="lRF">
 
 	<form:hidden path="id"/>
 	
@@ -26,30 +26,31 @@
 	
 	<acme:textboxbs code="record.edit.title" path="title"/>
 	<acme:textboxbs code="record.edit.description" path="description"/>
+	<acme:textboxbs code="record.edit.legalName" path="legalName"/>
+	<acme:textboxbs code="record.edit.vatNumber" path="vatNumber"/>
 	
-	<!-- Edit photos -->
+	<!-- Edit laws -->
 
 	<table>
 		<tr>
-    		<th><spring:message code="record.edit.photos" /></th>
-    		<th><spring:message code="record.edit.miniature"/></th>
+    		<th><spring:message code="record.edit.applicableLaws" /></th>
     		<th></th>
   		</tr>
-		<jstl:forEach items="${iRF.photo}" 
-						var="photos">
+		<jstl:forEach items="${lRF.applicableLaws}" 
+						var="law">
 		<tr>
-    		<td><jstl:out value="${photos.link}"/></td>
-    		<td><img src="${photos.link}" alt="link" height=32 width=32/></td>
-    		<td><acme:cancel url="/records/inceptionRecord/deletePhoto.do?id=${iRF.id}&pos=${cont}" 
-    			code="configuration.edit.delete"/></td>
+    		<td><jstl:out value="${law}"/></td>
+    		<jstl:if test="${lRF.applicableLaws.size!=1}">
+    		<td><acme:cancel url="/records/legalRecord/deleteLaw.do?id=${lRF.id}&law=${law}" 
+    			code="record.edit.delete"/></td>
+    		</jstl:if>
   		</tr>
-  		<jstl:set var="cont" value="${cont+1}" />
 		</jstl:forEach>
 	</table>
 	
-	<form:input path="link"/>
-	<form:errors path="link" cssClass="error" />
-	<acme:submit name="addPhoto" code="record.edit.addPhoto"/>&nbsp;
+	<form:input path="law"/>
+	<form:errors path="law" cssClass="error" />
+	<acme:submit name="addLaw" code="record.edit.addLaw"/>&nbsp;
 	<br/>
 	<br/>
 	
@@ -57,9 +58,9 @@
 	
 	<acme:submit name="save" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records/inceptionRecord/delete.do?id=${iRF.id}" code="record.edit.delete"/>&nbsp;
+	<acme:cancel url="/records/legalRecord/delete.do?id=${lRF.id}" code="record.edit.delete"/>&nbsp;
 	
-	<acme:cancel url="/records/inceptionRecord/show.do?id=${iRF.id}" code="record.edit.cancel"/>
+	<acme:cancel url="/records/legalRecord/show.do?id=${lRF.id}" code="record.edit.cancel"/>
 	
 </form:form>
 </body>

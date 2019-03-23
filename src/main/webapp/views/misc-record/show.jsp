@@ -16,14 +16,7 @@
 <acme:showtext fieldset="false" code="record.description" value="${record.description}"/>
 <br/>
 <br/>
-<b><spring:message code="record.photo"/>:</b>
-<br/>
-<jstl:forEach items="${record.photo}" var="photo">
-	<img src="${photo.link}" alt="link" height=300 width=500/>
-</jstl:forEach>
-<br/>
-<br/>
 <acme:cancel url="/records" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
-	<acme:cancel url="" code="record.edit"/>
+	<acme:cancel url="/records/miscRecord/edit.do?id=${record.id}" code="record.edit"/>
 </jstl:if>

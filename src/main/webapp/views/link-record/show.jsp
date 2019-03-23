@@ -16,14 +16,21 @@
 <acme:showtext fieldset="false" code="record.description" value="${record.description}"/>
 <br/>
 <br/>
-<b><spring:message code="record.photo"/>:</b>
+<b><spring:message code="record.linkedBH"/>:</b>
 <br/>
-<jstl:forEach items="${record.photo}" var="photo">
-	<img src="${photo.link}" alt="link" height=300 width=500/>
-</jstl:forEach>
+<table>
+	<tr>
+    	<th><spring:message code="bh.title"/></th>
+    	<th><spring:message code="bh.date"/></th>
+  	</tr>
+	<tr>
+   		<td><jstl:out value="${record.linkedBH.title}"/></td>
+   		<td><jstl:out value="${record.linkedBH.establishmentDate}"/></td>
+  	</tr>
+</table>
 <br/>
 <br/>
 <acme:cancel url="/records" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
-	<acme:cancel url="" code="record.edit"/>
+	<acme:cancel url="/records/linkRecord/edit.do?id=${record.id}" code="record.edit"/>
 </jstl:if>

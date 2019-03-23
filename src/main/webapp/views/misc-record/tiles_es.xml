@@ -16,9 +16,19 @@
       
 <tiles-definitions>
 	
-	<definition name="records/periodRecord/show" extends="master.page">	
-		<put-attribute name="title" value="Registro de periodo" />
-		<put-attribute name="body" value="/views/period-record/show.jsp" />
+	<definition name="records/miscRecord/show" extends="master.page">	
+		<put-attribute name="title" value="Registro sin categoria" />
+		<put-attribute name="body" value="/views/misc-record/show.jsp" />
+	</definition>
+	
+	<definition name="records/miscRecord/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar registro sin categoria" />
+		<put-attribute name="body" value="/views/misc-record/edit.jsp" />
+	</definition>
+	
+	<definition name="records/miscRecord/create" extends="master.page">	
+		<put-attribute name="title" value="Crear registro sin categoria" />
+		<put-attribute name="body" value="/views/misc-record/create.jsp" />
 	</definition>
 	
 </tiles-definitions>

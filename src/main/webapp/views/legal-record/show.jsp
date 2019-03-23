@@ -9,21 +9,38 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-
+<!DOCTYPE>
+<html>
+<head>
+<link rel="stylesheet" href="styles/table.css" type="text/css">
+</head>
+<body>
 <acme:showtext fieldset="false" code="record.title" value="${record.title}"/>
 <br/>
 <br/>
 <acme:showtext fieldset="false" code="record.description" value="${record.description}"/>
 <br/>
 <br/>
-<b><spring:message code="record.photo"/>:</b>
-<br/>
-<jstl:forEach items="${record.photo}" var="photo">
-	<img src="${photo.link}" alt="link" height=300 width=500/>
-</jstl:forEach>
+<acme:showtext fieldset="false" code="record.edit.legalName" value="${record.legalName}"/>
 <br/>
 <br/>
+<acme:showtext fieldset="false" code="record.edit.vatNumber" value="${record.vatNumber}"/>
+<br/>
+<!-- Applicable Laws -->
+<table>
+	<tr>
+    	<th><spring:message code="record.edit.applicableLaws" /></th>
+  	</tr>
+	<jstl:forEach items="${record.applicableLaws}" 
+					var="law">
+		<tr>
+    		<td><jstl:out value="${law}"/></td>
+  		</tr>
+	</jstl:forEach>
+</table>
 <acme:cancel url="/records" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
-	<acme:cancel url="" code="record.edit"/>
+	<acme:cancel url="/records/legalRecord/edit.do?id=${record.id}" code="record.edit"/>
+	<acme:cancel url="/records/legalRecord/delete.do?id=${record.id}" code="record.edit.delete"/>&nbsp;
 </jstl:if>
+</body>

@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.LinkRecordRepository;
 import security.LoginService;
@@ -26,6 +28,8 @@ public class LinkRecordService {
 	private ActorService			actorService;
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+	@Autowired
+	private Validator				validator;
 
 
 	public LinkRecord create() {
@@ -73,6 +77,35 @@ public class LinkRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(lR.getId() != 0);
 		this.linkRecordRepository.delete(lR);
+	}
+	//Reconstructs
+	public LinkRecord reconstructCreate(final LinkRecord lRF, final BindingResult binding) {
+		final LinkRecord result = new LinkRecord();
+
+		result.setTitle(lRF.getTitle());
+		result.setDescription(lRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public LinkRecord reconstructEdit(final LinkRecord lRF, final BindingResult binding) {
+		LinkRecord lR;
+		final LinkRecord result = new LinkRecord();
+
+		lR = this.linkRecordRepository.findOne(lRF.getId());
+
+		result.setId(lR.getId());
+		result.setVersion(lR.getVersion());
+		result.setBrotherhood(lR.getBrotherhood());
+
+		result.setTitle(lRF.getTitle());
+		result.setDescription(lRF.getDescription());
+
+		this.validator.validate(result, binding);
+
+		return result;
 	}
 
 	public Collection<LinkRecord> getLinkRecordByBrotherhood(final int BrotherhoodId) {

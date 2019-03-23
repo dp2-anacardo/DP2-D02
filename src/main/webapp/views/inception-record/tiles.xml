@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/inception-record/edit.jsp" />
 	</definition>
 	
+	<definition name="records/inceptionRecord/create" extends="master.page">	
+		<put-attribute name="title" value="Create inception record" />
+		<put-attribute name="body" value="/views/inception-record/create.jsp" />
+	</definition>
+	
 </tiles-definitions>

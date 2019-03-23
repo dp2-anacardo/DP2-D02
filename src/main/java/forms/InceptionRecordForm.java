@@ -3,6 +3,10 @@ package forms;
 
 import java.util.Collection;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.hibernate.validator.constraints.URL;
+
 import datatype.Url;
 import domain.InceptionRecord;
 
@@ -48,6 +52,8 @@ public class InceptionRecordForm {
 		return this.photo;
 	}
 
+	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Url getLink() {
 		return this.link;
 	}

@@ -16,6 +16,12 @@
 <acme:showtext fieldset="false" code="record.description" value="${record.description}"/>
 <br/>
 <br/>
+<acme:showtext fieldset="false" code="record.startYear" value="${record.startYear}"/>
+<br/>
+<br/>
+<acme:showtext fieldset="false" code="record.endYear" value="${record.endYear}"/>
+<br/>
+<br/>
 <b><spring:message code="record.photo"/>:</b>
 <br/>
 <jstl:forEach items="${record.photo}" var="photo">
@@ -25,5 +31,5 @@
 <br/>
 <acme:cancel url="/records" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
-	<acme:cancel url="" code="record.edit"/>
+	<acme:cancel url="/records/periodRecord/edit.do?id=${record.id}" code="record.edit"/>
 </jstl:if>
