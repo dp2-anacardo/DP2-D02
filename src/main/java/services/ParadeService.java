@@ -15,14 +15,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ParadeRepository;
-import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Parade;
 import domain.Request;
 import domain.Segment;
+import repositories.ParadeRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -128,8 +128,9 @@ public class ParadeService {
 				f.getParades().remove(p);
 		final Collection<Segment> segments = this.segmentService.getPathByParade(p.getId());
 		for (final Segment s : segments)
-			//this.segmentService.delete(s);
-			this.paradeRepository.delete(p);
+			this.segmentService.delete(s);
+
+		this.paradeRepository.delete(p);
 	}
 
 	public Collection<Parade> getParadesByBrotherhood(final Brotherhood b) {
@@ -181,16 +182,17 @@ public class ParadeService {
 		result.setTitle(p1.getTitle());
 		result = this.saveDraft(result);
 
-		//		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
-		//		for (final Segment s : segments) {
-		//			final Segment newSegment = this.segmentService.create();
-		//			newSegment.setParade(result);
-		//			newSegment.setOrigin(s.getOrigin());
-		//			newSegment.setDestination(s.getDestination());
-		//			newSegment.setTimeOrigin(s.getTimeOrigin());
-		//			newSegment.setTimeDestination(s.getTimeDestination());
-		//			this.segmentService.save(newSegment);
-		//		}
+		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
+		for (final Segment s : segments) {
+			final Segment newSegment = this.segmentService.create(result);
+			newSegment.setOriginLatitude(s.getOriginLatitude());
+			newSegment.setOriginLongitude(s.getOriginLongitude());
+			newSegment.setDestinationLatitude(s.getDestinationLatitude());
+			newSegment.setDestinationLongitude(s.getDestinationLongitude());
+			newSegment.setTimeOrigin(s.getTimeOrigin());
+			newSegment.setTimeDestination(s.getTimeDestination());
+			this.segmentService.save(newSegment);
+		}
 		return result;
 	}
 

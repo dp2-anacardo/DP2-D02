@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.FloatEntity;
+import domain.Message;
+import domain.Parade;
+import domain.Sponsorship;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
@@ -24,13 +31,6 @@ import services.MessageService;
 import services.ParadeService;
 import services.PriorityService;
 import services.SponsorshipService;
-import controllers.AbstractController;
-import domain.Actor;
-import domain.Brotherhood;
-import domain.FloatEntity;
-import domain.Message;
-import domain.Parade;
-import domain.Sponsorship;
 
 @Controller
 @RequestMapping("parade")
@@ -233,6 +233,19 @@ public class ParadeController extends AbstractController {
 		result.addObject("parade", parade);
 		result.addObject("message", messageCode);
 		result.addObject("floats", floats);
+		return result;
+	}
+
+	@RequestMapping(value = "/brotherhood/copy", method = RequestMethod.GET)
+	public ModelAndView copy(@RequestParam final int paradeId) {
+		ModelAndView result;
+		try {
+			final Parade newParade = this.paradeService.copyParade(paradeId);
+			this.paradeService.saveDraft(newParade);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 		return result;
 	}
 
