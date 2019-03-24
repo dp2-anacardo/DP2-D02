@@ -163,4 +163,13 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query("select stddev(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
 	Double getStddevSponsorshipsActivesPerSponsor();
+
+	@Query("select avg(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
+	Double getAvgParadesCoordinatesByChapters();
+
+	@Query("select min(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
+	Double getMinParadesCoordinatesByChapters();
+
+	@Query("select max(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
+	Double getMaxParadesCoordinatesByChapters();
 }
