@@ -481,7 +481,7 @@ public class AdministratorService {
 	}
 
 	/* Q16: The ratio of areas that are not co-ordinated by any chapters. */
-	Double getRatioAreaNotCoordinatesByChapter() {
+	public Double getRatioAreaNotCoordinatesByChapter() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
@@ -492,6 +492,35 @@ public class AdministratorService {
 	}
 
 	/* TODO Q17: The average, the minimum, the maximum, and the standard deviation of the number of parades co-ordinated by the chapters. */
+	public Double getAvgParadesCoordinatesByChapters() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getAvgParadesCoordinatesByChapters();
+		return res;
+	}
+
+	public Double getMinParadesCoordinatesByChapters() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getMinParadesCoordinatesByChapters();
+		return res;
+	}
+
+	public Double getMaxParadesCoordinatesByChapters() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getMaxParadesCoordinatesByChapters();
+		return res;
+	}
 
 	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
 
