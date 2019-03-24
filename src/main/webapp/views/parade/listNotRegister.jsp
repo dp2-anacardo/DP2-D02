@@ -24,7 +24,7 @@
 	
 	<security:authorize access="hasRole('CHAPTER')">
 	<spring:message code="parade.status" var="status"/>
-	<display:column title="${status}">
+	<display:column title="${status}" sortable="true">
 			<jstl:if test="${row.status == 'ACCEPTED' }">
 				<spring:message code="parade.accepted"/>
 			</jstl:if>

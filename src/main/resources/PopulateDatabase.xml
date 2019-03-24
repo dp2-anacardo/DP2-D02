@@ -113,6 +113,17 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="chapter2" />
+		<property name="password" value="07a29f2348d728fad16c5260823f93ef" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHAPTER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	
 	
 	<!-- Other domain beans come here -->	
@@ -1234,6 +1245,35 @@
 		<property name="title" value="titleChapter1"/>
 	</bean>
 	
+	<bean id="chapter2" class="domain.Chapter">
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="name" value="chapter2" />
+		<property name="middleName" value="middleName" />
+		<property name="surname" value="chapter2"/>
+		<property name="photo" value="https://github.com/dp2-anacardo/DP2-D01"/>
+		<property name="email" value="emailDePrueba@gmail.com"/>
+		<property name="phoneNumber" value="+34 678123674"/>
+		<property name="address" value="Avenida Reina Mercedes"/>
+		<property name="isSuspicious" value="false"/>
+		<property name="isBanned" value="false"/>
+		<property name="score" value=""/>
+		<property name="socialProfiles">
+			<list>
+			</list>
+		</property>
+		<property name="boxes">
+			<list>
+				<ref bean="inBoxChapter2"/>
+				<ref bean="outBoxChapter2"/>
+				<ref bean="spamBoxChapter2"/>
+				<ref bean="trashBoxChapter2"/>
+				<ref bean="notificationBoxChapter2" />
+			</list>
+		</property>
+		<property name="title" value="titleChapter2"/>
+		<property name="area" ref="area2"/>
+	</bean>
+	
 	<!-- Chapter's SocialProfiles -->	
 	
 	<bean id="socialProfileChapter1" class="domain.SocialProfile">
@@ -1297,6 +1337,71 @@
 	</bean>
 	
 	<bean id="notificationBoxChapter1" class="domain.MessageBox">
+		<property name="name" value="NOTIFICATIONBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inBoxChapter2" class="domain.MessageBox">
+		<property name="name" value="INBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="outBoxChapter2" class="domain.MessageBox">
+		<property name="name" value="OUTBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="spamBoxChapter2" class="domain.MessageBox">
+		<property name="name" value="SPAMBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="trashBoxChapter2" class="domain.MessageBox">
+		<property name="name" value="TRASHBOX"/>
+		<property name="isSystem" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="sons">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="notificationBoxChapter2" class="domain.MessageBox">
 		<property name="name" value="NOTIFICATIONBOX"/>
 		<property name="isSystem" value="true"/>
 		<property name="messages">
