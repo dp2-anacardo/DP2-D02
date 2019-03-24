@@ -1,6 +1,7 @@
 
 package controllers.parade;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -20,13 +21,16 @@ import services.ChapterService;
 import services.ConfigurationService;
 import services.FinderService;
 import services.FloatEntityService;
+import services.MessageService;
 import services.ParadeService;
+import services.PriorityService;
 import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Chapter;
 import domain.FloatEntity;
+import domain.Message;
 import domain.Parade;
 import domain.Sponsorship;
 
@@ -57,6 +61,12 @@ public class ParadeController extends AbstractController {
 
 	@Autowired
 	private ChapterService			chapterService;
+
+	@Autowired
+	private MessageService			messageService;
+
+	@Autowired
+	private PriorityService			priorityService;
 
 
 	@RequestMapping(value = "/brotherhood/list", method = RequestMethod.GET)
@@ -183,8 +193,17 @@ public class ParadeController extends AbstractController {
 				final Sponsorship sponsorship = sponsorships.get(rnd.nextInt(sponsorships.size()));
 				result.addObject("sponsorshipBanner", sponsorship.getBanner());
 
-				System.out.println(sponsorship.getSponsor().getName());
-				System.out.println("A pagar por perro: " + this.configurationService.getConfiguration().getFlatFee());
+				final Double vat = this.configurationService.getConfiguration().getVat();
+				final Double fee = this.configurationService.getConfiguration().getFlatFee();
+				final Double totalAmount = (vat / 100) * fee + fee;
+				final Message message = this.messageService.create();
+				final Collection<Actor> recipients = new ArrayList<>();
+				recipients.add(sponsorship.getSponsor());
+				message.setRecipients(recipients);
+				message.setPriority(this.priorityService.getHighPriority());
+				message.setSubject("A sponsorship has been shown \n Se ha mostrado un anuncio");
+				message.setBody("Se le cargará un importe de: " + totalAmount + "\n Se le cargará un importe de:" + totalAmount);
+				this.messageService.save(message);
 			}
 		}
 		return result;
@@ -304,7 +323,19 @@ public class ParadeController extends AbstractController {
 		result = new ModelAndView("parade/chapter/reject");
 		result.addObject("parade", parade);
 		result.addObject("message", messageCode);
+		return result;
+	}
 
+	@RequestMapping(value = "/brotherhood/copy", method = RequestMethod.GET)
+	public ModelAndView copy(@RequestParam final int paradeId) {
+		ModelAndView result;
+		try {
+			final Parade newParade = this.paradeService.copyParade(paradeId);
+			this.paradeService.saveDraft(newParade);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 		return result;
 	}
 

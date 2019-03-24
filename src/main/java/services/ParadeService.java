@@ -60,8 +60,6 @@ public class ParadeService {
 			p.setTicker(result.getTicker());
 			p.setVersion(result.getVersion());
 			p.setIsFinal(result.getIsFinal());
-			p.setStatus(result.getStatus());
-			p.setRejectComment(result.getRejectComment());
 			this.validator.validate(p, binding);
 			result = p;
 		}
@@ -97,6 +95,7 @@ public class ParadeService {
 		Parade result;
 		result = new Parade();
 		result.setIsFinal(false);
+		result.setRejectComment("");
 		return result;
 	}
 
@@ -169,8 +168,9 @@ public class ParadeService {
 				f.getParades().remove(p);
 		final Collection<Segment> segments = this.segmentService.getPathByParade(p.getId());
 		for (final Segment s : segments)
-			//this.segmentService.delete(s);
-			this.paradeRepository.delete(p);
+			this.segmentService.delete(s);
+
+		this.paradeRepository.delete(p);
 	}
 
 	public Collection<Parade> getParadesByBrotherhood(final Brotherhood b) {
@@ -222,16 +222,17 @@ public class ParadeService {
 		result.setTitle(p1.getTitle());
 		result = this.saveDraft(result);
 
-		//		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
-		//		for (final Segment s : segments) {
-		//			final Segment newSegment = this.segmentService.create();
-		//			newSegment.setParade(result);
-		//			newSegment.setOrigin(s.getOrigin());
-		//			newSegment.setDestination(s.getDestination());
-		//			newSegment.setTimeOrigin(s.getTimeOrigin());
-		//			newSegment.setTimeDestination(s.getTimeDestination());
-		//			this.segmentService.save(newSegment);
-		//		}
+		final Collection<Segment> segments = this.segmentService.getPathByParade(p1.getId());
+		for (final Segment s : segments) {
+			final Segment newSegment = this.segmentService.create(result);
+			newSegment.setOriginLatitude(s.getOriginLatitude());
+			newSegment.setOriginLongitude(s.getOriginLongitude());
+			newSegment.setDestinationLatitude(s.getDestinationLatitude());
+			newSegment.setDestinationLongitude(s.getDestinationLongitude());
+			newSegment.setTimeOrigin(s.getTimeOrigin());
+			newSegment.setTimeDestination(s.getTimeDestination());
+			this.segmentService.save(newSegment);
+		}
 		return result;
 	}
 

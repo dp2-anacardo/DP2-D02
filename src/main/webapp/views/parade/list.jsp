@@ -54,6 +54,12 @@
 		</a>
 	</display:column>
 	
+	<display:column>
+		<a href="parade/brotherhood/copy.do?paradeId=${row.id}">
+			<spring:message code="parade.copy"/>
+		</a>
+	</display:column>
+	
 	
 </display:table>
 <div>

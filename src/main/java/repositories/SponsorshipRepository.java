@@ -18,4 +18,7 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 
 	@Query("select s from Sponsorship s where s.parade.id = ?1 and s.status = TRUE")
 	List<Sponsorship> findAllByParade(int paradeId);
+
+	@Query("select s from Sponsorship s where s.status = TRUE")
+	Collection<Sponsorship> findAllActive();
 }

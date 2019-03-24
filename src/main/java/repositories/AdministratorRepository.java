@@ -99,10 +99,10 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select stddev(f.parades.size)*1.0 from Finder f")
 	Double getStddevResultFinder();
 
-	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is not empty")
+	@Query("select (count(f1)*100.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is not empty")
 	Double getRatioOfNotEmptyFinders();
 
-	@Query("select (count(f1)*1.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is empty")
+	@Query("select (count(f1)*100.0)/(select count(f2) from Finder f2) from Finder f1 where f1.parades is empty")
 	Double getRatioOfEmptyFinders();
 
 	//AQUI EMPIEZAN LAS QUERIES DEL DASHBOARD DE ACME PARADE
@@ -134,9 +134,33 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select count(f) from LinkRecord f where f.brotherhood.id = ?1")
 	Integer getNumOfLinkRecordPerBrotherhood(Integer brotherhoodId);
 
-	@Query("select (count(f1)*1.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = false")
+	@Query("select (count(f1)*100.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = false")
 	Double getRatioParadeDraftVsFinal();
 
-	@Query(" select (count(f1)*1.0) / (select count(f2) from Sponsorship f2) from Sponsorship f1 where f1.status = true")
+	@Query(" select (count(f1)*100.0) / (select count(f2) from Sponsorship f2) from Sponsorship f1 where f1.status = true")
 	Double getRatioActiveSponsorships();
+
+	@Query("select (count(f1)*100.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'ACCEPTED'")
+	Double getRatioParadeFinalModeAccepted();
+
+	@Query("select (count(f1)*100.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'SUBMITTED'")
+	Double getRatioParadeFinalModeSubmitted();
+
+	@Query("select (count(f1)*100.0)/(select count(f2) from Parade f2 where f2.isFinal = true) from Parade f1 where f1.isFinal = true and f1.status = 'REJECTED'")
+	Double getRatioParadeFinalModeRejected();
+
+	@Query("select (count(f1)*100.0) / (select count(f2) from Area f2) from Chapter f1 where f1.area = null")
+	Double getRatioAreaNotCoordinatesByChapter();
+
+	@Query("select avg(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id))from Sponsor f2")
+	Double getAvgSponsorshipsActivesPerSponsor();
+
+	@Query("select min(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getMinSponsorshipsActivesPerSponsor();
+
+	@Query("select max(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getMaxSponsorshipsActivesPerSponsor();
+
+	@Query("select stddev(1.0*(select count(f) from Sponsorship f where f.status = true and f.sponsor.id= f2.id)) from Sponsor f2")
+	Double getStddevSponsorshipsActivesPerSponsor();
 }

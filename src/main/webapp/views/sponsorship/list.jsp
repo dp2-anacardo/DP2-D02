@@ -33,17 +33,35 @@
 			<a href="${row.targetURL}">${row.targetURL}</a>
 		</display:column>
 
-		<spring:message code="sponsorship.switch" var="rerere" />
-		<display:column title="${rerere}">
-			<jstl:if test="${row.status eq false}">
-				<acme:cancel url='sponsorship/activate.do?sponsorshipId=${row.id}'
-					code="sponsorship.activate" />
-			</jstl:if>
-			<jstl:if test="${row.status eq true}">
-				<acme:cancel url='sponsorship/desactivate.do?sponsorshipId=${row.id}'
-					code="sponsorship.desactivate" />
-			</jstl:if>
+		<spring:message code="sponsorship.switch" var="switchSponsorship" />
+		<display:column title="${switchSponsorship}">
+			<jstl:choose>
+				<jstl:when test="${row.status eq false and row.creditCard.expiration lt date}">
+					<spring:message code="sponsorship.creditCard.expirate"/>
+				</jstl:when>
+				<jstl:when test="${row.status eq false and row.creditCard.expiration gt date}">
+					<acme:cancel url='sponsorship/activate.do?sponsorshipId=${row.id}'
+						code="sponsorship.activate" />
+				</jstl:when>
+				<jstl:when test="${row.status eq true}">
+					<acme:cancel
+						url='sponsorship/desactivate.do?sponsorshipId=${row.id}'
+						code="sponsorship.desactivate" />
+				</jstl:when>
+			</jstl:choose>
 		</display:column>
+		
+		<spring:message code="sponsorship.update" var="udpateHeader" />
+	<display:column title="${udpateHeader}">
+		<a href="sponsorship/update.do?sponsorshipId=${row.id}"> <spring:message
+				code="sponsorship.update" /></a>
+	</display:column>
+	
+	<spring:message code="sponsorship.show" var="showHeader" />
+	<display:column title="${showHeader}">
+		<a href="sponsorship/show.do?sponsorshipId=${row.id}"> <spring:message
+				code="sponsorship.show" /></a>
+	</display:column>
 	</display:table>
 
 	<div>
