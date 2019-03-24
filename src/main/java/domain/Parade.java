@@ -143,7 +143,6 @@ public class Parade extends DomainEntity {
 	}
 
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	@NotBlank
 	public String getRejectComment() {
 		return this.rejectComment;
 	}

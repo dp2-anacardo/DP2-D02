@@ -52,6 +52,10 @@ public class ParadeService {
 		Parade result;
 		if (p.getId() == 0) {
 			p.setTicker(this.tickerGenerator());
+			p.setStatus("SUBMITTED");
+			final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+			final Brotherhood b = this.brotherhoodService.findOne(user.getId());
+			p.setBrotherhood(b);
 			result = p;
 			this.validator.validate(p, binding);
 		} else {
@@ -60,6 +64,8 @@ public class ParadeService {
 			p.setTicker(result.getTicker());
 			p.setVersion(result.getVersion());
 			p.setIsFinal(result.getIsFinal());
+			p.setStatus(result.getStatus());
+			p.setRejectComment(result.getRejectComment());
 			this.validator.validate(p, binding);
 			result = p;
 		}
@@ -95,7 +101,6 @@ public class ParadeService {
 		Parade result;
 		result = new Parade();
 		result.setIsFinal(false);
-		result.setRejectComment("");
 		return result;
 	}
 
