@@ -37,10 +37,15 @@
 <br>
 
 
+
+
 <input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
 			onclick="javascript: relativeRedir('/administrator/administrator/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
+			
+<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
+			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 			
 </security:authorize>
 	
@@ -63,7 +68,12 @@
 			onclick="javascript: relativeRedir('brotherhood/brotherhood/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
+		
+<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
+			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 </security:authorize>
+
+
 
 <security:authorize access="hasRole('MEMBER')">
 
@@ -85,6 +95,10 @@
 			onclick="javascript: relativeRedir('/member/member/edit.do');" />
 <input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
 			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin/list.do');" />
+			
+<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
+			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+	
 			
 </security:authorize>
 
