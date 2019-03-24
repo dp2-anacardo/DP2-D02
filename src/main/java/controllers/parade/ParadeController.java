@@ -276,7 +276,10 @@ public class ParadeController extends AbstractController {
 		ModelAndView result;
 		parade = this.paradeService.reconstructChapter(parade, binding);
 
-		if (binding.hasErrors())
+		if (parade.getRejectComment().equals("")) {
+			binding.rejectValue("rejectComment", "error.rejectComment");
+			result = this.rejectModelAndView(parade);
+		} else if (binding.hasErrors())
 			result = this.rejectModelAndView(parade);
 		else
 			try {
