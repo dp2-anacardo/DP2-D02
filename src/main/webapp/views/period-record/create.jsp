@@ -23,17 +23,27 @@
 	<!-- Single areas -->
 	<jstl:out value="${messageCode}"/>
 	
-	<acme:textboxbs code="record.edit.title" path="title"/>
-	<acme:textboxbs code="record.edit.description" path="description"/>
+	<acme:textboxbs code="record.title" path="title"/>
+	<acme:textarea bold="true" code="record.description" path="description"/>
 	<acme:textboxbs code="record.edit.startYear" path="startYear"/>
 	<acme:textboxbs code="record.edit.endYear" path="endYear"/>
+	<br/>
+	<acme:textboxbs code="record.edit.onePhoto" path="link"/>
+	<jstl:if test="${customErrorMessage!=null}">
+	<div class="error">
+	<spring:message code="${customErrorMessage}"/>
+	</div>
+	</jstl:if>
+	<spring:message code="record.edit.explanation2"/>
+	<br/>
+	<br/>
 	
 	
 	<!-- Submit, delete and cancel -->
 	
 	<acme:submit name="create" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records" code="record.edit.cancel"/>
+	<acme:cancel url="/" code="record.edit.cancel"/>
 	
 </form:form>
 </body>

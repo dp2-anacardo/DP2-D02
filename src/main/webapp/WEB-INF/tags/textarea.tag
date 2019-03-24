@@ -25,17 +25,30 @@
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="readonly" required="false" %>
+<%@ attribute name="bold" required="false" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
+</jstl:if>
+
+<jstl:if test="${bold == null}">
+	<jstl:set var="bold" value="false" />
 </jstl:if>
 
 <%-- Definition --%>
 
 <div class="form-group">
 	<form:label path="${path}">
-		<spring:message code="${code}" />
+	<jstl:choose>
+	<jstl:when test="${bold}">
+		<b><spring:message code="${code}" />:</b>
+	</jstl:when>
+	<jstl:otherwise>
+		<spring:message code="${code}" />:
+	</jstl:otherwise>
+	</jstl:choose>
 	</form:label>
+	<br/>
 	<form:textarea path="${path}" readonly="${readonly}" />
 	<form:errors path="${path}" cssClass="error" />
 </div>

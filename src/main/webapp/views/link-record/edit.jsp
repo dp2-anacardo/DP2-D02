@@ -23,9 +23,13 @@
 	<!-- Single areas -->
 	<jstl:out value="${messageCode}"/>
 	
-	<acme:textboxbs code="record.edit.title" path="title"/>
-	<acme:textboxbs code="record.edit.description" path="description"/>	
+	<acme:textboxbs code="record.title" path="title"/>
+	<acme:textboxbs code="record.description" path="description"/>	
+	<b><spring:message code="record.edit.brotherhoods"/></b>
+	<br/>
 	<form:select path="linkedBH" items="${brotherhoods}" code="record.edit.brotherhoods"/>
+	<br/>
+	<br/>
 
 	<!-- Submit, delete and cancel -->
 	

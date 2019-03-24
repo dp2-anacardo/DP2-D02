@@ -26,7 +26,6 @@ public class PeriodRecord extends DomainEntity {
 	private int				endYear;
 	private Collection<Url>	photo;
 
-	//Relationships
 	private Brotherhood		brotherhood;
 
 
@@ -77,9 +76,8 @@ public class PeriodRecord extends DomainEntity {
 		this.photo = photo;
 	}
 
-	//Relationships
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
@@ -87,4 +85,5 @@ public class PeriodRecord extends DomainEntity {
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
+
 }

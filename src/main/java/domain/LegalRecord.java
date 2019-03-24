@@ -24,7 +24,6 @@ public class LegalRecord extends DomainEntity {
 	private int					vatNumber;
 	private Collection<String>	applicableLaws;
 
-	//Relationships
 	private Brotherhood			brotherhood;
 
 
@@ -76,9 +75,8 @@ public class LegalRecord extends DomainEntity {
 		this.applicableLaws = applicableLaws;
 	}
 
-	//Relationships
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
@@ -86,4 +84,5 @@ public class LegalRecord extends DomainEntity {
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
+
 }

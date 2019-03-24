@@ -3,6 +3,10 @@ package forms;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.URL;
+
 import datatype.Url;
 import domain.PeriodRecord;
 
@@ -15,7 +19,7 @@ public class PeriodRecordForm {
 	private int				startYear;
 	private int				endYear;
 	private Collection<Url>	photo;
-	private Url				link;
+	private String			link;
 
 
 	public PeriodRecordForm(final PeriodRecord pR) {
@@ -68,7 +72,9 @@ public class PeriodRecordForm {
 		return this.photo;
 	}
 
-	public Url getLink() {
+	@Valid
+	@URL
+	public String getLink() {
 		return this.link;
 	}
 
@@ -92,7 +98,7 @@ public class PeriodRecordForm {
 		this.photo = photo;
 	}
 
-	public void setLink(final Url link) {
+	public void setLink(final String link) {
 		this.link = link;
 	}
 

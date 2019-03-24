@@ -57,8 +57,6 @@
 	
 	<acme:submit name="save" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records/inceptionRecord/delete.do?id=${iRF.id}" code="record.edit.delete"/>&nbsp;
-	
 	<acme:cancel url="/records/inceptionRecord/show.do?id=${iRF.id}" code="record.edit.cancel"/>
 	
 </form:form>

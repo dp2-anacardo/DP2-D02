@@ -15,7 +15,7 @@ public class MiscRecord extends DomainEntity {
 
 	private String		title;
 	private String		description;
-	//Relationships
+
 	private Brotherhood	brotherhood;
 
 
@@ -37,7 +37,7 @@ public class MiscRecord extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}

@@ -23,13 +23,15 @@
 	<!-- Single areas -->
 	<jstl:out value="${messageCode}"/>
 	
-	<acme:textboxbs code="record.edit.title" path="title"/>
-	<acme:textboxbs code="record.edit.description" path="description"/>
-	
+	<acme:textboxbs code="record.title" path="title"/>
+	<acme:textarea bold="true" code="record.description" path="description"/>
+	<br/>
 	
 	<!-- Submit, delete and cancel -->
 	
 	<acme:submit name="save" code="record.edit.save"/>&nbsp;
+	
+	<acme:cancel url="/records/miscRecord/delete.do?id=${mRF.id}" code="record.edit.delete"/>&nbsp;
 	
 	<acme:cancel url="/records/miscRecord/show.do?id=${mRF.id}" code="record.edit.cancel"/>
 	

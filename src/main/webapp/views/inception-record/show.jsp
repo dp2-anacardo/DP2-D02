@@ -23,8 +23,7 @@
 </jstl:forEach>
 <br/>
 <br/>
-<acme:cancel url="/records" code="record.goBack" />
+<acme:cancel url="/records/list.do?brotherhoodId=${record.brotherhood.id}" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
 	<acme:cancel url="/records/inceptionRecord/edit.do?id=${record.id}" code="record.edit"/>
-	<acme:cancel url="/records/inceptionRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
 </jstl:if>

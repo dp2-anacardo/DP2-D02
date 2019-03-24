@@ -94,6 +94,7 @@ public class PeriodRecordService {
 		result.setDescription(pRF.getDescription());
 		result.setStartYear(pRF.getStartYear());
 		result.setEndYear(pRF.getEndYear());
+		result.setPhoto(pRF.getPhoto());
 
 		this.validator.validate(result, binding);
 
@@ -139,9 +140,11 @@ public class PeriodRecordService {
 
 		result.setPhoto(photos);
 
-		if (!pRF.getLink().equals(""))
-			result.getPhoto().add(pRF.getLink());
-
+		if (!pRF.getLink().equals("")) {
+			final Url photo = new Url();
+			photo.setLink(pRF.getLink());
+			result.getPhoto().add(photo);
+		}
 		result.setId(pR.getId());
 		result.setVersion(pR.getVersion());
 

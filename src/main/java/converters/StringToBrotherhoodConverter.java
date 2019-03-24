@@ -28,7 +28,9 @@ public class StringToBrotherhoodConverter implements Converter<String, Brotherho
 			if (StringUtils.isEmpty(text))
 				result = null;
 			else {
-				id = Integer.valueOf(text);
+				final String rudeID = text.substring(text.indexOf('(') + 1, text.indexOf(')'));
+				rudeID.trim();
+				id = Integer.valueOf(rudeID);
 				result = this.brotherhoodRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {

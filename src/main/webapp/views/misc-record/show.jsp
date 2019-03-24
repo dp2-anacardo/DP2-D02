@@ -19,4 +19,5 @@
 <acme:cancel url="/records" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
 	<acme:cancel url="/records/miscRecord/edit.do?id=${record.id}" code="record.edit"/>
+	<acme:cancel url="/records/miscRecord/delete.do?id=${record.id}" code="record.edit.delete"/>&nbsp;
 </jstl:if>

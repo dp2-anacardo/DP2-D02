@@ -40,7 +40,7 @@
 						var="law">
 		<tr>
     		<td><jstl:out value="${law}"/></td>
-    		<jstl:if test="${lRF.applicableLaws.size!=1}">
+    		<jstl:if test="${size != 1}">
     		<td><acme:cancel url="/records/legalRecord/deleteLaw.do?id=${lRF.id}&law=${law}" 
     			code="record.edit.delete"/></td>
     		</jstl:if>

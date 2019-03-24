@@ -23,8 +23,9 @@
 	<!-- Single areas -->
 	<jstl:out value="${messageCode}"/>
 	
-	<acme:textboxbs code="record.edit.title" path="title"/>
-	<acme:textboxbs code="record.edit.description" path="description"/>
+	<acme:textboxbs code="record.title" path="title"/>
+	<acme:textarea bold="true" code="record.description" path="description"/>
+	<br/>
 	
 	
 	<!-- Submit, delete and cancel -->
