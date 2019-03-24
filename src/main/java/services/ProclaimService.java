@@ -71,4 +71,8 @@ public class ProclaimService {
 		return result;
 	}
 
+	public void flush() {
+		this.proclaimRepository.flush();
+	}
+
 }

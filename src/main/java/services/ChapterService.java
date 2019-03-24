@@ -120,11 +120,12 @@ public class ChapterService {
 
 		final Area area = this.areaService.findOne(areaId);
 		Assert.notNull(area);
+		Assert.isTrue(this.areaService.dontHaveChapter(area));
+		Assert.isNull(chapter.getArea());
 
 		if (this.areaService.getChapter(areaId) == null)
 			chapter.setArea(area);
 	}
-
 	public Chapter reconstruct(final ChapterForm c, final BindingResult binding) {
 
 		final Chapter result = this.create();
