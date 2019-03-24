@@ -26,7 +26,7 @@ public class InceptionRecord extends DomainEntity {
 	private String			description;
 	private Collection<Url>	photo;
 
-	//Relaciones
+	//Relacionships
 	private Brotherhood		brotherhood;
 
 

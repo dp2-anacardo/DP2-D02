@@ -19,7 +19,7 @@ public class BrotherhoodToStringConverter implements Converter<Brotherhood, Stri
 		if (brother == null)
 			result = null;
 		else
-			result = String.valueOf(brother.getId());
+			result = brother.getTitle() + " (" + String.valueOf(brother.getId()) + ")";
 
 		return result;
 	}

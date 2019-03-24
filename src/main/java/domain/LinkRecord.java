@@ -17,8 +17,8 @@ public class LinkRecord extends DomainEntity {
 	private String		title;
 	private String		description;
 	//Relationships
-	private Brotherhood	brotherhood;
 	private Brotherhood	linkedBH;
+	private Brotherhood	brotherhood;
 
 
 	@NotBlank
@@ -40,16 +40,6 @@ public class LinkRecord extends DomainEntity {
 
 	//Relationships
 	@Valid
-	@ManyToOne(optional = false)
-	public Brotherhood getBrotherhood() {
-		return this.brotherhood;
-	}
-
-	public void setBrotherhood(final Brotherhood brotherhood) {
-		this.brotherhood = brotherhood;
-	}
-
-	@Valid
 	@OneToOne(optional = false)
 	public Brotherhood getLinkedBH() {
 		return this.linkedBH;
@@ -57,6 +47,16 @@ public class LinkRecord extends DomainEntity {
 
 	public void setLinkedBH(final Brotherhood linkedBH) {
 		this.linkedBH = linkedBH;
+	}
+
+	@Valid
+	@ManyToOne
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
+	}
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
 	}
 
 }

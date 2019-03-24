@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PeriodRecordRepository;
 import security.LoginService;
@@ -17,6 +19,7 @@ import datatype.Url;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.PeriodRecord;
+import forms.PeriodRecordForm;
 
 @Service
 @Transactional
@@ -28,6 +31,8 @@ public class PeriodRecordService {
 	private ActorService			actorService;
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+	@Autowired
+	private Validator				validator;
 
 
 	public PeriodRecord create() {
@@ -77,6 +82,73 @@ public class PeriodRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(pR.getId() != 0);
 		this.periodRecordRepository.delete(pR);
+	}
+
+	//Reconstructs
+	public PeriodRecord reconstructCreate(final PeriodRecordForm pRF, final BindingResult binding) {
+		final PeriodRecord result = new PeriodRecord();
+
+		result.setPhoto(new ArrayList<Url>());
+
+		result.setTitle(pRF.getTitle());
+		result.setDescription(pRF.getDescription());
+		result.setStartYear(pRF.getStartYear());
+		result.setEndYear(pRF.getEndYear());
+		result.setPhoto(pRF.getPhoto());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public PeriodRecord reconstructEdit(final PeriodRecordForm pRF, final BindingResult binding) {
+		PeriodRecord pR;
+		final PeriodRecord result = new PeriodRecord();
+
+		pR = this.periodRecordRepository.findOne(pRF.getId());
+
+		result.setId(pR.getId());
+		result.setVersion(pR.getVersion());
+		result.setBrotherhood(pR.getBrotherhood());
+		result.setPhoto(pR.getPhoto());
+
+		result.setTitle(pRF.getTitle());
+		result.setDescription(pRF.getDescription());
+		result.setStartYear(pRF.getStartYear());
+		result.setEndYear(pRF.getEndYear());
+
+		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public PeriodRecord reconstructAddPhoto(final PeriodRecordForm pRF, final BindingResult binding) {
+		PeriodRecord pR;
+		final PeriodRecord result = new PeriodRecord();
+
+		pR = this.periodRecordRepository.findOne(pRF.getId());
+
+		result.setTitle(pR.getTitle());
+		result.setDescription(pR.getDescription());
+		result.setStartYear(pR.getStartYear());
+		result.setEndYear(pR.getEndYear());
+		result.setBrotherhood(pR.getBrotherhood());
+
+		final Collection<Url> photos = new ArrayList<Url>();
+
+		photos.addAll(pR.getPhoto());
+
+		result.setPhoto(photos);
+
+		if (!pRF.getLink().equals("")) {
+			final Url photo = new Url();
+			photo.setLink(pRF.getLink());
+			result.getPhoto().add(photo);
+		}
+		result.setId(pR.getId());
+		result.setVersion(pR.getVersion());
+
+		return result;
 	}
 
 	public Collection<PeriodRecord> getPeriodRecordByBrotherhood(final int BrotherhoodId) {

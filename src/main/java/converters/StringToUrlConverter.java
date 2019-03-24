@@ -23,7 +23,7 @@ public class StringToUrlConverter implements Converter<String, Url> {
 		else
 			try {
 				result = new Url();
-				result.setLink(URLDecoder.decode(text, StandardCharsets.UTF_8.name()));
+				result.setLink(URLDecoder.decode(text, StandardCharsets.ISO_8859_1.name()));
 			} catch (final Throwable oops) {
 				throw new IllegalArgumentException(oops);
 			}

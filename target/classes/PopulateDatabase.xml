@@ -305,7 +305,7 @@
 	
 	<bean id="photo1" class="datatype.Url">
 		<property name="link"
-			value="https://i.blogs.es/556f4e/barcelona-central-restricciones-trafico.jpg" />
+			value="https://queretaro24-7.com/wp-content/uploads/2017/11/Desfile-REvolucio%CC%81n_.jpg" />
 	</bean>
 	
 	<!-- Brotherhood's SocialProfile -->
