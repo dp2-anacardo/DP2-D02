@@ -22,7 +22,7 @@ import domain.Actor;
 import domain.SocialProfile;
 
 @Controller
-@RequestMapping("/socialProfile/brotherhood,member,admin")
+@RequestMapping("/socialProfile/brotherhood,member,admin,chapter,sponsor")
 public class SocialProfileController extends AbstractController {
 
 	@Autowired
@@ -45,9 +45,9 @@ public class SocialProfileController extends AbstractController {
 		final Actor user = this.actorService.getActorLogged();
 		profiles = user.getSocialProfiles();
 
-		result = new ModelAndView("socialProfile/brotherhood,member,admin/list");
+		result = new ModelAndView("socialProfile/brotherhood,member,admin,chapter,sponsor/list");
 		result.addObject("socialProfiles", profiles);
-		result.addObject("requestURI", "socialProfile/brotherhood,member,admin/list.do");
+		result.addObject("requestURI", "socialProfile/brotherhood,member,admin,chapter,sponsor/list.do");
 
 		return result;
 	}
@@ -131,7 +131,7 @@ public class SocialProfileController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final SocialProfile profile, final String messageCode) {
 
 		ModelAndView result;
-		result = new ModelAndView("socialProfile/brotherhood,member,admin/edit");
+		result = new ModelAndView("socialProfile/brotherhood,member,admin,chapter,sponsor/edit");
 		result.addObject("socialProfile", profile);
 		result.addObject("message", messageCode);
 		return result;

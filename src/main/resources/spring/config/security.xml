@@ -69,7 +69,7 @@
 
 		<security:intercept-url pattern="/brotherhood/showMember.do" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/socialProfile/brotherhood,member,admin/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/brotherhood,member,admin,chapter,sponsor/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/request/member,brotherhood/**" access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 

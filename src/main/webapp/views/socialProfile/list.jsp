@@ -10,11 +10,11 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<security:authorize access="hasAnyRole('BROTHERHOOD,MEMBER,ADMIN')">				   
+<security:authorize access="hasAnyRole('BROTHERHOOD,MEMBER,ADMIN,CHAPTER,SPONSOR')">				   
 <display:table pagesize="5" class="socialProfiles" name="socialProfiles" requestURI="${requestURI}" id="row">
 
 
-	<display:column> <a href="socialProfile/brotherhood,member,admin/edit.do?socialProfileId=${row.id}">
+	<display:column> <a href="socialProfile/brotherhood,member,admin,chapter,sponsor/edit.do?socialProfileId=${row.id}">
 	<spring:message code="socialProfile.edit" /></a> </display:column>
 
 	<spring:message code="socialProfile.nick" var="nick" />
@@ -29,7 +29,7 @@
 </display:table>
 
 <input type="button" value="<spring:message code="socialProfile.create" />"
-		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin/create.do');" />
+		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin,chapter,sponsor/create.do');" />
 		
 		
 
