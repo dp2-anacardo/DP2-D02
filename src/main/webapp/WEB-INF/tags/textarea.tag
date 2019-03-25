@@ -41,10 +41,10 @@
 	<form:label path="${path}">
 	<jstl:choose>
 	<jstl:when test="${bold}">
-		<b><spring:message code="${code}" />:</b>
+		<b><spring:message code="${code}" /></b>
 	</jstl:when>
 	<jstl:otherwise>
-		<spring:message code="${code}" />:
+		<spring:message code="${code}" />
 	</jstl:otherwise>
 	</jstl:choose>
 	</form:label>
