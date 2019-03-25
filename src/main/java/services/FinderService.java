@@ -120,4 +120,8 @@ public class FinderService {
 		return this.finderRepository.findAllFinal();
 	}
 
+	public void Delete(final Finder f) {
+		Assert.notNull(f);
+		this.finderRepository.delete(f);
+	}
 }

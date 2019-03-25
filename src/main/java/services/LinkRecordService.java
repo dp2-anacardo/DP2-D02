@@ -79,4 +79,9 @@ public class LinkRecordService {
 		return this.linkRecordRepository.getLinkRecordByBrotherhood(BrotherhoodId);
 	}
 
+	public Collection<LinkRecord> getLinkRecordByLinkedBH(final int brotherhoodId) {
+		Assert.notNull(brotherhoodId);
+		return this.getLinkRecordByLinkedBH(brotherhoodId);
+	}
+
 }

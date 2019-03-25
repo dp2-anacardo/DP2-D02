@@ -15,14 +15,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.ParadeRepository;
+import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Parade;
 import domain.Request;
 import domain.Segment;
-import repositories.ParadeRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -200,6 +200,11 @@ public class ParadeService {
 		Collection<Parade> result;
 		result = this.paradeRepository.getParadesFinal();
 		return result;
+	}
+
+	public Collection<Finder> getFinderByParade(final int paradeId) {
+		Assert.notNull(paradeId);
+		return this.paradeRepository.getFinderByParade(paradeId);
 	}
 
 }

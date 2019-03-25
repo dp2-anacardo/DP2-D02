@@ -1,3 +1,4 @@
+
 package security;
 
 import java.util.Collection;
@@ -8,77 +9,81 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import services.ActorService;
-
 import domain.Actor;
 
 @Service
 @Transactional
 public class UserAccountService {
 
-		// Managed repository -----------------------------------------------------
+	// Managed repository -----------------------------------------------------
 
-		@Autowired
-		private UserAccountRepository	userAccountRepository;
-		
-		@Autowired
-		private ActorService actorService;
+	@Autowired
+	private UserAccountRepository	userAccountRepository;
 
-
-		// Supporting services ----------------------------------------------------
-
-		// Constructors -----------------------------------------------------------
+	@Autowired
+	private ActorService			actorService;
 
 
-		// Simple CRUD methods ----------------------------------------------------
+	// Supporting services ----------------------------------------------------
 
-		public UserAccount findByActor(final Actor actor) {
-			Assert.notNull(actor);
+	// Constructors -----------------------------------------------------------
 
-			UserAccount result;
+	// Simple CRUD methods ----------------------------------------------------
 
-			result = this.userAccountRepository.findByActorId(actor.getId());
+	public UserAccount findByActor(final Actor actor) {
+		Assert.notNull(actor);
 
-			return result;
-		}
-		
-		public Collection<UserAccount> findAll() {
+		UserAccount result;
 
-			Collection<UserAccount> result;
-			result = this.userAccountRepository.findAll();
-			Assert.notNull(result);
-			return result;
+		result = this.userAccountRepository.findByActorId(actor.getId());
 
-		}
+		return result;
+	}
 
-		public UserAccount findOne(final int userAccountId) {
+	public Collection<UserAccount> findAll() {
+
+		Collection<UserAccount> result;
+		result = this.userAccountRepository.findAll();
+		Assert.notNull(result);
+		return result;
+
+	}
+
+	public UserAccount findOne(final int userAccountId) {
+		final Actor actor = this.actorService.getActorLogged();
+		Assert.notNull(actor);
+
+		Assert.notNull(userAccountId);
+		UserAccount result;
+		result = this.userAccountRepository.findOne(userAccountId);
+
+		return result;
+	}
+
+	public UserAccount save(final UserAccount userAccount) {
+
+		Assert.notNull(userAccount);
+		UserAccount result;
+
+		if (userAccount.getId() != 0) {
+
 			final Actor actor = this.actorService.getActorLogged();
 			Assert.notNull(actor);
 
-			Assert.notNull(userAccountId);
-			UserAccount result;
-			result = this.userAccountRepository.findOne(userAccountId);
+			Assert.isTrue(actor.getId() == userAccount.getId());
 
-			return result;
-		}
+			result = this.userAccountRepository.save(userAccount);
 
-		public UserAccount save(final UserAccount userAccount) {
+		} else
+			result = this.userAccountRepository.save(userAccount);
 
-			Assert.notNull(userAccount);
-			UserAccount result;
+		return result;
 
-			if (userAccount.getId() != 0) {
+	}
 
-				final Actor actor = this.actorService.getActorLogged();
-				Assert.notNull(actor);
+	public void delete(final UserAccount user) {
 
-				Assert.isTrue(actor.getId() == userAccount.getId());
-
-				result = this.userAccountRepository.save(userAccount);
-
-			} else
-				result = this.userAccountRepository.save(userAccount);
-
-			return result;
-
-		}
+		Assert.notNull(user);
+		this.userAccountRepository.delete(user.getId());
+	}
 }

@@ -140,4 +140,9 @@ public class EnrolmentService {
 		return result;
 	}
 
+	public void delete(final Enrolment e) {
+		Assert.notNull(e);
+		this.enrolmentRepository.delete(e);
+	}
+
 }
