@@ -22,16 +22,24 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Message extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
+	@Expose
 	private Date				sendingMoment;
+	@Expose
 	private String				subject;
+	@Expose
 	private String				body;
+	@Expose
 	private Priority			priority;
+	@Expose
 	private Collection<String>	tags;
+	@Expose
 	private Boolean				isSpam;
 
 

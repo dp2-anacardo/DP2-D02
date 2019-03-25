@@ -55,6 +55,7 @@ public class MessageBox extends DomainEntity {
 
 
 	// Relationships -------------------------------------------------------------
+	@Expose
 	private Collection<Message>		messages;
 	private MessageBox				father;
 	private Collection<MessageBox>	sons;
