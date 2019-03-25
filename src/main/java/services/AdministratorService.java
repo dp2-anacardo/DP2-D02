@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -492,7 +491,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* TODO Q17: The average, the minimum, the maximum, and the standard deviation of the number of parades co-ordinated by the chapters. */
+	/* Q17: The average, the minimum, the maximum, and the standard deviation of the number of parades co-ordinated by the chapters. */
 	public Double getAvgParadesCoordinatesByChapters() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -619,20 +618,27 @@ public class AdministratorService {
 		return res;
 	}
 
-	/*
-	 * TODO : Devuelve un object y hay que mapear
-	 * Q23: The top-5 sponsors in terms of number of active sponsorships.
-	 */
+	/* Q23: The top-5 sponsors in terms of number of active sponsorships. */
 
-	public Map<String, Integer> getTop5SponsorsInTermsOfSponsorshipsActives() {
+	public List<String> getTop5SponsorsInTermsOfSponsorshipsActives() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		Map<String, Integer> res;
-		res = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
+		List<String> top5 = new ArrayList<String>();
 
-		return res;
+		final List<List<Object>> result = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
+
+		for (final List<Object> l : result) {
+			String res;
+			res = (String) l.get(0);
+			top5.add(res);
+		}
+
+		if (top5.size() > 5)
+			top5 = top5.subList(0, 5);
+
+		return top5;
 	}
 
 	//Validador de contraseñas
