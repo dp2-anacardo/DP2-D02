@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -618,7 +619,21 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* TODO Q23: The top-5 sponsors in terms of number of active sponsorships. */
+	/*
+	 * TODO : Devuelve un object y hay que mapear
+	 * Q23: The top-5 sponsors in terms of number of active sponsorships.
+	 */
+
+	public Map<String, Integer> getTop5SponsorsInTermsOfSponsorshipsActives() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Map<String, Integer> res;
+		res = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
+
+		return res;
+	}
 
 	//Validador de contraseñas
 	public Boolean checkPass(final String pass, final String confirmPass) {

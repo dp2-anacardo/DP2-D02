@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -172,4 +173,7 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query("select max(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
 	Double getMaxParadesCoordinatesByChapters();
+
+	@Query("select sp.name, count(s) from Sponsorship s join s.sponsor sp where status = true group by sp order by count(s) desc")
+	Map<String, Integer> getTop5SponsorsInTermsOfSponsorshipsActives();
 }
