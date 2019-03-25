@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.ParadeRepository;
 import repositories.SponsorshipRepository;
 import domain.Sponsor;
 import domain.Sponsorship;
@@ -28,6 +29,9 @@ public class SponsorshipService {
 
 	@Autowired
 	private Validator				validator;
+
+	@Autowired
+	private ParadeRepository		paradeRepository;
 
 
 	// CRUD methods
@@ -136,4 +140,7 @@ public class SponsorshipService {
 		return sponsorships;
 	}
 
+	public Collection<Sponsorship> getSponsorshipByParade(final int id) {
+		return this.paradeRepository.getParadesBySponsorship(id);
+	}
 }

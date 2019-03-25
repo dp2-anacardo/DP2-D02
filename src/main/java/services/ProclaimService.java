@@ -74,5 +74,9 @@ public class ProclaimService {
 	public void flush() {
 		this.proclaimRepository.flush();
 	}
+	public void delete(final Proclaim p) {
+		Assert.notNull(p);
+		this.proclaimRepository.delete(p.getId());
+	}
 
 }

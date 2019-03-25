@@ -266,5 +266,10 @@ public class ParadeService {
 		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
 		parade.setStatus("REJECTED");
 	}
+	public Collection<Finder> getFinderByParade(final int paradeId) {
+		Assert.notNull(paradeId);
+		return this.paradeRepository.getFinderByParade(paradeId);
+
+	}
 
 }

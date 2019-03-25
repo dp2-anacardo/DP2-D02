@@ -114,6 +114,11 @@ public class ChapterService {
 		return parades;
 	}
 
+	public void delete(final Chapter c) {
+		Assert.notNull(c);
+		this.chapterRepository.delete(c);
+	}
+
 	public void autoAssignateArea(final Chapter chapter, final int areaId) {
 		Assert.notNull(areaId);
 		Assert.notNull(chapter);
