@@ -10,12 +10,17 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class SocialProfile extends DomainEntity {
 
+	@Expose
 	private String	nick;
+	@Expose
 	private String	socialNetworkName;
+	@Expose
 	private String	profileLink;
 
 

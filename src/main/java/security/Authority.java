@@ -1,8 +1,8 @@
 /*
  * Authority.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,13 +21,15 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 
+import com.google.gson.annotations.Expose;
+
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class Authority implements GrantedAuthority {
 
 	// Constructors -----------------------------------------------------------
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long serialVersionUID = 1L;
 
 
 	public Authority() {
@@ -36,15 +38,19 @@ public class Authority implements GrantedAuthority {
 
 
 	// Values -----------------------------------------------------------------
-
+	@Expose
 	public static final String	ADMIN		= "ADMIN";
+	@Expose
 	public static final String	BROTHERHOOD	= "BROTHERHOOD";
+	@Expose
 	public static final String	MEMBER		= "MEMBER";
+	@Expose
 	public static final String	CHAPTER		= "CHAPTER";
+	@Expose
 	public static final String	SPONSOR		= "SPONSOR";
 
 	// Attributes -------------------------------------------------------------
-
+	@Expose
 	private String				authority;
 
 

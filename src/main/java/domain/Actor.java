@@ -20,6 +20,8 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
+import com.google.gson.annotations.Expose;
+
 import security.UserAccount;
 
 @Entity
@@ -29,19 +31,29 @@ import security.UserAccount;
 })
 public abstract class Actor extends DomainEntity {
 
+	@Expose
 	private String						name;
+	@Expose
 	private String						photo;
+	@Expose
 	private String						email;
+	@Expose
 	private String						phoneNumber;
+	@Expose
 	private String						address;
+	@Expose
 	private Boolean						isSuspicious;
+	@Expose
 	private Boolean						isBanned;
+	@Expose
 	private Double						score;
 
 	//Relationships
-
+	@Expose
 	private Collection<MessageBox>		boxes;
+	@Expose
 	private UserAccount					userAccount;
+	@Expose
 	private Collection<SocialProfile>	socialProfiles;
 
 

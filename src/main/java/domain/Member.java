@@ -11,11 +11,15 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Member extends Actor {
 
+	@Expose
 	private String	middleName;
+	@Expose
 	private String	surname;
 
 	//Relationships

@@ -18,6 +18,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
@@ -26,7 +28,9 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 public class MessageBox extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
+	@Expose
 	private String	name;
+	@Expose
 	private Boolean	isSystem;
 
 

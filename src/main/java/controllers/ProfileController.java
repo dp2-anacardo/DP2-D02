@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import domain.Actor;
 import domain.Administrator;
@@ -83,7 +84,7 @@ public class ProfileController extends AbstractController {
 		final ModelAndView result = new ModelAndView("profile/exportJSON");
 		final Actor user = this.actorService.getActorLogged();
 		final UserAccount userAccount = LoginService.getPrincipal();
-		final Gson gson = new Gson();
+		final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
 			Administrator administrador1;
@@ -105,7 +106,7 @@ public class ProfileController extends AbstractController {
 			Member member;
 			member = this.memberService.findOne(user.getId());
 			Assert.notNull(member);
-			member.setBoxes(null);
+			//member.setBoxes(null);
 			final String json = gson.toJson(member);
 			result.addObject("json", json);
 		}
