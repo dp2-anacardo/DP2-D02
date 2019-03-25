@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Area;
+import domain.Brotherhood;
+import domain.Member;
+import domain.Parade;
+import domain.Position;
 import services.AdministratorService;
 import services.AreaService;
 import services.ParadeService;
 import services.PositionService;
-import controllers.AbstractController;
-import domain.Area;
-import domain.Member;
-import domain.Parade;
-import domain.Position;
 
 @Controller
 @RequestMapping("administrator")
@@ -135,6 +136,21 @@ public class DashboardAdministratorController extends AbstractController {
 			else
 				positions2.add(p.getRoleEn());
 		}
+
+		/* Q13 */
+		final Double AvgRecordsPerHistory = this.administratorService.getAvgRecordsPerHistory();
+		final Double MaxRecordsPerHistory = this.administratorService.getMaxRecordsPerHistory();
+		final Double MinRecordsPerHistory = this.administratorService.getMinRecordsPerHistory();
+		final Double StddevRecordsPerHistory = this.administratorService.getStddevRecordsPerHistory();
+
+		/* TODO Q14 */
+
+		/* Q15 */
+		final List<Brotherhood> BrotherhoodHistoryLargerThanAvg = this.administratorService.getBrotherhoodHistoryLargerThanAvg();
+
+		/* Q16 */
+		final Double RatioAreaNotCoordinatesByChapter = this.administratorService.getRatioAreaNotCoordinatesByChapter();
+
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
@@ -176,6 +192,15 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("RatioOfEmptyFinders", RatioOfEmptyFinders);
 		result.addObject("HistogramOfPositions", HistogramOfPositions);
 		result.addObject("positions2", positions2);
+
+		result.addObject("AvgRecordsPerHistory", AvgRecordsPerHistory);
+		result.addObject("MaxRecordsPerHistory", MaxRecordsPerHistory);
+		result.addObject("MinRecordsPerHistory", MinRecordsPerHistory);
+		result.addObject("StddevRecordsPerHistory", StddevRecordsPerHistory);
+
+		result.addObject("BrotherhoodHistoryLargerThanAvg", BrotherhoodHistoryLargerThanAvg);
+
+		result.addObject("RatioAreaNotCoordinatesByChapter", RatioAreaNotCoordinatesByChapter);
 
 		return result;
 	}

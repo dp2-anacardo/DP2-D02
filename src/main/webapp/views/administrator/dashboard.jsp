@@ -107,7 +107,24 @@ datasets: [{
 
 		<b><spring:message code="administrator.RatioOfNotEmptyFinders" /></b> ${RatioOfNotEmptyFinders} <br />
 		<b><spring:message code="administrator.RatioOfEmptyFinders" /></b> ${RatioOfEmptyFinders} <br />
-
+		
+		<b><spring:message code="administrator.AvgRecordsPerHistory" /></b> ${AvgRecordsPerHistory} <br />
+		<b><spring:message code="administrator.MaxRecordsPerHistory" /></b> ${MaxRecordsPerHistory} <br />
+		<b><spring:message code="administrator.MinRecordsPerHistory" /></b> ${MinRecordsPerHistory} <br />
+		<b><spring:message code="administrator.StddevRecordsPerHistory" /></b> ${StddevRecordsPerHistory} <br />
+		
+		<b><spring:message
+				code="administrator.BrotherhoodHistoryLargerThanAvg" /></b>
+		<jstl:forEach var="BrotherhoodHistoryLargerThanAvg"
+			items="${BrotherhoodHistoryLargerThanAvg}">
+			<br>
+			- ${BrotherhoodHistoryLargerThanAvg.name}
+		</jstl:forEach>
+		
+		<br>
+		<b><spring:message code="administrator.RatioAreaNotCoordinatesByChapter" /></b> 
+		${RatioAreaNotCoordinatesByChapter} <br />
+	
 	</security:authorize>
 </body>
 </html>
