@@ -108,6 +108,8 @@ public class SegmentService {
 	}
 
 	public Collection<Segment> getPathByParade(final int paradeId) {
+		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
+		Assert.isTrue(this.paradeService.findOne(paradeId).getBrotherhood().equals(user));
 		final Collection<Segment> result = new ArrayList<Segment>();
 		result.addAll(this.segmentRepository.getPathByParade(paradeId));
 		return result;
