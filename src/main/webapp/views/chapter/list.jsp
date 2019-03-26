@@ -15,9 +15,6 @@
 	<spring:message code="record.title" var="title" />
 	<display:column property="title" title="${title}"/>
 	
-	<spring:message code="chapter.surname" var="surname" />
-	<display:column property="surname" title="${surname}"/>
-	
 	<display:column> <a href="proclaim/list.do?chapterId=${row.id}">
 	<spring:message code="chapter.proclaims" /></a> </display:column>
 	

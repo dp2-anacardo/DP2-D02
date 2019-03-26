@@ -141,8 +141,6 @@ public class ChapterService {
 		result.setPhoneNumber(c.getPhoneNumber());
 		result.setPhoto(c.getPhoto());
 		result.setTitle(c.getTitle());
-		result.setMiddleName(c.getMiddleName());
-		result.setSurname(c.getSurname());
 		result.getUserAccount().setPassword(c.getPassword());
 		result.getUserAccount().setUsername(c.getUsername());
 		result.setVersion(c.getVersion());

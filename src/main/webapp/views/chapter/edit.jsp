@@ -28,20 +28,6 @@
 	<form:errors cssClass="error" path="name" />
 	<br />
 	
-	<form:label path="middleName">
-		<spring:message code="chapter.middleName" />
-	</form:label>
-	<form:input path="middleName" />
-	<form:errors cssClass="error" path="middleName" />
-	<br />
-	
-	<form:label path="surname">
-		<spring:message code="chapter.surname" />
-	</form:label>
-	<form:input path="surname" />
-	<form:errors cssClass="error" path="surname" />
-	<br />
-	
 	<form:label path="photo">
 		<spring:message code="chapter.photo" />
 	</form:label>
