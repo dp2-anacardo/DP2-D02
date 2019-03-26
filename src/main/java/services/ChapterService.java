@@ -163,20 +163,18 @@ public class ChapterService {
 
 	public Chapter reconstruct(final Chapter chapter, final BindingResult binding) {
 		Chapter result;
-		if (chapter.getId() == 0)
-			result = chapter;
-		else {
-			result = this.chapterRepository.findOne(chapter.getId());
 
-			result.setName(chapter.getName());
-			result.setPhoto(chapter.getPhoto());
-			result.setPhoneNumber(chapter.getPhoneNumber());
-			result.setEmail(chapter.getEmail());
-			result.setAddress(chapter.getAddress());
-			result.setTitle(chapter.getTitle());
+		result = this.chapterRepository.findOne(chapter.getId());
 
-			this.validator.validate(result, binding);
-		}
+		result.setName(chapter.getName());
+		result.setPhoto(chapter.getPhoto());
+		result.setPhoneNumber(chapter.getPhoneNumber());
+		result.setEmail(chapter.getEmail());
+		result.setAddress(chapter.getAddress());
+		result.setTitle(chapter.getTitle());
+
+		this.validator.validate(result, binding);
+
 		return result;
 	}
 
