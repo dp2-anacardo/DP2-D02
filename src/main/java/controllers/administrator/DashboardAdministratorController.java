@@ -145,6 +145,8 @@ public class DashboardAdministratorController extends AbstractController {
 
 		/* TODO Q14 */
 
+		final String BrotherhoodWithLargestHistory = this.administratorService.getBrotherhoodWithLargestHistory();
+
 		/* Q15 */
 		final List<Brotherhood> BrotherhoodHistoryLargerThanAvg = this.administratorService.getBrotherhoodHistoryLargerThanAvg();
 
@@ -250,6 +252,8 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("StddevSponsorshipsActivesPerSponsor", StddevSponsorshipsActivesPerSponsor);
 
 		result.addObject("Top5SponsorsInTermsOfSponsorshipsActives", Top5SponsorsInTermsOfSponsorshipsActives);
+
+		result.addObject("BrotherhoodWithLargestHistory", BrotherhoodWithLargestHistory);
 
 		return result;
 	}

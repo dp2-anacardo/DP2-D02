@@ -113,6 +113,8 @@ datasets: [{
 		<b><spring:message code="administrator.MinRecordsPerHistory" /></b> ${MinRecordsPerHistory} <br />
 		<b><spring:message code="administrator.StddevRecordsPerHistory" /></b> ${StddevRecordsPerHistory} <br />
 		
+		<b><spring:message code="administrator.BrotherhoodWithLargestHistory" /></b> ${BrotherhoodWithLargestHistory} <br />
+		
 		<b><spring:message
 				code="administrator.BrotherhoodHistoryLargerThanAvg" /></b>
 		<jstl:forEach var="BrotherhoodHistoryLargerThanAvg"

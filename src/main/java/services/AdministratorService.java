@@ -398,20 +398,51 @@ public class AdministratorService {
 		return result;
 	}
 
+	//	public Double getMaxRecordsPerHistory() {
+	//		UserAccount userAccount;
+	//		userAccount = LoginService.getPrincipal();
+	//		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+	//
+	//		Double max = 0.;
+	//		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+	//		for (final Brotherhood b : brotherhoods) {
+	//			final Integer id = b.getId();
+	//			final Double res = this.getNumRecordsPerBrotherhoods(id);
+	//			if (res > max)
+	//				max = res;
+	//		}
+	//		return max;
+	//	}
+
 	public Double getMaxRecordsPerHistory() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
+		final Double res = (Double) this.getBrotherhoodWithMoreRecords().get(1);
+
+		return res;
+	}
+
+	private List<Object> getBrotherhoodWithMoreRecords() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final List<Object> result = new ArrayList<Object>();
 		Double max = 0.;
 		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		for (final Brotherhood b : brotherhoods) {
 			final Integer id = b.getId();
 			final Double res = this.getNumRecordsPerBrotherhoods(id);
-			if (res > max)
+			if (res > max) {
 				max = res;
+				result.add(b.getName());
+			}
 		}
-		return max;
+		result.add(max);
+
+		return result;
 	}
 
 	public Double getMinRecordsPerHistory() {
@@ -459,7 +490,17 @@ public class AdministratorService {
 		return res * 1.;
 	}
 
-	/* TODO Q14: The brotherhood with the largest history. */
+	/* Q14: The brotherhood with the largest history. */
+
+	public String getBrotherhoodWithLargestHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final String res = this.getBrotherhoodWithMoreRecords().get(0).toString();
+
+		return res;
+	}
 
 	/* Q15: The brotherhoods whose history is larger than the average. */
 
