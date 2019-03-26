@@ -15,9 +15,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ParadeRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Chapter;
@@ -25,6 +22,9 @@ import domain.Finder;
 import domain.Parade;
 import domain.Request;
 import domain.Segment;
+import repositories.ParadeRepository;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -179,6 +179,7 @@ public class ParadeService {
 	}
 
 	public Collection<Parade> getParadesByBrotherhood(final Brotherhood b) {
+		Assert.notNull(b);
 		Collection<Parade> result;
 		result = this.paradeRepository.getParadesByBrotherhood(b);
 		return result;
