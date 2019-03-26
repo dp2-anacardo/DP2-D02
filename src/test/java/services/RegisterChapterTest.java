@@ -9,9 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.validation.DataBinder;
 
 import utilities.AbstractTest;
 import domain.Chapter;
+import forms.ChapterForm;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -23,14 +25,19 @@ public class RegisterChapterTest extends AbstractTest {
 	@Autowired
 	private ChapterService	chapterService;
 
+	@Autowired
+	private ActorService	actorService;
+
 
 	@Test
-	public void driver() {
+	public void registerChapterDriver() {
 		final Object testingData[][] = {
 			{
-				"prueba2", "123456", "123456", "prueba2", "prueba2", "prueba2", "", "", "prueba@prueba.com", "", "", null
+				"prueba2", "123456", "123456", "prueba2", "prueba2", "prueba2", "prueba2", "", "prueba@prueba.com", "", "", null
 			}, {
-				"", "123456", "123456", "prueba2", "prueba2", "prueba2", "", "", "prueba@prueba.com", "", "", ConstraintViolationException.class
+				"prueba3", "123456", "123456", "prueba2", "prueba2", "prueba2", "prueba2", "", "prueba@prueba.com", "600102030", "", null
+			}, {
+				"", "123456", "123456", "prueba2", "prueba2", "prueba2", "prueba2", "", "prueba@prueba.com", "", "", ConstraintViolationException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -38,26 +45,44 @@ public class RegisterChapterTest extends AbstractTest {
 				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (String) testingData[i][10], (Class<?>) testingData[i][11]);
 	}
 
-	public void templateRegisterChapter(final String username, final String password, final String confirmPassword, final String name, final String title, final String surname, final String middleName, final String photo, final String email,
+	@Test
+	public void editChapterDriver() {
+		final Object testingData[][] = {
+			{
+				"chapter1", "newName", null
+			}, {
+				"chapter1", "", ConstraintViolationException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditChapter((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	public void templateRegisterChapter(final String username, final String password, final String confirmPassword, final String name, final String title, final String middleName, final String surname, final String photo, final String email,
 		final String phoneNumber, final String address, final Class<?> expected) {
 
 		Class<?> caught;
 		caught = null;
 		try {
-			final Chapter c = this.chapterService.create();
+			final ChapterForm sForm = new ChapterForm();
 
-			c.getUserAccount().setUsername(username);
-			c.getUserAccount().setPassword(password);
-			c.setName(name);
-			c.setTitle(title);
-			c.setSurname(surname);
-			c.setMiddleName(middleName);
-			c.setPhoneNumber(phoneNumber);
-			c.setPhoto(photo);
-			c.setEmail(email);
-			c.setAddress(address);
+			final DataBinder binding = new DataBinder(new Chapter());
 
-			this.chapterService.save(c);
+			sForm.setName(name);
+			sForm.setMiddleName(middleName);
+			sForm.setSurname(surname);
+			sForm.setUsername(username);
+			sForm.setPassword(password);
+			sForm.setConfirmPass(confirmPassword);
+			sForm.setEmail(email);
+			sForm.setAddress(address);
+			sForm.setPhoneNumber(phoneNumber);
+			sForm.setPhoto(photo);
+			sForm.setTitle(title);
+
+			final Chapter chapter = this.chapterService.reconstruct(sForm, binding.getBindingResult());
+
+			this.chapterService.save(chapter);
 			this.chapterService.flush();
 
 		} catch (final Exception e) {
@@ -65,4 +90,30 @@ public class RegisterChapterTest extends AbstractTest {
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	public void templateEditChapter(final String username, final String name, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+		try {
+
+			super.authenticate(username);
+
+			final DataBinder binding = new DataBinder(new Chapter());
+
+			final Chapter chapter = this.chapterService.findOne(this.actorService.getActorLogged().getId());
+
+			chapter.setName(name);
+
+			final Chapter result = this.chapterService.reconstruct(chapter, binding.getBindingResult());
+
+			this.chapterService.save(result);
+			this.chapterService.flush();
+
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
 }

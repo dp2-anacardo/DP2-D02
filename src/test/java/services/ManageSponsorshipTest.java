@@ -2,6 +2,7 @@
 package services;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -11,11 +12,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 import org.springframework.validation.DataBinder;
 
 import utilities.AbstractTest;
 import datatype.CreditCard;
 import domain.Parade;
+import domain.Sponsor;
 import domain.Sponsorship;
 
 @ContextConfiguration(locations = {
@@ -33,6 +36,9 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 	@Autowired
 	private ParadeService		paradeService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	@Test
@@ -86,6 +92,20 @@ public class ManageSponsorshipTest extends AbstractTest {
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateActivateSponsorship((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+
+	@Test
+	public void listSponsorshipBySponsorDriver() {
+		final Object testingData[][] = {
+			{
+				"sponsor1", 2, null
+			}, {
+				"sponsor2", 2, null
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListSponsorshipBySponsor((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
 
 	}
 
@@ -186,6 +206,26 @@ public class ManageSponsorshipTest extends AbstractTest {
 			this.sponsorshipService.activate(sp);
 
 			this.sponsorService.flush();
+
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	public void templateListSponsorshipBySponsor(final String sponsor, final int numSponsorships, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+		try {
+
+			super.authenticate(sponsor);
+
+			final Sponsor sp = this.sponsorService.findOne(this.actorService.getActorLogged().getId());
+
+			final Collection<Sponsorship> sponsorships = this.sponsorshipService.findBySponsor(sp.getId());
+
+			Assert.isTrue(sponsorships.size() == numSponsorships);
 
 		} catch (final Exception e) {
 			caught = e.getClass();

@@ -67,6 +67,13 @@ public class ProfileController extends AbstractController {
 		final Actor user = this.actorService.getActorLogged();
 		final UserAccount userAccount = LoginService.getPrincipal();
 
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER")) {
+			Member member;
+			member = this.memberService.findOne(user.getId());
+			Assert.notNull(member);
+			result.addObject("member", member);
+		}
+
 		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
 			Administrator administrador1;
 			administrador1 = this.administratorService.findOne(user.getId());
@@ -124,6 +131,24 @@ public class ProfileController extends AbstractController {
 			Assert.notNull(member);
 			//member.setBoxes(null);
 			final String json = gson.toJson(member);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER")) {
+			Chapter chapter;
+			chapter = this.chapterService.findOne(user.getId());
+			Assert.notNull(chapter);
+			//member.setBoxes(null);
+			final String json = gson.toJson(chapter);
+			result.addObject("json", json);
+		}
+
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR")) {
+			Sponsor sponsor;
+			sponsor = this.sponsorService.findOne(user.getId());
+			Assert.notNull(sponsor);
+			//member.setBoxes(null);
+			final String json = gson.toJson(sponsor);
 			result.addObject("json", json);
 		}
 		return result;
