@@ -54,6 +54,16 @@
 	value="${config.defaultCC}"
 	fieldset="true"/>
 </p>
+<p>
+	<acme:showtext code="configuration.edit.vat" 
+	value="${config.vat}"
+	fieldset="true"/>
+</p>
+<p>
+	<acme:showtext code="configuration.edit.flatfee" 
+	value="${config.flatFee}"
+	fieldset="true"/>
+</p>
 
 <!-- Table Attributes -->
 	
@@ -89,6 +99,18 @@
 					var="negWords">
 		<tr>
     		<td><jstl:out value="${negWords}"/></td>
+  		</tr>
+	</jstl:forEach>
+</table>
+
+<table>
+	<tr>
+    	<th><spring:message code="configuration.edit.brandName" /></th>
+  	</tr>
+	<jstl:forEach items="${config.brandName}" 
+					var="name">
+		<tr>
+    		<td><jstl:out value="${name}"/></td>
   		</tr>
 	</jstl:forEach>
 </table>

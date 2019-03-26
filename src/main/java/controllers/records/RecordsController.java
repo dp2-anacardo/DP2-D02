@@ -186,7 +186,7 @@ public class RecordsController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/miscRecord/create", method = RequestMethod.POST, params = "create")
-	public ModelAndView createMisc(@ModelAttribute("mRF") @Valid final MiscRecord mRF, final BindingResult binding) {
+	public ModelAndView createMisc(@ModelAttribute("mRF") final MiscRecord mRF, final BindingResult binding) {
 		ModelAndView result;
 		MiscRecord mR;
 
@@ -229,25 +229,31 @@ public class RecordsController extends AbstractController {
 			photos.add(photo);
 			pRF.setPhoto(photos);
 		}
-
-		pR = this.periodRecordService.reconstructCreate(pRF, binding);
-
-		if (binding.hasErrors()) {
+		if (pRF.getStartYear() > pRF.getEndYear()) {
 			result = this.createModelAndView(pRF, null);
-			if (pRF.getLink().equals(""))
-				result.addObject("customErrorMessage", "record.error.onePhoto");
-		} else
-			try {
-				final Brotherhood bh = this.brotherhoodService.findOne(this.actorService.getActorLogged().getId());
-				pR.setBrotherhood(bh);
-				this.periodRecordService.save(pR);
-				result = this.list(pR.getBrotherhood().getId());
-			} catch (final Throwable oops) {
-				result = this.createModelAndView(pRF, "record.edit.error");
-			}
+			result.addObject("error", "record.error.1");
+		} else {
+
+			pR = this.periodRecordService.reconstructCreate(pRF, binding);
+
+			if (binding.hasErrors()) {
+				result = this.createModelAndView(pRF, null);
+				if (pRF.getLink().equals("")) {
+					result.addObject("customErrorMessage", "record.error.onePhoto");
+					result.addObject("error", "record.error.1");
+				}
+			} else
+				try {
+					final Brotherhood bh = this.brotherhoodService.findOne(this.actorService.getActorLogged().getId());
+					pR.setBrotherhood(bh);
+					this.periodRecordService.save(pR);
+					result = this.list(pR.getBrotherhood().getId());
+				} catch (final Throwable oops) {
+					result = this.createModelAndView(pRF, "record.edit.error");
+				}
+		}
 		return result;
 	}
-
 	//LINK RECORD CREATE
 	@RequestMapping(value = "/linkRecord/create", method = RequestMethod.GET)
 	public ModelAndView createLink() {
@@ -260,7 +266,7 @@ public class RecordsController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/linkRecord/create", method = RequestMethod.POST, params = "create")
-	public ModelAndView createLink(@ModelAttribute("lRF") @Valid final LinkRecord lRF, final BindingResult binding) {
+	public ModelAndView createLink(@ModelAttribute("lRF") final LinkRecord lRF, final BindingResult binding) {
 		ModelAndView result;
 		LinkRecord lR;
 		//final LinkRecord lR2 = new LinkRecord();
@@ -520,7 +526,7 @@ public class RecordsController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/miscRecord/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveMisc(@ModelAttribute("mRF") @Valid final MiscRecord mRF, final BindingResult binding) {
+	public ModelAndView saveMisc(@ModelAttribute("mRF") final MiscRecord mRF, final BindingResult binding) {
 		ModelAndView result;
 		MiscRecord mR;
 
@@ -561,9 +567,14 @@ public class RecordsController extends AbstractController {
 
 		pRF.setPhoto(pR.getPhoto());
 
-		if (binding.hasErrors())
+		if (pRF.getStartYear() > pRF.getEndYear()) {
 			result = this.editModelAndView(pRF, null);
-		else
+			result.addObject("error", "record.error.1");
+		} else if (binding.hasErrors()) {
+			result = this.editModelAndView(pRF, null);
+			if (pR.getStartYear() > pR.getEndYear())
+				result.addObject("error", "record.error.1");
+		} else
 			try {
 				this.periodRecordService.save(pR);
 				result = new ModelAndView("redirect:/records/periodRecord/show.do?id=" + pR.getId());
@@ -572,7 +583,6 @@ public class RecordsController extends AbstractController {
 			}
 		return result;
 	}
-
 	//LINK RECORD EDIT GET AND POST
 	@RequestMapping(value = "/linkRecord/edit", method = RequestMethod.GET)
 	public ModelAndView editLink(@RequestParam final int id) {
@@ -588,7 +598,7 @@ public class RecordsController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/linkRecord/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveLink(@ModelAttribute("lRF") @Valid final LinkRecord lRF, final BindingResult binding) {
+	public ModelAndView saveLink(@ModelAttribute("lRF") final LinkRecord lRF, final BindingResult binding) {
 		ModelAndView result;
 		LinkRecord lR;
 
@@ -764,7 +774,7 @@ public class RecordsController extends AbstractController {
 		Assert.notNull(bh);
 		final List<Url> photos = (List<Url>) iR.getPhoto();
 
-		if (!(iR.getBrotherhood().equals(bh)) || pos >= photos.size())
+		if (!(iR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
 			result = this.editModelAndView(iR);
 		else {
 			photos.remove(photos.get(pos));
@@ -815,7 +825,7 @@ public class RecordsController extends AbstractController {
 		Assert.notNull(bh);
 		final List<Url> photos = (List<Url>) pR.getPhoto();
 
-		if (!(pR.getBrotherhood().equals(bh)) || pos >= photos.size())
+		if (!(pR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
 			result = this.editModelAndView(pR);
 		else {
 			photos.remove(photos.get(pos));
@@ -897,6 +907,7 @@ public class RecordsController extends AbstractController {
 
 		result = new ModelAndView("records/inceptionRecord/edit");
 		result.addObject("iRF", iRF);
+		result.addObject("size", iRF.getPhoto().size());
 		result.addObject("cont", 0);
 		result.addObject("messageCode", messageCode);
 
@@ -935,6 +946,7 @@ public class RecordsController extends AbstractController {
 		result = new ModelAndView("records/periodRecord/edit");
 		result.addObject("pRF", pRF);
 		result.addObject("cont", 0);
+		result.addObject("size", pRF.getPhoto().size());
 		result.addObject("messageCode", messageCode);
 
 		return result;
@@ -971,6 +983,7 @@ public class RecordsController extends AbstractController {
 
 		result = new ModelAndView("records/legalRecord/edit");
 		result.addObject("lRF", lRF);
+		result.addObject("size", lRF.getApplicableLaws().size());
 		result.addObject("cont", 0);
 		result.addObject("messageCode", messageCode);
 
@@ -989,7 +1002,6 @@ public class RecordsController extends AbstractController {
 
 		result = new ModelAndView("records/legalRecord/create");
 		result.addObject("lRF", lRF);
-		//result.addObject("size", lRF.getApplicableLaws().size());
 		result.addObject("cont", 0);
 		result.addObject("messageCode", messageCode);
 

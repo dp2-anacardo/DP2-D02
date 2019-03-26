@@ -28,6 +28,7 @@
 	<acme:textboxbs code="record.edit.description" path="description"/>
 	<acme:textboxbs code="record.edit.startYear" path="startYear"/>
 	<acme:textboxbs code="record.edit.endYear" path="endYear"/>
+	<jstl:if test="${error!=null}"><div class="error"><spring:message code="record.error.1"/></div></jstl:if>
 	
 	<!-- Edit photos -->
 
@@ -35,15 +36,17 @@
 		<tr>
     		<th><spring:message code="record.photo" /></th>
     		<th><spring:message code="record.edit.miniature"/></th>
-    		<th></th>
+    		<jstl:if test="${size!=1}"><th></th></jstl:if>
   		</tr>
 		<jstl:forEach items="${pRF.photo}" 
 						var="photos">
 		<tr>
     		<td><jstl:out value="${photos.link}"/></td>
     		<td><img src="${photos.link}" alt="link" height=32 width=32/></td>
+    		<jstl:if test="${size!=1}">
     		<td><acme:cancel url="/records/periodRecord/deletePhoto.do?id=${pRF.id}&pos=${cont}" 
     			code="record.edit.delete"/></td>
+    		</jstl:if>
   		</tr>
   		<jstl:set var="cont" value="${cont+1}" />
 		</jstl:forEach>
@@ -59,7 +62,7 @@
 	
 	<acme:submit name="save" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records/periodRecord/delete.do?id=${pRF.id}" code="record.edit.delete"/>&nbsp;
+	<acme:submit name="delete" code="record.edit.delete"/>&nbsp;
 	
 	<acme:cancel url="/records/periodRecord/show.do?id=${pRF.id}" code="record.edit.cancel"/>
 	

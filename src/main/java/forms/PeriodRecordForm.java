@@ -16,8 +16,8 @@ public class PeriodRecordForm {
 	private int				version;
 	private String			title;
 	private String			description;
-	private int				startYear;
-	private int				endYear;
+	private Integer			startYear;
+	private Integer			endYear;
 	private Collection<Url>	photo;
 	private String			link;
 
@@ -60,11 +60,11 @@ public class PeriodRecordForm {
 		return this.description;
 	}
 
-	public int getStartYear() {
+	public Integer getStartYear() {
 		return this.startYear;
 	}
 
-	public int getEndYear() {
+	public Integer getEndYear() {
 		return this.endYear;
 	}
 
@@ -86,11 +86,11 @@ public class PeriodRecordForm {
 		this.description = description;
 	}
 
-	public void setStartYear(final int startYear) {
+	public void setStartYear(final Integer startYear) {
 		this.startYear = startYear;
 	}
 
-	public void setEndYear(final int endYear) {
+	public void setEndYear(final Integer endYear) {
 		this.endYear = endYear;
 	}
 

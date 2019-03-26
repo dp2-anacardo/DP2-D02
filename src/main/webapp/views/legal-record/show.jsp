@@ -23,9 +23,11 @@
 <br/>
 <acme:showtext fieldset="false" code="record.edit.legalName" value="${record.legalName}"/>
 <br/>
+<jstl:if test="${record.vatNumber!=0 && record.vatNumber!=null}">
 <br/>
 <acme:showtext fieldset="false" code="record.edit.vatNumber" value="${record.vatNumber}"/>
 <br/>
+</jstl:if>
 <!-- Applicable Laws -->
 <table>
 	<tr>

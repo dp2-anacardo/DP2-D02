@@ -92,6 +92,26 @@ public class ConfigurationController extends AbstractController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/deleteBName", method = RequestMethod.GET)
+	public ModelAndView deleteBName(@RequestParam(value = "BN") final String BN) {
+		final ModelAndView result;
+		final Configuration config = this.configurationService.findAll().get(0);
+
+		final Actor user = this.actorService.getActorLogged();
+		final Administrator admin = this.administratorService.findOne(user.getId());
+		Assert.notNull(admin);
+
+		final Collection<String> bN = config.getBrandName();
+		bN.remove(BN);
+		config.setBrandName(bN);
+
+		this.configurationService.save(config);
+		result = new ModelAndView("redirect:/configuration/administrator/edit.do");
+
+		return result;
+	}
+
 	// WORD ADDS
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "addWord")
 	public ModelAndView addSW(@ModelAttribute("configF") @Valid final ConfigurationForm configF, final BindingResult binding) {
@@ -111,6 +131,7 @@ public class ConfigurationController extends AbstractController {
 			configF.setSpamWords(config.getSpamWords());
 			configF.setPositiveWords(config.getPositiveWords());
 			configF.setNegativeWords(config.getNegativeWords());
+			configF.setBrandName(config.getBrandName());
 
 			result = this.editModelAndView(configF, null);
 		} else
@@ -147,6 +168,7 @@ public class ConfigurationController extends AbstractController {
 		configF.setSpamWords(config.getSpamWords());
 		configF.setPositiveWords(config.getPositiveWords());
 		configF.setNegativeWords(config.getNegativeWords());
+		configF.setBrandName(config.getBrandName());
 
 		if (binding.hasErrors())
 			result = this.editModelAndView(configF, null);

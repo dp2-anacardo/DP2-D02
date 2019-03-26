@@ -113,4 +113,8 @@ public class MiscRecordService {
 		return this.miscRecordRepository.getMiscRecordByBrotherhood(BrotherhoodId);
 	}
 
+	public void flush() {
+		this.miscRecordRepository.flush();
+	}
+
 }

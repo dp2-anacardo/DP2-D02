@@ -16,7 +16,7 @@
 <acme:showtext fieldset="false" code="record.description" value="${record.description}"/>
 <br/>
 <br/>
-<acme:cancel url="/records" code="record.goBack" />
+<acme:cancel url="/records/list.do?brotherhoodId=${record.brotherhood.id}" code="record.goBack" />
 <jstl:if test="${isBrotherhood}">
 	<acme:cancel url="/records/miscRecord/edit.do?id=${record.id}" code="record.edit"/>
 	<acme:cancel url="/records/miscRecord/delete.do?id=${record.id}" code="record.edit.delete"/>&nbsp;

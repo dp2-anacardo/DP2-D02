@@ -34,7 +34,9 @@
 	<table>
 		<tr>
     		<th><spring:message code="record.edit.applicableLaws" /></th>
+    		<jstl:if test="${size != 1}">
     		<th></th>
+    		</jstl:if>
   		</tr>
 		<jstl:forEach items="${lRF.applicableLaws}" 
 						var="law">

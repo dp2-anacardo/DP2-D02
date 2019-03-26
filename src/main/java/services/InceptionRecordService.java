@@ -150,4 +150,8 @@ public class InceptionRecordService {
 	public Collection<InceptionRecord> getInceptionRecordByBrotherhood(final int BrotherhoodId) {
 		return this.inceptionRecordRepository.getInceptionRecordByBrotherhood(BrotherhoodId);
 	}
+
+	public void flush() {
+		this.inceptionRecordRepository.flush();
+	}
 }

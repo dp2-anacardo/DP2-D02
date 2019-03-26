@@ -33,15 +33,17 @@
 		<tr>
     		<th><spring:message code="record.edit.photos" /></th>
     		<th><spring:message code="record.edit.miniature"/></th>
-    		<th></th>
+    		<jstl:if test="${size!=1}"><th></th></jstl:if>
   		</tr>
 		<jstl:forEach items="${iRF.photo}" 
 						var="photos">
 		<tr>
     		<td><jstl:out value="${photos.link}"/></td>
     		<td><img src="${photos.link}" alt="link" height=32 width=32/></td>
+    		<jstl:if test="${size!=1}">
     		<td><acme:cancel url="/records/inceptionRecord/deletePhoto.do?id=${iRF.id}&pos=${cont}" 
     			code="configuration.edit.delete"/></td>
+    		</jstl:if>
   		</tr>
   		<jstl:set var="cont" value="${cont+1}" />
 		</jstl:forEach>

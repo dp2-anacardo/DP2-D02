@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,8 +23,8 @@ public class PeriodRecord extends DomainEntity {
 
 	private String			title;
 	private String			description;
-	private int				startYear;
-	private int				endYear;
+	private Integer			startYear;
+	private Integer			endYear;
 	private Collection<Url>	photo;
 
 	private Brotherhood		brotherhood;
@@ -40,11 +41,12 @@ public class PeriodRecord extends DomainEntity {
 		return this.description;
 	}
 
-	public int getStartYear() {
+	@NotNull
+	public Integer getStartYear() {
 		return this.startYear;
 	}
-
-	public int getEndYear() {
+	@NotNull
+	public Integer getEndYear() {
 		return this.endYear;
 	}
 
@@ -64,11 +66,11 @@ public class PeriodRecord extends DomainEntity {
 		this.description = description;
 	}
 
-	public void setStartYear(final int startYear) {
+	public void setStartYear(final Integer startYear) {
 		this.startYear = startYear;
 	}
 
-	public void setEndYear(final int endYear) {
+	public void setEndYear(final Integer endYear) {
 		this.endYear = endYear;
 	}
 

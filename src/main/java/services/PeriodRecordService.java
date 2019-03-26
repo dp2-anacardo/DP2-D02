@@ -92,8 +92,14 @@ public class PeriodRecordService {
 
 		result.setTitle(pRF.getTitle());
 		result.setDescription(pRF.getDescription());
-		result.setStartYear(pRF.getStartYear());
-		result.setEndYear(pRF.getEndYear());
+		if (pRF.getStartYear() == 0)
+			result.setStartYear(null);
+		else
+			result.setStartYear(pRF.getStartYear());
+		if (pRF.getEndYear() == 0)
+			result.setEndYear(null);
+		else
+			result.setEndYear(pRF.getEndYear());
 		result.setPhoto(pRF.getPhoto());
 
 		this.validator.validate(result, binding);
@@ -114,8 +120,14 @@ public class PeriodRecordService {
 
 		result.setTitle(pRF.getTitle());
 		result.setDescription(pRF.getDescription());
-		result.setStartYear(pRF.getStartYear());
-		result.setEndYear(pRF.getEndYear());
+		if (pRF.getStartYear() == 0)
+			result.setStartYear(null);
+		else
+			result.setStartYear(pRF.getStartYear());
+		if (pRF.getEndYear() == 0)
+			result.setEndYear(null);
+		else
+			result.setEndYear(pRF.getEndYear());
 
 		this.validator.validate(result, binding);
 

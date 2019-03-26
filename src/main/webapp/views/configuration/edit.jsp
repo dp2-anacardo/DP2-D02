@@ -32,6 +32,8 @@
 	<acme:textboxbs code="configuration.edit.welcomeEs" 
 		path="welcomeMessageEs"/>
 	<acme:textboxbs code="configuration.edit.defaultCC" path="defaultCC"/>
+	<acme:textboxbs code="configuration.edit.vat" path="vat"/>
+	<acme:textboxbs code="configuration.edit.flatfee" path="flatFee"/>
 	
 	<!-- Edit words -->
 
@@ -91,6 +93,26 @@
 	<form:input path="addNW"/>
 	<form:errors path="addNW" cssClass="error" />
 	<acme:submit name="addWord" code="configuration.edit.addNW"/>&nbsp;
+	<br/>
+	
+	<table>
+		<tr>
+    		<th><spring:message code="configuration.edit.brandName" /></th>
+    		<th></th>
+  		</tr>
+		<jstl:forEach items="${configF.brandName}" 
+						var="name">
+		<tr>
+    		<td><jstl:out value="${name}"/></td>
+    		<td><acme:cancel url="/configuration/administrator/deleteBName.do?BN=${name}" 
+    			code="configuration.edit.delete"/></td>
+  		</tr>
+		</jstl:forEach>
+	</table>
+	
+	<form:input path="addBN"/>
+	<form:errors path="addBN" cssClass="error" />
+	<acme:submit name="addWord" code="configuration.edit.addBN"/>&nbsp;
 	<br/>
 	
 	<!-- Submit and cancel -->

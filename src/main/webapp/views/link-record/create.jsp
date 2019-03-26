@@ -24,7 +24,8 @@
 	<jstl:out value="${messageCode}"/>
 	
 	<acme:textboxbs code="record.title" path="title"/>
-	<acme:textboxbs code="record.description" path="description"/>
+	<acme:textarea bold="true" code="record.description" path="description"/>
+	<br/>
 	<b><spring:message code="record.edit.brotherhoods"/></b>
 	<br/>
 	<form:select path="linkedBH" items="${brotherhoods}" code="record.edit.brotherhoods"/>
@@ -35,7 +36,7 @@
 	
 	<acme:submit name="create" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records" code="record.edit.cancel"/>
+	<acme:cancel url="/" code="record.edit.cancel"/>
 	
 </form:form>
 </body>

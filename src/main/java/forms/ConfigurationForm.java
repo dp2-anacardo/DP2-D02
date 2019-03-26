@@ -25,6 +25,10 @@ public class ConfigurationForm {
 	private String				addSW;
 	private String				addPW;
 	private String				addNW;
+	private Collection<String>	brandName;
+	private String				addBN;
+	private Double				vat;
+	private Double				flatFee;
 
 
 	public ConfigurationForm(final Configuration config) {
@@ -40,6 +44,33 @@ public class ConfigurationForm {
 		this.positiveWords = config.getPositiveWords();
 		this.negativeWords = config.getNegativeWords();
 		this.defaultCC = config.getDefaultCC();
+		this.brandName = config.getBrandName();
+		this.vat = config.getVat();
+		this.flatFee = config.getFlatFee();
+	}
+
+	public Collection<String> getBrandName() {
+		return this.brandName;
+	}
+
+	public Double getVat() {
+		return this.vat;
+	}
+
+	public Double getFlatFee() {
+		return this.flatFee;
+	}
+
+	public void setBrandName(final Collection<String> brandName) {
+		this.brandName = brandName;
+	}
+
+	public void setVat(final Double vat) {
+		this.vat = vat;
+	}
+
+	public void setFlatFee(final Double flatFee) {
+		this.flatFee = flatFee;
 	}
 
 	public ConfigurationForm() {
@@ -127,6 +158,15 @@ public class ConfigurationForm {
 
 	public void setSystemName(final String systemName) {
 		this.systemName = systemName;
+	}
+
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getAddBN() {
+		return this.addBN;
+	}
+
+	public void setAddBN(final String addBN) {
+		this.addBN = addBN;
 	}
 
 	public void setBanner(final String banner) {

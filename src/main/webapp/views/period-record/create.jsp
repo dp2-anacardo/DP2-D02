@@ -27,6 +27,7 @@
 	<acme:textarea bold="true" code="record.description" path="description"/>
 	<acme:textboxbs code="record.edit.startYear" path="startYear"/>
 	<acme:textboxbs code="record.edit.endYear" path="endYear"/>
+	<jstl:if test="${error!=null}"><div class="error"><spring:message code="record.error.1"/></div></jstl:if>
 	<br/>
 	<acme:textboxbs code="record.edit.onePhoto" path="link"/>
 	<jstl:if test="${customErrorMessage!=null}">

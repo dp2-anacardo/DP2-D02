@@ -191,4 +191,8 @@ public class BrotherhoodService {
 		return this.brotherhoodRepository.getEnrolmentsByBrotherhoodAndMember(b, m);
 	}
 
+	public void flush() {
+		this.brotherhoodRepository.flush();
+	}
+
 }

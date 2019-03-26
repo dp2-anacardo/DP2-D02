@@ -46,10 +46,10 @@
 	
 	<jstl:if test="${isBrotherhood}">
 	<display:column>
-		<acme:cancel url="/records/legalRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
+		<acme:cancel url="/records/legalRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
 	</display:column>
 	<display:column>
-		<acme:cancel url="/records/legalRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
+		<acme:cancel url="/records/legalRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
 	</display:column>
 	</jstl:if>
 	
@@ -75,10 +75,10 @@
 	
 	<jstl:if test="${isBrotherhood}">
 	<display:column>
-		<acme:cancel url="/records/linkRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
+		<acme:cancel url="/records/linkRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
 	</display:column>
 	<display:column>
-		<acme:cancel url="/records/linkRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
+		<acme:cancel url="/records/linkRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
 	</display:column>
 	</jstl:if>
 	
@@ -104,10 +104,10 @@
 	
 	<jstl:if test="${isBrotherhood}">
 	<display:column>
-		<acme:cancel url="/records/miscRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
+		<acme:cancel url="/records/miscRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
 	</display:column>
 	<display:column>
-		<acme:cancel url="/records/miscRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
+		<acme:cancel url="/records/miscRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
 	</display:column>
 	</jstl:if>
 		
@@ -133,10 +133,10 @@
 	
 	<jstl:if test="${isBrotherhood}">
 	<display:column>
-		<acme:cancel url="/records/periodRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
+		<acme:cancel url="/records/periodRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
 	</display:column>
 	<display:column>
-		<acme:cancel url="/records/periodRecord/edit.do?id=${row.id}" code="record.edit"/>&nbsp;
+		<acme:cancel url="/records/periodRecord/delete.do?id=${row.id}" code="record.edit.delete"/>&nbsp;
 	</display:column>
 	</jstl:if>
 	

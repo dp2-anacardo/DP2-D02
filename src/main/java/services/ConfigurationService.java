@@ -71,7 +71,10 @@ public class ConfigurationService {
 		result.setSpamWords(config.getSpamWords());
 		result.setPositiveWords(config.getPositiveWords());
 		result.setNegativeWords(config.getNegativeWords());
+		result.setBrandName(config.getBrandName());
 
+		result.setVat(configF.getVat());
+		result.setFlatFee(configF.getFlatFee());
 		result.setMaxResults(configF.getMaxResults());
 		result.setMaxTime(configF.getMaxTime());
 		result.setSystemName(configF.getSystemName());
@@ -98,18 +101,23 @@ public class ConfigurationService {
 		result.setWelcomeMessageEn(config.getWelcomeMessageEn());
 		result.setWelcomeMessageEs(config.getWelcomeMessageEs());
 		result.setDefaultCC(config.getDefaultCC());
+		result.setVat(config.getVat());
+		result.setFlatFee(config.getFlatFee());
 
 		final Collection<String> sW = new ArrayList<String>();
 		final Collection<String> pW = new ArrayList<String>();
 		final Collection<String> nW = new ArrayList<String>();
+		final Collection<String> bN = new ArrayList<String>();
 
 		sW.addAll(config.getSpamWords());
 		pW.addAll(config.getPositiveWords());
 		nW.addAll(config.getNegativeWords());
+		bN.addAll(config.getBrandName());
 
 		result.setSpamWords(sW);
 		result.setPositiveWords(pW);
 		result.setNegativeWords(nW);
+		result.setBrandName(bN);
 
 		if (!configF.getAddSW().equals(""))
 			result.getSpamWords().add(configF.getAddSW());
@@ -119,6 +127,9 @@ public class ConfigurationService {
 
 		if (!configF.getAddNW().equals(""))
 			result.getNegativeWords().add(configF.getAddNW());
+
+		if (!configF.getAddBN().equals(""))
+			result.getBrandName().add(configF.getAddBN());
 
 		result.setId(config.getId());
 		result.setVersion(config.getVersion());

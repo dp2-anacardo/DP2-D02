@@ -32,7 +32,7 @@
 	
 	<acme:submit name="create" code="record.edit.submit"/>&nbsp;
 	
-	<acme:cancel url="/records" code="record.edit.cancel"/>
+	<acme:cancel url="/" code="record.edit.cancel"/>
 	
 </form:form>
 </body>
