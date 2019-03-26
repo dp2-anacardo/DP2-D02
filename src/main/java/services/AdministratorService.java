@@ -522,6 +522,16 @@ public class AdministratorService {
 		return res;
 	}
 
+	public Double getStddevParadesCoordinatesByChapters() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getStddevParadesCoordinatesByChapters();
+		return res;
+	}
+
 	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
 
 	/* Q19: The ratio of parades in draft mode versus parades in final mode. */

@@ -151,6 +151,12 @@ public class DashboardAdministratorController extends AbstractController {
 		/* Q16 */
 		final Double RatioAreaNotCoordinatesByChapter = this.administratorService.getRatioAreaNotCoordinatesByChapter();
 
+		/* Q17 */
+		final Double AvgParadesCoordinatesByChapters = this.administratorService.getAvgParadesCoordinatesByChapters();
+		final Double MinParadesCoordinatesByChapter = this.administratorService.getMinParadesCoordinatesByChapters();
+		final Double MaxParadesCoordinatesByChapters = this.administratorService.getMaxParadesCoordinatesByChapters();
+		final Double StddevParadesCoordinatesByChapters = this.administratorService.getStddevParadesCoordinatesByChapters();
+
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
@@ -201,6 +207,11 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("BrotherhoodHistoryLargerThanAvg", BrotherhoodHistoryLargerThanAvg);
 
 		result.addObject("RatioAreaNotCoordinatesByChapter", RatioAreaNotCoordinatesByChapter);
+
+		result.addObject("AvgParadesCoordinatesByChapters", AvgParadesCoordinatesByChapters);
+		result.addObject("MinParadesCoordinatesByChapter", MinParadesCoordinatesByChapter);
+		result.addObject("MaxParadesCoordinatesByChapters", MaxParadesCoordinatesByChapters);
+		result.addObject("StddevParadesCoordinatesByChapters", StddevParadesCoordinatesByChapters);
 
 		return result;
 	}

@@ -125,6 +125,12 @@ datasets: [{
 		<b><spring:message code="administrator.RatioAreaNotCoordinatesByChapter" /></b> 
 		${RatioAreaNotCoordinatesByChapter} <br />
 	
+		<b><spring:message code="administrator.AvgParadesCoordinatesByChapters" /></b> ${AvgParadesCoordinatesByChapters} <br />
+		<b><spring:message code="administrator.MinParadesCoordinatesByChapter" /></b> ${MinParadesCoordinatesByChapter} <br />
+		<b><spring:message code="administrator.MaxParadesCoordinatesByChapters" /></b> ${MaxParadesCoordinatesByChapters} <br />
+		<b><spring:message code="administrator.StddevParadesCoordinatesByChapters" /></b> ${StddevParadesCoordinatesByChapters} <br />
+		
+	
 	</security:authorize>
 </body>
 </html>
