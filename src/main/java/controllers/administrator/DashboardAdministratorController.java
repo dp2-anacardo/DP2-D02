@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import domain.Parade;
 import domain.Position;
@@ -143,7 +144,9 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double MinRecordsPerHistory = this.administratorService.getMinRecordsPerHistory();
 		final Double StddevRecordsPerHistory = this.administratorService.getStddevRecordsPerHistory();
 
-		/* TODO Q14 */
+		/* Q14 */
+
+		final String BrotherhoodWithLargestHistory = this.administratorService.getBrotherhoodWithLargestHistory();
 
 		/* Q15 */
 		final List<Brotherhood> BrotherhoodHistoryLargerThanAvg = this.administratorService.getBrotherhoodHistoryLargerThanAvg();
@@ -158,6 +161,8 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double StddevParadesCoordinatesByChapters = this.administratorService.getStddevParadesCoordinatesByChapters();
 
 		/* TODO Q18 */
+
+		final List<Chapter> ChaptersCoordinate10MoreParadesThanAvg = this.administratorService.getChaptersCoordinate10MoreParadesThanAvg();
 
 		/* Q19 */
 		final Double RatioParadeDraftVsFinal = this.administratorService.getRatioParadeDraftVsFinal();
@@ -250,6 +255,10 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("StddevSponsorshipsActivesPerSponsor", StddevSponsorshipsActivesPerSponsor);
 
 		result.addObject("Top5SponsorsInTermsOfSponsorshipsActives", Top5SponsorsInTermsOfSponsorshipsActives);
+
+		result.addObject("BrotherhoodWithLargestHistory", BrotherhoodWithLargestHistory);
+
+		result.addObject("ChaptersCoordinate10MoreParadesThanAvg", ChaptersCoordinate10MoreParadesThanAvg);
 
 		return result;
 	}

@@ -292,6 +292,7 @@
 				<ref bean="picture2"/>
 			</list>
 		</property>
+		<property name="chapter" ref = "chapter1"></property>
 	</bean>
 	
 	<!-- Picture -->
@@ -1243,6 +1244,7 @@
 			</list>
 		</property>
 		<property name="title" value="titleChapter1"/>
+		<property name="area" ref = "areaBrotherhood1"></property>
 	</bean>
 	
 	<bean id="chapter2" class="domain.Chapter">

@@ -17,26 +17,37 @@
 <body>
 
 	<security:authorize access="hasRole('ADMIN')">
-	
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-<canvas id="myChart" width="40" height="10" aria-label="coza" role="img"></canvas>
-<b><spring:message code="administrator.histogram"/></b> <br />
-<script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-labels: ["President","Vicepresident","Secretary","Treasurer","Fundraiser","Historian","Officer"],
-datasets: [{
-  label: 'Number of positions',
-  data: ["${HistogramOfPositions.get(0)}","${HistogramOfPositions.get(1)}","${HistogramOfPositions.get(2)}","${HistogramOfPositions.get(3)}",
-         "${HistogramOfPositions.get(4)}","${HistogramOfPositions.get(5)}","${HistogramOfPositions.get(6)}"],
-  backgroundColor: 'rgba(0, 0, 255, 1)',
-}]
-  }
-});
-</script>
+		<script type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+		<canvas id="myChart" width="40" height="10" aria-label="coza"
+			role="img"></canvas>
+		<b><spring:message code="administrator.histogram" /></b>
+		<br />
+		<script>
+			var positions = '<jstl:out value="${positions2}"/>';
+			var sillyString = positions.substr(1).slice(0, -1);
+			positions2 = sillyString.split(",");
+			var numberArray = '<jstl:out value="${HistogramOfPositions}"/>';
+			var sillyString2 = numberArray.substr(1).slice(0, -1);
+			numberArray2 = sillyString2.split(",").map(Number);
+
+			var ctx = document.getElementById("myChart").getContext('2d');
+			var myChart = new Chart(ctx, {
+				type : 'bar',
+				data : {
+					labels : positions2,
+					datasets : [
+						{
+							label : 'Number of positions',
+							data : numberArray2,
+							backgroundColor : 'rgba(0, 0, 255, 1)',
+						}
+					]
+				}
+			});
+		</script>
 		<b><spring:message code="administrator.AvgOfMembersPerBrotherhood" /></b> ${AvgOfMembersPerBrotherhood} <br />
 		<b><spring:message code="administrator.MinOfMembersPerBrotherhood" /></b> ${MinOfMembersPerBrotherhood} <br />
 		<b><spring:message code="administrator.MaxOfMembersPerBrotherhood" /></b> ${MaxOfMembersPerBrotherhood} <br />
@@ -107,12 +118,15 @@ datasets: [{
 
 		<b><spring:message code="administrator.RatioOfNotEmptyFinders" /></b> ${RatioOfNotEmptyFinders} <br />
 		<b><spring:message code="administrator.RatioOfEmptyFinders" /></b> ${RatioOfEmptyFinders} <br />
-		
+
 		<b><spring:message code="administrator.AvgRecordsPerHistory" /></b> ${AvgRecordsPerHistory} <br />
 		<b><spring:message code="administrator.MaxRecordsPerHistory" /></b> ${MaxRecordsPerHistory} <br />
 		<b><spring:message code="administrator.MinRecordsPerHistory" /></b> ${MinRecordsPerHistory} <br />
 		<b><spring:message code="administrator.StddevRecordsPerHistory" /></b> ${StddevRecordsPerHistory} <br />
-		
+
+		<b><spring:message
+				code="administrator.BrotherhoodWithLargestHistory" /></b> ${BrotherhoodWithLargestHistory} <br />
+
 		<b><spring:message
 				code="administrator.BrotherhoodHistoryLargerThanAvg" /></b>
 		<jstl:forEach var="BrotherhoodHistoryLargerThanAvg"
@@ -120,29 +134,49 @@ datasets: [{
 			<br>
 			- ${BrotherhoodHistoryLargerThanAvg.name}
 		</jstl:forEach>
-		
+
 		<br>
-		<b><spring:message code="administrator.RatioAreaNotCoordinatesByChapter" /></b> 
+		<b><spring:message
+				code="administrator.RatioAreaNotCoordinatesByChapter" /></b> 
 		${RatioAreaNotCoordinatesByChapter} <br />
-	
-		<b><spring:message code="administrator.AvgParadesCoordinatesByChapters" /></b> ${AvgParadesCoordinatesByChapters} <br />
-		<b><spring:message code="administrator.MinParadesCoordinatesByChapter" /></b> ${MinParadesCoordinatesByChapter} <br />
-		<b><spring:message code="administrator.MaxParadesCoordinatesByChapters" /></b> ${MaxParadesCoordinatesByChapters} <br />
-		<b><spring:message code="administrator.StddevParadesCoordinatesByChapters" /></b> ${StddevParadesCoordinatesByChapters} <br />
-		
+
+		<b><spring:message
+				code="administrator.AvgParadesCoordinatesByChapters" /></b> ${AvgParadesCoordinatesByChapters} <br />
+		<b><spring:message
+				code="administrator.MinParadesCoordinatesByChapter" /></b> ${MinParadesCoordinatesByChapter} <br />
+		<b><spring:message
+				code="administrator.MaxParadesCoordinatesByChapters" /></b> ${MaxParadesCoordinatesByChapters} <br />
+		<b><spring:message
+				code="administrator.StddevParadesCoordinatesByChapters" /></b> ${StddevParadesCoordinatesByChapters} <br />
+
+		<b><spring:message
+				code="administrator.ChaptersCoordinate10MoreParadesThanAvg" /></b>
+		<jstl:forEach var="ChaptersCoordinate10MoreParadesThanAvg"
+			items="${ChaptersCoordinate10MoreParadesThanAvg}">
+			<br>
+			- ${ChaptersCoordinate10MoreParadesThanAvg.title}
+		</jstl:forEach>
+
+		<br>
 		<b><spring:message code="administrator.RatioParadeDraftVsFinal" /></b> ${RatioParadeDraftVsFinal} <br />
-		
-		<b><spring:message code="administrator.RatioParadeFinalModeAccepted" /></b> ${RatioParadeFinalModeAccepted} <br />
-		<b><spring:message code="administrator.RatioParadeFinalModeSubmitted" /></b> ${RatioParadeFinalModeSubmitted} <br />
-		<b><spring:message code="administrator.RatioParadeFinalModeRejected" /></b> ${RatioParadeFinalModeRejected} <br />
-	
+
+		<b><spring:message
+				code="administrator.RatioParadeFinalModeAccepted" /></b> ${RatioParadeFinalModeAccepted} <br />
+		<b><spring:message
+				code="administrator.RatioParadeFinalModeSubmitted" /></b> ${RatioParadeFinalModeSubmitted} <br />
+		<b><spring:message
+				code="administrator.RatioParadeFinalModeRejected" /></b> ${RatioParadeFinalModeRejected} <br />
+
 		<b><spring:message code="administrator.RatioActiveSponsorships" /></b> ${RatioActiveSponsorships} <br />
-		
+
 		<b><spring:message code="administrator.AvgSponsorshipsPerSponsor" /></b> ${AvgSponsorshipsPerSponsor} <br />
-		<b><spring:message code="administrator.MinSponsorshipsActivesPerSponsor" /></b> ${MinSponsorshipsActivesPerSponsor} <br />
-		<b><spring:message code="administrator.MaxSponsorshipsActivesPerSponsor" /></b> ${MaxSponsorshipsActivesPerSponsor} <br />
-		<b><spring:message code="administrator.StddevSponsorshipsActivesPerSponsors" /></b> ${StddevSponsorshipsActivesPerSponsor} <br />
-		
+		<b><spring:message
+				code="administrator.MinSponsorshipsActivesPerSponsor" /></b> ${MinSponsorshipsActivesPerSponsor} <br />
+		<b><spring:message
+				code="administrator.MaxSponsorshipsActivesPerSponsor" /></b> ${MaxSponsorshipsActivesPerSponsor} <br />
+		<b><spring:message
+				code="administrator.StddevSponsorshipsActivesPerSponsors" /></b> ${StddevSponsorshipsActivesPerSponsor} <br />
+
 		<b><spring:message
 				code="administrator.Top5SponsorsInTermsOfSponsorshipsActives" /></b>
 		<jstl:forEach var="Top5SponsorsInTermsOfSponsorshipsActives"
@@ -150,7 +184,7 @@ datasets: [{
 			<br>
 			- ${Top5SponsorsInTermsOfSponsorshipsActives}
 		</jstl:forEach>
-		
+
 	</security:authorize>
 </body>
 </html>
