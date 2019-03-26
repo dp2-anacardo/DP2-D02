@@ -130,7 +130,27 @@ datasets: [{
 		<b><spring:message code="administrator.MaxParadesCoordinatesByChapters" /></b> ${MaxParadesCoordinatesByChapters} <br />
 		<b><spring:message code="administrator.StddevParadesCoordinatesByChapters" /></b> ${StddevParadesCoordinatesByChapters} <br />
 		
+		<b><spring:message code="administrator.RatioParadeDraftVsFinal" /></b> ${RatioParadeDraftVsFinal} <br />
+		
+		<b><spring:message code="administrator.RatioParadeFinalModeAccepted" /></b> ${RatioParadeFinalModeAccepted} <br />
+		<b><spring:message code="administrator.RatioParadeFinalModeSubmitted" /></b> ${RatioParadeFinalModeSubmitted} <br />
+		<b><spring:message code="administrator.RatioParadeFinalModeRejected" /></b> ${RatioParadeFinalModeRejected} <br />
 	
+		<b><spring:message code="administrator.RatioActiveSponsorships" /></b> ${RatioActiveSponsorships} <br />
+		
+		<b><spring:message code="administrator.AvgSponsorshipsPerSponsor" /></b> ${AvgSponsorshipsPerSponsor} <br />
+		<b><spring:message code="administrator.MinSponsorshipsActivesPerSponsor" /></b> ${MinSponsorshipsActivesPerSponsor} <br />
+		<b><spring:message code="administrator.MaxSponsorshipsActivesPerSponsor" /></b> ${MaxSponsorshipsActivesPerSponsor} <br />
+		<b><spring:message code="administrator.StddevSponsorshipsActivesPerSponsors" /></b> ${StddevSponsorshipsActivesPerSponsor} <br />
+		
+		<b><spring:message
+				code="administrator.Top5SponsorsInTermsOfSponsorshipsActives" /></b>
+		<jstl:forEach var="Top5SponsorsInTermsOfSponsorshipsActives"
+			items="${Top5SponsorsInTermsOfSponsorshipsActives}">
+			<br>
+			- ${Top5SponsorsInTermsOfSponsorshipsActives}
+		</jstl:forEach>
+		
 	</security:authorize>
 </body>
 </html>

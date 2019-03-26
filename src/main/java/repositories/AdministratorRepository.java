@@ -178,6 +178,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	Double getStddevParadesCoordinatesByChapters();
 
 	@Query("select sp.name, count(s) from Sponsorship s join s.sponsor sp where status = true group by sp order by count(s) desc")
-	List<List<Object>> getTop5SponsorsInTermsOfSponsorshipsActives();
+	List<Object[]> getTop5SponsorsInTermsOfSponsorshipsActives();
 
 }
