@@ -65,7 +65,8 @@
 		<security:intercept-url pattern="/brotherhood/deleteMember.do" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/segment/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/area/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" /> 
-		<security:intercept-url pattern="/area/chapter/**" access="hasRole('CHAPTER')" /> 
+		<security:intercept-url pattern="/area/chapter/**" access="hasRole('CHAPTER')" />
+		<security:intercept-url pattern="/chapter/chapter/**" access="hasRole('CHAPTER')" /> 
 
 		<security:intercept-url pattern="/brotherhood/showMember.do" access="permitAll" /> 
 		

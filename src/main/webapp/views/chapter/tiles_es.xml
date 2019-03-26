@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/chapter/list.jsp" />
 	</definition>
 	
+	<definition name="chapter/chapter/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar Sede" />
+		<put-attribute name="body" value="/views/chapter/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>
