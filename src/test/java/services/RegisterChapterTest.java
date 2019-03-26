@@ -28,18 +28,18 @@ public class RegisterChapterTest extends AbstractTest {
 	public void driver() {
 		final Object testingData[][] = {
 			{
-				"prueba2", "123456", "123456", "prueba2", "prueba2", "prueba2", "", "", "prueba@prueba.com", "", "", null
+				"prueba2", "123456", "123456", "prueba2", "prueba2", "", "prueba@prueba.com", "", "", null
 			}, {
-				"", "123456", "123456", "prueba2", "prueba2", "prueba2", "", "", "prueba@prueba.com", "", "", ConstraintViolationException.class
+				"", "123456", "123456", "prueba2", "prueba2", "", "prueba@prueba.com", "", "", ConstraintViolationException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateRegisterChapter((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (String) testingData[i][10], (Class<?>) testingData[i][11]);
+				(String) testingData[i][7], (String) testingData[i][8], (Class<?>) testingData[i][9]);
 	}
 
-	public void templateRegisterChapter(final String username, final String password, final String confirmPassword, final String name, final String title, final String surname, final String middleName, final String photo, final String email,
-		final String phoneNumber, final String address, final Class<?> expected) {
+	public void templateRegisterChapter(final String username, final String password, final String confirmPassword, final String name, final String title, final String photo, final String email, final String phoneNumber, final String address,
+		final Class<?> expected) {
 
 		Class<?> caught;
 		caught = null;
@@ -50,8 +50,6 @@ public class RegisterChapterTest extends AbstractTest {
 			c.getUserAccount().setPassword(password);
 			c.setName(name);
 			c.setTitle(title);
-			c.setSurname(surname);
-			c.setMiddleName(middleName);
 			c.setPhoneNumber(phoneNumber);
 			c.setPhoto(photo);
 			c.setEmail(email);

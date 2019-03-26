@@ -15,30 +15,9 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 @Access(AccessType.PROPERTY)
 public class Chapter extends Actor {
 
-	private String	middleName;
-	private String	surname;
 	private String	title;
 	private Area	area;
 
-
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
-	}
 
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)

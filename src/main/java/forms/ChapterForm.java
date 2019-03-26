@@ -18,8 +18,6 @@ public class ChapterForm {
 	private String	confirmPass;
 	private String	password;
 	private String	username;
-	private String	middleName;
-	private String	surname;
 	private String	name;
 	private String	photo;
 	private String	email;
@@ -43,8 +41,6 @@ public class ChapterForm {
 		result.setTitle(c.getTitle());
 		result.setArea(c.getArea());
 		result.setVersion(c.getVersion());
-		result.setSurname(c.getSurname());
-		result.setMiddleName(c.getMiddleName());
 	}
 	public ChapterForm() {
 
@@ -163,25 +159,6 @@ public class ChapterForm {
 
 	public void setArea(final Area area) {
 		this.area = area;
-	}
-
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(final String surname) {
-		this.surname = surname;
 	}
 
 }

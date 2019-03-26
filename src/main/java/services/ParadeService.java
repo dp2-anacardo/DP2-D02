@@ -251,19 +251,22 @@ public class ParadeService {
 		Assert.notNull(parade);
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
+		final Chapter chapter = this.chapterService.findOne(this.actorService.getActorLogged().getId());
 
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
+		Assert.isTrue(chapter.getArea().equals(parade.getBrotherhood().getArea()));
 		parade.setStatus("ACCEPTED");
 	}
-
 	public void rejectParade(final Parade parade) {
 		Assert.notNull(parade);
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
+		final Chapter chapter = this.chapterService.findOne(this.actorService.getActorLogged().getId());
 
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
+		Assert.isTrue(chapter.getArea().equals(parade.getBrotherhood().getArea()));
 		parade.setStatus("REJECTED");
 	}
 	public Collection<Finder> getFinderByParade(final int paradeId) {

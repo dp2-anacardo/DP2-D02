@@ -113,12 +113,6 @@
 
 <acme:showtext code="administrator.name" value="${chapter.name}" fieldset="true"/>
 <br>
-<jstl:if test="${chapter.middleName != ''}">
-		<acme:showtext code="administrator.middleName" value="${chapter.middleName}" fieldset="true"/>
-		<br>
-</jstl:if>
-<acme:showtext code="administrator.surname" value="${chapter.surname}" fieldset="true"/>
-<br>
 <acme:showtext code="administrator.email" value="${chapter.email}" fieldset="true"/>
 <br>
 <acme:showtext code="administrator.phoneNumber" value="${chapter.phoneNumber}" fieldset="true"/>
