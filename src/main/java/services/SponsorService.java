@@ -116,22 +116,20 @@ public class SponsorService {
 
 	public Sponsor reconstruct(final Sponsor member, final BindingResult binding) {
 
-		Sponsor result;
-		if (member.getId() == 0)
-			result = member;
-		else {
-			result = this.sponsorRepository.findOne(member.getId());
+		final Sponsor result;
 
-			result.setName(member.getName());
-			result.setMiddleName(member.getMiddleName());
-			result.setSurname(member.getSurname());
-			result.setPhoto(member.getPhoto());
-			result.setPhoneNumber(member.getPhoneNumber());
-			result.setEmail(member.getEmail());
-			result.setAddress(member.getAddress());
+		result = this.sponsorRepository.findOne(member.getId());
 
-			this.validator.validate(result, binding);
-		}
+		result.setName(member.getName());
+		result.setMiddleName(member.getMiddleName());
+		result.setSurname(member.getSurname());
+		result.setPhoto(member.getPhoto());
+		result.setPhoneNumber(member.getPhoneNumber());
+		result.setEmail(member.getEmail());
+		result.setAddress(member.getAddress());
+
+		this.validator.validate(result, binding);
+
 		return result;
 	}
 
