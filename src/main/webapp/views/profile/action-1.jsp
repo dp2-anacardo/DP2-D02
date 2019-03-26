@@ -46,6 +46,9 @@
 			
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="deleteValidation();"/>
 			
 </security:authorize>
 	
@@ -71,6 +74,9 @@
 		
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+			
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="javascript: relativeRedir('/profile/deleteInformation');" />
 </security:authorize>
 
 
@@ -99,7 +105,8 @@
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 	
-			
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="javascript: relativeRedir('/profile/deleteInformation');" />			
 </security:authorize>
 
 <security:authorize access="hasRole('CHAPTER')">
@@ -160,3 +167,22 @@
 
 <acme:cancel url="/" code="messageBox.goBack"/>
 
+<script type="text/javascript">
+	function deleteValidation(){
+		doubleConfirmation();
+		redirect();
+	}
+	
+	</script>
+
+<script type="text/javascript">
+function redirect(){
+	relativeRedir('/profile/deleteInformation.do');
+}
+</script>
+
+<script type="text/javascript">
+function doubleConfirmation(){
+	return confirm('<spring:message code="delete.confirm" />');
+}
+</script>

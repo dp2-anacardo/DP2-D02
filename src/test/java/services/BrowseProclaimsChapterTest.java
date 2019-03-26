@@ -30,7 +30,7 @@ public class BrowseProclaimsChapterTest extends AbstractTest {
 	public void driver() {
 		final Object testingData[][] = {
 			{
-				699, null
+				super.getEntityId("chapter1"), null
 			}, {
 				999, IllegalArgumentException.class
 			}
