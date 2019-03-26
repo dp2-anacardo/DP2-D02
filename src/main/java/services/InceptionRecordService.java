@@ -135,8 +135,11 @@ public class InceptionRecordService {
 
 		result.setPhoto(photos);
 
-		if (!iRF.getLink().equals(""))
-			result.getPhoto().add(iRF.getLink());
+		if (!iRF.getLink().equals("")) {
+			final Url photo = new Url();
+			photo.setLink(iRF.getLink());
+			result.getPhoto().add(photo);
+		}
 
 		result.setId(iR.getId());
 		result.setVersion(iR.getVersion());

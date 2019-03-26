@@ -729,7 +729,7 @@ public class RecordsController extends AbstractController {
 
 	//INCEPTION RECORD ADD PHOTO
 	@RequestMapping(value = "/inceptionRecord/edit", method = RequestMethod.POST, params = "addPhoto")
-	public ModelAndView addPhoto(final InceptionRecordForm iRF, final BindingResult binding) {
+	public ModelAndView addPhoto(@ModelAttribute("iRF") @Valid final InceptionRecordForm iRF, final BindingResult binding) {
 		ModelAndView result;
 		InceptionRecord iR;
 
@@ -740,7 +740,6 @@ public class RecordsController extends AbstractController {
 		iR = this.inceptionRecordService.reconstructAddPhoto(iRF, binding);
 
 		if (binding.hasErrors()) {
-
 			iR = this.inceptionRecordService.findOne(iRF.getId());
 			iRF.setPhoto(iR.getPhoto());
 			result = this.editModelAndView(iRF, null);
@@ -780,7 +779,7 @@ public class RecordsController extends AbstractController {
 
 	//PERIOD RECORD ADD PHOTO
 	@RequestMapping(value = "/periodRecord/edit", method = RequestMethod.POST, params = "addPhoto")
-	public ModelAndView addPhoto(final PeriodRecordForm pRF, final BindingResult binding) {
+	public ModelAndView addPhoto(@ModelAttribute("pRF") @Valid final PeriodRecordForm pRF, final BindingResult binding) {
 		ModelAndView result;
 		PeriodRecord pR;
 
@@ -831,7 +830,7 @@ public class RecordsController extends AbstractController {
 
 	//LEGAL RECORD ADD LAW
 	@RequestMapping(value = "/legalRecord/edit", method = RequestMethod.POST, params = "addLaw")
-	public ModelAndView addLaw(final LegalRecordForm lRF, final BindingResult binding) {
+	public ModelAndView addLaw(@ModelAttribute("lRF") @Valid final LegalRecordForm lRF, final BindingResult binding) {
 		ModelAndView result;
 		LegalRecord lR;
 
@@ -990,7 +989,7 @@ public class RecordsController extends AbstractController {
 
 		result = new ModelAndView("records/legalRecord/create");
 		result.addObject("lRF", lRF);
-		result.addObject("size", lRF.getApplicableLaws().size());
+		//result.addObject("size", lRF.getApplicableLaws().size());
 		result.addObject("cont", 0);
 		result.addObject("messageCode", messageCode);
 

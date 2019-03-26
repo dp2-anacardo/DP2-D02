@@ -17,7 +17,7 @@ public class InceptionRecordForm {
 	private String			title;
 	private String			description;
 	private Collection<Url>	photo;
-	private Url				link;
+	private String			link;
 
 
 	public InceptionRecordForm(final InceptionRecord iR) {
@@ -54,7 +54,7 @@ public class InceptionRecordForm {
 
 	@URL
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public Url getLink() {
+	public String getLink() {
 		return this.link;
 	}
 
@@ -78,7 +78,7 @@ public class InceptionRecordForm {
 		this.photo = photo;
 	}
 
-	public void setLink(final Url link) {
+	public void setLink(final String link) {
 		this.link = link;
 	}
 
