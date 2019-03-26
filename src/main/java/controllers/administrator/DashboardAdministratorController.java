@@ -157,6 +157,29 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double MaxParadesCoordinatesByChapters = this.administratorService.getMaxParadesCoordinatesByChapters();
 		final Double StddevParadesCoordinatesByChapters = this.administratorService.getStddevParadesCoordinatesByChapters();
 
+		/* TODO Q18 */
+
+		/* Q19 */
+		final Double RatioParadeDraftVsFinal = this.administratorService.getRatioParadeDraftVsFinal();
+
+		/* Q20 */
+		final Double RatioParadeFinalModeAccepted = this.administratorService.getRatioParadeFinalModeAccepted();
+		final Double RatioParadeFinalModeSubmitted = this.administratorService.getRatioParadeFinalModeSubmitted();
+		final Double RatioParadeFinalModeRejected = this.administratorService.getRatioParadeFinalModeRejected();
+
+		/* Q21 */
+		final Double RatioActiveSponsorships = this.administratorService.getRatioActiveSponsorships();
+
+		/* Q22 */
+
+		final Double AvgSponsorshipsPerSponsor = this.administratorService.getAvgSponsorshipsPerSponsor();
+		final Double MinSponsorshipsActivesPerSponsor = this.administratorService.getMinSponsorshipsActivesPerSponsor();
+		final Double MaxSponsorshipsActivesPerSponsor = this.administratorService.getMaxSponsorshipsActivesPerSponsor();
+		final Double StddevSponsorshipsActivesPerSponsor = this.administratorService.getStddevSponsorshipsActivesPerSponsor();
+
+		/* Q23 */
+		final List<String> Top5SponsorsInTermsOfSponsorshipsActives = this.administratorService.getTop5SponsorsInTermsOfSponsorshipsActives();
+
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("AvgOfMembersPerBrotherhood", AvgOfMembersPerBrotherhood);
@@ -212,6 +235,21 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("MinParadesCoordinatesByChapter", MinParadesCoordinatesByChapter);
 		result.addObject("MaxParadesCoordinatesByChapters", MaxParadesCoordinatesByChapters);
 		result.addObject("StddevParadesCoordinatesByChapters", StddevParadesCoordinatesByChapters);
+
+		result.addObject("RatioParadeDraftVsFinal", RatioParadeDraftVsFinal);
+
+		result.addObject("RatioParadeFinalModeAccepted", RatioParadeFinalModeAccepted);
+		result.addObject("RatioParadeFinalModeSubmitted", RatioParadeFinalModeSubmitted);
+		result.addObject("RatioParadeFinalModeRejected", RatioParadeFinalModeRejected);
+
+		result.addObject("RatioActiveSponsorships", RatioActiveSponsorships);
+
+		result.addObject("AvgSponsorshipsPerSponsor", AvgSponsorshipsPerSponsor);
+		result.addObject("MinSponsorshipsActivesPerSponsor", MinSponsorshipsActivesPerSponsor);
+		result.addObject("MaxSponsorshipsActivesPerSponsor", MaxSponsorshipsActivesPerSponsor);
+		result.addObject("StddevSponsorshipsActivesPerSponsor", StddevSponsorshipsActivesPerSponsor);
+
+		result.addObject("Top5SponsorsInTermsOfSponsorshipsActives", Top5SponsorsInTermsOfSponsorshipsActives);
 
 		return result;
 	}

@@ -635,18 +635,17 @@ public class AdministratorService {
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		List<String> top5 = new ArrayList<String>();
+		final List<String> top5 = new ArrayList<String>();
 
-		final List<List<Object>> result = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
+		final List<Object[]> res = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
 
-		for (final List<Object> l : result) {
-			String res;
-			res = (String) l.get(0);
-			top5.add(res);
+		for (final Object[] l : res) {
+			final String s = l[0].toString();
+			top5.add(s);
 		}
 
 		if (top5.size() > 5)
-			top5 = top5.subList(0, 5);
+			top5.subList(0, 4);
 
 		return top5;
 	}
