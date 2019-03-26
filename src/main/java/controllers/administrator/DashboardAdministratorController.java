@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import domain.Parade;
 import domain.Position;
@@ -143,13 +144,46 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double MinRecordsPerHistory = this.administratorService.getMinRecordsPerHistory();
 		final Double StddevRecordsPerHistory = this.administratorService.getStddevRecordsPerHistory();
 
-		/* TODO Q14 */
+		/* Q14 */
+
+		final String BrotherhoodWithLargestHistory = this.administratorService.getBrotherhoodWithLargestHistory();
 
 		/* Q15 */
 		final List<Brotherhood> BrotherhoodHistoryLargerThanAvg = this.administratorService.getBrotherhoodHistoryLargerThanAvg();
 
 		/* Q16 */
 		final Double RatioAreaNotCoordinatesByChapter = this.administratorService.getRatioAreaNotCoordinatesByChapter();
+
+		/* Q17 */
+		final Double AvgParadesCoordinatesByChapters = this.administratorService.getAvgParadesCoordinatesByChapters();
+		final Double MinParadesCoordinatesByChapter = this.administratorService.getMinParadesCoordinatesByChapters();
+		final Double MaxParadesCoordinatesByChapters = this.administratorService.getMaxParadesCoordinatesByChapters();
+		final Double StddevParadesCoordinatesByChapters = this.administratorService.getStddevParadesCoordinatesByChapters();
+
+		/* TODO Q18 */
+
+		final List<Chapter> ChaptersCoordinate10MoreParadesThanAvg = this.administratorService.getChaptersCoordinate10MoreParadesThanAvg();
+
+		/* Q19 */
+		final Double RatioParadeDraftVsFinal = this.administratorService.getRatioParadeDraftVsFinal();
+
+		/* Q20 */
+		final Double RatioParadeFinalModeAccepted = this.administratorService.getRatioParadeFinalModeAccepted();
+		final Double RatioParadeFinalModeSubmitted = this.administratorService.getRatioParadeFinalModeSubmitted();
+		final Double RatioParadeFinalModeRejected = this.administratorService.getRatioParadeFinalModeRejected();
+
+		/* Q21 */
+		final Double RatioActiveSponsorships = this.administratorService.getRatioActiveSponsorships();
+
+		/* Q22 */
+
+		final Double AvgSponsorshipsPerSponsor = this.administratorService.getAvgSponsorshipsPerSponsor();
+		final Double MinSponsorshipsActivesPerSponsor = this.administratorService.getMinSponsorshipsActivesPerSponsor();
+		final Double MaxSponsorshipsActivesPerSponsor = this.administratorService.getMaxSponsorshipsActivesPerSponsor();
+		final Double StddevSponsorshipsActivesPerSponsor = this.administratorService.getStddevSponsorshipsActivesPerSponsor();
+
+		/* Q23 */
+		final List<String> Top5SponsorsInTermsOfSponsorshipsActives = this.administratorService.getTop5SponsorsInTermsOfSponsorshipsActives();
 
 		result = new ModelAndView("administrator/dashboard");
 
@@ -201,6 +235,30 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("BrotherhoodHistoryLargerThanAvg", BrotherhoodHistoryLargerThanAvg);
 
 		result.addObject("RatioAreaNotCoordinatesByChapter", RatioAreaNotCoordinatesByChapter);
+
+		result.addObject("AvgParadesCoordinatesByChapters", AvgParadesCoordinatesByChapters);
+		result.addObject("MinParadesCoordinatesByChapter", MinParadesCoordinatesByChapter);
+		result.addObject("MaxParadesCoordinatesByChapters", MaxParadesCoordinatesByChapters);
+		result.addObject("StddevParadesCoordinatesByChapters", StddevParadesCoordinatesByChapters);
+
+		result.addObject("RatioParadeDraftVsFinal", RatioParadeDraftVsFinal);
+
+		result.addObject("RatioParadeFinalModeAccepted", RatioParadeFinalModeAccepted);
+		result.addObject("RatioParadeFinalModeSubmitted", RatioParadeFinalModeSubmitted);
+		result.addObject("RatioParadeFinalModeRejected", RatioParadeFinalModeRejected);
+
+		result.addObject("RatioActiveSponsorships", RatioActiveSponsorships);
+
+		result.addObject("AvgSponsorshipsPerSponsor", AvgSponsorshipsPerSponsor);
+		result.addObject("MinSponsorshipsActivesPerSponsor", MinSponsorshipsActivesPerSponsor);
+		result.addObject("MaxSponsorshipsActivesPerSponsor", MaxSponsorshipsActivesPerSponsor);
+		result.addObject("StddevSponsorshipsActivesPerSponsor", StddevSponsorshipsActivesPerSponsor);
+
+		result.addObject("Top5SponsorsInTermsOfSponsorshipsActives", Top5SponsorsInTermsOfSponsorshipsActives);
+
+		result.addObject("BrotherhoodWithLargestHistory", BrotherhoodWithLargestHistory);
+
+		result.addObject("ChaptersCoordinate10MoreParadesThanAvg", ChaptersCoordinate10MoreParadesThanAvg);
 
 		return result;
 	}

@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import domain.Message;
 import domain.MessageBox;
@@ -398,20 +399,51 @@ public class AdministratorService {
 		return result;
 	}
 
+	//	public Double getMaxRecordsPerHistory() {
+	//		UserAccount userAccount;
+	//		userAccount = LoginService.getPrincipal();
+	//		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+	//
+	//		Double max = 0.;
+	//		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+	//		for (final Brotherhood b : brotherhoods) {
+	//			final Integer id = b.getId();
+	//			final Double res = this.getNumRecordsPerBrotherhoods(id);
+	//			if (res > max)
+	//				max = res;
+	//		}
+	//		return max;
+	//	}
+
 	public Double getMaxRecordsPerHistory() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
+		final Double res = (Double) this.getBrotherhoodWithMoreRecords().get(1);
+
+		return res;
+	}
+
+	private List<Object> getBrotherhoodWithMoreRecords() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final List<Object> result = new ArrayList<Object>();
 		Double max = 0.;
 		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		for (final Brotherhood b : brotherhoods) {
 			final Integer id = b.getId();
 			final Double res = this.getNumRecordsPerBrotherhoods(id);
-			if (res > max)
+			if (res > max) {
 				max = res;
+				result.add(b.getName());
+			}
 		}
-		return max;
+		result.add(max);
+
+		return result;
 	}
 
 	public Double getMinRecordsPerHistory() {
@@ -459,7 +491,17 @@ public class AdministratorService {
 		return res * 1.;
 	}
 
-	/* TODO Q14: The brotherhood with the largest history. */
+	/* Q14: The brotherhood with the largest history. */
+
+	public String getBrotherhoodWithLargestHistory() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final String res = this.getBrotherhoodWithMoreRecords().get(0).toString();
+
+		return res;
+	}
 
 	/* Q15: The brotherhoods whose history is larger than the average. */
 
@@ -522,7 +564,27 @@ public class AdministratorService {
 		return res;
 	}
 
+	public Double getStddevParadesCoordinatesByChapters() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		Double res;
+		res = this.administratorRepository.getStddevParadesCoordinatesByChapters();
+		return res;
+	}
+
 	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
+
+	public List<Chapter> getChaptersCoordinate10MoreParadesThanAvg() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final List<Chapter> res = this.administratorRepository.getChaptersCoordinate10MoreParadesThanAvg();
+
+		return res;
+	}
 
 	/* Q19: The ratio of parades in draft mode versus parades in final mode. */
 	public Double getRatioParadeDraftVsFinal() {
@@ -625,18 +687,17 @@ public class AdministratorService {
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 
-		List<String> top5 = new ArrayList<String>();
+		final List<String> top5 = new ArrayList<String>();
 
-		final List<List<Object>> result = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
+		final List<Object[]> res = this.administratorRepository.getTop5SponsorsInTermsOfSponsorshipsActives();
 
-		for (final List<Object> l : result) {
-			String res;
-			res = (String) l.get(0);
-			top5.add(res);
+		for (final Object[] l : res) {
+			final String s = l[0].toString();
+			top5.add(s);
 		}
 
 		if (top5.size() > 5)
-			top5 = top5.subList(0, 5);
+			top5.subList(0, 4);
 
 		return top5;
 	}

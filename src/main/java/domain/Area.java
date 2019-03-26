@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
@@ -48,6 +49,21 @@ public class Area extends DomainEntity {
 
 	public void setPictures(final Collection<Url> pictures) {
 		this.pictures = pictures;
+	}
+
+
+	//Relationships
+	private Chapter chapter;
+
+
+	@Valid
+	@OneToOne(optional = true)
+	public Chapter getChapter() {
+		return this.chapter;
+	}
+
+	public void setChapter(final Chapter chapter) {
+		this.chapter = chapter;
 	}
 
 }

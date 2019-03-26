@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import domain.Parade;
 import domain.Position;
@@ -174,7 +175,13 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select max(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
 	Double getMaxParadesCoordinatesByChapters();
 
+	@Query("select stddev(1.0*(select count(p) from Parade p where p.brotherhood.area.id = c.area.id)) from Chapter c")
+	Double getStddevParadesCoordinatesByChapters();
+
 	@Query("select sp.name, count(s) from Sponsorship s join s.sponsor sp where status = true group by sp order by count(s) desc")
-	List<List<Object>> getTop5SponsorsInTermsOfSponsorshipsActives();
+	List<Object[]> getTop5SponsorsInTermsOfSponsorshipsActives();
+
+	@Query("select c from Parade p join p.brotherhood.area.chapter c group by c having count(p)> (select avg(1.0 * (select count(s) from Parade s where s.brotherhood.area.chapter.id = b.id)) from Chapter b)")
+	List<Chapter> getChaptersCoordinate10MoreParadesThanAvg();
 
 }

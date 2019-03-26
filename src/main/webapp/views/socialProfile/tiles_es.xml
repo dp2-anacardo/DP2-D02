@@ -16,12 +16,12 @@
       
 <tiles-definitions>
 
-	<definition name="socialProfile/brotherhood,member,admin/edit" extends="master.page">	
+	<definition name="socialProfile/brotherhood,member,admin,chapter,sponsor/edit" extends="master.page">	
 		<put-attribute name="title" value="Social Profile" />
 		<put-attribute name="body" value="/views/socialProfile/edit.jsp" />
 	</definition>
 	
-	<definition name="socialProfile/brotherhood,member,admin/list" extends="master.page">	
+	<definition name="socialProfile/brotherhood,member,admin,chapter,sponsor/list" extends="master.page">	
 		<put-attribute name="title" value="Listado de redes sociales" />
 		<put-attribute name="body" value="/views/socialProfile/list.jsp" />
 	</definition>

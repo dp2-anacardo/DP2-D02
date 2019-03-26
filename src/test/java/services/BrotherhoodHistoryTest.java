@@ -34,13 +34,17 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 	private PeriodRecordService		periodRecordService;
 	@Autowired
 	private ChapterService			chapterService;
+	@Autowired
+	private LinkRecordService		linkRecordService;
+	@Autowired
+	private LegalRecordService		legalRecordService;
 
 
 	@Test
 	public void driver() {
 		final Object testingData[][] = {
 			{
-				638, null
+				super.getEntityId("brotherhood1"), null
 			}, {
 				999, IllegalArgumentException.class
 			}
@@ -64,6 +68,8 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 			final Collection<PeriodRecord> p = this.periodRecordService.getPeriodRecordByBrotherhood(brotherhoodId);
 			Assert.notNull(p);
 			Assert.isTrue(p.size() == 1);
+			//Assert.isNull(this.legalRecordService.getLegalRecordByBrotherhood(brotherhoodId));
+			//			Assert.isTrue(this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId) == null);
 
 			this.chapterService.flush();
 

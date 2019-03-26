@@ -17,7 +17,7 @@ import domain.Chapter;
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class AreaServiceTest extends AbstractTest {
+public class AutoAssignateAreaTest extends AbstractTest {
 
 	@Autowired
 	private ChapterService	chapterService;

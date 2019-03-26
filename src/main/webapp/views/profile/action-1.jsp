@@ -46,6 +46,9 @@
 			
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="deleteValidation();"/>
 			
 </security:authorize>
 	
@@ -71,6 +74,9 @@
 		
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+			
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="javascript: relativeRedir('/profile/deleteInformation');" />
 </security:authorize>
 
 
@@ -99,8 +105,84 @@
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 	
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="javascript: relativeRedir('/profile/deleteInformation');" />			
+</security:authorize>
+
+<security:authorize access="hasRole('CHAPTER')">
+
+<acme:showtext code="administrator.name" value="${chapter.name}" fieldset="true"/>
+<br>
+<jstl:if test="${chapter.middleName != ''}">
+		<acme:showtext code="administrator.middleName" value="${chapter.middleName}" fieldset="true"/>
+		<br>
+</jstl:if>
+<acme:showtext code="administrator.surname" value="${chapter.surname}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.email" value="${chapter.email}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.phoneNumber" value="${chapter.phoneNumber}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.address" value="${chapter.address}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.title" value="${chapter.title}" fieldset="true"/>
+<br>
+<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
+			onclick="javascript: relativeRedir('/chapter/chapter/edit.do');" />
+<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
+			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin,chapter,sponsor/list.do');" />
+			
+<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
+			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+	
+			
+</security:authorize>
+
+<security:authorize access="hasRole('SPONSOR')">
+
+<acme:showtext code="administrator.name" value="${sponsor.name}" fieldset="true"/>
+<br>
+<jstl:if test="${sponsor.middleName != ''}">
+		<acme:showtext code="administrator.middleName" value="${sponsor.middleName}" fieldset="true"/>
+		<br>
+</jstl:if>
+<acme:showtext code="administrator.surname" value="${sponsor.surname}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.email" value="${sponsor.email}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.phoneNumber" value="${sponsor.phoneNumber}" fieldset="true"/>
+<br>
+<acme:showtext code="administrator.address" value="${sponsor.address}" fieldset="true"/>
+<br>
+<input type="button" name="Edit PD" value="<spring:message code="edit.PD" />"
+			onclick="javascript: relativeRedir('/sponsor/edit.do');" />
+<input type="button" name="socialProfiles" value="<spring:message code="socialProfile" />"
+			onclick="javascript: relativeRedir('/socialProfile/brotherhood,member,admin,chapter,sponsor/list.do');" />
+			
+<input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
+			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
+	
 			
 </security:authorize>
 
 <acme:cancel url="/" code="messageBox.goBack"/>
 
+<script type="text/javascript">
+	function deleteValidation(){
+		doubleConfirmation();
+		redirect();
+	}
+	
+	</script>
+
+<script type="text/javascript">
+function redirect(){
+	relativeRedir('/profile/deleteInformation.do');
+}
+</script>
+
+<script type="text/javascript">
+function doubleConfirmation(){
+	return confirm('<spring:message code="delete.confirm" />');
+}
+</script>

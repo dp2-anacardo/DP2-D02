@@ -9,8 +9,8 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasAnyRole('BROTHERHOOD,MEMBER,ADMIN')">
-<form:form action="socialProfile/brotherhood,member,admin/edit.do" modelAttribute="socialProfile">
+<security:authorize access="hasAnyRole('BROTHERHOOD,MEMBER,ADMIN,CHAPTER,SPONSOR')">
+<form:form action="socialProfile/brotherhood,member,admin,chapter,sponsor/edit.do" modelAttribute="socialProfile">
 
 	<form:hidden path="id" />
 	
@@ -44,7 +44,7 @@
 	</jstl:if>
 	<input type="button" name="cancel"
 		value="<spring:message code="socialProfile.cancel" />"
-		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin/list.do');" />
+		onclick="javascript: relativeRedir('socialProfile/brotherhood,member,admin,chapter,sponsor/list.do');" />
 	<br />
 	
 	

@@ -38,7 +38,7 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 	public void driver() {
 		final Object testingData[][] = {
 			{
-				699, 644, 638, null
+				super.getEntityId("chapter1"), super.getEntityId("areaBrotherhood1"), super.getEntityId("brotherhood1"), null
 			}, {
 				999, 998, 997, IllegalArgumentException.class
 			}
@@ -57,7 +57,7 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 			Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId)));
 			final Collection<Chapter> c = this.chapterService.findAll();
 			Assert.notNull(c);
-			Assert.isTrue(c.size() == 1);
+			Assert.isTrue(c.size() == 2);
 			Assert.isNull(this.chapterService.findOne(chapterId).getArea());
 			final Collection<Brotherhood> b = this.areaService.getBrotherhood(areaId);
 			Assert.notNull(b);
