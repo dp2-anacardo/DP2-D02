@@ -34,6 +34,7 @@ public class BrotherhoodForm {
 	private String			title;
 	private Collection<Url>	pictures;
 	private Area			area;
+	private String			description;
 
 
 	public BrotherhoodForm(final Brotherhood bro) {
@@ -178,6 +179,16 @@ public class BrotherhoodForm {
 
 	public void setArea(final Area area) {
 		this.area = area;
+	}
+
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
 	}
 
 }

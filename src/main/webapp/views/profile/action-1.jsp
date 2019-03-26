@@ -76,7 +76,7 @@
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 			
 <input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
-			onclick="javascript: relativeRedir('/profile/deleteInformation');" />
+			onclick="deleteValidation();"/>
 </security:authorize>
 
 
@@ -106,7 +106,7 @@
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
 	
 <input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
-			onclick="javascript: relativeRedir('/profile/deleteInformation');" />			
+			onclick="deleteValidation();"/>			
 </security:authorize>
 
 <security:authorize access="hasRole('CHAPTER')">
@@ -134,7 +134,9 @@
 			
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
-	
+
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="deleteValidation();"/>
 			
 </security:authorize>
 
@@ -161,7 +163,9 @@
 			
 <input type="button" name="socialProfiles" value="<spring:message code="profile.export" />"
 			onclick="javascript: relativeRedir('/profile/exportJSON.do');" />
-	
+
+<input type="button" name="deleteInformation" value="<spring:message code="actor.deleteInformationButton" />"
+			onclick="deleteValidation();"/>
 			
 </security:authorize>
 

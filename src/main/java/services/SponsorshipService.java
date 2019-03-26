@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -69,6 +70,10 @@ public class SponsorshipService {
 	public void delete(final Sponsorship sponsorship) {
 		Assert.notNull(sponsorship);
 
+		final Sponsor sponsor = sponsorship.getSponsor();
+
+		sponsor.getSponsorships().remove(sponsorship);
+
 		this.sponsorshipRepository.delete(sponsorship);
 	}
 
@@ -126,14 +131,30 @@ public class SponsorshipService {
 
 	}
 
+	public List<Sponsorship> findAllByActiveParade(final int paradeId) {
+		Assert.notNull(paradeId);
+
+		List<Sponsorship> sponsorships = new ArrayList<Sponsorship>();
+		try {
+			sponsorships = this.sponsorshipRepository.findAllByActiveParade(paradeId);
+
+		} catch (final Throwable e) {
+			e.getCause();
+		}
+		return sponsorships;
+	}
 	public List<Sponsorship> findAllByParade(final int paradeId) {
 		Assert.notNull(paradeId);
 
-		final List<Sponsorship> sponsorships = this.sponsorshipRepository.findAllByParade(paradeId);
+		List<Sponsorship> sponsorships = new ArrayList<Sponsorship>();
+		try {
+			sponsorships = this.sponsorshipRepository.findAllByParade(paradeId);
 
+		} catch (final Throwable e) {
+			e.getCause();
+		}
 		return sponsorships;
 	}
-
 	public Collection<Sponsorship> findAllActive() {
 		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllActive();
 

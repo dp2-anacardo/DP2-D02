@@ -3,7 +3,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -26,12 +25,13 @@ import domain.FloatEntity;
 import domain.LegalRecord;
 import domain.LinkRecord;
 import domain.Member;
+import domain.Message;
+import domain.MessageBox;
 import domain.MiscRecord;
 import domain.Parade;
 import domain.PeriodRecord;
 import domain.Proclaim;
 import domain.Request;
-import domain.Segment;
 import domain.SocialProfile;
 import domain.Sponsor;
 import domain.Sponsorship;
@@ -43,73 +43,47 @@ public class ActorService {
 	//Managed Repositories
 	@Autowired
 	private ActorRepository			actorRepository;
-
 	//Supporting services
 	@Autowired
 	private UserAccountService		userAccountService;
-
 	@Autowired
 	private SocialProfileService	socialProfileService;
-
 	@Autowired
 	private AdministratorService	administratorService;
-
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
-
 	@Autowired
 	private ChapterService			chapterService;
-
 	@Autowired
 	private ProclaimService			proclaimService;
-
-	@Autowired
-	private AreaService				areaService;
-
 	@Autowired
 	private SponsorService			sponsorService;
-
 	@Autowired
 	private SponsorshipService		sponsorShipService;
-
 	@Autowired
 	private MemberService			memberService;
-
 	@Autowired
 	private FinderService			finderService;
-
 	@Autowired
 	private EnrolmentService		enrolmentService;
-
-	@Autowired
-	private PositionService			positionService;
-
 	@Autowired
 	private RequestService			requestService;
-
 	@Autowired
 	private InceptionRecordService	inceptionRecordService;
-
 	@Autowired
 	private LinkRecordService		linkRecordService;
-
 	@Autowired
 	private MiscRecordService		miscRecordService;
-
 	@Autowired
 	private PeriodRecordService		periodRecordService;
-
 	@Autowired
 	private LegalRecordService		legalRecordService;
-
 	@Autowired
 	private FloatEntityService		floatEntityService;
-
 	@Autowired
 	private ParadeService			paradeService;
-
 	@Autowired
-	private SegmentService			segmentService;
+	private MessageService			messageService;
 
 
 	public Collection<Actor> findAll() {
@@ -236,6 +210,30 @@ public class ActorService {
 				this.socialProfileService.delete(i);
 		}
 
+		//Borrado de los mensajes que recibes
+		final Collection<Message> msgs = this.messageService.findAllReceivedByActor(varActor.getId());
+
+		if (msgs.size() > 0)
+			for (final Message m : msgs)
+				for (final MessageBox b : varActor.getBoxes())
+					if (b.getMessages().contains(m)) {
+						b.deleteMessage(m);
+						m.getMessageBoxes().remove(b);
+					}
+
+		//Borrado de los mensajes que envias
+		final Collection<Message> sent = this.messageService.findAllByActor(varActor.getId());
+
+		if (sent.size() > 0)
+			for (final Message m : sent) {
+				for (final MessageBox b : varActor.getBoxes())
+					if (b.getMessages().contains(m)) {
+						b.deleteMessage(m);
+						m.getMessageBoxes().remove(b);
+					}
+				m.setSender(null);
+			}
+
 		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
 
 			final Administrator a = this.administratorService.findOne(this.getActorLogged().getId());
@@ -249,66 +247,65 @@ public class ActorService {
 			final Brotherhood b = this.brotherhoodService.findOne(this.getActorLogged().getId());
 			//Borrado de todos los record de la brotherhood
 			this.inceptionRecordService.delete(this.inceptionRecordService.getInceptionRecordByBrotherhood(b.getId()).iterator().next());
-			if (!(this.linkRecordService.getLinkRecordByLinkedBH(b.getId())).isEmpty()) {
-				final Iterator<LinkRecord> itRecord = this.linkRecordService.getLinkRecordByLinkedBH(b.getId()).iterator();
-				while (itRecord.hasNext())
-					this.linkRecordService.delete(itRecord.next());
-			}
 			if (!(this.linkRecordService.getLinkRecordByBrotherhood(b.getId())).isEmpty()) {
-				final Iterator<LinkRecord> it1 = this.linkRecordService.getLinkRecordByBrotherhood(b.getId()).iterator();
-				while (it1.hasNext())
-					this.linkRecordService.delete(it1.next());
+				final List<LinkRecord> linkList = new ArrayList<LinkRecord>();
+				final Collection<LinkRecord> it1 = this.linkRecordService.getLinkRecordByBrotherhood(b.getId());
+				linkList.addAll(it1);
+				for (final LinkRecord ls1 : linkList)
+					this.linkRecordService.delete(ls1);
 			}
 			if (!(this.miscRecordService.getMiscRecordByBrotherhood(b.getId())).isEmpty()) {
-				final Iterator<MiscRecord> it2 = this.miscRecordService.getMiscRecordByBrotherhood(b.getId()).iterator();
-				while (it2.hasNext())
-					this.miscRecordService.delete(it2.next());
+				final List<MiscRecord> miscList = new ArrayList<MiscRecord>();
+				final Collection<MiscRecord> it2 = this.miscRecordService.getMiscRecordByBrotherhood(b.getId());
+				miscList.addAll(it2);
+				for (final MiscRecord mr : miscList)
+					this.miscRecordService.delete(mr);
 			}
 			if (!(this.periodRecordService.getPeriodRecordByBrotherhood(b.getId())).isEmpty()) {
-				final Iterator<PeriodRecord> it3 = this.periodRecordService.getPeriodRecordByBrotherhood(b.getId()).iterator();
-				while (it3.hasNext())
-					this.periodRecordService.delete(it3.next());
+				final List<PeriodRecord> periodList = new ArrayList<PeriodRecord>();
+				final Collection<PeriodRecord> it3 = this.periodRecordService.getPeriodRecordByBrotherhood(b.getId());
+				periodList.addAll(it3);
+				for (final PeriodRecord pr : periodList)
+					this.periodRecordService.delete(pr);
 			}
 			if (!(this.legalRecordService.getLegalRecordByBrotherhood(b.getId())).isEmpty()) {
-				final Iterator<LegalRecord> it4 = this.legalRecordService.getLegalRecordByBrotherhood(b.getId()).iterator();
-				while (it4.hasNext())
-					this.legalRecordService.delete(it4.next());
+				final List<LegalRecord> legalList = new ArrayList<LegalRecord>();
+				final Collection<LegalRecord> it4 = this.legalRecordService.getLegalRecordByBrotherhood(b.getId());
+				legalList.addAll(it4);
+				for (final LegalRecord lr : legalList)
+					this.legalRecordService.delete(lr);
 			}
 			//Borrado de enrolments de una brotherhood
-			final Iterator<Enrolment> it = this.brotherhoodService.getEnrolments(b.getId()).iterator();
-			while (it.hasNext()) {
-				this.positionService.delete(it.next().getPosition());
-				this.enrolmentService.delete(it.next());
-			}
+			final List<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+			final Collection<Enrolment> it = this.brotherhoodService.getEnrolments(b.getId());
+			enrolmentList.addAll(it);
+			for (final Enrolment e : enrolmentList)
+				this.enrolmentService.delete(e);
 			//Borrado de FloatEntity
 			if (!(this.floatEntityService.getFloatsByBrotherhood(b)).isEmpty()) {
-				final Iterator<FloatEntity> it5 = this.floatEntityService.getFloatsByBrotherhood(b).iterator();
-				while (it5.hasNext())
-					this.floatEntityService.delete(it5.next());
+				final List<FloatEntity> fList = new ArrayList<FloatEntity>();
+				final Collection<FloatEntity> it5 = this.floatEntityService.getFloatsByBrotherhood(b);
+				fList.addAll(it5);
+				for (final FloatEntity f : fList)
+					this.floatEntityService.delete(f);
+
 			}
 			//Borrado de parade y de todas sus relaciones
 			if (!(this.paradeService.getParadesByBrotherhood(b)).isEmpty()) {
-				final Iterator<Parade> it6 = this.paradeService.getParadesByBrotherhood(b).iterator();
-				while (it6.hasNext()) {
-					final Iterator<Request> it7 = this.requestService.getRequestByParade(it6.next()).iterator();
-					while (it7.hasNext())
-						this.requestService.delete(it7.next());
-					if (!(this.segmentService.getPathByParade(it6.next().getId())).isEmpty()) {
-						final Iterator<Segment> it8 = this.segmentService.getPathByParade(it6.next().getId()).iterator();
-						while (it8.hasNext())
-							this.segmentService.delete(it8.next());
+				final List<Parade> paradeList = new ArrayList<Parade>();
+				final Collection<Parade> it6 = this.paradeService.getParadesByBrotherhood(b);
+				paradeList.addAll(it6);
+				for (final Parade p : paradeList) {
+					if (!(this.sponsorShipService.findAllByParade(p.getId())).isEmpty()) {
+						final List<Sponsorship> sponsorSList = new ArrayList<Sponsorship>();
+						final Collection<Sponsorship> it9 = this.sponsorShipService.findAllByParade(p.getId());
+						sponsorSList.addAll(it9);
+						for (final Sponsorship sp : sponsorSList)
+							this.sponsorShipService.delete(sp);
 					}
-					if (!(this.sponsorShipService.findAllByParade(it6.next().getId())).isEmpty()) {
-						final Iterator<Sponsorship> it9 = this.sponsorShipService.findAllByParade(it6.next().getId()).iterator();
-						while (it9.hasNext())
-							this.sponsorShipService.delete(it9.next());
-					}
-					final Iterator<Finder> itFinder = this.paradeService.getFinderByParade(it6.next().getId()).iterator();
-					while (itFinder.hasNext())
-						if (itFinder.next().getParades().contains(it6.next()))
-							itFinder.next().getParades().remove(it6.next());
+					this.paradeService.delete(p);
 				}
-				this.paradeService.delete(it6.next());
+
 			}
 			this.brotherhoodService.delete(b);
 
@@ -318,9 +315,11 @@ public class ActorService {
 			final Sponsor s = this.sponsorService.findOne(this.getActorLogged().getId());
 			//Borrado de las sponsorships
 			if (!(this.sponsorShipService.findBySponsor(s.getId()).isEmpty())) {
-				final Iterator<Sponsorship> it = this.sponsorShipService.findBySponsor(s.getId()).iterator();
-				while (it.hasNext())
-					this.sponsorShipService.delete(it.next());
+				final List<Sponsorship> sponsorship = new ArrayList<Sponsorship>();
+				final Collection<Sponsorship> it = this.sponsorShipService.findBySponsor(s.getId());
+				sponsorship.addAll(it);
+				for (final Sponsorship sp : sponsorship)
+					this.sponsorShipService.delete(sp);
 			}
 			//Borrado de la informacion del sponsor
 			this.sponsorService.delete(s);
@@ -331,13 +330,12 @@ public class ActorService {
 			final Chapter chapter = this.chapterService.findOne(this.getActorLogged().getId());
 			//Borrado de las proclaims del chapter logueado
 			if (!(this.chapterService.getProclaims(chapter.getId()).isEmpty())) {
-				final Iterator<Proclaim> it = this.chapterService.getProclaims(chapter.getId()).iterator();
-				while (it.hasNext())
-					this.proclaimService.delete(it.next());
+				final List<Proclaim> proclaimList = new ArrayList<Proclaim>();
+				final Collection<Proclaim> it = this.chapterService.getProclaims(chapter.getId());
+				proclaimList.addAll(it);
+				for (final Proclaim p : proclaimList)
+					this.proclaimService.delete(p);
 			}
-			//Borrado del area del chapter si es que la tiene
-			if (chapter.getArea() != null)
-				this.areaService.delete(chapter.getArea());
 
 			//Borrado de la informacion del chapter
 			this.chapterService.delete(chapter);
@@ -347,19 +345,22 @@ public class ActorService {
 			final Member member = this.memberService.findOne(this.getActorLogged().getId());
 			//Borrando su finder
 			final Finder f = member.getFinder();
-			this.finderService.Delete(f);
 			//Borrando sus enrolment y sus positions
-			final Iterator<Enrolment> e = this.memberService.getEnrolments(member.getId()).iterator();
-			while (e.hasNext()) {
-				this.positionService.delete(e.next().getPosition());
-				this.enrolmentService.delete(e.next());
-			}
+			final List<Enrolment> enrolmentList = new ArrayList<Enrolment>();
+			final Collection<Enrolment> e = this.memberService.getEnrolments(member.getId());
+			enrolmentList.addAll(e);
+			for (final Enrolment enrol : enrolmentList)
+				this.enrolmentService.delete(enrol);
 			//Borrando las request
-			final Iterator<Request> r = this.requestService.getRequestsByMember(member).iterator();
-			while (r.hasNext())
-				this.requestService.delete(r.next());
+			final List<Request> requestList = new ArrayList<Request>();
+			final Collection<Request> r = this.requestService.getRequestsByMember(member);
+			requestList.addAll(r);
+			for (final Request requ : requestList)
+				this.requestService.delete(requ);
 
 			this.memberService.delete(member);
+			this.finderService.Delete(f);
+
 		}
 	}
 }

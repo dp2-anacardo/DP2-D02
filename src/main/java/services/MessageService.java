@@ -169,6 +169,11 @@ public class MessageService {
 		}
 	}
 
+	public void deleteAll(final Message m) {
+
+		this.messageRepository.delete(m);
+
+	}
 	// Other methods
 
 	public Message moveMessage(final Message message, final MessageBox srcMessageBox, final MessageBox destMessageBox) {
@@ -252,6 +257,13 @@ public class MessageService {
 
 	public Collection<Message> findAllByActor(final int actorID) {
 		final Collection<Message> result = this.messageRepository.findAllByActor(actorID);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Message> findAllReceivedByActor(final int actorID) {
+		final Collection<Message> result = this.messageRepository.findAllReceivedByActor(actorID);
 		Assert.notNull(result);
 
 		return result;

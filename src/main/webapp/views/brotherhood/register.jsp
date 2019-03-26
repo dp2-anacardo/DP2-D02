@@ -63,6 +63,9 @@ onsubmit="return validarForm(this)">
 	<acme:textbox code="administrator.address" path="address"/>
 	<br />
 	
+	<acme:textarea code="inception.description" path="description"/>
+	<br />
+	
 	<script type="text/javascript">
 	function validarForm(form){
 		phoneValidation();
