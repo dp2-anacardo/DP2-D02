@@ -18,7 +18,7 @@ import domain.Proclaim;
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class ProclaimServiceTest extends AbstractTest {
+public class PublishProclaimTest extends AbstractTest {
 
 	@Autowired
 	private ProclaimService	proclaimService;

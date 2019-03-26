@@ -161,6 +161,25 @@ public class ChapterService {
 		return result;
 	}
 
+	public Chapter reconstruct(final Chapter chapter, final BindingResult binding) {
+		Chapter result;
+		if (chapter.getId() == 0)
+			result = chapter;
+		else {
+			result = this.chapterRepository.findOne(chapter.getId());
+
+			result.setName(chapter.getName());
+			result.setPhoto(chapter.getPhoto());
+			result.setPhoneNumber(chapter.getPhoneNumber());
+			result.setEmail(chapter.getEmail());
+			result.setAddress(chapter.getAddress());
+			result.setTitle(chapter.getTitle());
+
+			this.validator.validate(result, binding);
+		}
+		return result;
+	}
+
 	public void flush() {
 		this.chapterRepository.flush();
 	}
