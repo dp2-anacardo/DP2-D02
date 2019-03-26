@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdministratorService;
 import services.BrotherhoodService;
+import services.InceptionRecordService;
 import controllers.AbstractController;
 import domain.Brotherhood;
+import domain.InceptionRecord;
 import forms.BrotherhoodForm;
 
 @Controller
@@ -28,6 +30,8 @@ public class RegisterBrotherhoodController extends AbstractController {
 	private ActorService			actorService;
 	@Autowired
 	private AdministratorService	administratorService;
+	@Autowired
+	private InceptionRecordService	inceptionRecordService;
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -61,8 +65,14 @@ public class RegisterBrotherhoodController extends AbstractController {
 				}
 		} else
 			try {
+				final InceptionRecord r = this.inceptionRecordService.create();
+				r.setDescription(brotherhoodForm.getDescription());
 				bro = this.brotherhoodService.reconstruct(brotherhoodForm, binding);
-				this.brotherhoodService.save(bro);
+				r.setTitle(bro.getTitle());
+				r.setPhoto(bro.getPictures());
+				final Brotherhood bsave = this.brotherhoodService.save(bro);
+				r.setBrotherhood(bsave);
+				this.inceptionRecordService.save(r);
 				result = new ModelAndView("redirect:/");
 			} catch (final Throwable oops) {
 				if (binding.hasErrors())

@@ -603,6 +603,7 @@
 		<property name="isSystem" value="true"/>
 		<property name="messages">
 			<list>
+				<ref bean="messageMember1"/>
 			</list>
 		</property>
 		<property name="sons">
@@ -736,6 +737,7 @@
 		<property name="messageBoxes">
 		<list>
 			<ref bean="inBoxMember1"/>
+			<ref bean="outBoxMember2"/>
 		</list>
 		</property>
 	</bean>

@@ -14,10 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.InceptionRecordRepository;
-import security.LoginService;
 import datatype.Url;
-import domain.Actor;
-import domain.Brotherhood;
 import domain.InceptionRecord;
 import forms.InceptionRecordForm;
 
@@ -30,15 +27,12 @@ public class InceptionRecordService {
 	@Autowired
 	private ActorService				actorService;
 	@Autowired
-	private BrotherhoodService			brotherhoodService;
-	@Autowired
 	private Validator					validator;
 
 
 	//CRUD
 	public InceptionRecord create() {
 
-		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		final InceptionRecord result = new InceptionRecord();
 		result.setPhoto(new ArrayList<Url>());
 		return result;
@@ -61,19 +55,8 @@ public class InceptionRecordService {
 
 	public InceptionRecord save(final InceptionRecord inceptionRecord) {
 
-		final InceptionRecord res;
 		Assert.notNull(inceptionRecord);
-		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
-		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
-		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-
-		if (inceptionRecord.getId() == 0) {
-			inceptionRecord.setBrotherhood(b);
-			res = this.inceptionRecordRepository.save(inceptionRecord);
-		} else {
-			Assert.isTrue(inceptionRecord.getBrotherhood().equals(b));
-			res = this.inceptionRecordRepository.save(inceptionRecord);
-		}
+		final InceptionRecord res = this.inceptionRecordRepository.save(inceptionRecord);
 		return res;
 	}
 

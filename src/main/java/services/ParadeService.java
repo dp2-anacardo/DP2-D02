@@ -268,7 +268,11 @@ public class ParadeService {
 	}
 	public Collection<Finder> getFinderByParade(final int paradeId) {
 		Assert.notNull(paradeId);
-		return this.paradeRepository.getFinderByParade(paradeId);
+
+		final Collection<Finder> result = this.paradeRepository.getFinderByParade(paradeId);
+
+		//return this.paradeRepository.getFinderByParade(paradeId);
+		return result;
 
 	}
 

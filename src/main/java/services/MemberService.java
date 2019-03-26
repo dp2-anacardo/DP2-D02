@@ -128,11 +128,9 @@ public class MemberService {
 	}
 	public void delete(final Member member) {
 
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		Assert.notNull(member);
 		Assert.isTrue(member.getId() != 0);
+
 		this.memberRepository.delete(member.getId());
 
 	}

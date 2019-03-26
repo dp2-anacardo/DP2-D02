@@ -187,7 +187,7 @@ public class ParadeController extends AbstractController {
 			result = new ModelAndView("parade/show");
 			result.addObject("p", p);
 
-			final List<Sponsorship> sponsorships = this.sponsorshipService.findAllByParade(paradeId);
+			final List<Sponsorship> sponsorships = this.sponsorshipService.findAllByActiveParade(paradeId);
 			if (sponsorships.size() > 0) {
 				final Random rnd = new Random();
 				final Sponsorship sponsorship = sponsorships.get(rnd.nextInt(sponsorships.size()));
