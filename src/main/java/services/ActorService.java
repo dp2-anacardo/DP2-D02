@@ -229,9 +229,11 @@ public class ActorService {
 
 		//Borrado de los socialProfiles de los actores
 		if (!(varActor.getSocialProfiles().isEmpty())) {
-			final Iterator<SocialProfile> it = varActor.getSocialProfiles().iterator();
-			while (it.hasNext())
-				this.socialProfileService.delete(it.next());
+			final List<SocialProfile> a = new ArrayList<SocialProfile>();
+			final Collection<SocialProfile> ad = varActor.getSocialProfiles();
+			a.addAll(ad);
+			for (final SocialProfile i : a)
+				this.socialProfileService.delete(i);
 		}
 
 		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN")) {
@@ -240,7 +242,8 @@ public class ActorService {
 			//Borrado de la informacion del administrador
 			this.administratorService.delete(a);
 
-		} else if (userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD")) {
+		}
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD")) {
 
 			//Faltan las relaciones de brotherhood
 			final Brotherhood b = this.brotherhoodService.findOne(this.getActorLogged().getId());
@@ -309,7 +312,8 @@ public class ActorService {
 			}
 			this.brotherhoodService.delete(b);
 
-		} else if (userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR")) {
+		}
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("SPONSOR")) {
 
 			final Sponsor s = this.sponsorService.findOne(this.getActorLogged().getId());
 			//Borrado de las sponsorships
@@ -321,7 +325,8 @@ public class ActorService {
 			//Borrado de la informacion del sponsor
 			this.sponsorService.delete(s);
 
-		} else if (userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER")) {
+		}
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER")) {
 
 			final Chapter chapter = this.chapterService.findOne(this.getActorLogged().getId());
 			//Borrado de las proclaims del chapter logueado
@@ -337,7 +342,8 @@ public class ActorService {
 			//Borrado de la informacion del chapter
 			this.chapterService.delete(chapter);
 
-		} else if (userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER")) {
+		}
+		if (userAccount.getAuthorities().iterator().next().getAuthority().equals("MEMBER")) {
 			final Member member = this.memberService.findOne(this.getActorLogged().getId());
 			//Borrando su finder
 			final Finder f = member.getFinder();

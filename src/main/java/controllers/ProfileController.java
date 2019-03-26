@@ -1,8 +1,8 @@
 /*
  * ProfileController.java
- *
+ * 
  * Copyright (C) 2018 Universidad de Sevilla
- *
+ * 
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import security.UserAccount;
+import services.ActorService;
+import services.AdministratorService;
+import services.BrotherhoodService;
+import services.MemberService;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -24,12 +31,6 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
-import security.LoginService;
-import security.UserAccount;
-import services.ActorService;
-import services.AdministratorService;
-import services.BrotherhoodService;
-import services.MemberService;
 
 @Controller
 @RequestMapping("profile")
@@ -111,6 +112,23 @@ public class ProfileController extends AbstractController {
 			result.addObject("json", json);
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/deleteInformation", method = RequestMethod.GET)
+	public ModelAndView messageDelete() {
+		ModelAndView result;
+		try {
+			Assert.isTrue(this.actorService.getActorLogged() != null);
+			this.actorService.deleteInformation();
+			result = new ModelAndView("redirect:/j_spring_security_logout");
+		} catch (final Exception e) {
+			return this.forbiddenOperation();
+		}
+
+		return result;
+	}
+	private ModelAndView forbiddenOperation() {
+		return new ModelAndView("redirect:/action-1.do");
 	}
 
 }
