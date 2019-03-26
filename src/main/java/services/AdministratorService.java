@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import domain.Message;
 import domain.MessageBox;
@@ -574,6 +575,16 @@ public class AdministratorService {
 	}
 
 	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
+
+	public List<Chapter> getChaptersCoordinate10MoreParadesThanAvg() {
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+
+		final List<Chapter> res = this.administratorRepository.getChaptersCoordinate10MoreParadesThanAvg();
+
+		return res;
+	}
 
 	/* Q19: The ratio of parades in draft mode versus parades in final mode. */
 	public Double getRatioParadeDraftVsFinal() {
