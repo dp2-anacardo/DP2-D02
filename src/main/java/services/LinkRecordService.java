@@ -118,4 +118,8 @@ public class LinkRecordService {
 		return this.getLinkRecordByLinkedBH(brotherhoodId);
 	}
 
+	public void flush() {
+		this.linkRecordRepository.flush();
+	}
+
 }

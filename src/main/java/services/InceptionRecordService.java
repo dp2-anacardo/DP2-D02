@@ -25,7 +25,7 @@ public class InceptionRecordService {
 	@Autowired
 	private InceptionRecordRepository	inceptionRecordRepository;
 	@Autowired
-	private ActorService				actorService;
+	private BrotherhoodService			brotherhoodService;
 	@Autowired
 	private Validator					validator;
 
@@ -63,12 +63,11 @@ public class InceptionRecordService {
 	public void delete(final InceptionRecord inceptionRecord) {
 
 		Assert.notNull(inceptionRecord);
-		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
+		Assert.isTrue(!this.brotherhoodService.findAll().contains(inceptionRecord.getBrotherhood()));
 
 		Assert.isTrue(inceptionRecord.getId() != 0);
 		this.inceptionRecordRepository.delete(inceptionRecord);
 	}
-
 	//Reconstructs
 	public InceptionRecord reconstructCreate(final InceptionRecordForm iRF, final BindingResult binding) {
 		final InceptionRecord result = new InceptionRecord();

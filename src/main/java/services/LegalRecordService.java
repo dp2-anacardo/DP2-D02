@@ -150,4 +150,8 @@ public class LegalRecordService {
 		return this.legalRecordRepository.getLegalRecordByBrotherhood(BrotherhoodId);
 	}
 
+	public void flush() {
+		this.legalRecordRepository.flush();
+	}
+
 }
