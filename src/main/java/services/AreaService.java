@@ -102,6 +102,7 @@ public class AreaService {
 
 	public Collection<Brotherhood> getBrotherhood(final int areaId) {
 		Assert.notNull(areaId);
+		Assert.isTrue(this.findAll().contains(this.findOne(areaId)));
 		final Collection<Brotherhood> result = this.areaRepository.getBrotherhood(areaId);
 		return result;
 	}
