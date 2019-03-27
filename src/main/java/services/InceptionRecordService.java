@@ -28,6 +28,8 @@ public class InceptionRecordService {
 	private ActorService				actorService;
 	@Autowired
 	private Validator					validator;
+	@Autowired
+	private BrotherhoodService			brotherhoodService;
 
 
 	//CRUD
@@ -131,6 +133,7 @@ public class InceptionRecordService {
 	}
 
 	public Collection<InceptionRecord> getInceptionRecordByBrotherhood(final int BrotherhoodId) {
+		Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(BrotherhoodId)));
 		return this.inceptionRecordRepository.getInceptionRecordByBrotherhood(BrotherhoodId);
 	}
 

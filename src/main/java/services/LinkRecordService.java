@@ -110,6 +110,7 @@ public class LinkRecordService {
 	}
 
 	public Collection<LinkRecord> getLinkRecordByBrotherhood(final int BrotherhoodId) {
+		Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(BrotherhoodId)));
 		return this.linkRecordRepository.getLinkRecordByBrotherhood(BrotherhoodId);
 	}
 

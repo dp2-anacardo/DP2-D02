@@ -1326,6 +1326,30 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<!-- Link Record -->
+	
+	<bean id="linkRecord1" class="domain.LinkRecord">
+		<property name="title" value="Primer link record"/>
+		<property name="description" value="Primer link record de la bbdd"/>
+		<property name="brotherhood" ref="brotherhood1"/>
+		<property name="linkedBH" ref="brotherhood2"/>
+	</bean>
+	
+	<!-- Legal Record -->
+	
+	<bean id="legalRecord1" class="domain.LegalRecord">
+		<property name="title" value="Primer legal record"/>
+		<property name="description" value="Primer link legal de la bbdd"/>
+		<property name="legalName" value="Esto es legal"/>
+		<property name="vatNumber" value="21"/>
+		<property name="applicableLaws">
+			<list>
+				<value>Te lo aseguro es legal</value>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1"/>
+	</bean>
+	
 	<!-- Chapter -->
 			
 	<bean id="chapter1" class="domain.Chapter">
