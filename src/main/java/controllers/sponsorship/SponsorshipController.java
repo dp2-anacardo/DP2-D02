@@ -4,8 +4,6 @@ package controllers.sponsorship;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
-
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,6 +87,7 @@ public class SponsorshipController extends AbstractController {
 		try {
 			final Sponsor principal = this.sponsorService.findByPrincipal();
 			sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+			Assert.isTrue(principal.getSponsorships().contains(sponsorship));
 
 		} catch (final Exception e) {
 			result = this.forbiddenOpperation();
@@ -141,8 +140,9 @@ public class SponsorshipController extends AbstractController {
 		final Sponsorship sponsorship;
 
 		try {
+			final Sponsor principal = this.sponsorService.findByPrincipal();
 			sponsorship = this.sponsorshipService.findOne(sponsorshipId);
-			Assert.notNull(sponsorship);
+			Assert.isTrue(principal.getSponsorships().contains(sponsorship));
 			result = new ModelAndView("sponsorship/show");
 			result.addObject("sponsorship", sponsorship);
 		} catch (final Exception e) {
@@ -156,8 +156,18 @@ public class SponsorshipController extends AbstractController {
 	public ModelAndView activate(@RequestParam final int sponsorshipId) {
 		ModelAndView result;
 
-		final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
-		this.sponsorshipService.activate(sponsorship);
+		try {
+			final Sponsor principal = this.sponsorService.findByPrincipal();
+			final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+			Assert.isTrue(principal.getSponsorships().contains(sponsorship));
+
+			this.sponsorshipService.activate(sponsorship);
+
+			result = new ModelAndView("sponsorship/show");
+			result.addObject("sponsorship", sponsorship);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 
 		result = new ModelAndView("redirect:/sponsorship/list.do");
 
@@ -168,8 +178,18 @@ public class SponsorshipController extends AbstractController {
 	public ModelAndView desactivate(@RequestParam final int sponsorshipId) {
 		ModelAndView result;
 
-		final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
-		this.sponsorshipService.desactivate(sponsorship);
+		try {
+			final Sponsor principal = this.sponsorService.findByPrincipal();
+			final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+			Assert.isTrue(principal.getSponsorships().contains(sponsorship));
+
+			this.sponsorshipService.desactivate(sponsorship);
+
+			result = new ModelAndView("sponsorship/show");
+			result.addObject("sponsorship", sponsorship);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 
 		result = new ModelAndView("redirect:/sponsorship/list.do");
 
@@ -204,8 +224,7 @@ public class SponsorshipController extends AbstractController {
 		return result;
 	}
 	private ModelAndView forbiddenOpperation() {
-		JOptionPane.showMessageDialog(null, "Forbidden operation");
-		return new ModelAndView("redirect:list.do");
+		return new ModelAndView("redirect:/misc/403");
 	}
 
 }
