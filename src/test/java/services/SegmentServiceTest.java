@@ -101,10 +101,10 @@ public class SegmentServiceTest extends AbstractTest {
 	public void deleteSegmentDriver() {
 		final Object testingData[][] = {
 			{
-				"segment1", "brotherhood1", null
-			}, {
 				"segment1", "brotherhood2", IllegalArgumentException.class
-			}
+			}, {
+				"segment1", "brotherhood1", null
+			},
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.deleteSegmentTemplate(super.getEntityId((String) testingData[i][0]), (String) testingData[i][1], (Class<?>) testingData[i][2]);
