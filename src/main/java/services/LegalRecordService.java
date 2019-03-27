@@ -147,6 +147,7 @@ public class LegalRecordService {
 	}
 
 	public Collection<LegalRecord> getLegalRecordByBrotherhood(final int BrotherhoodId) {
+		Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(BrotherhoodId)));
 		return this.legalRecordRepository.getLegalRecordByBrotherhood(BrotherhoodId);
 	}
 

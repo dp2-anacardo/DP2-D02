@@ -399,22 +399,6 @@ public class AdministratorService {
 		return result;
 	}
 
-	//	public Double getMaxRecordsPerHistory() {
-	//		UserAccount userAccount;
-	//		userAccount = LoginService.getPrincipal();
-	//		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
-	//
-	//		Double max = 0.;
-	//		final List<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
-	//		for (final Brotherhood b : brotherhoods) {
-	//			final Integer id = b.getId();
-	//			final Double res = this.getNumRecordsPerBrotherhoods(id);
-	//			if (res > max)
-	//				max = res;
-	//		}
-	//		return max;
-	//	}
-
 	public Double getMaxRecordsPerHistory() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -574,7 +558,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	/* TODO Q18: The chapters that co-ordinate at least 10% more parades than the average. */
+	/* Q18: The chapters that co-ordinate at least 10% more parades than the average. */
 
 	public List<Chapter> getChaptersCoordinate10MoreParadesThanAvg() {
 		UserAccount userAccount;

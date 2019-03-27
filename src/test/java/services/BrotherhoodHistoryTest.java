@@ -14,6 +14,8 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.InceptionRecord;
+import domain.LegalRecord;
+import domain.LinkRecord;
 import domain.MiscRecord;
 import domain.PeriodRecord;
 
@@ -25,15 +27,11 @@ import domain.PeriodRecord;
 public class BrotherhoodHistoryTest extends AbstractTest {
 
 	@Autowired
-	private BrotherhoodService		brotherhoodService;
-	@Autowired
 	private InceptionRecordService	inceptionRecordService;
 	@Autowired
 	private MiscRecordService		miscRecordService;
 	@Autowired
 	private PeriodRecordService		periodRecordService;
-	@Autowired
-	private ChapterService			chapterService;
 	@Autowired
 	private LinkRecordService		linkRecordService;
 	@Autowired
@@ -41,7 +39,7 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 
 
 	@Test
-	public void driver() {
+	public void driverListInceptionRecord() {
 		final Object testingData[][] = {
 			{
 				super.getEntityId("brotherhood1"), null
@@ -50,28 +48,132 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateBrotherhoodHistory((int) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.templateListInceptionRecord((int) testingData[i][0], (Class<?>) testingData[i][1]);
 	}
-	public void templateBrotherhoodHistory(final int brotherhoodId, final Class<?> expected) {
+	public void templateListInceptionRecord(final int brotherhoodId, final Class<?> expected) {
 
 		Class<?> caught;
 		caught = null;
 
 		try {
-			Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(brotherhoodId)));
 			final Collection<InceptionRecord> i = this.inceptionRecordService.getInceptionRecordByBrotherhood(brotherhoodId);
-			Assert.notNull(i);
 			Assert.isTrue(i.size() == 1);
+
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void driverListMiscRecord() {
+		final Object testingData[][] = {
+			{
+				super.getEntityId("brotherhood1"), null
+			}, {
+				999, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListMiscRecord((int) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	public void templateListMiscRecord(final int brotherhoodId, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
 			final Collection<MiscRecord> m = this.miscRecordService.getMiscRecordByBrotherhood(brotherhoodId);
-			Assert.notNull(m);
 			Assert.isTrue(m.size() == 1);
+
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void driverListPeriodRecord() {
+		final Object testingData[][] = {
+			{
+				super.getEntityId("brotherhood1"), null
+			}, {
+				999, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListPeriodRecord((int) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	public void templateListPeriodRecord(final int brotherhoodId, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
 			final Collection<PeriodRecord> p = this.periodRecordService.getPeriodRecordByBrotherhood(brotherhoodId);
-			Assert.notNull(p);
 			Assert.isTrue(p.size() == 1);
+
 			//Assert.isNull(this.legalRecordService.getLegalRecordByBrotherhood(brotherhoodId));
 			//			Assert.isTrue(this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId) == null);
 
-			this.chapterService.flush();
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void driverListLegalRecord() {
+		final Object testingData[][] = {
+			{
+				super.getEntityId("brotherhood1"), null
+			}, {
+				999, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListLegalRecord((int) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	public void templateListLegalRecord(final int brotherhoodId, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			final Collection<LegalRecord> f = this.legalRecordService.getLegalRecordByBrotherhood(brotherhoodId);
+			Assert.isTrue(f.size() == 1);
+			//			Assert.isTrue(this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId) == null);
+
+		} catch (final Exception e) {
+			caught = e.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void driverListLinkRecord() {
+		final Object testingData[][] = {
+			{
+				super.getEntityId("brotherhood1"), null
+			}, {
+				999, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListLinkRecord((int) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	public void templateListLinkRecord(final int brotherhoodId, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			final Collection<LinkRecord> l = this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId);
+			Assert.isTrue(l.size() == 1);
 
 		} catch (final Exception e) {
 			caught = e.getClass();

@@ -72,8 +72,7 @@ public class AreaService {
 
 	public Area save(final Area a) {
 		Assert.notNull(a);
-		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("ADMIN")
-			|| this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
+		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		Area result;
 		result = this.areaRepository.save(a);
 		return result;

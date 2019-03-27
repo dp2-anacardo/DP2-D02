@@ -160,7 +160,7 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double MaxParadesCoordinatesByChapters = this.administratorService.getMaxParadesCoordinatesByChapters();
 		final Double StddevParadesCoordinatesByChapters = this.administratorService.getStddevParadesCoordinatesByChapters();
 
-		/* TODO Q18 */
+		/* Q18 */
 
 		final List<Chapter> ChaptersCoordinate10MoreParadesThanAvg = this.administratorService.getChaptersCoordinate10MoreParadesThanAvg();
 

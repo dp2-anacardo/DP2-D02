@@ -44,9 +44,7 @@ public class BrowseProclaimsChapterTest extends AbstractTest {
 		caught = null;
 
 		try {
-			Assert.isTrue(this.chapterService.findAll().contains(this.chapterService.findOne(chapterId)));
 			final Collection<Proclaim> c = this.chapterService.getProclaims(chapterId);
-			Assert.notNull(c);
 			Assert.isTrue(c.size() == 1);
 
 		} catch (final Exception e) {

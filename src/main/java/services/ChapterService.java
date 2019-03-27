@@ -153,6 +153,8 @@ public class ChapterService {
 	}
 
 	public Collection<Proclaim> getProclaims(final int chapterId) {
+
+		Assert.isTrue(this.findAll().contains(this.findOne(chapterId)));
 		Assert.notNull(chapterId);
 		Collection<Proclaim> result;
 

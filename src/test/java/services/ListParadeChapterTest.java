@@ -28,8 +28,12 @@ public class ListParadeChapterTest extends AbstractTest {
 	private ActorService	actorService;
 
 
+	//In this test we are testing the requirement 7.2.2(list parades).
+	//In the negative case we are testing that an user not authenticated as a chapter
+	//in this case member, can not manage the parades of a chapter.
+
 	@Test
-	public void listParadesDriver() {
+	public void listParadeChapterDriver() {
 		final Object testingData[][] = {
 			{
 				"chapter2", null
@@ -38,10 +42,10 @@ public class ListParadeChapterTest extends AbstractTest {
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.listParadesTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.listParadeChapterTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
 	}
 
-	private void listParadesTemplate(final String string, final Class<?> expected) {
+	private void listParadeChapterTemplate(final String string, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
