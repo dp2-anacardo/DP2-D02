@@ -27,9 +27,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver1() {
 		final Object testingData[][] = {
 			{
-				"admin1", 1.0, null
+				"admin1", 2.5, null
 			}, {
-				"member1", 1.0, IllegalArgumentException.class
+				"member1", 2.5, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -40,9 +40,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver2() {
 		final Object testingData[][] = {
 			{
-				"admin1", 3.0, null
+				"admin1", 5.0, null
 			}, {
-				"member1", 3.0, IllegalArgumentException.class
+				"member1", 5.0, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -308,16 +308,6 @@ public class AdministratorDashboardTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.DashboardTemplate22((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-
-	//	private void DashboardTemplate(final String admin1, final Double avgRecordsPerHistory, final Double maxRecordsPerHistory, final Double minRecordsPerHistory, final Double stddevRecordsPerHistory, final String brotherhoodLargestHistory,
-	//		final String brotherhood1, final Double ratioANotCoordinates, final Double avgCoordinatesByC, final Double minCoordinatesByC, final Double maxCoordinatesByC, final Double stddevCoordinatesByC, final String titleChapter2,
-	//		final Double ratioPInDrafVsFinal, final Double ratioPInFinalAccepteds, final Double ratioPInFinalSubmitteds, final Double ratioPInFinalRejecteds, final Double ratioActiveSponsorships, final Double avgActiveSponsorshipsPerSponsor,
-	//		final Double minActiveSponsorshipsPerSponsor, final Double maxActiveSponsorshipsPerSponsor, final Double stddevActiveSponsorshipsPerSponsor, final String sponsor2, final String sponsor1) {
-	//		Class<?> caught;
-	//		caught = null;
-	//
-	//
-	//	}
 
 	private void DashboardTemplate1(final String string, final Double d, final Class<?> expected) {
 		Class<?> caught;
