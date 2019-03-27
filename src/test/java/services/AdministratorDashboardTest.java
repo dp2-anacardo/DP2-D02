@@ -23,6 +23,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 	private AdministratorService administatorService;
 
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the average of the number of records per history.
+	 * Positive: The average is 2.5 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver1() {
 		final Object testingData[][] = {
@@ -36,6 +43,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate1((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the minimum of the number of records per history.
+	 * Positive: The minimum is 5.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver2() {
 		final Object testingData[][] = {
@@ -49,6 +63,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate2((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the maximum of the number of records per history.
+	 * Positive: The minimum is 1.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver3() {
 		final Object testingData[][] = {
@@ -62,6 +83,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate3((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the minimum of the number of records per history.
+	 * Positive: The standard deviation is 0.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver4() {
 		final Object testingData[][] = {
@@ -75,6 +103,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate4((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the brotherhood with the largest history.
+	 * Positive: The brotherhood with the largest history is brotherhood1.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver5() {
 		final Object testingData[][] = {
@@ -88,6 +123,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate5((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the brotherhoods whose history is larger than the average.
+	 * Positive: The size of list that contains the brotherhoods whose history is larger than the average is 1.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver6() {
 		final Object testingData[][] = {
@@ -101,6 +143,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate6((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of areas that are not co-ordinated by any chapters.
+	 * Positive: The ratio of areas that are not co-ordinated by any chapters is 33.33333.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver7() {
 		final Object testingData[][] = {
@@ -114,6 +163,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate7((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the average of the number of parades co-ordinated by the chapters
+	 * Positive: The average of the number of parades co-ordinated by the chapters is 2.0.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver8() {
 		final Object testingData[][] = {
@@ -127,6 +183,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate8((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the minimum of the number of parades co-ordinated by the chapters.
+	 * Positive: The minimum of the number of parades co-ordinated by the chapters is 0.0
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver9() {
 		final Object testingData[][] = {
@@ -140,6 +203,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate9((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the maximum of the number of parades co-ordinated by the chapters.
+	 * Positive: The maximum of the number of parades co-ordinated by the chapters is 4.0
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver10() {
 		final Object testingData[][] = {
@@ -153,6 +223,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate10((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the standard deviation of the number of parades co-ordinated by the chapters.
+	 * Positive: The standard deviation of the number of parades co-ordinated by the chapters is 2.0
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver11() {
 		final Object testingData[][] = {
@@ -166,6 +243,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate11((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the chapters that co-ordinate at least 10% more parades than the average.
+	 * Positive: The size of list that contains the chapters that co-ordinate at least 10% more parades than the average is 1.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver12() {
 		final Object testingData[][] = {
@@ -179,6 +263,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate12((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of parades in draft mode versus parades in final mode.
+	 * Positive: The ratio of parades in draft mode versus parades in final mode is 6.66667 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver13() {
 		final Object testingData[][] = {
@@ -192,6 +283,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate13((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of parades in final mode accepteds.
+	 * Positive: The ratio of parades in final mode accepteds is 13.33333 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver14() {
 		final Object testingData[][] = {
@@ -205,6 +303,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate14((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of parades in final mode submitteds.
+	 * Positive: The ratio of parades in final mode submitteds is 73.33333 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver15() {
 		final Object testingData[][] = {
@@ -218,6 +323,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate15((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of parades in final mode rejecteds.
+	 * Positive: The ratio of parades in final mode rejecteds is 13.33333 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver16() {
 		final Object testingData[][] = {
@@ -231,6 +343,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate16((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the ratio of active sponsorships.
+	 * Positive: The ratio of active sponsorships is 75.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver17() {
 		final Object testingData[][] = {
@@ -244,6 +363,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate17((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the average of ac-tive sponsorships per sponsor.
+	 * Positive: The average of ac-tive sponsorships per sponsor is 1.5 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver18() {
 		final Object testingData[][] = {
@@ -257,6 +383,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate18((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the minimum of ac-tive sponsorships per sponsor.
+	 * Positive: The minimum of ac-tive sponsorships per sponsor is 1.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver19() {
 		final Object testingData[][] = {
@@ -270,6 +403,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate19((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the maximum of ac-tive sponsorships per sponsor.
+	 * Positive: The maximum of ac-tive sponsorships per sponsor is 2.0 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver20() {
 		final Object testingData[][] = {
@@ -283,6 +423,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate20((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the standard deviation of ac-tive sponsorships per sponsor.
+	 * Positive: The standard deviation of ac-tive sponsorships per sponsor is 0.5 .
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver21() {
 		final Object testingData[][] = {
@@ -296,6 +443,13 @@ public class AdministratorDashboardTest extends AbstractTest {
 			this.DashboardTemplate21((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as an administrator must be able to: Display a dashboard with the top-5 sponsors in terms of number of active sponsorships.
+	 * Positive: The size of list that contains the top-5 sponsors in terms of number of active sponsorships is 2.
+	 * Negative: A member tries view the average in dashboard
+	 * Sentence coverage: 90%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void DashboardDriver22() {
 		final Object testingData[][] = {
