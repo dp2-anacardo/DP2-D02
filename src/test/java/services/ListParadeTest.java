@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import security.LoginService;
-import utilities.AbstractTest;
 import domain.Actor;
 import domain.Brotherhood;
+import security.LoginService;
+import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,6 +29,13 @@ public class ListParadeTest extends AbstractTest {
 	private BrotherhoodService	brotherhoodService;
 
 
+	/*
+	 * Testing functional requirement :List their parades
+	 * Positive: A brotherhood lists its parades
+	 * Negative: A member tries to list his parades
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void listParadesDriver() {
 		final Object testingData[][] = {

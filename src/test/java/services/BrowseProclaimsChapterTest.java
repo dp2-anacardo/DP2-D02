@@ -32,7 +32,7 @@ public class BrowseProclaimsChapterTest extends AbstractTest {
 			{
 				super.getEntityId("chapter1"), null
 			}, {
-				999, IllegalArgumentException.class
+				0, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

@@ -1303,6 +1303,17 @@
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
 	
+	<bean id="inceptionRecord2" class="domain.InceptionRecord">
+		<property name="title" value="Registro de comienzo numero 2"/>
+		<property name="description" value="Este es el segundo registro de comienzo"/>
+		<property name="photo">
+			<list>
+			<ref bean="photo1"/>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood2"/>
+	</bean>
+	
 	<!-- Period Record -->
 	
 	<bean id="periodRecord1" class="domain.PeriodRecord">

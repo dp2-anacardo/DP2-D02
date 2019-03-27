@@ -40,7 +40,7 @@
 	</display:column>
 	
 	<spring:message code="parade.status" var="status"/>
-	<display:column title="${status}" class="${css}">
+	<display:column title="${status}" class="${css}" sortable="true">
 			<jstl:if test="${row.status == 'ACCEPTED' }">
 				<spring:message code="parade.accepted"/>
 			</jstl:if>

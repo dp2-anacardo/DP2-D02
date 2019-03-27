@@ -254,6 +254,10 @@ public class ActorService {
 				for (final LinkRecord ls1 : linkList)
 					this.linkRecordService.delete(ls1);
 			}
+			final Collection<LinkRecord> lbh = this.linkRecordService.findAll();
+			for (final LinkRecord lr1 : lbh)
+				if (lr1.getLinkedBH().equals(b))
+					this.linkRecordService.delete(lr1);
 			if (!(this.miscRecordService.getMiscRecordByBrotherhood(b.getId())).isEmpty()) {
 				final List<MiscRecord> miscList = new ArrayList<MiscRecord>();
 				final Collection<MiscRecord> it2 = this.miscRecordService.getMiscRecordByBrotherhood(b.getId());
