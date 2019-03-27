@@ -25,6 +25,13 @@ public class SegmentServiceTest extends AbstractTest {
 	private ParadeService	paradeService;
 
 
+	/*
+	 * Testing functional requirement : Manage the paths of their parades, which includes creating them.
+	 * Positive: A brotherhood creates a segment
+	 * Negative: We try to create a segment that is not contiguous
+	 * Sentence coverage: 76%
+	 * Data coverage: 33%
+	 */
 	@Test
 	public void createSegmentDriver() {
 		final Object testingData[][] = {
@@ -61,13 +68,21 @@ public class SegmentServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * Testing functional requirement : Manage the paths of their parades, which includes updating them.
+	 * Positive: A brotherhood edits a segment
+	 * Negative: A member tries to edit a test
+	 * Sentence coverage: 74%
+	 * Data coverage: 33%
+	 */
 	@Test
 	public void editSegmentDriver() {
 		final Object testingData[][] = {
 			{
 				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", null, "segment1"
 			}, {
-				999.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "member1", IllegalArgumentException.class, "segment1"
+				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "member1", IllegalArgumentException.class, "segment1"
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -97,6 +112,14 @@ public class SegmentServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * Testing functional requirement : Manage the paths of their parades, which includes deleting them.
+	 * Positive: A brotherhood deletes a segment
+	 * Negative: A brotherhood tries to delete another's brotherhood segment
+	 * Sentence coverage: 55,1%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void deleteSegmentDriver() {
 		final Object testingData[][] = {
@@ -126,6 +149,13 @@ public class SegmentServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+	/*
+	 * Testing functional requirement : Manage the paths of their parades, which includes listing them.
+	 * Positive: A brotherhood lists its parades
+	 * Negative: A member tries to list his parades
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void listSegmentDriver() {
 		final Object testingData[][] = {

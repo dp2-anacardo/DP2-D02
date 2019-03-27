@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Mr GaRRos
 Build-Jdk: 1.8.0_171
+=======
+Built-By: Jesus
+Build-Jdk: 1.8.0_201
+>>>>>>> origin/jesus
 Created-By: Maven Integration for Eclipse
 
