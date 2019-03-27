@@ -110,6 +110,7 @@ public class MiscRecordService {
 	}
 
 	public Collection<MiscRecord> getMiscRecordByBrotherhood(final int BrotherhoodId) {
+		Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(BrotherhoodId)));
 		return this.miscRecordRepository.getMiscRecordByBrotherhood(BrotherhoodId);
 	}
 

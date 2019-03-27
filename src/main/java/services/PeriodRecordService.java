@@ -164,6 +164,7 @@ public class PeriodRecordService {
 	}
 
 	public Collection<PeriodRecord> getPeriodRecordByBrotherhood(final int BrotherhoodId) {
+		Assert.isTrue(this.brotherhoodService.findAll().contains(this.brotherhoodService.findOne(BrotherhoodId)));
 		return this.periodRecordRepository.getPeriodRecordByBrotherhood(BrotherhoodId);
 	}
 
