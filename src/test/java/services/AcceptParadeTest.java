@@ -23,6 +23,10 @@ public class AcceptParadeTest extends AbstractTest {
 	private ParadeService	paradeService;
 
 
+	//In this test we are testing the requirement 7.2.2(accepting parades).
+	//In the negative cases we are testing that accepted parades, rejected parades
+	//and parades that are co-ordinated by another chapter can not be accepted.
+
 	@Test
 	public void acceptParadeDriver() {
 		final Object testingData[][] = {

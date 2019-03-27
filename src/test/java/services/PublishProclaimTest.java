@@ -24,6 +24,10 @@ public class PublishProclaimTest extends AbstractTest {
 	private ProclaimService	proclaimService;
 
 
+	//In this test we are testing the requirement 17(publish a proclaim).
+	//In the negative case we are testing that the published description can not
+	//have a description longer than 250 characters.
+
 	@Test
 	public void listProclaimDriver() {
 		final Object testingData[][] = {

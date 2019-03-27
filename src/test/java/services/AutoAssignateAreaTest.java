@@ -23,6 +23,10 @@ public class AutoAssignateAreaTest extends AbstractTest {
 	private ChapterService	chapterService;
 
 
+	//In this test we are testing the requirement 7.2.1(self-assign area).
+	//In the negative case we are testing that a chapter without an area can not
+	//self-assign an area assigned to another chapter.
+
 	@Test
 	public void autoAssignateAreaDriver() {
 		final Object testingData[][] = {
