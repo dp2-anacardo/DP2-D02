@@ -337,7 +337,6 @@
 				<ref bean="picture2"/>
 			</list>
 		</property>
-		<property name="chapter" ref = "chapter1"></property>
 	</bean>
 	
 	<!-- Picture -->
@@ -1141,7 +1140,7 @@
 	<bean id="enrolment2" class="domain.Enrolment">
 		<property name="registerMoment" value="17/02/2019 12:00"/>
 		<property name="status" value="ACCEPTED"/>
-		<property name="position" ref="default"/>
+		<property name="position" ref="officer"/>
 		<property name="member" ref="member1"/>
 		<property name="brotherhood" ref="brotherhood1"/>
 	</bean>
@@ -1354,7 +1353,6 @@
 			</list>
 		</property>
 		<property name="title" value="titleChapter1"/>
-		<property name="area" ref = "areaBrotherhood1"></property>
 	</bean>
 	
 	<bean id="chapter2" class="domain.Chapter">
@@ -1541,6 +1539,7 @@
 				<ref bean="picture2"/>
 			</list>
 		</property>
+		<property name="chapter" ref="chapter2"/>
 	</bean>
 	
 	<bean id="area3" class="domain.Area">

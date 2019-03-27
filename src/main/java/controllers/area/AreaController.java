@@ -150,8 +150,9 @@ public class AreaController extends AbstractController {
 		if (area == null || !this.areaService.dontHaveChapter(area) || chapter.getArea() != null)
 			result = new ModelAndView("redirect:/misc/403");
 		else {
-			chapter.setArea(area);
+			this.chapterService.autoAssignateArea(chapter, areaId);
 			this.chapterService.save(chapter);
+			this.areaService.save(area);
 			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
