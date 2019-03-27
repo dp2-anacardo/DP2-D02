@@ -24,47 +24,39 @@ public class RejectParadeTest extends AbstractTest {
 
 
 	@Test
-	public void rejectParadeTest() {
-		super.authenticate("chapter2");
-
-		final int paradeId = super.getEntityId("parade7");
-		final Parade parade = this.paradeService.findOne(paradeId);
-		this.paradeService.rejectParade(parade);
-
-		super.unauthenticate();
+	public void rejectParadeDriver() {
+		final Object testingData[][] = {
+			{
+				"chapter2", "parade7", null
+			}, {
+				"chapter2", "parade9", IllegalArgumentException.class
+			}, {
+				"chapter2", "parade8", IllegalArgumentException.class
+			}, {
+				"chapter2", "parade4", IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.rejectParadeTemplate((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void rejectRejectedParadeTest() {
-		super.authenticate("chapter2");
+	private void rejectParadeTemplate(final String username, final String parade, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
 
-		final int paradeId = super.getEntityId("parade9");
-		final Parade parade = this.paradeService.findOne(paradeId);
-		this.paradeService.rejectParade(parade);
+		try {
+			this.authenticate(username);
 
-		super.unauthenticate();
-	}
+			final int paradeId = super.getEntityId(parade);
+			final Parade p = this.paradeService.findOne(paradeId);
+			this.paradeService.rejectParade(p);
 
-	@Test(expected = IllegalArgumentException.class)
-	public void rejectAcceptedParadeTest() {
-		super.authenticate("chapter2");
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
 
-		final int paradeId = super.getEntityId("parade8");
-		final Parade parade = this.paradeService.findOne(paradeId);
-		this.paradeService.rejectParade(parade);
+		super.checkExceptions(expected, caught);
 
-		super.unauthenticate();
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void rejectAnotherChapterParadeTest() {
-		super.authenticate("chapter2");
-
-		final int paradeId = super.getEntityId("parade4");
-		final Parade parade = this.paradeService.findOne(paradeId);
-		this.paradeService.rejectParade(parade);
-
-		super.unauthenticate();
 	}
 
 }

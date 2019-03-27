@@ -24,31 +24,38 @@ public class AutoAssignateAreaTest extends AbstractTest {
 
 
 	@Test
-	public void autoAssignateArea() {
-		super.authenticate("chapter1");
-
-		final int chapterId = super.getEntityId("chapter1");
-		final Chapter chapter = this.chapterService.findOne(chapterId);
-		final int areaId = super.getEntityId("areaBrotherhood1");
-
-		this.chapterService.autoAssignateArea(chapter, areaId);
-		this.chapterService.save(chapter);
-
-		super.unauthenticate();
+	public void autoAssignateAreaDriver() {
+		final Object testingData[][] = {
+			{
+				"chapter1", "areaBrotherhood1", null
+			}, {
+				"chapter1", "area2", IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.autoAssignateAreaTemplate((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void autoAssignateAreaWithChapter() {
-		super.authenticate("chapter1");
+	private void autoAssignateAreaTemplate(final String username, final String area, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
 
-		final int chapterId = super.getEntityId("chapter1");
-		final Chapter chapter = this.chapterService.findOne(chapterId);
-		final int areaId = super.getEntityId("area2");
+		try {
+			this.authenticate(username);
 
-		this.chapterService.autoAssignateArea(chapter, areaId);
-		this.chapterService.save(chapter);
+			final int chapterId = super.getEntityId(username);
+			final Chapter chapter = this.chapterService.findOne(chapterId);
+			final int areaId = super.getEntityId(area);
 
-		super.unauthenticate();
+			this.chapterService.autoAssignateArea(chapter, areaId);
+			this.chapterService.save(chapter);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
 	}
 
 }

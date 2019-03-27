@@ -25,27 +25,39 @@ public class PublishProclaimTest extends AbstractTest {
 
 
 	@Test
-	public void createProclaimTest() {
-		super.authenticate("chapter1");
-
-		final Proclaim proclaim = this.proclaimService.create();
-		proclaim.setDescription("Probando");
-		this.proclaimService.save(proclaim);
-
-		super.unauthenticate();
+	public void listProclaimDriver() {
+		final Object testingData[][] = {
+			{
+				"chapter1", "probando", null
+			},
+			{
+				"chapter1",
+				"Espero que esta descripción sea de más de 250 caracteres para que salte el error de que debe estar entre 0 y 250 caracteres. Creo que aún no es suficiente así que sigo escribiendo hasta que crea conveniente. Seguiré si no coge la excepción. Parece ser que aún no son 250 caracteres ya que no salta la excepción, este sera el segundo intento, he comprobado en local poniendo todo AAAAAA y no ha dejado que se guarde así que debería de saltar, es solo cuestión de tiempo.",
+				ConstraintViolationException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.listProclaimTemplate((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
 
-	@Test(expected = ConstraintViolationException.class)
-	public void createProclaimLongDescriptionTest() {
-		super.authenticate("chapter1");
+	private void listProclaimTemplate(final String username, final String description, final Class<?> expected) {
+		Class<?> caught;
+		caught = null;
 
-		final Proclaim proclaim = this.proclaimService.create();
-		proclaim
-			.setDescription("Espero que esta descripción sea de más de 250 caracteres para que salte el error de que debe estar entre 0 y 250 caracteres. Creo que aún no es suficiente así que sigo escribiendo hasta que crea conveniente. Seguiré si no coge la excepción. Parece ser que aún no son 250 caracteres ya que no salta la excepción, este sera el segundo intento, he comprobado en local poniendo todo AAAAAA y no ha dejado que se guarde así que debería de saltar, es solo cuestión de tiempo.");
-		this.proclaimService.save(proclaim);
-		this.proclaimService.flush();
+		try {
+			super.authenticate(username);
 
-		super.unauthenticate();
+			final Proclaim proclaim = this.proclaimService.create();
+			proclaim.setDescription(description);
+			this.proclaimService.save(proclaim);
+			this.proclaimService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
 	}
 
 }

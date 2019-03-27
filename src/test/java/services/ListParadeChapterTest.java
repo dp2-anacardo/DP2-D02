@@ -29,7 +29,7 @@ public class ListParadeChapterTest extends AbstractTest {
 
 
 	@Test
-	public void listParadesDriver() {
+	public void listParadeChapterDriver() {
 		final Object testingData[][] = {
 			{
 				"chapter2", null
@@ -38,10 +38,10 @@ public class ListParadeChapterTest extends AbstractTest {
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.listParadesTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.listParadeChapterTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
 	}
 
-	private void listParadesTemplate(final String string, final Class<?> expected) {
+	private void listParadeChapterTemplate(final String string, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 

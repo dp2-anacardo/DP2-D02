@@ -152,7 +152,6 @@ public class AreaController extends AbstractController {
 		else {
 			this.chapterService.autoAssignateArea(chapter, areaId);
 			this.chapterService.save(chapter);
-			this.areaService.save(area);
 			result = new ModelAndView("redirect:list.do");
 		}
 		return result;
