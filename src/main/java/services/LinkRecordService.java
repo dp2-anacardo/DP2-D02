@@ -61,9 +61,10 @@ public class LinkRecordService {
 		Assert.isTrue(this.actorService.getActorLogged().getUserAccount().getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
 		final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-		if (lR.getId() == 0)
+		if (lR.getId() == 0) {
+			lR.setBrotherhood(b);
 			res = this.linkRecordRepository.save(lR);
-		else {
+		} else {
 			Assert.isTrue(lR.getBrotherhood().equals(b));
 			res = this.linkRecordRepository.save(lR);
 		}

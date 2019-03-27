@@ -28,8 +28,6 @@ public class InceptionRecordService {
 	private BrotherhoodService			brotherhoodService;
 	@Autowired
 	private Validator					validator;
-	@Autowired
-	private BrotherhoodService			brotherhoodService;
 
 
 	//CRUD
