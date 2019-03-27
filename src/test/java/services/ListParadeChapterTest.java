@@ -12,28 +12,27 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import security.LoginService;
 import utilities.AbstractTest;
 import domain.Actor;
-import domain.Brotherhood;
+import domain.Chapter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class ListParadeTest extends AbstractTest {
+public class ListParadeChapterTest extends AbstractTest {
 
 	@Autowired
-	private ParadeService		paradeService;
+	private ChapterService	chapterService;
+
 	@Autowired
-	private ActorService		actorService;
-	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private ActorService	actorService;
 
 
 	@Test
 	public void listParadesDriver() {
 		final Object testingData[][] = {
 			{
-				"brotherhood1", null
+				"chapter2", null
 			}, {
 				"member1", IllegalArgumentException.class
 			}
@@ -49,8 +48,8 @@ public class ListParadeTest extends AbstractTest {
 		try {
 			this.authenticate(string);
 			final Actor user = this.actorService.findByUsername(LoginService.getPrincipal().getUsername());
-			final Brotherhood b = this.brotherhoodService.findOne(user.getId());
-			this.paradeService.getParadesByBrotherhood(b);
+			final Chapter chapter = this.chapterService.findOne(user.getId());
+			this.chapterService.getParadesByArea(chapter);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

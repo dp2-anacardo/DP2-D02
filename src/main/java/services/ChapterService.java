@@ -106,8 +106,8 @@ public class ChapterService {
 		return result;
 	}
 
-	public Collection<Parade> getParadesByArea() {
-		final Chapter chapter = this.chapterRepository.findOne(LoginService.getPrincipal().getId());
+	public Collection<Parade> getParadesByArea(final Chapter chapter) {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 
 		final Collection<Parade> parades = this.chapterRepository.getParadesOfChapter(chapter.getArea().getId());
 
