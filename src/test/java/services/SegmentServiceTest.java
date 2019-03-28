@@ -2,12 +2,14 @@
 package services;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.validation.DataBinder;
 
 import domain.Segment;
 import utilities.AbstractTest;
@@ -38,7 +40,7 @@ public class SegmentServiceTest extends AbstractTest {
 			{
 				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", null
 			}, {
-				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", IllegalArgumentException.class
+				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", ValidationException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -52,13 +54,15 @@ public class SegmentServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(brotherhood);
-			final Segment s = this.segmentService.create(this.paradeService.findOne(paradeId));
+			Segment s = this.segmentService.create(this.paradeService.findOne(paradeId));
 			s.setOriginLatitude(oLa);
 			s.setOriginLongitude(oLo);
 			s.setDestinationLatitude(dLa);
 			s.setDestinationLongitude(dLo);
 			s.setTimeOrigin(oT);
 			s.setTimeDestination(dT);
+			final DataBinder binding = new DataBinder(new Segment());
+			s = this.segmentService.reconstruct(s, binding.getBindingResult());
 			this.segmentService.save(s);
 
 		} catch (final Throwable oops) {
@@ -82,7 +86,7 @@ public class SegmentServiceTest extends AbstractTest {
 			{
 				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", null, "segment1"
 			}, {
-				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", IllegalArgumentException.class, "segment1"
+				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", ValidationException.class, "segment1"
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -96,13 +100,15 @@ public class SegmentServiceTest extends AbstractTest {
 
 		try {
 			this.authenticate(brotherhood);
-			final Segment s = this.segmentService.findOne(segmentId);
+			Segment s = this.segmentService.findOne(segmentId);
 			s.setOriginLatitude(oLa);
 			s.setOriginLongitude(oLo);
 			s.setDestinationLatitude(dLa);
 			s.setDestinationLongitude(dLo);
 			s.setTimeOrigin(oT);
 			s.setTimeDestination(dT);
+			final DataBinder binding = new DataBinder(new Segment());
+			s = this.segmentService.reconstruct(s, binding.getBindingResult());
 			this.segmentService.save(s);
 
 		} catch (final Throwable oops) {
