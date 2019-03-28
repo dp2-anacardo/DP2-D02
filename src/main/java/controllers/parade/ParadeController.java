@@ -146,17 +146,23 @@ public class ParadeController extends AbstractController {
 
 	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
-
 		ModelAndView result;
-		Collection<Parade> pro;
-		pro = this.paradeService.getParadesFinalByBrotherhood(brotherhoodId);
-		if (pro == null)
+		try {
+
+			Collection<Parade> pro;
+			pro = this.paradeService.getParadesFinalByBrotherhood(brotherhoodId);
+			if (pro == null)
+				result = new ModelAndView("redirect:/misc/403");
+			else {
+				result = new ModelAndView("parade/listNotRegister");
+				result.addObject("parade", pro);
+				result.addObject("requestURI", "parade/listNotRegister.do");
+			}
+
+		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/misc/403");
-		else {
-			result = new ModelAndView("parade/listNotRegister");
-			result.addObject("parade", pro);
-			result.addObject("requestURI", "parade/listNotRegister.do");
 		}
+
 		return result;
 	}
 	@RequestMapping(value = "/listForMembers", method = RequestMethod.GET)

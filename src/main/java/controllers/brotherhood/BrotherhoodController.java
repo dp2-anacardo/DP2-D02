@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Enrolment;
+import domain.Member;
 import security.LoginService;
 import services.ActorService;
 import services.AreaService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.MemberService;
-import controllers.AbstractController;
-import domain.Actor;
-import domain.Brotherhood;
-import domain.Enrolment;
-import domain.Member;
 
 @Controller
 @RequestMapping("/brotherhood")
@@ -42,11 +42,15 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView list() {
 
 		ModelAndView result;
-		final Collection<Brotherhood> bros = this.brotherhoodService.findAll();
+		try {
+			final Collection<Brotherhood> bros = this.brotherhoodService.findAll();
 
-		result = new ModelAndView("brotherhood/list");
-		result.addObject("brotherhood", bros);
-		result.addObject("requestURI", "brotherhood/list.do");
+			result = new ModelAndView("brotherhood/list");
+			result.addObject("brotherhood", bros);
+			result.addObject("requestURI", "brotherhood/list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 
 		return result;
 	}
@@ -55,11 +59,15 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView list(@RequestParam final int areaId) {
 
 		ModelAndView result;
-		final Collection<Brotherhood> bros = this.areaService.getBrotherhood(areaId);
+		try {
+			final Collection<Brotherhood> bros = this.areaService.getBrotherhood(areaId);
 
-		result = new ModelAndView("brotherhood/listNotRegister");
-		result.addObject("brotherhood", bros);
-		result.addObject("requestURI", "brotherhood/listNotRegister.do");
+			result = new ModelAndView("brotherhood/listNotRegister");
+			result.addObject("brotherhood", bros);
+			result.addObject("requestURI", "brotherhood/listNotRegister.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
 
 		return result;
 	}
