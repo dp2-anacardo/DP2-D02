@@ -340,7 +340,8 @@ public class ActorService {
 				for (final Proclaim p : proclaimList)
 					this.proclaimService.delete(p);
 			}
-
+			if (chapter.getArea() != null)
+				chapter.getArea().setChapter(null);
 			//Borrado de la informacion del chapter
 			this.chapterService.delete(chapter);
 

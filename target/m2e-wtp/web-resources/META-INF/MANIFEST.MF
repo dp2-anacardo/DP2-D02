@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Built-By: HP
 Build-Jdk: 1.8.0_101
 =======
@@ -11,5 +12,9 @@ Build-Jdk: 1.7.0_13
 Built-By: Student
 Build-Jdk: 1.7.0_13
 >>>>>>> manuercaximba
+=======
+Built-By: Student
+Build-Jdk: 1.7.0_13
+>>>>>>> sergi
 Created-By: Maven Integration for Eclipse
 
