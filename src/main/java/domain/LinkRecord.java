@@ -44,7 +44,7 @@ public class LinkRecord extends DomainEntity {
 
 	//Relationships
 	@Valid
-	@OneToOne(optional = false)
+	@OneToOne(optional = true)
 	public Brotherhood getLinkedBH() {
 		return this.linkedBH;
 	}

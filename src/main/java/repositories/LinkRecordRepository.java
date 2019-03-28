@@ -17,5 +17,4 @@ public interface LinkRecordRepository extends JpaRepository<LinkRecord, Integer>
 
 	@Query("select r from LinkRecord r join r.linkedBH b where b.id=?1")
 	Collection<LinkRecord> getLinkRecordByLinkedBH(final int brotherhoodId);
-
 }

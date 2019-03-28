@@ -21,8 +21,13 @@
 	<form:hidden path="id"/>
 
 	<!-- Single areas -->
-	<jstl:out value="${messageCode}"/>
 	
+	<jstl:if test="${messageCode!=null}">
+	<div class="error">
+	<spring:message code="${messageCode}"/>
+	</div>
+	
+	</jstl:if>
 	<acme:textboxbs code="record.title" path="title"/>
 	<acme:textarea bold="true" code="record.description" path="description"/>
 	<br/>
