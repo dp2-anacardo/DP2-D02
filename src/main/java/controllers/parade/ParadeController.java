@@ -8,12 +8,21 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Chapter;
+import domain.FloatEntity;
+import domain.Message;
+import domain.Parade;
+import domain.Sponsorship;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
@@ -25,14 +34,6 @@ import services.MessageService;
 import services.ParadeService;
 import services.PriorityService;
 import services.SponsorshipService;
-import controllers.AbstractController;
-import domain.Actor;
-import domain.Brotherhood;
-import domain.Chapter;
-import domain.FloatEntity;
-import domain.Message;
-import domain.Parade;
-import domain.Sponsorship;
 
 @Controller
 @RequestMapping("parade")
@@ -233,6 +234,7 @@ public class ParadeController extends AbstractController {
 			chapterId = this.actorService.getActorLogged().getId();
 			chapter = this.chapterService.findOne(chapterId);
 			parade = this.paradeService.findOne(paradeId);
+			Assert.notNull(parade);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/misc/403");
 			return result;
@@ -259,6 +261,7 @@ public class ParadeController extends AbstractController {
 			chapterId = this.actorService.getActorLogged().getId();
 			chapter = this.chapterService.findOne(chapterId);
 			parade = this.paradeService.findOne(paradeId);
+			Assert.notNull(parade);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:/misc/403");
 			return result;
