@@ -4,6 +4,7 @@ package services;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
+import org.jsoup.select.Evaluator.Class;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,6 @@ public class HistoryManagementTest extends AbstractTest {
 
 
 	/*
-	 * Testing functional requirement: Edit brotherhood's history
-	 * Positive: A brotherhood edit their parades
-	 * Negative: A member tries to list his parades
 	 * For every test in this class we are testing : 3. An actor who is authenticated as a brotherhood must be able to: 1. Manage their history
 	 * Positive: A brotherhood creates a miscRecord
 	 * Negative: A brotherhood tries to create a miscRecord with invalid data //// A member tries to create a miscRecord
@@ -41,80 +39,29 @@ public class HistoryManagementTest extends AbstractTest {
 	public void createMiscRecordDriver() {
 		final Object testingData[][] = {
 			{
-				"brotherhood1", "inceptionRecord1", "periodRecord1", "legalRecord1", "linkRecord1", "miscRecord1", null
+				"title", "description", "brotherhood1", null
 			}, {
-				"member1", "member1", "member1", "member1", "member1", "member1", IllegalArgumentException.class
+				"", "description", "brotherhood1", ConstraintViolationException.class
+			}, {
+				"title", "", "brotherhood1", ConstraintViolationException.class
+			}, {
+				"title", "description", "member1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.editRecords((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), super.getEntityId((String) testingData[i][2]), super.getEntityId((String) testingData[i][3]), super.getEntityId((String) testingData[i][4]),
-				super.getEntityId((String) testingData[i][5]), (Class<?>) testingData[i][6]);
+			this.createMiscRecordTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
-	public void editRecords(final String bID1, final int iRID, final int pRID, final int lRID, final int liRID, final int mRID, final Class<?> expected) {
-
-				"title", "description", "brotherhood1", null
-			},
-
-
-	{
-				"", "description", "brotherhood1", ConstraintViolationException.class
-			},
-	{
-				"title", "", "brotherhood1", ConstraintViolationException.class
-			},
-	{
-				"title", "description", "member1", IllegalArgumentException.class
-			}};for(
-	int i = 0;i<testingData.length;i++)this.createMiscRecordTemplate((String)testingData[i][0],(String)testingData[i][1],(String)testingData[i][2],(Class<?>)testingData[i][3]);
-	}
-
-
 	private void createMiscRecordTemplate(final String string, final String string2, final String brotherhood, final Class<?> expected) {
->>>>>>> jesus
 		Class<?> caught;
 		caught = null;
 
 		try {
-<<<<<<< HEAD
-			final Brotherhood bh = this.brotherhoodService.findOne(super.getEntityId(bID1));
-
-			super.authenticate(bID1);
-
-			MiscRecord newMR = this.miscRecordService.findOne(mRID);
-			LegalRecord newLR = this.legalRecordService.findOne(lRID);
-			final LinkRecord newLiR = this.linkRecordService.findOne(liRID);
-			PeriodRecord newPR = this.periodRecordService.findOne(pRID);
-			final InceptionRecord IR = this.inceptionRecordService.findOne(iRID);
-
-			//Edit
-			if (bh.equals(newMR.getBrotherhood())) {
-				newMR.setTitle("new Title");
-				newMR = this.miscRecordService.save(newMR);
-			}
-
-			Assert.isTrue(newMR.getTitle().equals("new Title"));
-
-			if (bh.equals(newPR.getBrotherhood())) {
-				newPR.setTitle("new Title");
-				newPR = this.periodRecordService.save(newPR);
-			}
-
-			Assert.isTrue(newPR.getTitle().equals("new Title"));
-
-			if (bh.equals(newLR.getBrotherhood())) {
-				newLR.setTitle("new Title");
-				newLR = this.legalRecordService.save(newLR);
-			}
-
-			Assert.isTrue(newLR.getTitle().equals("new Title"));
-=======
 			super.authenticate(brotherhood);
 			final MiscRecord m = this.miscRecordService.create();
 			m.setTitle(string);
 			m.setDescription(string2);
 			this.miscRecordService.save(m);
 			this.miscRecordService.flush();
->>>>>>> jesus
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
