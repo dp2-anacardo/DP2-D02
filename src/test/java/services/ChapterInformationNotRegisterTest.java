@@ -12,11 +12,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import utilities.AbstractTest;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Chapter;
 import domain.Parade;
+import utilities.AbstractTest;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -122,7 +122,7 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 
 		try {
 			final Collection<Parade> p = this.paradeService.getParadesFinalByBrotherhood(brotherhoodId);
-			Assert.isTrue(p.size() == 11);
+			Assert.isTrue(p.size() == 1);
 
 		} catch (final Exception e) {
 			caught = e.getClass();
