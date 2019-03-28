@@ -24,7 +24,7 @@ public interface ParadeRepository extends JpaRepository<Parade, Integer> {
 	@Query("select f from Finder f join f.parades p where p.id=?1")
 	Collection<Finder> getFinderByParade(final int paradeId);
 
-	@Query("select p from Parade p where p.brotherhood.id =?1 and p.isFinal =TRUE and p.status='ACCEPTED'")
+	@Query("select p from Parade p where p.brotherhood.id =?1 and p.isFinal =TRUE and p.status like 'ACCEPTED'")
 	Collection<Parade> getParadesFinalByBrotherhood(final int id);
 
 	@Query("select p from Parade p where p.isFinal = TRUE")

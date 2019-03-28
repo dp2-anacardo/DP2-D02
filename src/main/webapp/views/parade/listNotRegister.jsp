@@ -35,12 +35,12 @@
 		</jstl:if>
 
 	<spring:message code="parade.title" var="columnTitle"/>
-	<display:column title="columnTitle" class="${css}">
+	<display:column title="${columnTitle}" class="${css}">
 		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 	
 	<spring:message code="parade.date" var="columnTitle"/>
-	<display:column title="columnTitle" class="${css}">
+	<display:column title="${columnTitle}" class="${css}">
 		<jstl:out value="${row.moment }"></jstl:out>
 	</display:column>
 	
