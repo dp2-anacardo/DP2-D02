@@ -93,7 +93,7 @@ public class RegisterSponsorTest extends AbstractTest {
 			this.sponsorService.save(sponsor);
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
@@ -118,7 +118,7 @@ public class RegisterSponsorTest extends AbstractTest {
 			this.sponsorService.save(result);
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
