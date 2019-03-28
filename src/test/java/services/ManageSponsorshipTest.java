@@ -47,7 +47,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 	 * Positive: A sponsor successfully creates a sponsorship
 	 * Negative: A sponsor left an obligatory attribute in blank.
 	 * Sentence coverage: 100%
-	 * Data coverage: ??? 2/9
+	 * Data coverage: 22%
 	 */
 	@Test
 	public void createSponsorShipDriver() {
@@ -69,7 +69,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 	 * Positive: A sponsor successfully updates a sponsorship
 	 * Negative: A sponsor left an obligatory attribute in blank.
 	 * Sentence coverage: 100%
-	 * Data coverage: ??? 2/8
+	 * Data coverage: 25%
 	 */
 	@Test
 	public void editSponsorShipDriver() {

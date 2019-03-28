@@ -31,7 +31,7 @@ public class RegisterSponsorTest extends AbstractTest {
 	 * Positive: An actor who is not authenticated is successfully registered as a sponsor
 	 * Negative: An actor who is not authenticated left an obligatory attribute in blank
 	 * Sentence coverage: 100%
-	 * Data coverage: ???
+	 * Data coverage: 20%
 	 */
 	@Test
 	public void registerSponsorDriver() {
@@ -52,7 +52,7 @@ public class RegisterSponsorTest extends AbstractTest {
 	 * Positive: A sponsor successfully edit his personal data
 	 * Negative: A sponsor left an obligatory attribute in blank
 	 * Sentence coverage: 100%
-	 * Data coverage: ???
+	 * Data coverage: 22%
 	 */
 	@Test
 	public void editSponsorDriver() {
