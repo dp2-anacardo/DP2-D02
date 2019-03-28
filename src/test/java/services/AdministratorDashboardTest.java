@@ -28,7 +28,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The average is 2.5 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver1() {
@@ -48,7 +48,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The minimum is 5.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver2() {
@@ -68,7 +68,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The minimum is 1.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver3() {
@@ -88,7 +88,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The standard deviation is 0.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver4() {
@@ -108,7 +108,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The brotherhood with the largest history is brotherhood1.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver5() {
@@ -128,7 +128,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The size of list that contains the brotherhoods whose history is larger than the average is 1.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver6() {
@@ -148,7 +148,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of areas that are not co-ordinated by any chapters is 33.33333.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver7() {
@@ -168,7 +168,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The average of the number of parades co-ordinated by the chapters is 2.0.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver8() {
@@ -188,7 +188,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The minimum of the number of parades co-ordinated by the chapters is 0.0
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver9() {
@@ -208,7 +208,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The maximum of the number of parades co-ordinated by the chapters is 4.0
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver10() {
@@ -228,7 +228,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The standard deviation of the number of parades co-ordinated by the chapters is 2.0
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver11() {
@@ -248,7 +248,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The size of list that contains the chapters that co-ordinate at least 10% more parades than the average is 1.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver12() {
@@ -268,7 +268,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of parades in draft mode versus parades in final mode is 6.66667 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver13() {
@@ -288,7 +288,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of parades in final mode accepteds is 13.33333 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver14() {
@@ -308,7 +308,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of parades in final mode submitteds is 73.33333 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver15() {
@@ -328,7 +328,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of parades in final mode rejecteds is 13.33333 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver16() {
@@ -348,7 +348,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The ratio of active sponsorships is 75.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver17() {
@@ -368,7 +368,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The average of ac-tive sponsorships per sponsor is 1.5 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver18() {
@@ -388,7 +388,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The minimum of ac-tive sponsorships per sponsor is 1.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver19() {
@@ -408,7 +408,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The maximum of ac-tive sponsorships per sponsor is 2.0 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver20() {
@@ -428,7 +428,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The standard deviation of ac-tive sponsorships per sponsor is 0.5 .
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver21() {
@@ -448,7 +448,7 @@ public class AdministratorDashboardTest extends AbstractTest {
 	 * Positive: The size of list that contains the top-5 sponsors in terms of number of active sponsorships is 2.
 	 * Negative: A member tries view the average in dashboard
 	 * Sentence coverage: 90%
-	 * Data coverage: 100%
+	 * Data coverage: Not applicable
 	 */
 	@Test
 	public void DashboardDriver22() {
