@@ -184,7 +184,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 			this.sponsorshipService.save(result);
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
@@ -208,7 +208,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 			this.sponsorshipService.save(result);
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
@@ -228,7 +228,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
@@ -248,7 +248,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 			this.sponsorService.flush();
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
@@ -268,7 +268,7 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 			Assert.isTrue(sponsorships.size() == numSponsorships);
 
-		} catch (final Exception e) {
+		} catch (final Throwable e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);

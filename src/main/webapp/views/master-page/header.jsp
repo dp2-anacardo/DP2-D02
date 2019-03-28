@@ -62,7 +62,8 @@
 					<li><a href="parade/brotherhood/list.do"><spring:message code="master.page.brotherhood.parades" /></a></li>		
 					<li><a href="floatEntity/brotherhood/list.do"><spring:message code="master.page.floatEntity.list" /></a></li>
 					<li><a href="brotherhood/listMember.do"><spring:message code="master.page.members" /></a></li>						
-					<li><a href="area/brotherhood/edit.do"><spring:message code="master.page.brotherhood.editArea" /></a></li>					
+					<li><a href="area/brotherhood/edit.do"><spring:message code="master.page.brotherhood.editArea" /></a></li>
+					<li><a href="records/history.do"><spring:message code="master.page.brotherhood.history" /></a></li>									
 
 				</ul>
 			</li>
