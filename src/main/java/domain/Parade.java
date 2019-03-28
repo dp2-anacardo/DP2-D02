@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "title, description, moment, isFinal")
+	@Index(columnList = "title, description, moment, isFinal, status")
 }, uniqueConstraints = {
 	@UniqueConstraint(columnNames = "ticker")
 })
@@ -134,6 +134,7 @@ public class Parade extends DomainEntity {
 	}
 
 	@Pattern(regexp = "^ACCEPTED|SUBMITTED|REJECTED$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getStatus() {
 		return this.status;
 	}

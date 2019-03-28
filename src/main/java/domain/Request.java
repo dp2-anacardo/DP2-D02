@@ -21,12 +21,12 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 })
 public class Request extends DomainEntity {
 
-	private Integer		positionRow;
-	private Integer		positionColumn;
-	private String		status;
-	private String		comment;
+	private Integer	positionRow;
+	private Integer	positionColumn;
+	private String	status;
+	private String	comment;
 	private Parade	parade;
-	private Member		member;
+	private Member	member;
 
 
 	@NotBlank

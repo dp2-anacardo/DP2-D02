@@ -43,28 +43,35 @@ public class HistoryManagementTest extends AbstractTest {
 	private MiscRecordService		miscRecordService;
 
 
+	/*
+	 * Testing functional requirement: Edit brotherhood's history
+	 * Positive: A brotherhood edit their parades
+	 * Negative: A member tries to list his parades
+	 * Sentence coverage: 100%
+	 * Data coverage: 100%
+	 */
 	@Test
 	public void editRecordDriver() {
 		final Object testingData[][] = {
 			{
-				"brotherhood1", "brotherhood2", "inceptionRecord1", "periodRecord1", "legalRecord1", "linkRecord1", "miscRecord1", null
+				"brotherhood1", "inceptionRecord1", "periodRecord1", "legalRecord1", "linkRecord1", "miscRecord1", null
 			}, {
-				"member1", "member1", "member1", "member1", "member1", "member1", "member1", IllegalArgumentException.class
+				"member1", "member1", "member1", "member1", "member1", "member1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.editRecords(super.getEntityId((String) testingData[i][0]), super.getEntityId((String) testingData[i][1]), super.getEntityId((String) testingData[i][2]), super.getEntityId((String) testingData[i][3]),
-				super.getEntityId((String) testingData[i][4]), super.getEntityId((String) testingData[i][5]), super.getEntityId((String) testingData[i][6]), (Class<?>) testingData[i][7]);
+			this.editRecords((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), super.getEntityId((String) testingData[i][2]), super.getEntityId((String) testingData[i][3]), super.getEntityId((String) testingData[i][4]),
+				super.getEntityId((String) testingData[i][5]), (Class<?>) testingData[i][6]);
 	}
-	public void editRecords(final int bID1, final int bID2, final int iRID, final int pRID, final int lRID, final int liRID, final int mRID, final Class<?> expected) {
+	public void editRecords(final String bID1, final int iRID, final int pRID, final int lRID, final int liRID, final int mRID, final Class<?> expected) {
 
 		Class<?> caught;
 		caught = null;
 
 		try {
-			final Brotherhood bh = this.brotherhoodService.findOne(bID1);
+			final Brotherhood bh = this.brotherhoodService.findOne(super.getEntityId(bID1));
 
-			super.authenticate("brotherhood1");
+			super.authenticate(bID1);
 
 			MiscRecord newMR = this.miscRecordService.findOne(mRID);
 			LegalRecord newLR = this.legalRecordService.findOne(lRID);
