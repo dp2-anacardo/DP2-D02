@@ -105,8 +105,8 @@
 					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
 					<li><a href="messageBox/list.do"><spring:message code="master.page.message" /></a></li>
 					<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.listAll" /></a></li>
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-					<li><a href="chapter/list.do"><spring:message code="master.page.chapter.listAll" /></a></li>				
+					<li><a href="chapter/list.do"><spring:message code="master.page.chapter.listAll" /></a></li>
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>				
 				</ul>
 			</li>
 		</security:authorize>
