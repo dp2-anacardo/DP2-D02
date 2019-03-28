@@ -829,21 +829,25 @@ public class RecordsController extends AbstractController {
 	@RequestMapping(value = "/inceptionRecord/deletePhoto", method = RequestMethod.GET)
 	public ModelAndView deleteInceptionPhoto(@RequestParam("id") final int id, @RequestParam("pos") final int pos) {
 		ModelAndView result;
-		final InceptionRecord iR = this.inceptionRecordService.findOne(id);
+		try {
+			final InceptionRecord iR = this.inceptionRecordService.findOne(id);
 
-		final Actor user = this.actorService.getActorLogged();
-		final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
-		Assert.notNull(bh);
-		final List<Url> photos = (List<Url>) iR.getPhoto();
+			final Actor user = this.actorService.getActorLogged();
+			final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
+			Assert.notNull(bh);
+			final List<Url> photos = (List<Url>) iR.getPhoto();
 
-		if (!(iR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
-			result = this.editModelAndView(iR);
-		else {
-			photos.remove(photos.get(pos));
-			iR.setPhoto(photos);
+			if (!(iR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
+				result = this.editModelAndView(iR);
+			else {
+				photos.remove(photos.get(pos));
+				iR.setPhoto(photos);
 
-			this.inceptionRecordService.save(iR);
-			result = this.editModelAndView(iR);
+				this.inceptionRecordService.save(iR);
+				result = this.editModelAndView(iR);
+			}
+		} catch (final Throwable oops) {
+			result = this.forbiddenOperation();
 		}
 
 		return result;
@@ -880,21 +884,25 @@ public class RecordsController extends AbstractController {
 	@RequestMapping(value = "/periodRecord/deletePhoto", method = RequestMethod.GET)
 	public ModelAndView deletePeriodPhoto(@RequestParam("id") final int id, @RequestParam("pos") final int pos) {
 		ModelAndView result;
-		final PeriodRecord pR = this.periodRecordService.findOne(id);
+		try {
+			final PeriodRecord pR = this.periodRecordService.findOne(id);
 
-		final Actor user = this.actorService.getActorLogged();
-		final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
-		Assert.notNull(bh);
-		final List<Url> photos = (List<Url>) pR.getPhoto();
+			final Actor user = this.actorService.getActorLogged();
+			final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
+			Assert.notNull(bh);
+			final List<Url> photos = (List<Url>) pR.getPhoto();
 
-		if (!(pR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
-			result = this.editModelAndView(pR);
-		else {
-			photos.remove(photos.get(pos));
-			pR.setPhoto(photos);
+			if (!(pR.getBrotherhood().equals(bh)) || pos >= photos.size() || (photos.size() == 1))
+				result = this.editModelAndView(pR);
+			else {
+				photos.remove(photos.get(pos));
+				pR.setPhoto(photos);
 
-			this.periodRecordService.save(pR);
-			result = this.editModelAndView(pR);
+				this.periodRecordService.save(pR);
+				result = this.editModelAndView(pR);
+			}
+		} catch (final Throwable oops) {
+			result = this.forbiddenOperation();
 		}
 
 		return result;
@@ -931,21 +939,25 @@ public class RecordsController extends AbstractController {
 	@RequestMapping(value = "/legalRecord/deleteLaw", method = RequestMethod.GET)
 	public ModelAndView deleteLaw(@RequestParam("id") final int id, @RequestParam("law") final String law) {
 		ModelAndView result;
-		final LegalRecord lR = this.legalRecordService.findOne(id);
+		try {
+			final LegalRecord lR = this.legalRecordService.findOne(id);
 
-		final Actor user = this.actorService.getActorLogged();
-		final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
-		Assert.notNull(bh);
-		final List<String> laws = (List<String>) lR.getApplicableLaws();
+			final Actor user = this.actorService.getActorLogged();
+			final Brotherhood bh = this.brotherhoodService.findOne(user.getId());
+			Assert.notNull(bh);
+			final List<String> laws = (List<String>) lR.getApplicableLaws();
 
-		if (!(lR.getBrotherhood().equals(bh)) || (lR.getApplicableLaws().size() == 1))
-			result = this.editModelAndView(lR);
-		else {
-			laws.remove(law);
-			lR.setApplicableLaws(laws);
+			if (!(lR.getBrotherhood().equals(bh)) || (lR.getApplicableLaws().size() == 1))
+				result = this.editModelAndView(lR);
+			else {
+				laws.remove(law);
+				lR.setApplicableLaws(laws);
 
-			this.legalRecordService.save(lR);
-			result = this.editModelAndView(lR);
+				this.legalRecordService.save(lR);
+				result = this.editModelAndView(lR);
+			}
+		} catch (final Throwable oops) {
+			result = this.forbiddenOperation();
 		}
 
 		return result;
