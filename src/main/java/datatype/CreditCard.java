@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Embeddable
@@ -27,6 +29,8 @@ public class CreditCard {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+
 	public String getHolderName() {
 		return this.holderName;
 	}
@@ -35,6 +39,8 @@ public class CreditCard {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+
 	public String getBrandName() {
 		return this.brandName;
 	}
@@ -44,6 +50,7 @@ public class CreditCard {
 
 	@NotBlank
 	@CreditCardNumber
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getNumber() {
 		return this.number;
 	}

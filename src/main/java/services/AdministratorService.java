@@ -813,6 +813,9 @@ public class AdministratorService {
 	}
 
 	public void desactivateExpiredSponsorships() {
+		final Actor principal = this.actorService.getActorLogged();
+		Assert.isInstanceOf(Administrator.class, principal);
+
 		final Collection<Sponsorship> sponsorships = this.sponsorshipService.findAllActive();
 		final Date date = new Date();
 

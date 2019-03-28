@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ConfigurationService;
-import services.ParadeService;
-import services.SponsorService;
-import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Parade;
 import domain.Sponsor;
 import domain.Sponsorship;
+import services.ConfigurationService;
+import services.ParadeService;
+import services.SponsorService;
+import services.SponsorshipService;
 
 @Controller
 @RequestMapping("sponsorship")

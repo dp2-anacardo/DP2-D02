@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 import org.springframework.validation.DataBinder;
 
-import utilities.AbstractTest;
 import datatype.CreditCard;
 import domain.Parade;
 import domain.Sponsor;
 import domain.Sponsorship;
+import utilities.AbstractTest;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -41,11 +42,20 @@ public class ManageSponsorshipTest extends AbstractTest {
 	private ActorService		actorService;
 
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as a sponsor must be able to create sponsorships.
+	 * Positive: A sponsor successfully creates a sponsorship
+	 * Negative: A sponsor left an obligatory attribute in blank.
+	 * Sentence coverage: 100%
+	 * Data coverage: ??? 2/9
+	 */
 	@Test
 	public void createSponsorShipDriver() {
 		final Object testingData[][] = {
 			{
-				"sponsor1", "http://www.test.es", true, "Skere", "MCARD", "5105105105105100", "25/02/2022", 666, "parade2", null
+				"sponsor1", "http://www.test1.es", true, "Sponsor 1", "MCARD", "5105105105105100", "25/02/2022", 666, "parade2", null
+			}, {
+				"sponsor2", "", true, "Sponsor 2", "MCARD", "5105105105105100", "25/02/2022", 666, "parade2", ConstraintViolationException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -54,11 +64,21 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as a sponsor must be able to update his sponsorships.
+	 * Positive: A sponsor successfully updates a sponsorship
+	 * Negative: A sponsor left an obligatory attribute in blank.
+	 * Sentence coverage: 100%
+	 * Data coverage: ??? 2/8
+	 */
 	@Test
 	public void editSponsorShipDriver() {
 		final Object testingData[][] = {
 			{
 				"sponsor1", "sponsorship1", "http://www.testEdit.es", null
+			}, {
+				"sponsor1", "sponsorship1", "", ConstraintViolationException.class
+
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -66,6 +86,13 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as a sponsor must be able to de-activate his sponsorships.
+	 * Positive: A sponsor successfully de-activate his sponsorship
+	 * Negative: A sponsor tries to de-activate a de-activated sponsorship
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 	@Test
 	public void desactivateSponsorshipDriver() {
 		final Object testingData[][] = {
@@ -81,6 +108,13 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as a sponsor must be able to activate his sponsorships.
+	 * Positive: A sponsor successfully activate his sponsorship
+	 * Negative: A sponsor tries to activate an activated sponsorship
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 	@Test
 	public void activateSponsorshipDriver() {
 		final Object testingData[][] = {
@@ -95,13 +129,20 @@ public class ManageSponsorshipTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated as a sponsor must be able to list his sponsorships.
+	 * Positive: A sponsor successfully list his sponsorships
+	 * Negative: A member tries to list sponsorships
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 	@Test
 	public void listSponsorshipBySponsorDriver() {
 		final Object testingData[][] = {
 			{
 				"sponsor1", 2, null
 			}, {
-				"sponsor2", 2, null
+				"member1", 10, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

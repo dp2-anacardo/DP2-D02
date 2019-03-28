@@ -12,10 +12,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ParadeRepository;
-import repositories.SponsorshipRepository;
+import domain.Actor;
 import domain.Sponsor;
 import domain.Sponsorship;
+import repositories.SponsorshipRepository;
 
 @Service
 @Transactional
@@ -31,8 +31,11 @@ public class SponsorshipService {
 	@Autowired
 	private Validator				validator;
 
+	//@Autowired
+	// ParadeService			paradeService;
+
 	@Autowired
-	private ParadeRepository		paradeRepository;
+	private ActorService			actorService;
 
 
 	// CRUD methods
@@ -62,6 +65,9 @@ public class SponsorshipService {
 
 	public Sponsorship save(final Sponsorship sponsorship) {
 		Assert.notNull(sponsorship);
+		final Actor principal = this.actorService.getActorLogged();
+		Assert.isInstanceOf(Sponsor.class, principal);
+
 		final Sponsorship result = this.sponsorshipRepository.save(sponsorship);
 
 		return result;
@@ -79,6 +85,9 @@ public class SponsorshipService {
 
 	// Other business methods
 	public Collection<Sponsorship> findBySponsor(final int sponsorId) {
+		final Actor principal = this.actorService.getActorLogged();
+		Assert.isInstanceOf(Sponsor.class, principal);
+
 		return this.sponsorshipRepository.findBySponsor(sponsorId);
 	}
 
@@ -106,7 +115,6 @@ public class SponsorshipService {
 		if (sponsorship.getId() == 0) {
 			result = sponsorship;
 			result.setSponsor(this.sponsorService.findByPrincipal());
-			result.setTargetURL("http://localhost:8080/Acme-Madruga/parade/show.do?paradeId=" + result.getParade().getId() + "");
 
 			this.validator.validate(result, binding);
 
@@ -116,7 +124,6 @@ public class SponsorshipService {
 			//sponsorship.setBanner(result.getBanner());
 			//sponsorship.setCreditCard(result.getCreditCard());
 			//sponsorship.setStatus(result.getStatus());
-			sponsorship.setTargetURL(result.getTargetURL());
 			sponsorship.setParade(result.getParade());
 			sponsorship.setSponsor(result.getSponsor());
 			sponsorship.setVersion(result.getVersion());
@@ -161,7 +168,7 @@ public class SponsorshipService {
 		return sponsorships;
 	}
 
-	public Collection<Sponsorship> getSponsorshipByParade(final int id) {
-		return this.paradeRepository.getParadesBySponsorship(id);
-	}
+	//public Collection<Sponsorship> getSponsorshipByParade(final int id) {
+	//	return this.paradeRepository.getParadesBySponsorship(id);
+	//}
 }

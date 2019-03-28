@@ -1787,7 +1787,6 @@
 	<!--  Sponsorship activo-->
 	<bean id="sponsorship1" class = "domain.Sponsorship">
 		<property name = "banner" value = "https://www.sponsorship1.com"/>
-		<property name = "targetURL" value = "https://www.sponsorshipp1.com"/>
 		<property name="status" value="true"/>
 		<property name="creditCard" ref="creditCard1"/>
 		<property name="parade" ref="parade1"/>
@@ -1797,7 +1796,6 @@
 	<!--  Sponsorship 2-->
 	<bean id="sponsorship2" class = "domain.Sponsorship">
 		<property name = "banner" value = "https://www.sponsorship2.com"/>
-		<property name = "targetURL" value = "https://www.sponsorshipp2.com"/>
 		<property name="status" value="true"/>
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="parade" ref="parade1"/>
@@ -1807,7 +1805,6 @@
 	<!-- Sponsorship 3 -->
 	<bean id="sponsorship3" class = "domain.Sponsorship">
 		<property name = "banner" value = "https://www.sponsorship3.com"/>
-		<property name = "targetURL" value = "https://www.sponsorshipp3.com"/>
 		<property name="status" value="true"/>
 		<property name="creditCard" ref="creditCard3"/>
 		<property name="parade" ref="parade1"/>
@@ -1817,7 +1814,6 @@
 	<!-- Sponsorship 4 (Inactivo)-->
 	<bean id="sponsorship4" class = "domain.Sponsorship">
 		<property name = "banner" value = "https://www.sponsorship4.com"/>
-		<property name = "targetURL" value = "https://www.sponsorshipp4.com"/>
 		<property name="status" value="false"/>
 		<property name="creditCard" ref="creditCard4"/>
 		<property name="parade" ref="parade1"/>
@@ -1846,7 +1842,7 @@
 		<property name = "holderName" value = "Sponsor 2"/>
 		<property name = "brandName" value = "VISA"/>
 		<property name = "number" value = "4493416572903791"/>
-		<property name="expiration" value="01/05/2024"/>
+		<property name="expiration" value="01/05/2018"/>
 		<property name = "cvvCode" value = "486"/>
 	</bean>
 	

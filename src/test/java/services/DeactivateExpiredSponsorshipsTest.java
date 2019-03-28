@@ -19,14 +19,24 @@ import utilities.AbstractTest;
 public class DeactivateExpiredSponsorshipsTest extends AbstractTest {
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService administratorService;
 
+
+	/*
+	 * Testing functional requirement : An administrator can launch a process that automatically de-activates the sponsorships whose credit cards have expired.
+	 * Positive: An administrator launches the process successfully
+	 * Negative: A member tries to launch the process
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 
 	@Test
 	public void deactivateExpiredSponsorshipsDriver() {
 		final Object testingData[][] = {
 			{
 				"admin1", null
+			}, {
+				"member1", IllegalArgumentException.class
 			}
 
 		};

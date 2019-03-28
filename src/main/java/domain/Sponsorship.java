@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 import datatype.CreditCard;
@@ -18,7 +20,6 @@ import datatype.CreditCard;
 public class Sponsorship extends DomainEntity {
 
 	private String		banner;
-	private String		targetURL;
 	private Boolean		status;
 	private CreditCard	creditCard;
 	private Parade		parade;
@@ -26,22 +27,13 @@ public class Sponsorship extends DomainEntity {
 
 	@NotBlank
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBanner() {
 		return this.banner;
 	}
 
 	public void setBanner(final String banner) {
 		this.banner = banner;
-	}
-
-	@NotBlank
-	@URL
-	public String getTargetURL() {
-		return this.targetURL;
-	}
-
-	public void setTargetURL(final String targetURL) {
-		this.targetURL = targetURL;
 	}
 
 	@NotNull
@@ -75,7 +67,7 @@ public class Sponsorship extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Sponsor	sponsor;
+	private Sponsor sponsor;
 
 
 	@Valid

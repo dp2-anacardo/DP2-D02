@@ -30,7 +30,7 @@
 
 		<spring:message code="sponsorship.targetURL" var="targetURL" />
 		<display:column title="${targetURL}">
-			<a href="${row.targetURL}">${row.targetURL}</a>
+			<a href="<%=request.getContextPath()%>/parade/show.do?paradeId=${row.parade.id}">Target URL</a>
 		</display:column>
 
 		<spring:message code="sponsorship.switch" var="switchSponsorship" />

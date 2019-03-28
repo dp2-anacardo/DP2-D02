@@ -11,9 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.DataBinder;
 
-import utilities.AbstractTest;
 import domain.Sponsor;
 import forms.SponsorForm;
+import utilities.AbstractTest;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -23,16 +23,21 @@ import forms.SponsorForm;
 public class RegisterSponsorTest extends AbstractTest {
 
 	@Autowired
-	private SponsorService	sponsorService;
+	private SponsorService sponsorService;
 
 
+	/*
+	 * Testing functional requirement : An actor who is not authenticated must be able to register as a sponsor.
+	 * Positive: An actor who is not authenticated is successfully registered as a sponsor
+	 * Negative: An actor who is not authenticated left an obligatory attribute in blank
+	 * Sentence coverage: 100%
+	 * Data coverage: ???
+	 */
 	@Test
 	public void registerSponsorDriver() {
 		final Object testingData[][] = {
 			{
-				"pruab1", "123456", "123456", "prueba1", "", "prueba1", "", "prueba@prueba.com", "", "", null
-			}, {
-				"prueba2", "123456", "123456", "prueba2", "", "prueba2", "", "prueba@prueba.com", "600102030", "", null
+				"prueba1", "123456", "123456", "prueba1", "", "prueba1", "", "prueba@prueba.com", "600102030", "", null
 			}, {
 				"", "123456", "123456", "prueba2", "", "prueba2", "", "prueba@prueba.com", "", "", ConstraintViolationException.class
 			}
@@ -42,6 +47,13 @@ public class RegisterSponsorTest extends AbstractTest {
 				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (Class<?>) testingData[i][10]);
 	}
 
+	/*
+	 * Testing functional requirement : An actor who is authenticated must be able to edit his personal data.
+	 * Positive: A sponsor successfully edit his personal data
+	 * Negative: A sponsor left an obligatory attribute in blank
+	 * Sentence coverage: 100%
+	 * Data coverage: ???
+	 */
 	@Test
 	public void editSponsorDriver() {
 		final Object testingData[][] = {
