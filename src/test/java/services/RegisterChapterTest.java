@@ -29,6 +29,14 @@ public class RegisterChapterTest extends AbstractTest {
 	private ActorService	actorService;
 
 
+	/*
+	 * Testing functional requirement : requirement 7.1 (chapter register)
+	 * Positive:An actor who is not authenticated is successfully registered as a chapter
+	 * Negative:An actor who is not authenticated left an obligatory attribute in blank
+	 * Sentence coverage: 100%
+	 * Data coverage: 30%
+	 */
+
 	@Test
 	public void registerChapterDriver() {
 		final Object testingData[][] = {
