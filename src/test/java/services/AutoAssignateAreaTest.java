@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import utilities.AbstractTest;
 import domain.Chapter;
+import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -20,12 +20,14 @@ import domain.Chapter;
 public class AutoAssignateAreaTest extends AbstractTest {
 
 	@Autowired
-	private ChapterService	chapterService;
+	private ChapterService chapterService;
 
 
 	//In this test we are testing the requirement 7.2.1(self-assign area).
 	//In the negative case we are testing that a chapter without an area can not
 	//self-assign an area assigned to another chapter.
+	//Sequence coverage: 100%
+	//Data coverage: Not applicable
 
 	@Test
 	public void autoAssignateAreaDriver() {

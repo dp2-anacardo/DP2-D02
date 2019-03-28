@@ -269,6 +269,7 @@ public class ParadeService {
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("CHAPTER"));
 		Assert.isTrue(parade.getStatus().equals("SUBMITTED"));
 		Assert.isTrue(chapter.getArea().equals(parade.getBrotherhood().getArea()));
+		Assert.isTrue(!parade.getRejectComment().equals(""));
 		parade.setStatus("REJECTED");
 	}
 	public Collection<Finder> getFinderByParade(final int paradeId) {
