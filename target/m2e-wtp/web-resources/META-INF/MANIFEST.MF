@@ -1,15 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-<<<<<<< HEAD
-Built-By: Jesus
-Build-Jdk: 1.8.0_201
-=======
 Built-By: Student
 Build-Jdk: 1.7.0_13
->>>>>>> sergi
-=======
-Built-By: HP
-Build-Jdk: 1.8.0_101
->>>>>>> miguel
 Created-By: Maven Integration for Eclipse
 
