@@ -1208,7 +1208,7 @@
 		<property name="maxResults" value="10"/>
 		<property name="maxTime" value="1"/>
 		<property name="systemName" value="Acme Madrugá"/>
-		<property name="banner" value="https://tinyurl.com/acme-madruga"/>
+		<property name="banner" value="https://st.depositphotos.com/1907907/3851/v/950/depositphotos_38512469-stock-illustration-marching-band-in-celebtarion-parade.jpg"/>
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones."/>
 		<property name="welcomeMessageEn" value="Welcome to Acme Madrugá, the site to organise your parades."/>
 		<property name="defaultCC" value="34"/>
