@@ -20,11 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Finder extends DomainEntity {
 
-	private String					keyWord;
-	private Date					minimumDate;
-	private Date					maximumDate;
-	private String					areaName;
-	private Date					lastUpdate;
+	private String				keyWord;
+	private Date				minimumDate;
+	private Date				maximumDate;
+	private String				areaName;
+	private Date				lastUpdate;
 
 	//Relationships
 
@@ -37,7 +37,10 @@ public class Finder extends DomainEntity {
 	}
 
 	public void setKeyWord(final String keyWord) {
-		this.keyWord = keyWord;
+		if (keyWord == null)
+			this.keyWord = keyWord;
+		else
+			this.keyWord = keyWord.trim();
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -66,7 +69,10 @@ public class Finder extends DomainEntity {
 	}
 
 	public void setAreaName(final String areaName) {
-		this.areaName = areaName;
+		if (areaName == null)
+			this.areaName = areaName;
+		else
+			this.areaName = areaName.trim();
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
