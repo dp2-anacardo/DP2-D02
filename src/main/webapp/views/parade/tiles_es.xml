@@ -17,32 +17,32 @@
 <tiles-definitions>
 
 	<definition name="parade/brotherhood/edit" extends="master.page">	
-		<put-attribute name="title" value="Procesión" />
+		<put-attribute name="title" value="Desfile" />
 		<put-attribute name="body" value="/views/parade/edit.jsp" />
 	</definition>
 	
 	<definition name="parade/brotherhood/list" extends="master.page">	
-		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="title" value="Desfiles" />
 		<put-attribute name="body" value="/views/parade/list.jsp" />
 	</definition>
 	
 	<definition name="parade/chapter/list" extends="master.page">	
-		<put-attribute name="title" value="Parades" />
+		<put-attribute name="title" value="Desfiles" />
 		<put-attribute name="body" value="/views/parade/listChapter.jsp" />
 	</definition>
 	
 	<definition name="parade/listNotRegister" extends="master.page">	
-		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="title" value="Desfiles" />
 		<put-attribute name="body" value="/views/parade/listNotRegister.jsp" />
 	</definition>
 		
 	<definition name="parade/show" extends="master.page">	
-		<put-attribute name="title" value="Procesión" />
+		<put-attribute name="title" value="Desfile" />
 		<put-attribute name="body" value="/views/parade/show.jsp" />
 	</definition>
 	
 	<definition name="parade/listForMembers" extends="master.page">	
-		<put-attribute name="title" value="Parades" />
+		<put-attribute name="title" value="Desfiles" />
 		<put-attribute name="body" value="/views/parade/listForMembers.jsp" />
 	</definition>
 	
