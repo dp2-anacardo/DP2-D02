@@ -145,6 +145,31 @@ public class ParadeController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/chapter/list", method = RequestMethod.GET)
+	public ModelAndView listChapter(@RequestParam final int brotherhoodId) {
+		ModelAndView result;
+		try {
+
+			Collection<Parade> pro;
+			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
+			final Chapter c = this.chapterService.findOne(this.actorService.getActorLogged().getId());
+			Assert.isTrue(b.getArea().getChapter().equals(c));
+			pro = this.chapterService.getParadesByArea(b.getArea().getChapter());
+			if (pro == null)
+				result = new ModelAndView("redirect:/misc/403");
+			else {
+				result = new ModelAndView("parade/chapter/list");
+				result.addObject("parade", pro);
+				result.addObject("requestURI", "parade/chapter/list.do");
+			}
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/misc/403");
+		}
+
+		return result;
+	}
+
 	@RequestMapping(value = "/listNotRegister", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
@@ -166,6 +191,7 @@ public class ParadeController extends AbstractController {
 
 		return result;
 	}
+
 	@RequestMapping(value = "/listForMembers", method = RequestMethod.GET)
 	public ModelAndView listMembers() {
 
@@ -251,7 +277,7 @@ public class ParadeController extends AbstractController {
 		else {
 			this.paradeService.acceptParade(parade);
 			this.paradeService.saveChapter(parade);
-			result = new ModelAndView("redirect:/parade/listNotRegister.do?brotherhoodId=" + parade.getBrotherhood().getId());
+			result = new ModelAndView("redirect:/parade/chapter/list.do?brotherhoodId=" + parade.getBrotherhood().getId());
 		}
 		return result;
 	}
@@ -294,7 +320,7 @@ public class ParadeController extends AbstractController {
 			try {
 				this.paradeService.rejectParade(parade);
 				this.paradeService.saveChapter(parade);
-				result = new ModelAndView("redirect:/parade/listNotRegister.do?brotherhoodId=" + parade.getBrotherhood().getId());
+				result = new ModelAndView("redirect:/parade/chapter/list.do?brotherhoodId=" + parade.getBrotherhood().getId());
 			} catch (final Exception e) {
 				result = this.rejectModelAndView(parade);
 			}

@@ -25,8 +25,15 @@
 	<spring:message code="administrator.title" var="title" />
 	<display:column property="title" title="${title}"/>
 	
+	<security:authorize access="isAnonymous()">
 	<display:column> <a href="parade/listNotRegister.do?brotherhoodId=${row.id}">
 	<spring:message code="brotherhood.parade" /></a> </display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('CHAPTER')">
+	<display:column> <a href="parade/chapter/list.do?brotherhoodId=${row.id}">
+	<spring:message code="brotherhood.parade" /></a> </display:column>
+	</security:authorize>
 	
 </display:table>
 
