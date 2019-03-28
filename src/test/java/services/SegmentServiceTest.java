@@ -28,9 +28,9 @@ public class SegmentServiceTest extends AbstractTest {
 	/*
 	 * Testing functional requirement : Manage the paths of their parades, which includes creating them.
 	 * Positive: A brotherhood creates a segment
-	 * Negative: We try to create a segment that is not contiguous
+	 * Negative: We try to create a segment with an invalid origin latitude
 	 * Sentence coverage: 76%
-	 * Data coverage: 33%
+	 * Data coverage: 29%
 	 */
 	@Test
 	public void createSegmentDriver() {
@@ -38,7 +38,7 @@ public class SegmentServiceTest extends AbstractTest {
 			{
 				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", null
 			}, {
-				3.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", IllegalArgumentException.class
+				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -72,9 +72,9 @@ public class SegmentServiceTest extends AbstractTest {
 	/*
 	 * Testing functional requirement : Manage the paths of their parades, which includes updating them.
 	 * Positive: A brotherhood edits a segment
-	 * Negative: A member tries to edit a test
+	 * Negative: A brotherhood edits a segment with an invalid origin latitude
 	 * Sentence coverage: 74%
-	 * Data coverage: 33%
+	 * Data coverage: 29%
 	 */
 	@Test
 	public void editSegmentDriver() {
@@ -82,7 +82,7 @@ public class SegmentServiceTest extends AbstractTest {
 			{
 				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", null, "segment1"
 			}, {
-				1.0, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "member1", IllegalArgumentException.class, "segment1"
+				999.9, 1.0, 1.0, 1.0, "12:05", "12:10", "parade1", "brotherhood1", IllegalArgumentException.class, "segment1"
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -118,7 +118,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * Positive: A brotherhood deletes a segment
 	 * Negative: A brotherhood tries to delete another's brotherhood segment
 	 * Sentence coverage: 55,1%
-	 * Data coverage: 100%
+	 * Data coverage: not applicable
 	 */
 	@Test
 	public void deleteSegmentDriver() {
@@ -154,7 +154,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * Positive: A brotherhood lists its parades
 	 * Negative: A member tries to list his parades
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: not applicable
 	 */
 	@Test
 	public void listSegmentDriver() {

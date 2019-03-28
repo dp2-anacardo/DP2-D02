@@ -34,7 +34,7 @@ public class ListParadeTest extends AbstractTest {
 	 * Positive: A brotherhood lists its parades
 	 * Negative: A member tries to list his parades
 	 * Sentence coverage: 100%
-	 * Data coverage: 100%
+	 * Data coverage: not applicable
 	 */
 	@Test
 	public void listParadesDriver() {
