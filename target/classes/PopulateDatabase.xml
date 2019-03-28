@@ -1068,7 +1068,7 @@
 		<property name="description" value="Parade14's description"/>
 		<property name="moment" value="04/20/2020"/>
 		<property name="ticker" value="190432-ROOKI"/>
-		<property name="isFinal" value="true"/>
+		<property name="isFinal" value="false"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
@@ -1080,7 +1080,7 @@
 		<property name="description" value="Parade15's description"/>
 		<property name="moment" value="05/20/2020"/>
 		<property name="ticker" value="190432-MONTA"/>
-		<property name="isFinal" value="true"/>
+		<property name="isFinal" value="false"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
@@ -1092,7 +1092,7 @@
 		<property name="description" value="Parade15's description"/>
 		<property name="moment" value="05/08/2019"/>
 		<property name="ticker" value="190436-CRONI"/>
-		<property name="isFinal" value="true"/>
+		<property name="isFinal" value="false"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>
