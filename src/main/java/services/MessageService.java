@@ -13,13 +13,13 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.MessageRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Configuration;
 import domain.Message;
 import domain.MessageBox;
+import repositories.MessageRepository;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -63,9 +63,8 @@ public class MessageService {
 
 	public Message save(final Message message) {
 		Assert.notNull(message);
-		Assert.notNull(LoginService.getPrincipal());
-		final UserAccount userAccount = LoginService.getPrincipal();
 		final Message result;
+
 		Actor sender = null;
 
 		if (message.getId() == 0) {
@@ -78,7 +77,7 @@ public class MessageService {
 			final Integer actors = this.actorService.findAll().size();
 
 			if (message.getSubject().equals(sponsorshipFee) || message.getSubject().equals(acceptedRequest) || message.getSubject().equals(acceptedEnrolment) || message.getSubject().equals(dropoutBrotherhood)
-				|| (message.getRecipients().size() == actors && userAccount.getAuthorities().iterator().next().getAuthority().equals("ADMIN"))) {
+				|| (message.getRecipients().size() == actors)) {
 
 				final Collection<Actor> recipients = message.getRecipients();
 				Assert.notNull(recipients);
@@ -93,6 +92,7 @@ public class MessageService {
 					recipient.getMessageBox("NOTIFICATIONBOX").addMessage(result);
 
 			} else {
+				final UserAccount userAccount = LoginService.getPrincipal();
 
 				sender = this.actorService.findByUserAccount(userAccount);
 				message.setSender(sender);
