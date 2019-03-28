@@ -80,7 +80,7 @@
 </display:table>
 
 <security:authorize
-	access="hasAnyRole('ADMIN', 'MEMBER', 'BROTHERHOOD')">
+	access="hasAnyRole('ADMIN', 'MEMBER', 'BROTHERHOOD', 'SPONSOR', 'CHAPTER')">
 	<acme:cancel url="message/create.do" code="message.create"/>
 </security:authorize>
 
