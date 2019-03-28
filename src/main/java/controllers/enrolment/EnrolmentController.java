@@ -254,8 +254,8 @@ public class EnrolmentController extends AbstractController {
 			recipients.add(enrolment.getMember());
 			recipients.add(enrolment.getBrotherhood());
 			message.setRecipients(recipients);
-			message.setSubject("Drop out brotherhood \n Salida de hermandad");
-			message.setBody("A drop out happened \n Se ha dejado la hermandad");
+			message.setSubject("Drop out brotherhood \n Salida de fraternidad");
+			message.setBody("A drop out happened \n Se ha dejado la fraternidad");
 			message.setPriority(this.priorityService.getHighPriority());
 			this.messageService.save(message);
 			this.enrolmentService.dropOut(enrolment);

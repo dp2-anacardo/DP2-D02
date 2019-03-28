@@ -71,7 +71,7 @@ public class MessageService {
 			Assert.notNull(message);
 
 			final String acceptedEnrolment = "Enrolment accepted \n Inscripción aceptada";
-			final String dropoutBrotherhood = "Drop out brotherhood \n Salida de hermandad";
+			final String dropoutBrotherhood = "Drop out brotherhood \n Salida de fraternidad";
 			final String acceptedRequest = "A request changed its status \n Una petición ha cambiado su estatus";
 			final String sponsorshipFee = "A sponsorship has been shown \n Se ha mostrado un anuncio";
 			final Integer actors = this.actorService.findAll().size();

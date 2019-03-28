@@ -116,7 +116,6 @@ public class SponsorshipController extends AbstractController {
 				result = this.createEditModelAndView(spship);
 			else {
 				try {
-					final Sponsor principal = this.sponsorService.findByPrincipal();
 					if (sponsorship.getId() != 0)
 						security = this.sponsorshipService.findOne(sponsorship.getId());
 				} catch (final Exception e) {
