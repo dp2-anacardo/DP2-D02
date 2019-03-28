@@ -43,7 +43,7 @@ onsubmit="return validarForm(this)">
 	<acme:textbox code="administrator.name" path="name"/>
 	<br />
 	
-	<acme:textbox code="administrator.title" path="title"/>
+	<acme:textbox code="chapter.title" path="title"/>
 	<br />
 	
 	<acme:textbox code="administrator.photo" path="photo"/>
