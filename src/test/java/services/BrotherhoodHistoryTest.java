@@ -38,6 +38,14 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 	private LegalRecordService		legalRecordService;
 
 
+	/*
+	 * Testing functional requirement : requirement 2.1 (history of brotherhoods)
+	 * Positive:An actor who is not authenticated can see all inception records of brotherhoods
+	 * Negative:An actor who is not authenticated can't see all inception records of brotherhoods
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
+
 	@Test
 	public void driverListInceptionRecord() {
 		final Object testingData[][] = {
@@ -64,6 +72,14 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * Testing functional requirement : requirement 2.1 (history of brotherhoods)
+	 * Positive:An actor who is not authenticated can see all misc records of brotherhoods
+	 * Negative:An actor who is not authenticated can't see all misc records of brotherhoods
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 
 	@Test
 	public void driverListMiscRecord() {
@@ -93,6 +109,14 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 	}
 
+	/*
+	 * Testing functional requirement : requirement 2.1 (history of brotherhood)
+	 * Positive:An actor who is not authenticated can see all period records of brotherhood
+	 * Negative:An actor who is not authenticated can't see all period records of brotherhood
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
+
 	@Test
 	public void driverListPeriodRecord() {
 		final Object testingData[][] = {
@@ -115,14 +139,19 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 			final Collection<PeriodRecord> p = this.periodRecordService.getPeriodRecordByBrotherhood(brotherhoodId);
 			Assert.isTrue(p.size() == 1);
 
-			//Assert.isNull(this.legalRecordService.getLegalRecordByBrotherhood(brotherhoodId));
-			//			Assert.isTrue(this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId) == null);
-
 		} catch (final Exception e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * Testing functional requirement : requirement 2.1 (history of brotherhood)
+	 * Positive:An actor who is not authenticated can see all legal records of brotherhood.
+	 * Negative:An actor who is not authenticated can't see all history of brotherhood.
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 
 	@Test
 	public void driverListLegalRecord() {
@@ -145,13 +174,20 @@ public class BrotherhoodHistoryTest extends AbstractTest {
 		try {
 			final Collection<LegalRecord> f = this.legalRecordService.getLegalRecordByBrotherhood(brotherhoodId);
 			Assert.isTrue(f.size() == 1);
-			//			Assert.isTrue(this.linkRecordService.getLinkRecordByBrotherhood(brotherhoodId) == null);
 
 		} catch (final Exception e) {
 			caught = e.getClass();
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * Testing functional requirement : requirement 2.1 (history of brotherhood)
+	 * Positive:An actor who is not authenticated can see all link records of brotherhood
+	 * Negative:An actor who is not authenticated can't see all link records of brotherhood
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
 
 	@Test
 	public void driverListLinkRecord() {

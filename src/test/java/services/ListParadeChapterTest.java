@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import security.LoginService;
-import utilities.AbstractTest;
 import domain.Actor;
 import domain.Chapter;
+import security.LoginService;
+import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -30,7 +30,9 @@ public class ListParadeChapterTest extends AbstractTest {
 
 	//In this test we are testing the requirement 7.2.2(list parades).
 	//In the negative case we are testing that an user not authenticated as a chapter
-	//in this case member, can not manage the parades of a chapter.
+	//In this case, member can not manage the parades of a chapter.
+	//Sequence coverage: 100%
+	//Data coverage: Not applicable
 
 	@Test
 	public void listParadeChapterDriver() {

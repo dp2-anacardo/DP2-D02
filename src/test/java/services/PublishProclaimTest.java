@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import utilities.AbstractTest;
 import domain.Proclaim;
+import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -21,20 +21,21 @@ import domain.Proclaim;
 public class PublishProclaimTest extends AbstractTest {
 
 	@Autowired
-	private ProclaimService	proclaimService;
+	private ProclaimService proclaimService;
 
 
 	//In this test we are testing the requirement 17(publish a proclaim).
 	//In the negative case we are testing that the published description can not
 	//have a description longer than 250 characters.
+	//Sequence coverage: 100%
+	//Data coverage: 100%
 
 	@Test
 	public void listProclaimDriver() {
 		final Object testingData[][] = {
 			{
 				"chapter1", "probando", null
-			},
-			{
+			}, {
 				"chapter1",
 				"Espero que esta descripción sea de más de 250 caracteres para que salte el error de que debe estar entre 0 y 250 caracteres. Creo que aún no es suficiente así que sigo escribiendo hasta que crea conveniente. Seguiré si no coge la excepción. Parece ser que aún no son 250 caracteres ya que no salta la excepción, este sera el segundo intento, he comprobado en local poniendo todo AAAAAA y no ha dejado que se guarde así que debería de saltar, es solo cuestión de tiempo.",
 				ConstraintViolationException.class

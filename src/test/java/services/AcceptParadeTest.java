@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import utilities.AbstractTest;
 import domain.Parade;
+import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -20,12 +20,14 @@ import domain.Parade;
 public class AcceptParadeTest extends AbstractTest {
 
 	@Autowired
-	private ParadeService	paradeService;
+	private ParadeService paradeService;
 
 
 	//In this test we are testing the requirement 7.2.2(accepting parades).
 	//In the negative cases we are testing that accepted parades, rejected parades
 	//and parades that are co-ordinated by another chapter can not be accepted.
+	//Sequence coverage: 100%
+	//Data coverage: Not applicable
 
 	@Test
 	public void acceptParadeDriver() {
