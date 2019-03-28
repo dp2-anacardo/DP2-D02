@@ -51,7 +51,7 @@ public class RegisterChapterController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView save(@Valid final ChapterForm chapterForm, final BindingResult binding) {
 		ModelAndView result;
 		final Chapter c;

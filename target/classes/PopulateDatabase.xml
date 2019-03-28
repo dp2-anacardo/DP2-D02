@@ -911,7 +911,7 @@
 		<property name="description" value="Parade's description"/>
 		<property name="moment" value="08/05/2019"/>
 		<property name="ticker" value="190508-DAVID"/>
-		<property name="isFinal" value="false"/>
+		<property name="isFinal" value="true"/>
 		<property name="maxRow" value="20"/>
 		<property name="maxColumn" value="2"/>
 		<property name="brotherhood" ref="brotherhood1"/>

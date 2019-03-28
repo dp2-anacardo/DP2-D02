@@ -45,7 +45,7 @@ public class RegisterBrotherhoodController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView save(@Valid final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView result;
 		Brotherhood bro;

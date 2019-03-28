@@ -47,7 +47,7 @@ public class RegisterMemberController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView save(@Valid final MemberForm mForm, final BindingResult binding) {
 		ModelAndView result;
 		Member member;
