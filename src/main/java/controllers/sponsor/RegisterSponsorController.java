@@ -47,7 +47,7 @@ public class RegisterSponsorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView save(@Valid final SponsorForm mForm, final BindingResult binding) {
 		ModelAndView result;
 		Sponsor sponsor;

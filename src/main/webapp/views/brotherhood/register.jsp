@@ -17,8 +17,7 @@
 </head>
 <body>
 <spring:message code="administrator.firstMessage" />
-<form:form id="myform" action="brotherhood/create.do" modelAttribute="brotherhoodForm"
-onsubmit="return validarForm(this)">
+<form:form id="myform" action="brotherhood/create.do" modelAttribute="brotherhoodForm">
 
 	<form:hidden path="id" />
  
@@ -67,14 +66,6 @@ onsubmit="return validarForm(this)">
 	<br />
 	
 	<script type="text/javascript">
-	function validarForm(form){
-		phoneValidation();
-		checkForm(form);
-	}
-	
-	</script>
-	
-	<script type="text/javascript">
 	function phoneValidation(){
 		var phoneNumber = document.getElementById("phoneNumber").value;
 		var regexPN = /^(\d\d\d\d+)$/;
@@ -82,38 +73,32 @@ onsubmit="return validarForm(this)">
 		var regex2 = /^(\+[1-9][0-9]{0,2}) (\d\d\d\d+)$/;
 		
 		if (regexPN.test(phoneNumber)) {
-			return true;
+			return document.getElementById("myform").submit();
 		} else if(regex1.test(phoneNumber)) {
-			return true;
+			return document.getElementById("myform").submit();
 		}else if(regex2.test(phoneNumber)){
-			return true;
+			return document.getElementById("myform").submit();
 		}else{
-			return confirm('<spring:message code = "customer.confirm"/>');
+			var confirm = window.confirm('<spring:message code = "customer.confirm"/>');
+			if(!confirm){
+				return window.history.back();
+			}else{
+				return document.getElementById("myform").submit();
+			}
 		}
 	}
 	</script>
 	
-	<script>
-
-	function checkForm(form){
-		
-	    if(!form.terms.checked) {
-	      alert("Please indicate that you accept the Terms and Conditions");
-	      form.terms.focus();
-	      return false;
-	    }
-	    return true;
-	  }
-
-	</script>
+	
 	
 	 <div class=terms>
 	 <input type="checkbox" required name="terms">
 	 <label for="terms"><spring:message code="terms" /></label>
 	 </div>
 	
-	<input type="submit" name="save"
+	<input type="button" name="save"
 		value="<spring:message code="administrator.save"/>"
+		onclick="phoneValidation();"
 		 />&nbsp; 
 	
 		<input type="button" name="cancel"

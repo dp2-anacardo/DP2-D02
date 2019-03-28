@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: HP
 Build-Jdk: 1.8.0_101
+=======
+Built-By: Student
+Build-Jdk: 1.7.0_13
+>>>>>>> sergi
 Created-By: Maven Integration for Eclipse
 
