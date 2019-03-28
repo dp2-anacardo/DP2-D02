@@ -26,6 +26,14 @@ public class BrowseProclaimsChapterTest extends AbstractTest {
 	private ChapterService	chapterService;
 
 
+	/*
+	 * Testing functional requirement : requirement 14.2 (browse proclaims chapter)
+	 * Positive:An actor who is not authenticated can see all proclaims of chapters
+	 * Negative:An actor who is not authenticated can't see all proclaims of chapters
+	 * Sentence coverage: 100%
+	 * Data coverage: Not applicable
+	 */
+
 	@Test
 	public void driver() {
 		final Object testingData[][] = {

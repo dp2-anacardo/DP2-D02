@@ -33,7 +33,11 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 	private ParadeService	paradeService;
 
 
-	//En este test no hay casos negativos posibles
+	//In this test we are testing the requirement 14.1 (chapter information not register).
+	//DriverListChapter does not negative cases
+	//Sentence coverage: 100%
+	//Data coverage: Not applicable
+
 	@Test
 	public void driverListChapter() {
 		final Object testingData[][] = {
@@ -58,6 +62,11 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	//In this test we are testing the requirement 14.1 (chapter information not register).
+	//In the negative test we are testing listing area and brotherhoods
+	//Sentence coverage: 100%
+	//Data coverage: Not applicable
 
 	@Test
 	public void driverListArea() {
@@ -87,6 +96,11 @@ public class ChapterInformationNotRegisterTest extends AbstractTest {
 		}
 		super.checkExceptions(expected, caught);
 	}
+
+	//In this test we are testing the requirement 14.1 (chapter information not register).
+	//In the negative test we are testing listing parades.
+	//Sentence coverage: 100%
+	//Data coverage: Not applicable
 
 	@Test
 	public void driverListParade() {
