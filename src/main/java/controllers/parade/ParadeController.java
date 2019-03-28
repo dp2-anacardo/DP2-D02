@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Chapter;
+import domain.FloatEntity;
+import domain.Message;
+import domain.Parade;
+import domain.Sponsorship;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
@@ -25,14 +33,6 @@ import services.MessageService;
 import services.ParadeService;
 import services.PriorityService;
 import services.SponsorshipService;
-import controllers.AbstractController;
-import domain.Actor;
-import domain.Brotherhood;
-import domain.Chapter;
-import domain.FloatEntity;
-import domain.Message;
-import domain.Parade;
-import domain.Sponsorship;
 
 @Controller
 @RequestMapping("parade")
@@ -150,7 +150,7 @@ public class ParadeController extends AbstractController {
 		ModelAndView result;
 		Collection<Parade> pro;
 		pro = this.paradeService.getParadesFinalByBrotherhood(brotherhoodId);
-		if (pro == null || pro.size() <= 0)
+		if (pro == null)
 			result = new ModelAndView("redirect:/misc/403");
 		else {
 			result = new ModelAndView("parade/listNotRegister");
