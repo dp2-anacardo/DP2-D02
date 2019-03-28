@@ -274,9 +274,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver13() {
 		final Object testingData[][] = {
 			{
-				"admin1", 6.66667, null
+				"admin1", 23.07692, null
 			}, {
-				"member1", 6.66667, IllegalArgumentException.class
+				"member1", 23.07692, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -294,9 +294,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver14() {
 		final Object testingData[][] = {
 			{
-				"admin1", 13.33333, null
+				"admin1", 23.07692, null
 			}, {
-				"member1", 13.33333, IllegalArgumentException.class
+				"member1", 23.07692, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -314,9 +314,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver15() {
 		final Object testingData[][] = {
 			{
-				"admin1", 73.33333, null
+				"admin1", 61.53846, null
 			}, {
-				"member1", 73.33333, IllegalArgumentException.class
+				"member1", 61.53846, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -334,9 +334,9 @@ public class AdministratorDashboardTest extends AbstractTest {
 	public void DashboardDriver16() {
 		final Object testingData[][] = {
 			{
-				"admin1", 13.33333, null
+				"admin1", 15.38462, null
 			}, {
-				"member1", 13.33333, IllegalArgumentException.class
+				"member1", 15.38462, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
