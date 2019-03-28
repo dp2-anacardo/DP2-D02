@@ -4,7 +4,6 @@ package services;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
-import org.jsoup.select.Evaluator.Class;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
