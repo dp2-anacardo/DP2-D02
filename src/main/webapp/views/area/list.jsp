@@ -15,7 +15,7 @@
 	<display:table name="area" id="row" requestURI="${requestURI}"
 		pagesize="5" class="displaytag">
 		<spring:message code="area.name" var="columnTitle" />
-		<display:column title="columnTitle">
+		<display:column title="${columnTitle}">
 			<jstl:out value="${row.name }"></jstl:out>
 		</display:column>
 
